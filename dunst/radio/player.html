@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML lang="da">
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<TITLE>radio dunst</TITLE>
+<LINK REL="stylesheet" HREF="dunst_radio.css">
+<STYLE>
+.player { width:500px; max-width:calc(100% - 40px); }
+.player audio { display:block; width:100%; }
+</STYLE>
+</HEAD>
+<BODY>
+<BR><BR><BR><BR>
+<TABLE BORDER="0" ALIGN="CENTER" CELLPADDING="4" CELLSPACING="0" CLASS="ramme player">
+  <TR><TD CLASS="head"><B>radio dunst</B></TD></TR>
+  <TR><TD><DIV ID="trackTitle"></DIV><BR><AUDIO ID="radioPlayer" CONTROLS PRELOAD="metadata"></AUDIO></TD></TR>
+</TABLE>
+<SCRIPT>
+var params = new URLSearchParams(window.location.search);
+var source = params.get('src') || '';
+var title = params.get('title') || 'radio dunst';
+if (/^[^:\?#]+\.mp3$/i.test(source) && source.indexOf('..') === -1) {
+  document.getElementById('trackTitle').textContent = title;
+  document.getElementById('radioPlayer').src = source;
+} else {
+  document.getElementById('trackTitle').textContent = 'Lydfilen kunne ikke åbnes.';
+  document.getElementById('radioPlayer').style.display = 'none';
+}
+</SCRIPT>
+</BODY>
+</HTML>
