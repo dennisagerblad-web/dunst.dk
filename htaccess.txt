@@ -1,0 +1,1 @@
+ErrorDocument 401 http://www.dunst.dk/dunst/0/401.htmlErrorDocument 403 http://www.dunst.dk/dunst/0/403.htmlErrorDocument 404 http://www.dunst.dk/dunst/0/404.html

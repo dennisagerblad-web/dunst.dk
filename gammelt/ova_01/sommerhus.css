@@ -1,0 +1,7 @@
+.menu   { color: #ccc; font-weight: bold; font-size: 10px; line-height: 10px; font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular; text-decoration: none }
+.overskrift   { color: #ff9; font-weight: bold; font-size: 12px; line-height: 24px; font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular; text-decoration: none }
+.linkoverskrift { color: #ccc; font-weight: bold; font-size: 12px; line-height: 24px; font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular; text-decoration: none }
+.tekst  { color: #ccc; font-weight: normal; font-size: 12px; line-height: 16px; font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular; text-decoration: none }
+a.menu  { color: #ccc; font-weight: bold; font-size: 10px; line-height: 10px; font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular; text-decoration: none }
+a:hover.menu  { color: #ccc; font-weight: bold; font-size: 10px; line-height: 10px; font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular; text-decoration: underline }
+.mini { color: #ccc; font-weight: normal; font-size: 10px; line-height: 10px; font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular; text-decoration: none }

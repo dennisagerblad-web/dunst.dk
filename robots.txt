@@ -1,0 +1,7 @@
+User-agent: *
+# Vi skal IKKE have medlemsiderne indexeret !!!
+Disallow: /login
+
+
+
+# Check venligst syntax med : http://www.searchengineworld.com/cgi-bin/robotcheck.cgi

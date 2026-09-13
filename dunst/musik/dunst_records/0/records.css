@@ -1,0 +1,159 @@
+body { 
+    Margin: 0;
+	BACKGROUND-COLOR: #000000;
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; 
+	COLOR: #FFFFFF; 
+	FONT-SIZE: 13px; 
+	FONT-WEIGHT: normal;
+	background-image: url(bg_01.jpg);
+	background-position: bottom left;
+	margin: 0px;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	scrollbar-face-color: #FFFF00;
+	scrollbar-shadow-color: #000000; 
+	scrollbar-highlight-color: #000000;
+	scrollbar-3dlight-color:  #000000; 
+	scrollbar-darkshadow-color: #000000;
+	scrollbar-track-color: #000000; 
+	scrollbar-arrow-color: #000000; 
+} 
+
+hr {
+	height: 1px;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	line-height: 1px;
+	color: #FFFF00;
+}
+
+.fade_00 { 
+	background-image: url(fade_top_yellow_00.jpg);
+	background-position: top center;
+	margin: 0px;
+	background-repeat: repeat-x;
+	background-attachment: fixed;
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #FFFFFF;  
+	FONT-SIZE: 13px; 
+	FONT-WEIGHT: normal;
+ }
+ 
+ .top { 
+
+ }
+ 
+ .ramme {
+	border-style: solid;
+	border-color: #FFFF00;
+	border-width: 1px 1px 1px 1px;
+}
+
+ .ramme2 {
+	border-style: solid;
+	border-color: #666600;
+	border-width: 1px 1px 1px 1px;
+}
+
+.music-ramme {
+	border-style: solid;
+	border-color: #000000;
+	border-width: 1px 1px 1px 1px;
+}
+
+.music {
+	border-style: solid;
+	border-color: #000000;
+	border-width: 1px 1px 1px 1px;
+	padding: 4px;
+}
+
+ td { 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #FFFFFF;  
+	FONT-SIZE: 13px; 
+	FONT-WEIGHT: normal;
+ }
+ 
+.sort { 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #000000;  
+	FONT-SIZE: 13px; 
+	FONT-WEIGHT: bold;
+ }
+ 
+.tom { 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #FFFFFF;  
+	FONT-SIZE: 13px; 
+	FONT-WEIGHT: normal;
+	background-color: #000000;	
+ }
+ 
+.us { 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #FFFFFF;  
+	FONT-SIZE: 13px; 
+	FONT-WEIGHT: normal;
+	background-color: #333300;
+	border-style: solid;
+	border-color: #FFFF00;
+	border-width: 1px 1px 1px 1px;
+ }
+ 
+ .other { 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #FFFFFF;  
+	FONT-SIZE: 13px; 
+	FONT-WEIGHT: normal;
+	background-color: #000000;
+	border-style: solid;
+	border-color: #666600;
+	border-width: 1px 1px 1px 1px;
+ }
+
+ .head {
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #FFFFFF;
+	FONT-SIZE: 10px;
+	FONT-WEIGHT: bold;
+	TEXT-DECORATION: none;
+	padding: 4px;
+} 
+
+A {
+
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #FFFF00; 
+	FONT-WEIGHT: bold;
+	TEXT-DECORATION: underline;
+	CURSOR: hand;
+} 
+
+A:visited { 
+	COLOR: #FFFF00; 
+} 
+
+A:active { 
+	COLOR: #FFFF00; 
+} 
+
+A:hover { 
+    COLOR: #00FFFF; 
+	TEXT-DECORATION: none; 
+}
+
+TEXTAREA{
+    border: 1px solid #FFFF00;
+    background: #FFFFFF;
+    width: 250px;
+}
+
+.button {
+	COLOR: #000000;
+	font-weight : bold;
+	font-size : 10px;
+	background-color: #FFFF00;
+	BORDER: #FFFF00 1px solid;
+}

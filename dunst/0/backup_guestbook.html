@@ -1,0 +1,444 @@
+<html>
+<head>
+<title>dunst Guestbook 's gæstebog</title>
+<link rel="stylesheet" type="text/css" href="index.css">
+</head><body><script language="JavaScript" type="text/javascript">
+<!--
+far="Andre";jav="Ved ikke";skh="Andre";jav=navigator.javaEnabled();ref=""+escape(document.referrer); nav=navigator.appName;
+if(navigator.appName=="Netscape"&&(navigator.appVersion.charAt(0)=="2"||navigator.appVersion.charAt(0)=="3")){skriv=false;}else{skriv=true;}
+if(skriv==true){skh=screen.width+"x"+screen.height;
+if(nav != "Netscape"){far=screen.colorDepth;} else {far=screen.pixelDepth;}
+puri="brugernavn=gaeste&amp;version=150&amp;ssto="+skh+"&amp;referer="+ref+"&amp;colors="+far+"&amp;java="+jav+"&amp;js=true&amp;billed=trans";
+document.write("<img height=\"1\" width=\"1\" border=\"0\" src=\"http://www.zipstat.dk/cgi-bin/zipstat/zipstat.cgi2?"+puri+"\" alt=\"\" align=left>"); }
+//-->
+</script><noscript><img height="1" width="1" border="0" src="http://www.zipstat.dk/cgi-bin/zipstat/zipstat.cgi2?brugernavn=gaeste&amp;js=false&amp;billed=trans" alt="" align=left></noscript>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+far="Andre";jav="Ved ikke";skh="Andre";jav=navigator.javaEnabled();ref=""+escape(document.referrer); nav=navigator.appName;
+if(navigator.appName=="Netscape"&&(navigator.appVersion.charAt(0)=="2"||navigator.appVersion.charAt(0)=="3")){skriv=false;}else{skriv=true;}
+if(skriv==true){skh=screen.width+"x"+screen.height;
+if(nav != "Netscape"){far=screen.colorDepth;} else {far=screen.pixelDepth;}
+puri="brugernavn=zip&amp;version=150&amp;ssto="+skh+"&amp;referer="+ref+"&amp;colors="+far+"&amp;java="+jav+"&amp;js=true&amp;billed=trans";
+document.write("<img height=\"1\" width=\"1\" border=\"0\" src=\"http://zipstat.dk/cgi-bin/zipstat_beta/zipstat.php?"+puri+"\" alt=\"\" align=left>"); }
+//-->
+</script><noscript><img height="1" width="1" border="0" src="http://zipstat.dk/cgi-bin/zipstat_beta/zipstat.php?brugernavn=zip&amp;js=false&amp;billed=trans" alt="" align=left></noscript>
+
+<table border=0 width="100%"><tr><td valign="top">
+SmartGuy: <script language="JavaScript" src="http://impdk.tradedoubler.com/imp/2430/65513(http://www.smartguy.dk/butik/VisEfterDesigner.asp?DesignerID=3){http://www.zip.dk/img/adds/levis.jpg}" charset="ISO-8859-1"></script></td><td></td>
+<td>
+<div class=menu><a href="tilmeld.php3">[Få en gratis gæstebog]</a> <a href="admin.php3">[Brugerområde]</a>
+<a href="faq.php">[Ofte Stillede Spørgsmål]</a><a href="index.php3">[Forside]</a> <a href="http://www.zip.dk" target="_top">[www.ZIP.dk]</a></div>
+</td></tr></table>
+
+<div class="language">Sprog: [<a href="/gaeste/bog.php3?id=12126&amp;newLang=en">Engelsk / English</a>] [Dansk] </div>
+<style type="text/css">
+<!--
+
+BODY {
+   background: #FFFFFF;
+   color: #000000;            
+   font-family: Verdana, Arial, Helvetica, sans-serif;
+   FONT-SIZE: 10px;
+   margin: 10px;   
+     background-image: url(http://dunst.dk/dunst/0/images/fade_right.jpg);
+     background-position: right;
+     background-repeat: repeat-y;
+     background-attachment: fixed; 
+   scrollbar-face-color: #FFFFFF;
+   scrollbar-shadow-color: #808080; 
+   scrollbar-highlight-color: #CCCCCC;
+   scrollbar-3dlight-color:  #D4D0C8; 
+   scrollbar-darkshadow-color: #FF00FF;
+   scrollbar-track-color: #FFFFCC; 
+   scrollbar-arrow-color: #FF00FF; 
+}
+
+hr {
+   height: 1px;
+   width: 468px;
+   margin: 0px;
+   padding: 0px;
+   line-height: 1px;
+   color: #FF00FF;
+}
+
+A {
+   background-color: transparent;
+   FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+   COLOR: #FF00FF; 
+   FONT-SIZE: 10px;
+   FONT-WEIGHT: bold;
+   TEXT-DECORATION: underline;
+}
+
+A:hover {
+   TEXT-DECORATION: none;
+}
+
+A:visited {
+   TEXT-DECORATION: underline;
+}
+
+/*Alle overskrifter*/
+H1,H2,H3,H4,H5,H6 {
+   background-color: none;
+}
+
+.writeIn {
+align=center; /*Virker ikke*/
+}
+
+/*Feltet hvori beskederne vises*/
+.besked {
+   FONT-SIZE: 10px;
+   border-width: 1px 1px 1px 1px;
+   border-style: solid;
+   /*border-color: #85E1FC;*/
+   border-color: #FF00FF; 
+   background : #FFFFCC;
+   width: 468px;
+}
+
+/*Feltet hvori svaret vises*/
+.kommentar {
+   FONT-SIZE: 10px;
+   border-width: 0px 1px 1px 1px;
+   border-style: solid;
+   /*border-color: #85E1FC;*/
+   border-color: #FF00FF; 
+   margin-top: none;      
+   padding: 5px;    
+   background: #87E3FC;
+   color: #000000;         
+   width: 468px;
+}
+
+/*Streg i svar*/
+.anwser {
+    COLOR: #87E3FC; 
+    border-bottom: none;
+}
+
+DIV.menu { 
+background-color: transparent;
+}
+
+DIV.intro { 
+/*background: #FFFFFF;*/
+/*border: 1px solid #FF00FF;*/
+/*padding: 5px;*/
+/*height: 50px;*/
+}
+
+DIV.msgWriter {
+   margin-top: 40px; 
+   border-width: 1px 1px 0px 1px;
+   border-style: solid;
+   border-color: #FF00FF;
+   width: 468px;
+}
+
+INPUT {
+border: 1px solid #FF00FF;
+background: #FFFFCC;
+margin: 3px;
+height: 20px;
+}
+
+TEXTAREA{
+border: 1px solid #FF00FF;
+background: #FFFFCC;
+width: 468px;
+}
+
+-->
+</style>
+
+<center>
+<BR>
+<DIV class=intro>
+<HR>
+<B>dunst Guest book.</B>
+<HR>
+<DIV>
+<DIV ID="tom" STYLE="position:absolute; left:0px; top:0px; width:100%; height:105px; z-index:20; background-color: #FFFFFF; layer-background-color: #FFFFFF;"> 
+  <TABLE WIDTH="105%" HEIGHT="100" BORDER="0" ALIGN="RIGHT" CELLPADDING="0" CELLSPACING="0">
+    <TR> 
+      <TD VALIGN="TOP">
+<TABLE WIDTH="100%" HEIGHT="100" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+          <TR> 
+            <TD BACKGROUND="http://dunst.dk/dunst/0/images/fade_op.jpg">&nbsp;</TD>
+          </TR>
+        </TABLE>
+      </TD>
+      <TD WIDTH="150" ALIGN="RIGHT" VALIGN="TOP"><IMG SRC="http://dunst.dk/dunst/0/images/fade_corner_02.jpg" WIDTH="150" HEIGHT="105"></TD>
+    </TR>
+  </TABLE>
+</DIV><p align=right class=writeIn>[Der vises 35 indlæg] [<a href="#skriv">Skriv i gæstebogen</a>] </p>
+
+<div class=msgWriter>Skrevet af: <i>AF boy</i> d. 10/9 - 2004 kl. 17:55:13<br></div><br>
+<table border=0 class=besked><tr><td>Hej, er det ok at komme til dunst arrangementer, selvom man g&aring;r i Abercrombie t&oslash;j...?</td></tr></table>
+<div class=kommentar><span class=anwser>Svar fra dunst Guestbook, skrevet d. 14/09 - 2004 20:34:10</span><br>
+k&aelig;re ABERCOMBIE offer. det er godt du sp&oslash;rger:<br />
+<br />
+F&oslash;rst vil vi lige sl&aring; en ting fast: ALLE er velkomne til dunst arrangementer !<br />
+<br />
+Men folk i ABERZOMBIE t&oslash;j og andre m&aelig;rkv&aelig;rdigheder skal vide, at de p&aring; et tidspunkt nok f&aring;r lyst til at klippe deres fashion kluns i stykker og lave det om til pigetrusser. eller bruge det til at t&oslash;rre op i dark roomet...<br />
+<br />
+kh dunst</div><div class=msgWriter>Skrevet af: <i><a href="mailto:marols@ofir.dk">martina nav.</a></i> d. 26/8 - 2004 kl. 20:04:11<br><a href="http://www.smasken.com" target="_top">http://www.smasken.com</a></div><br>
+<table border=0 class=besked><tr><td>pyyyyha<br />
+<br />
+tak for opbakningen/opm&aelig;rksomheden ved min udmalkning fra egen barm findende sted i folkets hus i anledning af KLAM-fest og under pr&aelig;gtig overv&aelig;relse af op til flere be-dunstligheder.<br />
+<br />
+og endnu engang tak for den overd&aring;dige skaldyrssymfoni ved min konfirmation :) </td></tr></table>
+<div class=msgWriter>Skrevet af: <i><a href="mailto:June_Swanson@hotmail.com">June</a></i> d. 23/8 - 2004 kl. 14:21:17<br></div><br>
+<table border=0 class=besked><tr><td>Hey.<br />
+<br />
+Jeg s&oslash;ger efter Tommy (Hairwork)'s tlf'nummer til hans salon. Hvordan f&aring;r jeg fat i det?<br />
+<br />
+Tusing tak. </td></tr></table>
+<div class=kommentar><span class=anwser>Svar fra dunst Guestbook, skrevet d. 24/08 - 2004 14:26:49</span><br>
+Nummeret er sendt til din mailadresse.</div><div class=msgWriter>Skrevet d. 22/8 - 2004 kl. 02:15:09<br></div><br>
+<table border=0 class=besked><tr><td>h&oslash;rt i chatrum:<br />
+---------------<br />
+moden pervers kbh&gt; ADVARSEL ADVARSEL- KINKY 27 KBH &Oslash; NU. ER EN GAMMEL TRANS I SOMMERKJOLE ADVARSEL <br />
+<br />
+mon det er en fra dunst ?<br />
+<br />
+</td></tr></table>
+<div class=msgWriter>Skrevet af: <i><a href="mailto:mette-karlsen@privat.dk">Miss popo</a></i> d. 21/8 - 2004 kl. 18:42:21<br></div><br>
+<table border=0 class=besked><tr><td>Harj Dunst. Jeg vil bare lige sige at jeg respekterer jeres brance/levestil 100 %... top nice der!! Jeg g&aring;r selv rundt med en indebr&aelig;ndt trang til at fort&aelig;lle hele verden at jeg er til hardcore...! Logger ind p&aring; jeres hjemmeside HVER dag, bare for at se om der er kommet nye medlemmer! Sys at i er for fede.. I har en mega stor indflydelse p&aring; ungdommen nu til dags!! Jeg vil bare lige fort&aelig;lle at jeg ELSKER jer for h&aring;rdt!!! Skriv endelig tilbage til mig. Det vil betyde alt for mig! Ha det godt.. Dunst fra mette karlsen</td></tr></table>
+<div class=kommentar><span class=anwser>Svar fra dunst Guestbook, skrevet d. 22/08 - 2004 21:34:53</span><br>
+Hej Miss popo. Sk&oslash;nt navn. Du er altid velkommen til at v&aelig;re hardcore i dunst - <br />
+<br />
+Hvis du mener vi har indflydelse p&aring; ungdommen er det jo kun godt ;-) for fremtiden. <br />
+<br />
+kh fish</div><div class=msgWriter>Skrevet af: <i><a href="mailto:ricci12@gmx.net">ricci</a></i> d. 16/8 - 2004 kl. 20:52:01<br><a href="http://www.pussycoxx.com" target="_top">http://www.pussycoxx.com</a></div><br>
+<table border=0 class=besked><tr><td>Hey Bob,<br />
+<br />
+it's ricci from berlin. I lost your email. could you please write me to <a href="mailto:ricci12@gmx.net">ricci12@gmx.net</a>.<br />
+<br />
+thanxx!<br />
+ric</td></tr></table>
+<div class=msgWriter>Skrevet af: <i><a href="mailto:webmesteren-1000@webbyen.dk">tim</a></i> d. 4/8 - 2004 kl. 09:22:14<br><a href="www.stop-racisme.info " target="_top">www.stop-racisme.info </a></div><br>
+<table border=0 class=besked><tr><td>hej dunst jeg har en ny nyhed f&oslash;lg med p&aring; <br />
+<a href="http://www.stop-racisme.info" target="_top">www.stop-racisme.info</a> der er der maget at se fra nyheder til debatforumer<br />
+hils alle gutterne og jeg syntes fed fest i lavet i ungdomshuset<br />
+</td></tr></table>
+<div class=msgWriter>Skrevet af: <i><a href="mailto:aks@jur.ku.dk">Allan</a></i> d. 26/6 - 2004 kl. 15:43:11<br></div><br>
+<table border=0 class=besked><tr><td>Hejsa Dunster<br />
+Husk at se optagelser fra koncerten med Scissor Sisters p&aring; Musikprogrammet p&aring; DR2...<br />
+Ikke at der var nogen af os som viste at det blev filmet, men vi er der ihvertfald oppe foran....<br />
+Mvh Allan bandit...<br />
+</td></tr></table>
+<div class=kommentar><span class=anwser>Svar fra dunst Guestbook, skrevet d. 24/08 - 2004 14:26:49</span><br>
+Tak for tippet.</div><div class=msgWriter>Skrevet af: <i><a href="mailto:Pisaura_mirabilis@gmx.net">thomas</a></i> d. 21/6 - 2004 kl. 01:01:28<br></div><br>
+<table border=0 class=besked><tr><td>heyho dunsters,<br />
+saw your great performance at Q6 in amsterdam,i loved it. want to come in august for the queer perfomance contest. never been in kopenhagen before...<br />
+and many hugs to alexis: we were talking on sunday in amsterdam at the bar about some personal things.<br />
+hugs and kisses to all of you,<br />
+thomas<br />
+</td></tr></table>
+<div class=msgWriter>Skrevet af: <i><a href="mailto:bitten.dalfoss@get2net.dk">Bitten</a></i> d. 11/6 - 2004 kl. 01:00:16<br></div><br>
+<table border=0 class=besked><tr><td>K&aelig;re Dunster<br />
+<br />
+Jeg stortrives til jeres fester og elsker de provokerende og ofte rigtig gode performences. Specielt festerne i ungdomshuset har v&aelig;ret fede, men det var ogs&aring; helt ok at l&oslash;be t&oslash;r for benzin p&aring; R&aring;dhuspladsen p&aring; Distortion-bussen. En skam at vi blev bedt om at skrue ned for musikken :) <br />
+<br />
+Har I brug for en hj&aelig;lpende h&aring;nd en gang imellem? Vil gerne v&aelig;re med til selve festerne, men der m&aring; v&aelig;re noget man kan hj&aelig;lpe med inden det hele bliver skudt igang? Sig til.<br />
+<br />
+H&aring;ber p&aring; at I overvejer at arrangere en ny fest i forbindelse med Mermaid Priden til August!! <br />
+<br />
+Kan I ikke l&aelig;gge nogle billeder p&aring; sitet fra de forskellige fester? Har set jer knipse l&oslash;s med kamera, men er endnu ikke faldet over billederne. Ud p&aring; nettet med dem!</td></tr></table>
+<div class=kommentar><span class=anwser>Svar fra dunst Guestbook, skrevet d. 24/08 - 2004 14:26:49</span><br>
+Der ligger mange hundrede billeder p&aring; sitet rundt omkring. Men der er mange fotografer som som tager billeder af os, MEN som ikke holder aftalen om at give os nogle kopier. S&aring; derfor er der nogle huller rundt omkring. Vi h&aring;ber de kommer en dag. Bedre sent end aldrig.</div><div class=msgWriter>Skrevet af: <i><a href="mailto:mugu@mugu.com">ozo</a></i> d. 10/6 - 2004 kl. 15:36:38<br><a href="www.mugu.com" target="_top">hgrty</a></div><br>
+<table border=0 class=besked><tr><td>iland here</td></tr></table>
+<div class=msgWriter>Skrevet af: <i><a href="mailto:Guldtyr@spymac.com">Guld.....</a></i> d. 7/6 - 2004 kl. 01:29:47<br></div><br>
+<table border=0 class=besked><tr><td>Kommer der billeder fra distortion op nogle steder? ja jeg sp&oslash;rger jo bare!!!<br />
+<br />
+</td></tr></table>
+<div class=kommentar><span class=anwser>Svar fra dunst Guestbook, skrevet d. 23/06 - 2004 23:30:05</span><br>
+S&aring; kom de endelig. billederne fra dunst bussen.<br />
+g&aring; ind under parties og v&aelig;lg Christiania Distortion.<br />
+</div><div class=msgWriter>Skrevet af: <i>Jo</i> d. 6/6 - 2004 kl. 15:42:22<br></div><br>
+<table border=0 class=besked><tr><td>Hi guys,<br />
+<br />
+Loved your performance yesterday Sat, 05-jun-04 in the Africa squat in Amsterdam.<br />
+<br />
+;o)<br />
+<br />
+p.s.: Where did elephantman get his stockings?... Would love them on my girlfriend!</td></tr></table>
+<div class=kommentar><span class=anwser>Svar fra dunst Guestbook, skrevet d. 10/06 - 2004 01:04:16</span><br>
+Dear Jo, <br />
+1) I made them myself. <br />
+2) Thanks for a fantastic weekend to you and all other nice and cute people that were there, see you all next year! <br />
+<br />
+Love, Elephant Man/ The Thom  </div><div class=msgWriter>Skrevet af: <i><a href="mailto:kattesund@hotmail.com">Antoni Melander</a></i> d. 1/6 - 2004 kl. 22:38:05<br></div><br>
+<table border=0 class=besked><tr><td>Hey dunst!<br />
+<br />
+Jeg deltager i et stort modeshow p&aring; Frederiksberg d. 14. juni. Vi ku rigtigt godt t&aelig;nke os hvis dunst kunne deltage med nogle kostumer/t&oslash;j . Temaet er flashing Trash Show, med inspiration  af Moulin rouge. S&aring; hvis i har nogle kostumer der passer eller under alle omst&aelig;ndigheder er storsl&aring;et ku det v&aelig;re fedt. Showet er et st&oslash;tte show for r&oslash;dekors som indgangs billet skal pulikum tage et stykke gammelt kluns med. showet bliver vist b&aring;de p&aring; kanal kbh og tv2 lorry  s&aring; i ville ogs&aring; f&aring; lidt pr den vej.  Vi vil selvf&oslash;lgelig ogs&aring; vise et dias med Dunst logo f&oslash;r showet begynder, Men hvis det har fanget nogles interesse er i velkomne til at skrive til min mail adr. <a href="mailto:kattesund@hotmail.com">kattesund@hotmail.com</a>,,,,   Hilsen Antoni.. </td></tr></table>
+<div class=msgWriter>Skrevet af: <i><a href="mailto:mette@nonlimit.co.uk">Mette</a></i> d. 26/5 - 2004 kl. 21:29:49<br><a href="http://www.nonolimit.co.uk" target="_top">http://www.nonolimit.co.uk</a></div><br>
+<table border=0 class=besked><tr><td>Ja, jeg pr&oslash;ver lige igen! Vil bare lige sige at jeg er totalt ydmyg overfor jer. Alt hvad i g&oslash;r beundrer jeg. I er fantastiske:-)</td></tr></table>
+<div class=msgWriter>Skrevet af: <i><a href="mailto:sabineren@yahoo.com">sabine</a></i> d. 18/5 - 2004 kl. 13:22:29<br><a href="http://www.foravarchristiania.dk" target="_top">http://www.foravarchristiania.dk</a></div><br>
+<table border=0 class=besked><tr><td>Hej!!<br />
+Jeg leder med lys og lygte!!!!<br />
+Efter nogle der kunne v&aelig;re friske p&aring; at komme og v&aelig;re rigtig flotte. Det er lidt kort notice, men vi har rigtig meget brug for nogle med en masse farver og fjer til vores &quot;Forsvar Christiania&quot; demonstration p&aring; l&oslash;rdag den 22. Maj. Regeringen er jo netop idag igang med 2. behandlingen af lovforslag L205 om normalisering af Christiania omr&aring;det, som betyder en frisering af fristaden, en social udrensning, ind med mainstream kulturen og &quot;normale&quot; mennesker og ud med de anderledes t&aelig;nkende.... Det finder vi os ikke i! Kom og st&oslash;t os, vi har en vogn i demoen og vi mangler nogle flotte skabninger kl&aelig;dt p&aring; til fest! Vi har nogle til at lave bodypaint og fris&oslash;r Ronnie Dalgaard og et par assistenter til at style lidt, hvis der skulle v&aelig;re brug for det. Vi ligger ikke inde med fjer og lignende festivitas udstyr s&aring; det kunne v&aelig;re rigtig fedt hvis der fandtes noget af det derude vi kunne l&aring;ne. <br />
+Planen er den at der er opvarmning p&aring; Christiania fra kl.12.00-15.00, med dj's, &oslash;l, chill, og andet godt, derefter g&aring;r demoen kl. 15.00, rundt i byen og ender p&aring; Christiansborg, turen kommer til at tage ca.2-3 timer. Derefter er der forskellige koncerter p&aring; christiansborg, blandt andre Det brune punktum, MC Clemens, Johnny Heftig og J&oslash;den!<br />
+Det kunne v&aelig;re fantastiskt hvis der er nogen der har lyst til at v&aelig;re med, skriv en mail til mig: <a href="mailto:sabineren@yahoo.com">sabineren@yahoo.com</a>.     -K&aelig;rlige hilsner, Sabine</td></tr></table>
+<div class=kommentar><span class=anwser>Svar fra dunst Guestbook, skrevet d. 03/06 - 2004 10:46:15</span><br>
+K&aelig;re Sabine, <br />
+<br />
+Tak for din henvendelse. <br />
+Vi vil lige g&oslash;re dig opm&aelig;rksom p&aring;, at dunst ikke l&aelig;ngere h&oslash;rer til p&aring; Christiania. <br />
+<br />
+Efter  ca. 9 m&aring;neder i B&oslash;ssehuset, blev vi bedt om at forlade Christiania, fordi vi ikke passer ind i milj&oslash;et. <br />
+<br />
+I vores tid derude indf&oslash;rte vi en demokratisk brugerstyret ledelses form og &aring;bnede huset for kreative aktiviteter indenfor billedkunst, musik, foto, skulptur, video, dans, performance kunst,  DJ,s og hvad vi eller g&aring;r og sysler med. <br />
+<br />
+Vi holdt en r&aelig;kke arrangementer og aktiviteter, herunder en kunst workshop/udstilling, 3 Bevar Christiania aftener, onsdagslounges med chillout DJ og f&aelig;llesspisning mv. <br />
+<br />
+Derudover havde vi 3 st&oslash;rre st&oslash;ttefester, som ogs&aring; hjalp med at f&aring; B&oslash;ssehusets &oslash;konomi p&aring; plads efter en l&aelig;ngere periode uden indt&aelig;gter. Vi betalte og udf&oslash;rte en r&aelig;kke reparationer p&aring; B&oslash;ssehuset og fors&oslash;gte at g&aring; i dialog med naboer og forskellige af Christianias r&aring;d og udvalg. <br />
+<br />
+Vi fik desv&aelig;rre kun henvendelser, n&aring;r vi lavede ”st&oslash;j”, udviste ”upassende” adf&aelig;rd og fik at vide at vi havde problemer med at forst&aring; ”the Christiania lifestyle”. Vi er bla. blevet truet med baseball bats, har f&aring;et trusselbreve og homofobiske tilr&aring;b fra Christianitter. Vi har ikke oplevet Christiania som et samfund, der er &aring;bent for ”vores slags” anderledes t&aelig;nkende , men som et samfund der lukker sig om sine egne problemer med at f&aring; boligret og egne behov opfyldt.<br />
+<br />
+Vores daglige kamp for at blive accepteret som dem vi er er, er lige s&aring; besv&aelig;rlig p&aring; Christiania som alle andre steder i Samfundet – nogle gange endda sv&aelig;rere. <br />
+<br />
+Organisationen Distortion har bla. inviteret dunst til at deltage i deres st&oslash;tte arrangement ”Christiania Distortion”. Da dunst ikke m&aring;tte bruge b&oslash;ssehuset s&oslash;rgede arrang&oslash;rerne heldigvis for at vi kan holde dunst fest i en bus, der k&oslash;rer rundt om staden. Det bliver rigtig sk&aelig;gt, men desv&aelig;rre kunne vi ikke  invitere de kunstnere og det band fra Berlin, som vi havde planlagt skulle repr&aelig;sentere den homoseksuelle kultur p&aring; Christiania. <br />
+<br />
+Mvh dunst</div><div class=msgWriter>Skrevet af: <i><a href="mailto:hoffmeier@webspeed.dk">robert</a></i> d. 3/5 - 2004 kl. 21:44:57<br></div><br>
+<table border=0 class=besked><tr><td>life are stuffed with surprises-<br />
+THANK GOD</td></tr></table>
+<div class=msgWriter>Skrevet af: <i>EAM</i> d. 29/4 - 2004 kl. 21:18:32<br></div><br>
+<table border=0 class=besked><tr><td>Hej drenge. Bliver jeres album almindeligt tilg&aelig;ngeligt rundt om i pladeforretninger? Det m&aring; man da bare have...<br />
+Nu hvor Kanal K&oslash;benhavn har sagt fra, har I da ikke overvjevet at udgive nogle af v&aelig;rkerne p&aring; video? Jeg har desv&aelig;rre ikke haft mulighed for at se alle programmerne, s&aring; jeg er utvivlsomt g&aring;et glip af en masse.<br />
+<br />
+fart p&aring;!</td></tr></table>
+<div class=kommentar><span class=anwser>Svar fra dunst Guestbook, skrevet d. 24/08 - 2004 14:26:49</span><br>
+Der er ikke sat en dato endnu men tilmeld dig nyhedsbrevet s&aring; f&aring;r du en mail om hvorn&aring;r der sker noget.</div><div class=msgWriter>Skrevet af: <i>hinsidan</i> d. 13/4 - 2004 kl. 21:29:42<br><a href="http://hinsidan.net" target="_top">http://hinsidan.net</a></div><br>
+<table border=0 class=besked><tr><td>Hey Rock`n`roll fagots...tak for endnu en fantastisk fest- keep it up!!!, ingen andre g&oslash;r det.<br />
+</td></tr></table>
+<div class=kommentar><span class=anwser>Svar fra dunst Guestbook, skrevet d. 16/04 - 2004 01:25:38</span><br>
+Hov linket virker ikke uden www <a href="http://www.hinsidan.net/" target="_top">http://www.hinsidan.net/</a></div><div class=msgWriter>Skrevet af: <i><a href="mailto:pawloui@hotmail.com">Pawie</a></i> d. 12/4 - 2004 kl. 20:21:01<br></div><br>
+<table border=0 class=besked><tr><td>Hey alle dunster, ville bare lige sige tak for en fed og dejlig fest i ungeren i l&oslash;rdags (10april).<br />
+Keep on the great work.</td></tr></table>
+<div class=msgWriter>Skrevet af: <i><a href="mailto:info@dunst.dk">dunst</a></i> d. 12/4 - 2004 kl. 14:10:47<br><a href="http://www.dunst.dk" target="_top">http://www.dunst.dk</a></div><br>
+<table border=0 class=besked><tr><td>Copenhagen Is Burning!<br />
+<br />
+K&aelig;re alle folk der var til vores fest i l&oslash;rdags d. 10! <br />
+ 1000 tak fordi i kom; uden jer, ingen fest s&aring; god som denne! <br />
+Hvis nogen skulle ligge inde med fotos fra vores shows eller bare gode snapshots af stemningen til festen, s&aring; m&aring; i meget gerne sende dem til: <a href="mailto:info@dunst.dk">info@dunst.dk</a><br />
+<br />
+  kys, k&aelig;rtegn og komdylomer fra dunst</td></tr></table>
+<div class=msgWriter>Skrevet af: <i><a href="mailto:one_puffy@hotmail.com">Gina Gambino</a></i> d. 11/4 - 2004 kl. 23:30:58<br></div><br>
+<table border=0 class=besked><tr><td>hejsa dunst<br />
+<br />
+kanon fedt party I havde stablet p&aring; benene i Ugndomshuset d. 10/4. Masser af s&oslash;de og sjove partypeople. Der M&Aring; snart komme mere af den slags.<br />
+<br />
+masser af kys fra lak-trans Gina</td></tr></table>
+<div class=msgWriter>Skrevet af: <i><a href="mailto:loverflow@hotmail.com">wolf</a></i> d. 11/4 - 2004 kl. 05:33:52<br></div><br>
+<table border=0 class=besked><tr><td>can i listen a song of you... please<br />
+i ve got yours contacts i saw you ... but dont listen you... i want<br />
+thanks a  lot<br />
+wolf</td></tr></table>
+<div class=msgWriter>Skrevet af: <i><a href="mailto:k_agergaard@hotmail.com">special K</a></i> d. 27/3 - 2004 kl. 20:31:55<br></div><br>
+<table border=0 class=besked><tr><td>Sk&oslash;nne Dunster!<br />
+jeg elsker jeres glamour&oslash;se indtr&aelig;den p&aring; den k&oslash;benhavnske nattescene og som jeg ofte har sagt til nogle af jer, er det for fedt at alle homoer og heteroer kan g&aring; amok i samme extase!<br />
+Special K <br />
+<br />
+ps<br />
+gider i ikke s&aelig;tte den n&aelig;ste eventyr fest p&aring; kalenderen - the roman empire p&aring; hotel scandic d. 8. maj- den ekstravagante opf&oslash;lger p&aring; orient expressen (p&aring; b&amp;w) - det er desv&aelig;rre samme nat som skam fest, men jeg h&aring;ber alligevel af hele mit hjerte i kommer og joiner de sk&oslash;nne guder, gudiner, slaver, gladiotorer, m&aelig;cener, h&aelig;rf&oslash;rere osv osv.<br />
+-tjeck den fede flyer ud - forsalg i LUST </td></tr></table>
+<div class=msgWriter>Skrevet af: <i>Lugtende Tang</i> d. 24/3 - 2004 kl. 02:35:05<br></div><br>
+<table border=0 class=besked><tr><td>Lotte Overbjerg, du er da en nar! <br />
+Hvad skal vi med ENDNU en dokumentar, om een der &quot;ta'r springet&quot;. -Og s&aring; ovenik&oslash;bet om een for hvem det er lykkedes at bevare et godt forhold til sine k&aelig;re. HVOR KEDELIGT KAN DET BLIVE??? -Hvad med at lave en dokumentar om een, der ta'r springet, bliver smidt ud hjemmefra, og nu tjener sine crack-penge ved at l&aelig;gge r&oslash;v til fist-fucking af gamle m&aelig;nd i sure undertr&oslash;jer? -Eller ville det blive for meget 90'er tv2-dokumentar for dig?<br />
+Og hvorfor fanden skal VI lave DIT ops&oslash;gende arbejde?? Er det ikke det licens- og reklamepenge g&aring;r til?<br />
+<br />
+VIL GERNE OPFORDRE ALLE TIL AT MELDE LOTTE OVERBJERGS E-MAIL TIL S&Aring; MANGE SPAM-MASKINER SOM MULIGT!!!!!</td></tr></table>
+<div class=msgWriter>Skrevet af: <i><a href="mailto:lotte@jarowskij.dk">TV2</a></i> d. 11/3 - 2004 kl. 11:30:25<br></div><br>
+<table border=0 class=besked><tr><td>TV2-program om ”springet”<br />
+TV2-serien ”N&aring;r lynet sl&aring;r ned” handler om ganske almindelige mennesker, hvis liv pludselig &aelig;ndrer sig. Vi h&aring;ber at kunne lave et program en familie eller et par, hvor den ene springer ud som homoseksuel. S&aring; hvis du for nylig er sprunget ud og stadig har et godt forhold til din tidligere heteroseksuelle partner, vil vi gerne h&oslash;re fra dig.<br />
+<br />
+H&aring;ber I kan hj&aelig;lpe med kontakter eller evt. sende denne mail rundt. P&aring; forh&aring;nd tak.<br />
+<br />
+Ring eller skriv og h&oslash;r n&aelig;rmere. Al henvendelse uforpligtende.<br />
+<br />
+Lotte Overbjerg<br />
+Produktionsselskabet Jarowskij<br />
+Tlf. 35 86 05 00<br />
+Mail. <a href="mailto:lotte@jarowskij.dk">lotte@jarowskij.dk</a><br />
+</td></tr></table>
+<div class=msgWriter>Skrevet af: <i><a href="mailto:allan_klitgaard@hotmail.com">Allan</a></i> d. 9/3 - 2004 kl. 10:59:18<br></div><br>
+<table border=0 class=besked><tr><td>Hejsa T&oslash;ser<br />
+Det var s&aring; sindsygt fedt at v&aelig;re sammen med jer til Scissorsisters koncerten p&aring; Rust i torsdags. Som jeg tidligere sagde er det altid fedt at h&aelig;nge ud med (undskyld udtrykket) jeres slags. Jeg har manglet det siden jeg flyttede hjem fra New York og har endeligt fundet jer. Gl&aelig;der mig til festen i Ungdomshuset den 10 april. (H&aring;ber ogs&aring; straight peoeple er velkomne?)<br />
+Mvh Allan (lille rockerfyr i en lyser&oslash;d og sort-stribet t-shirt)</td></tr></table>
+<div class=msgWriter>Skrevet af: <i><a href="mailto:mullepigen@hotmail.com">Marrtine the rocky horror scissor sister!!!</a></i> d. 9/3 - 2004 kl. 00:53:38<br></div><br>
+<table border=0 class=besked><tr><td>woaaw hvor er i en spand af sj&aring;w :) jeg var med til scissor sisters koncerten (og afterpaty) og i var faaandme sjove!! i fik jon og de andre stivnakker til at g&aring; i hundende! men takker for jeres festlige indslag, det gjorde aftnenen mere uforlignelig.<br />
+<br />
+lovs<br />
+Lilith (langt r&oslash;dt h&aring;r und green tie)</td></tr></table>
+<div class=msgWriter>Skrevet af: <i><a href="mailto:sj@wdp.dk">Simon Jul J&oslash;rgensen</a></i> d. 5/3 - 2004 kl. 14:05:42<br></div><br>
+<table border=0 class=besked><tr><td>Hey for smukke syge engle freaks !!!!<br />
+-Tusind tak for en p&aring; den gode oplever ..I g&oslash;r sgu ogs&aring; en forskel over det hele !!!<br />
+Jeg kaster mig p&aring; mine s&oslash;rgelige heterokn&aelig; , klemmer ballerne sammen,  og erkl&aelig;rer mig stor DUNST fan !! <br />
+<br />
+-Tak for det t&oslash;ser, one love- <br />
+<br />
+Simon Jul J&oslash;rgensen</td></tr></table>
+<div class=msgWriter>Skrevet af: <i>Homo Hader!!!!!</i> d. 3/3 - 2004 kl. 08:43:49<br></div><br>
+<table border=0 class=besked><tr><td>Fucking homo freaks stik den op i r&oslash;ven og r&aelig;vn det er squ ikke mit problem mother fuckers!!!!!!!!! fucking homo hoveder</td></tr></table>
+<div class=msgWriter>Skrevet af: <i>thomas</i> d. 1/3 - 2004 kl. 21:04:55<br></div><br>
+<table border=0 class=besked><tr><td>tak fordi i g&oslash;r en forskel i homomilj&oslash;et. det er inspirerende. jubii.</td></tr></table>
+<div class=kommentar><span class=anwser>Svar fra dunst Guestbook, skrevet d. 31/03 - 2004 03:12:19</span><br>
+Tak Thommas. Hvad med dig selv, g&oslash;r du en forskel? ;-)</div><div class=msgWriter>Skrevet af: <i><a href="mailto:morgenstern@webspeed.dk">Sally Monella</a></i> d. 18/2 - 2004 kl. 01:20:02<br></div><br>
+<table border=0 class=besked><tr><td>Jeres hjemmeside g&oslash;r en gammel drag dybt imponeret og det lokker og tr&aelig;kker helt i stilletterne for at blive st&oslash;vet af. Men nej - Undertegnede evner ikke at holde jeres tempo.<br />
+Sk&oslash;nt at der stadig findes folk, der EVNER at provokere...</td></tr></table>
+<div class=kommentar><span class=anwser>Svar fra dunst Guestbook, skrevet d. 03/03 - 2004 01:37:48</span><br>
+Hej Sally Monella.<br />
+Tusind tak for dine s&oslash;de ord. Men man bliver aldrig for gammel til dunst. Du m&aring; endelig komme til n&aelig;ste dunst fest. hold &oslash;je med siden. Der kommer snart en dato. Det handler ikke om tempo men om personality.<br />
+Dennis Agerblad.</div><div class=msgWriter>Skrevet af: <i><a href="mailto:troels@elektrikalorius.com">Troels</a></i> d. 17/2 - 2004 kl. 17:03:25<br><a href="http://www.elektrikalrecords.com" target="_top">Elektrikal Records</a></div><br>
+<table border=0 class=besked><tr><td>Vi fra Elektrikal Records takker hermed for p&aelig;n opf&oslash;rsel, da alle i dejlige dunstiner kom forbi til vores release-party. <br />
+<br />
+PS: Cd'en findes nu p&aring; de fleste cafeer i byen, s&aring; nu kan Johnny Warehouse og Hairwerk alts&aring; bestilles...<br />
+<br />
+De allerbedste hilsner, Troels Dalg&aring;rd.</td></tr></table>
+<div class=kommentar><span class=anwser>Svar fra dunst Guestbook, skrevet d. 03/03 - 2004 01:37:48</span><br>
+K&aelig;re Troels - selv tak!<br />
+du beh&oslash;ver nu ikke at takke os - vi opf&oslash;rer os altid p&aelig;nt i dunst. Undtagen i Filmhuset hvor vi har ekstra buget til reng&oslash;ring.</div><div class=msgWriter>Skrevet af: <i><a href="mailto:cool-astrid@e-mail.dk">maria</a></i> d. 17/2 - 2004 kl. 14:12:54<br></div><br>
+<table border=0 class=besked><tr><td>hey miss fish!!<br />
+har li l&aelig;st om dig i informationsbogen &quot;homo&quot;<br />
+ville bare sige jeg beundrer dig utrolig meget for din &aring;benhed og ligefremhed.<br />
+selv om jeg godt ved hvad jeg er til ville det v&aelig;re utrolig hyggeligt at f&aring; en sludder en dag..<br />
+kysss fra maria</td></tr></table>
+<div class=kommentar><span class=anwser>Svar fra dunst Guestbook, skrevet d. 03/03 - 2004 01:37:48</span><br>
+hej maria,<br />
+tak for din fine kommentar. du beh&oslash;ver nu ikke v&aelig;re i tvivl om hvad du er til eller ude p&aring; dybt vand for at tage en sludder med mig. vi kan ogs&aring; snakke om min nyeste sang eller om alt muligt andet. grib fat i mig til vores n&aelig;ste fest.<br />
+Miss Fish</div><div class=msgWriter>Skrevet af: <i><a href="mailto:-">Anders</a></i> d. 14/2 - 2004 kl. 10:52:07<br><a href="http://www.klondesign.dk" target="_top">KLONdesign</a></div><br>
+<table border=0 class=besked><tr><td>Vi vil se flere billeder af dig i den hotdog, Dennis!! he he<br />
+M&aring;ske en ide til det n&aelig;ste Dunst-show du laver?<br />
+<br />
+I gav den sgu los i Zulu Bingo - har ikke grinet s&aring; meget i lang tid :-)<br />
+<br />
+Straf fra A</td></tr></table>
+<div class=kommentar><span class=anwser>Svar fra dunst Guestbook, skrevet d. 03/03 - 2004 01:37:48</span><br>
+Tak Anders Klon. Vi skal nok finde nogle billeder fra skr&aelig;k oplevelsen. <br />
+Dennis Agerblad</div><p align=center class="nextPrev"></p>
+<form action="bog.php3" method=post>
+<hr>
+<a name=skriv></a>
+Navn <input type=text name=navn>
+E-mail <input type=text name=email><br>
+Hjemmeside-adresse <input type=text name=url value="http://">
+Hjemmeside-titel <input type=text name=titel><br>
+<a href="http://www.icq.com" target="_blank" title="ICQ's hjemmeside [åbner i et nyt vindue]">ICQ</a>-nr.
+	<input type=text name=icqNr><br>
+<textarea cols=75 rows=10 name=indl></textarea><br>
+<input type=hidden name=type value=tilfoej> <input type=hidden name=id value="12126">
+<input type=checkbox name=sendmail CHECKED> Send mig en e-mail med information om hvordan jeg kan ændre eller slette mit indlæg.<br>
+<input type=submit value="  Tilføj  "><input type=reset value="Nulstil"><br>
+</form>
+<p align=center class="nextPrev"></p>
+<hr>
+<p align=center>Denne gæstebog tilhører dunst Guestbook</p>
+<p align=center>&copy; Simon Mikkelsen 1999 - 2004</p>
+</body>
+</html>

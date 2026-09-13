@@ -1,0 +1,180 @@
+body { 
+	BACKGROUND-COLOR: #FFFFFF;
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; 
+	COLOR: #B6B6B0; 
+	FONT-SIZE: 10px; 
+	FONT-WEIGHT: normal;
+	background-image: url(images/fade_op.jpg); 
+	background-position: top; 
+	margin: 0px; 
+	background-repeat: repeat-x; 
+	background-attachment: fixed;
+	scrollbar-face-color: #85E1FC;
+	scrollbar-shadow-color: #FF00FF; 
+	scrollbar-highlight-color: #FF00FF;
+	scrollbar-3dlight-color:  #FFFFFF; 
+	scrollbar-darkshadow-color: #FFFFFF;
+	scrollbar-track-color: #FFFFFF; 
+	scrollbar-arrow-color: #000000; 
+} 
+
+.ramme {
+	border-style: solid;
+	border-color: #FF00FF;
+	border-width: 1px 1px 1px 1px;
+}
+
+hr {
+	height: 1px;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	line-height: 1px;
+	color: #FF00FF;
+}
+
+h1 {
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; 
+	COLOR: #000000; 
+	FONT-SIZE: 13px; 
+	FONT-WEIGHT: bold;
+}
+
+td { 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #000000;  
+	FONT-SIZE: 10px; 
+	FONT-WEIGHT: normal;
+ }
+ 
+td.abroad { 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #FFFFFF;  
+	FONT-SIZE: 10px; 
+	FONT-WEIGHT: normal;
+	BACKGROUND-COLOR: #C04E4E;
+ }
+ 
+td.cafe { 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #FFFFFF;  
+	FONT-SIZE: 10px; 
+	FONT-WEIGHT: normal;
+	BACKGROUND-COLOR: #754223;
+ }
+ 
+td.event { 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #FFFFFF;  
+	FONT-SIZE: 10px; 
+	FONT-WEIGHT: normal;
+	BACKGROUND-COLOR: #2972A3;
+ }
+ 
+td.film { 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #FFFFFF;  
+	FONT-SIZE: 10px; 
+	FONT-WEIGHT: normal;
+	BACKGROUND-COLOR: #000000;
+ }
+ 
+td.musik { 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #000000;  
+	FONT-SIZE: 10px; 
+	FONT-WEIGHT: normal;
+	BACKGROUND-COLOR: #EEEEEE;
+ }
+ 
+td.party { 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #000000;  
+	FONT-SIZE: 10px; 
+	FONT-WEIGHT: normal;
+	BACKGROUND-COLOR: #FF00FF;
+ }
+ 
+td.radio { 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #000000;  
+	FONT-SIZE: 10px; 
+	FONT-WEIGHT: normal;
+	BACKGROUND-COLOR: #FFFF00;
+ }
+ 
+td.rec { 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #000000;  
+	FONT-SIZE: 10px; 
+	FONT-WEIGHT: normal;
+	BACKGROUND-COLOR: #FF720A;
+ }
+
+ .head {
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: 000000;
+	FONT-SIZE: 10px;
+	FONT-WEIGHT: bold;
+	TEXT-DECORATION: none;
+	padding: 5px;
+	border-bottom: medium solid #FF00FF;
+	border-bottom-width: 1 px;
+	BACKGROUND-COLOR: #85E1FC;
+}
+
+A {
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #FF00FF; 
+	FONT-SIZE: 10px;
+	FONT-WEIGHT: bold;
+	TEXT-DECORATION: underline;
+	CURSOR: hand;
+}
+
+.gul {
+	COLOR: #FFFFCC;
+} 
+
+.mini {
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #CCCCCC; 
+	FONT-SIZE: 10px;
+	FONT-WEIGHT: bold;
+	TEXT-DECORATION: underline;
+	CURSOR: hand;
+} 
+
+A:visited { 
+	COLOR: #FF00FF; 
+} 
+
+A:active { 
+	COLOR: #FF00FF; 
+} 
+
+A:hover { 
+    COLOR: #FF00FF; 
+	TEXT-DECORATION: none; 
+}
+
+input {
+    border: 1px solid #85E1FC;
+    background: #FFFFCC;
+    margin: 0px;
+    height: 20px;
+}
+
+TEXTAREA{
+    border: 1px solid #85E1FC;
+    background: #FFFFCC;
+    width: 250px;
+}
+
+.button {
+	COLOR: #000000;
+	font-weight : bold;
+	font-size : 10px;
+	background-color: #FFFFFF;
+	BORDER: #85E1FC 1px solid;
+}

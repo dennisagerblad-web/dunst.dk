@@ -1,0 +1,79 @@
+<!--------Website created and produced by--------->
+<!---------------http://www.ova.dk---------------->
+<HTML>
+<HEAD>
+<TITLE>menu</TITLE>
+<script language="JavaScript">
+<!--
+function tjekForm(){
+		if(document.forms["theForm"].email.value=="e-mail address"||(document.forms["theForm"].email.value=="")) {
+			alert("Write your e-mail address!");
+			return false;
+		}
+}
+
+function pwGo(){
+		var folder = "../login/kfgj/";
+		var pw = document.pwForm.pw.value;
+		parent.location = folder+pw+".html";
+		return false;
+}
+// -->
+</script>
+<LINK REL="stylesheet" HREF="dunst_right.css">
+<STYLE>
+body { 
+	background-image:  url(images/fade_right.jpg);
+	background-position: right;
+	margin: 0px;
+	background-repeat: repeat-y;
+	background-attachment: fixed;	
+}
+</STYLE>
+</HEAD>
+
+<BODY LINK="#FFFFFF" ALINK="#FF00FF" VLINK="#FFFFFF">
+<TABLE WIDTH="130" BORDER="0" ALIGN="CENTER" CELLPADDING="5" CELLSPACING="0" CLASS="ramme">
+  <TR> 
+    <TD CLASS="head">dunst Contact</TD>
+  </TR>
+  <TR> 
+    <TD>info(a)dunst.dk</TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE WIDTH="130" BORDER="0" ALIGN="CENTER" CELLPADDING="5" CELLSPACING="0" CLASS="ramme">
+  <TR> 
+    <TD CLASS="head">dunst Chat</TD>
+  </TR>
+  <TR> 
+    <TD><A HREF="#" onclick="javascript:window.open('http://chat.klaus.dk/chat/pjirc/pjirclogon.php?channel=zg&fontcolor=FF00FF&backgroundcolor=FFFFCC&nomainchannel=1','_blank', 'fullscreen=no,toolbar=no,status=yes,menubar=no,scrollbars=yes, resizable=yes,directories=no,location=no');return(false)">Opens in a popup</A></TD>
+  </TR>
+</TABLE>
+<BR>
+<BR>
+<table WIDTH="130" border="0" ALIGN="CENTER" cellpadding="5" cellspacing="0" CLASS="ramme">
+  <FORM NAME="pwForm" ACTION="javascript:pwGo()">
+    <tr> 
+      <td CLASS="head"><B>dunst Activist</B></td>
+    </tr>
+    <tr> 
+      <td HEIGHT="27"> <INPUT NAME="pw" TYPE="TEXT" onFocus="this.value='';" VALUE="" SIZE="16"></td>
+    </tr>
+    <tr> 
+      <td ALIGN="RIGHT"> <INPUT CLASS="button" TYPE="button" onClick="pwGo()" NAME="go" VALUE="Login"> 
+      </td>
+    </tr>
+  </FORM>
+</table>
+<BR>
+<table WIDTH="130" border="0" ALIGN="CENTER">
+  <tr> 
+      <td><IFRAME src="../../nyhedsbrev/mailliste.php" height="110" width="130" marginwidth="0" marginheight="0" frameborder="0" scrolling="no"></IFRAME></td>
+    </tr>
+</table>
+<BR>
+<BR>
+<script language="javascript" src="http://dunst.dk/dunst/0/sne.js"></script>
+</BODY>
+</HTML>

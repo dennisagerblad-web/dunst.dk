@@ -1,0 +1,668 @@
+<!--------Website created and produced by--------->
+<!---------------http://www.ova.dk---------------->
+<!--------------All rights reserved--------------->
+<HTML>
+<HEAD>
+<TITLE>menu</TITLE>
+<STYLE>
+body { 
+	background-image:url(images/fade_left.jpg);
+	background-position: left;
+	margin: 0px;
+	background-repeat: repeat-y;
+	background-attachment: fixed;	
+	font-family: verdana;
+	font-size: 10px;
+	scrollbar-face-color: #85E1FC;
+	scrollbar-shadow-color: #FF00FF; 
+	scrollbar-highlight-color: #FF00FF;
+	scrollbar-3dlight-color:  #FFFFFF; 
+	scrollbar-darkshadow-color: #FFFFFF;
+	scrollbar-track-color: #FFFFFF; 
+	scrollbar-arrow-color: #000000; 
+}
+
+/* [BEGIN] Menu top and menu end */
+#menuend, #menustart {
+	border-width: 0px;
+	border-top-width: 0px;
+	border-bottom-width: 1px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	border-style: solid;
+	border-color: #87E3FC;
+}
+
+#menustart {
+	height: 100px;
+	background-image:url(images/dunst_logo_20.jpg);
+	background-position: top-left;
+	background-repeat: no-repeat;
+}
+
+#menuend {
+border: 0;
+border-top: 1px solid #87E3FC;
+}
+/* [END] Menu top and menu end */
+
+
+
+/* [BEGIN] Menu styles */
+.mainNode {
+	padding: 4px;
+	font-weight: bold;
+	border-width: 1px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	border-style: solid;
+	border-color: #87E3FC;
+}
+
+.mainNodeOver {
+	padding: 4px;
+	font-weight: bold;
+	border-width: 1px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	border-style:solid;
+	border-color: #87E3FC;
+}
+
+.mainNode a {
+	color: #FF00FF;
+	text-decoration: none;
+}
+
+.mainNodeOver a {
+	color: #000000;
+	text-decoration: none;
+}
+
+.mainNode a:hover {
+	color: #000000;
+}
+
+.mainNode a:active {
+	color: #000000;
+}
+
+.subNode {
+	color: #43B4FF;
+	padding-left: 10px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	text-decoration: none;
+}
+
+.subNode a {
+	color: #FF00FF;
+}
+
+.subNode a:hover {
+	color: #000000;
+}
+
+.subNode a:active {
+	font-weight: bold;
+	color: #000000;
+}
+
+.subMenu {
+	position: relative;
+	display: none;
+	overflow: hidden;
+	border-width: 1px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	border-style: solid;
+	border-color: #87E3FC;
+}
+/* [END] Menu styles */
+</STYLE>
+
+<SCRIPT>
+
+/*
+ ******************************************************************************
+ *  Sliding treeview v 0.1 // IE 5+ and Mozilla 1+ only
+ ******************************************************************************
+ *
+ * Created by: Caspar Due (caspar.dk)
+ * 
+ * If you want to use this script please leave this message intact.
+ *
+ * and thanks for all the fish..
+ *
+ ******************************************************************************
+*/
+
+var curMenu = false;
+var curActiveMenu = false;
+var deltaY = 8;
+var speed = 10;
+
+window.onload = function()
+{
+	var elm;
+	for(var i=0; i<document.getElementsByTagName("DIV").length;i++) {
+		elm = document.getElementsByTagName("DIV")[i];
+		if(elm.className=="mainNode") {
+			elm.init = mainNodeInit;
+			elm.init();
+		}
+	}
+}
+
+function mainNodeInit()
+{
+	var subid = "subMenu" + this.id.substring(8,this.id.length+1);
+	if(document.getElementById(subid)) {
+		this.hasSub = true;
+		this.sub = document.getElementById(subid);
+		
+		this.isOpen = false;
+		this.isClosed = true;
+		this.isOpening = false;
+		this.isClosing = false;
+		
+		// show and hide trick to get offsetHeight (dunno if there is a better way?)		
+		this.sub.style.display = "block";
+		this.sub.fullHeight = this.sub.offsetHeight;
+		this.sub.style.display = "none";
+		this.sub.style.overflow = "hidden";
+	}
+	else {
+		this.hasSub = false;
+		this.sub = false;
+	}
+	
+	this.onmouseover = function()
+	{
+		this.className = "mainNodeOver";
+	}
+	
+	this.onmouseout = function()
+	{
+		this.className = "mainNode";
+	}
+	
+	
+	this.onclick = function()
+	{
+		curMenu = this;
+		
+		if(!curActiveMenu ||this == curActiveMenu) {
+			if(this.isOpening || this.isOpen) //  closing self
+			{
+				this.closeSub();
+			}
+			else if(this.isClosed || this.isClosing)
+			{
+				this.openSub();
+			}
+		}
+		else if (curActiveMenu)
+		{
+			if(curActiveMenu.isOpen || curActiveMenu.isOpening)
+			{
+				curActiveMenu.closeSub();
+			}
+		}
+	}
+		
+	this.closeSub = function()
+	{
+		this.isOpening = false;
+		this.isClosing = true;
+				
+		this.slideCloseSub();
+	}
+	
+	this.slideCloseSub = function()
+	{
+		if(this.isClosing)
+		{
+			curActiveMenu = this;
+
+			
+			if(this.isOpen)
+			{
+				this.isOpen = false;
+			}
+			
+			if(this.sub.offsetHeight - deltaY > 0)
+			{
+				this.sub.style.height = this.sub.offsetHeight - deltaY;
+				setTimeout("document.getElementById('" + this.id + "').slideCloseSub();",speed);
+			}
+			else
+			{
+				this.sub.style.display = "none";
+				this.isClosed = true;
+				if(curActiveMenu != curMenu)
+				{
+					if(curMenu.hasSub)
+					{
+						curMenu.openSub();
+					}
+				}
+				curActiveMenu = false;
+			}
+		}
+	}
+	
+	this.openSub = function()
+	{
+		this.isOpening = true;
+		this.isClosing = false;
+				
+		this.slideOpenSub();
+	}
+	
+	this.slideOpenSub = function()
+	{
+		if(this.isOpening)
+		{
+			curActiveMenu = this;
+			
+			if(this.isClosed)
+			{
+				this.sub.style.height = 1;
+				this.sub.style.display = "block";
+				this.isClosed = false;
+			}
+
+			if(this.sub.offsetHeight + deltaY < this.sub.fullHeight)
+			{
+				
+				this.sub.style.height =this.sub.offsetHeight + deltaY;
+				setTimeout("document.getElementById('" + this.id + "').slideOpenSub();",speed);
+			}
+			else
+			{
+				this.sub.style.height = this.sub.fullHeight;
+				this.isOpen = true;
+			}
+		}
+	}
+}
+
+</SCRIPT>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+<DIV ID="menustart"><A HREF="http://dunst.dk" TARGET="_top" onfocus="this.blur()"><IMG SRC="images/pix_trans.gif" WIDTH="170" HEIGHT="100" BORDER="0"></A></DIV>
+
+<DIV ID="mainNode_05" CLASS="mainNode" STYLE="border-top-width: 0px;"><A HREF="../calendar/2005.html#her" TARGET="main">CALENDAR</A></DIV>
+<DIV ID="subMenu_05" CLASS="subMenu"> 
+  <DIV CLASS="subNode">&nbsp;<A HREF="../calendar/2005.html#her" TARGET="main">2005</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../calendar/2004.html" TARGET="main">2004</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../calendar/2003.html" TARGET="main">2003</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../calendar/2002.html" TARGET="main">2002</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../calendar/2001.html" TARGET="main">2001</A></DIV>
+</DIV>
+
+<DIV ID="mainNode_06" CLASS="mainNode"><A HREF="../musik/index.html" TARGET="main"><FONT COLOR="#727272"><LI>dunst MUSIC</LI></FONT></A></DIV>
+
+<DIV ID="mainNode_07" CLASS="mainNode"><A HREF="../radio/index.html" TARGET="main"><FONT COLOR="#A3A300"><LI>dunst RADIO</LI></FONT></A></DIV>
+
+<DIV ID="mainNode_09" CLASS="mainNode"><A HREF="../02_parties/index.html" TARGET="main"><LI>dunst PARTIES</LI></A></DIV>
+<DIV ID="subMenu_09" CLASS="subMenu"> 
+  <DIV CLASS="subNode">&nbsp;<B>2005:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../02_parties/fest_19_habibis_exil/index.html" TARGET="main">habibisEXIL</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2004:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../02_parties/fest_18_hr_fru/index.html" TARGET="main">HR&amp;FRU 
+    dunst</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../02_parties/fest_17_spejder/index.html" TARGET="main">dunst 
+    Spejder Fest</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../02_parties/fest_16_coma/index.html" TARGET="main">dunst 
+    går i COMA</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../02_parties/fest_15_distortion/index.html" TARGET="main">Christiania 
+    Distortion</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../02_parties/fest_14_silo_01/index.html" TARGET="main">Silo</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../02_parties/fest_13_cross_dress/index.html" TARGET="main">Cross 
+    Dress!</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2003:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../02_parties/fest_12_skoegereden/index.html" TARGET="main">Skøgereden</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../02_parties/fest_11_helligaanden/index.html" TARGET="main">Helligåndsfesten</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../02_parties/fest_10_primate_nite/index.html" TARGET="main">Primate 
+    Nite</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../02_parties/fest_09_robbery/index.html" TARGET="main">Robbery</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2002:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../02_parties/fest_07_nytaar/index.html" TARGET="main">Nytårsknald</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../02_parties/fest_06_lefreak/index.html" TARGET="main">LeFreak</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../02_parties/fest_05_electro/index.html" TARGET="main">Elektro 
+    i dunst</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../02_parties/fest_04_sommerfest/index.html" TARGET="main">Sommerfest</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2001:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../02_parties/fest_02_nytaar/index.html" TARGET="main">Nytårsknald</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../02_parties/fest_01_barbeque/index.html" TARGET="main">Barbeque</A></DIV>
+</DIV>
+
+<DIV ID="mainNode_12" CLASS="mainNode"><A HREF="../03_events/index.html" TARGET="main"><FONT COLOR="#2972A3"><LI>dunst EVENTS</LI></FONT></A></DIV>
+<DIV ID="subMenu_12" CLASS="subMenu"> 
+  <DIV CLASS="subNode">&nbsp;<B>2005:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../03_events/2005/05_06_11_polen_demo/index.html" TARGET="main"><FONT COLOR="#2972A3">Polsk 
+    Demo</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../03_events/2005/aftenskole/index.html" TARGET="main"><FONT COLOR="#2972A3">dunst 
+    aftenskole</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2004:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../03_events/2004/04_08_27_universitetet/index.html" TARGET="main"><FONT COLOR="#2972A3">Køn 
+    I Spil</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../03_events/2004/04_07_17_belgrade_pride/index.html" TARGET="main"><FONT COLOR="#2972A3">Belgrade 
+    Demo</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../03_events/2004/04_03_04_scissor_sisters/index.html" TARGET="main"><FONT COLOR="#2972A3">Scissor 
+    Sisters Concert</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2003:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../03_events/2003/pride_dk/index.html" TARGET="main"><FONT COLOR="#2972A3">Danish 
+    Pride</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../03_events/2003/eurogames/index.html" TARGET="main"><FONT COLOR="#2972A3">Eurogames</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../03_events/2003/kunst_i_dunst/index.html" TARGET="main"><FONT COLOR="#2972A3">kunst 
+    i dunst</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../03_events/2003/sankt_hans/index.html" TARGET="main"><FONT COLOR="#2972A3">Sankt 
+    Hans</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2002:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../03_events/2002/fuck_around/index.html" TARGET="main"><FONT COLOR="#2972A3">Fuck 
+    Around</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../03_events/2002/designskolen/index.html" TARGET="main"><FONT COLOR="#2972A3">Danmarks 
+    Design Skole</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../03_events/2002/mermaid_pride/index.html" TARGET="main"><FONT COLOR="#2972A3">Mermade 
+    Pride</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2001:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../03_events/2001/mermaid_pride/index.html" TARGET="main"><FONT COLOR="#2972A3">Mermade 
+    Pride</FONT></A></DIV>
+</DIV>
+
+<DIV ID="mainNode_14" CLASS="mainNode"><A HREF="../abroad/index.html" TARGET="main"><FONT COLOR="#E71A1A"><LI>dunst ABROAD</LI></FONT></A></DIV>
+<DIV ID="subMenu_14" CLASS="subMenu"> 
+  <DIV CLASS="subNode">&nbsp;<B>2005:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../abroad/2005/05_05_30_queeruption_barcelona/index.html" TARGET="main"><FONT COLOR="#E71A1A">Queeruption 
+    #8</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../abroad/2005/05_05_05_frankrig/index.html" TARGET="main"><FONT COLOR="#E71A1A">Be 
+    Queer</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2004:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../abroad/2004/04_12_31_homophobia_newyear/index.html" TARGET="main"><FONT COLOR="#E71A1A">Homophobia 
+    - Newyear</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../abroad/2004/04_07_02_homophobia_berlin/index.html" TARGET="main"><FONT COLOR="#E71A1A">Homophobia</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../abroad/2004/04_06_04_queeruption/index.html" TARGET="main"><FONT COLOR="#E71A1A">Queeruption 
+    #6</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../abroad/2004/04_03_27_supamolli/index.html" TARGET="main"><FONT COLOR="#E71A1A">Supamolli</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2003:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../abroad/2003/03_11_15_shadow_people/index.html" TARGET="main"><FONT COLOR="#E71A1A">Shadow 
+    People</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../abroad/2003/wigstockholm/index.html" TARGET="main"><FONT COLOR="#E71A1A">WigStockholm 
+    Pride</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../abroad/2003/queeruption_berlin/index.html" TARGET="main"><FONT COLOR="#E71A1A">Queeruption 
+    #5</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../abroad/2003/ski_ferie/10/index.html" TARGET="main"><FONT COLOR="#E71A1A">Skiferie 
+    i Sverige</FONT></A></DIV>
+</DIV>
+
+<DIV ID="mainNode_15" CLASS="mainNode"><A HREF="../cafe/index.html" TARGET="main"><FONT COLOR="#6C391C"><LI>dunst CAFÉ</LI></FONT></A></DIV>
+<DIV ID="subMenu_15" CLASS="subMenu"> 
+  <DIV CLASS="subNode">&nbsp;<B>2005:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../cafe/2005/stille_aften/index.html" TARGET="main"><FONT COLOR="#6C391C">Stille 
+    aften med dunst</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2003:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../cafe/2003/bevar_christiania/03_turist_trap/index.html" TARGET="main"><FONT COLOR="#6C391C">Bevar 
+    Christiania 3</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../cafe/2003/onsdags_lounge/index.html" TARGET="main"><FONT COLOR="#6C391C">Ulles 
+    Onsdags Lounge</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../cafe/2003/bevar_christiania/02/index.html" TARGET="main"><FONT COLOR="#6C391C">Bevar 
+    Christiania 2</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../cafe/2003/bevar_christiania/01/index.html" TARGET="main"><FONT COLOR="#6C391C">Bevar 
+    Christiania 1</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../cafe/2003/arty_farty/index.html" TARGET="main"><FONT COLOR="#6C391C">dunst 
+    & Arty Farty</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2002:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../cafe/2002/gay_night_cabaret/index.html" TARGET="main"><FONT COLOR="#6C391C">Gay 
+    Night Cabaret</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../cafe/2002/internet_cafe/index.html" TARGET="main"><FONT COLOR="#6C391C">Internet 
+    Caf&eacute;</FONT></A></DIV>
+</DIV>
+
+<DIV ID="mainNode_17" CLASS="mainNode"><A HREF="../film/index.html" TARGET="main"><FONT COLOR="#000000"><LI>dunst FILMS</LI></FONT></A></DIV>
+<DIV ID="subMenu_17" CLASS="subMenu"> 
+  <DIV CLASS="subNode">&nbsp;<B>2005:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../press/2005/05_05_27_tv2-lorry_brunch/index.html" TARGET="main"><FONT COLOR="#000000">TV2-Lorry 
+    Brunch</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2004:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../film/music_videos/index.html" TARGET="main"><FONT COLOR="#000000">Music 
+    Videos</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../film/cglff_2004/index.html" TARGET="main"><FONT COLOR="#000000">G 
+    &amp; L Film Festival</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../film/04_08_04_playing_tourist/index.html" TARGET="main"><FONT COLOR="#000000">Playing 
+    tourist</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../film/ramonas_rejse/index.html" TARGET="main"><FONT COLOR="#000000">Ramonas 
+    Rejse</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../film/04_02_03_zullu/index.html" TARGET="main"><FONT COLOR="#000000">Zulu 
+    Bingo</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2003:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../film/kanal_dunst/index.html" TARGET="main"><FONT COLOR="#000000">Kanal 
+    dunst</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../film/skidt_kommer_til/index.html" TARGET="main"><FONT COLOR="#000000">Når 
+    skidt kommer...</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../film/dunst_bio/2003/index.html" TARGET="main"><FONT COLOR="#000000">dunst 
+    Bio</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2002:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../press/2002/02_08_16_tv2/video_tv2_foto.html" TARGET="main"><FONT COLOR="#000000">TV2 
+    Nyhederne</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../film/from_scratch/index.html" TARGET="main"><FONT COLOR="#000000">G 
+    &amp; L Film Festival</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../film/dunst_bio/2002/index.html" TARGET="main"><FONT COLOR="#000000">dunst 
+    Bio</FONT></A></DIV>
+</DIV>  
+  
+<DIV ID="mainNode_19" CLASS="mainNode"><A HREF="../recommends/index.html" TARGET="main"><FONT COLOR="FF6600"><LI>dunst RECOMMENDS</LI></FONT></A></DIV>
+<DIV ID="subMenu_19" CLASS="subMenu"> 
+  <DIV CLASS="subNode">&nbsp;<B>2005:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_08_12_team_trash/index.html" TARGET="main"><FONT COLOR="#FF6600">Team 
+    Trash Gay Event</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_08_04_kulturhavn/index.html" TARGET="main"><FONT COLOR="#FF6600">Kulturhavn</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_07_15_fnat_05/index.html" TARGET="main"><FONT COLOR="#FF6600">Fnat 
+    på Kat #5</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_07_08_tam/index.html" TARGET="main"><FONT COLOR="#FF6600">TAM</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_07_02_kran_01/index.html" TARGET="main"><FONT COLOR="#FF6600">KRAN 
+    #1</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_07_02_foedselsdag_riga/index.html" TARGET="main"><FONT COLOR="#FF6600">Fødselsdagsfest</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_06_30_pause_02/index.html" TARGET="main"><FONT COLOR="FF6600">Pause 
+    Show #2</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_06_24_csd_berlin/index.html" TARGET="main"><FONT COLOR="#FF6600">CSD</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_06_23_sankt_hans_puta/index.html" TARGET="main"><FONT COLOR="FF6600">Skt. 
+    Hans Aften</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_06_23_fish_berlin/index.html" TARGET="main"><FONT COLOR="FF6600">House 
+    Of Shame #2</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_06_16_bryllup/index.html" TARGET="main"><FONT COLOR="FF6600">Bryllup</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_06_11_kapilab/index.html" TARGET="main"><FONT COLOR="FF6600">KapiLab</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_06_01_barometer/index.html" TARGET="main"><FONT COLOR="FF6600">Barometer 
+    1 &aring;r</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_05_26_electrolux_01/index.html" TARGET="main"><FONT COLOR="FF6600">Electrolux 
+    #1</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_05_21_bend_05/index.html" TARGET="main"><FONT COLOR="FF6600">Bend 
+    #5</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_05_19_pause_01/index.html" TARGET="main"><FONT COLOR="FF6600">Pause 
+    Show #1</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_05_12_bend_04/index.html" TARGET="main"><FONT COLOR="FF6600">Bend 
+    #4</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_05_03_pluto/index.html" TARGET="main"><FONT COLOR="FF6600">Pluto</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_04_26_velour/index.html" TARGET="main"><FONT COLOR="FF6600">Velour</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_04_16_queen/index.html" TARGET="main"><FONT COLOR="FF6600">Queens 
+    Day...</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_04_15_queer/index.html" TARGET="main"><FONT COLOR="FF6600">Queer 
+    inclusive...</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_04_09_bend_03/index.html" TARGET="main"><FONT COLOR="FF6600">Bend 
+    #3</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_04_02_king_fest/index.html" TARGET="main"><FONT COLOR="FF6600">Drag 
+    King Fest</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_03_24_gritt_all_of_us/index.html" TARGET="main"><FONT COLOR="FF6600">All 
+    of Us</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_03_24_cunta_go_away/index.html" TARGET="main"><FONT COLOR="FF6600">Cunta 
+    Kinte show</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_03_12_puta_riga/index.html" TARGET="main"><FONT COLOR="FF6600">Luderl&aelig;derlillepige...</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_03_10_chantal_shame/index.html" TARGET="main"><FONT COLOR="FF6600">House 
+    Of Shame #1</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_03_08_gritt/index.html" TARGET="main"><FONT COLOR="FF6600">Suburbian 
+    Rape Busters</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_03_05_salon_oriental/index.html" TARGET="main"><FONT COLOR="FF6600">Salon 
+    Oriental #2</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_02_25_fnat_04/index.html" TARGET="main"><FONT COLOR="FF6600">Fnat 
+    på Kat #4</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_02_19_bend_02/index.html" TARGET="main"><FONT COLOR="FF6600">Bend 
+    #2</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_01_29_copenhagen_live/index.html" TARGET="main"><FONT COLOR="FF6600">Copenhagen 
+    Live</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_01_28_valg_fest/index.html" TARGET="main"><FONT COLOR="FF6600">Queer 
+    Politiker Battle!</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_01_22_bend_01/index.html" TARGET="main"><FONT COLOR="FF6600">Bend 
+    #1</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2005/05_01_14_oriental/index.html" TARGET="main"><FONT COLOR="FF6600">Salon 
+    Oriental #1</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2004:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_12_25_fnat_03/index.html" TARGET="main"><FONT COLOR="FF6600">FNAT 
+    på KAT #3</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_12_09_benutz/index.html" TARGET="main"><FONT COLOR="FF6600">Hygge 
+    Hygge Hygg</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_12_04_drag_kings_fest/index.html" TARGET="main"><FONT COLOR="FF6600">Drag 
+    King Fest</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_11_13_just_music/index.html" TARGET="main"><FONT COLOR="FF6600">Just 
+    For The Music</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_11_13_enhedslisten/index.html" TARGET="main"><FONT COLOR="FF6600">Enhedslistens 
+    Seminar</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_11_10_rhythm_king/index.html" TARGET="main"><FONT COLOR="FF6600">Rhythm 
+    King</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_10_30_halloween/index.html" TARGET="main"><FONT COLOR="FF6600">Halloween 
+    Horror Party</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_10_29_ramona_intime/index.html" TARGET="main"><FONT COLOR="FF6600">Ramona 
+    G&aring;r Retro #2</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_10_23_fnat_02/index.html" TARGET="main"><FONT COLOR="FF6600">FNAT 
+    på KAT #2</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_10_08_kulturnat_knud/index.html" TARGET="main"><FONT COLOR="FF6600">Kulturnat 
+    på Kafe Knud</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_10_01_bunkr_6/index.html" TARGET="main"><FONT COLOR="FF6600">Bunkr 
+    #6</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_09_25_puha_benutz/index.html" TARGET="main"><FONT COLOR="FF6600">PUHA 
+    Magazine Lounch</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_09_24_jeppe/index.html" TARGET="main"><FONT COLOR="FF6600">Jeppes 
+    Klub</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_09_18_ramona_intime/index.html" TARGET="main"><FONT COLOR="FF6600">Ramona 
+    G&aring;r Retro #1</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_09_17_fnat_kat/index.html" TARGET="main"><FONT COLOR="FF6600">FNAT 
+    på KAT #1</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_09_11_a_queer_riot/index.html" TARGET="main"><FONT COLOR="FF6600">A 
+    Queer Riot</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_09_02_kupe_aarhus/index.html" TARGET="main"><FONT COLOR="FF6600">The 
+    Act</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_08_14_klam_pride/index.html" TARGET="main"><FONT COLOR="FF6600">KLAM</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_08_14_parade/index.html" TARGET="main"><FONT COLOR="FF6600">Copenhagen 
+    Pride</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_06_23_sankt_hans/index.html" TARGET="main"><FONT COLOR="FF6600">Skt. 
+    Hans Aften</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_05_28_luder/index.html" TARGET="main"><FONT COLOR="FF6600">Din 
+    mor er en luder</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_05_08_skam/index.html" TARGET="main"><FONT COLOR="FF6600">SKAMløsBØSSEsexFEST</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_05_04_tove_blus/index.html" TARGET="main"><FONT COLOR="FF6600">Tove 
+    Hansen Show</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_04_17_kallas/index.html" TARGET="main"><FONT COLOR="FF6600">Kallas</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_03_03_bunkr/index.html" TARGET="main"><FONT COLOR="FF6600">Bunkr 
+    #3</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2004/04_01_17_cockpitt_farvel/index.html" TARGET="main"><FONT COLOR="FF6600">Cockpitt 
+    Farvel</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2003:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2003/03_12_27_santa_boogie/index.html" TARGET="main"><FONT COLOR="FF6600">Trash 
+    Santa Boogie</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2003/03_12_20_lektrisk_loerdag/index.html" TARGET="main"><FONT COLOR="FF6600">'lektrisk 
+    Lørdag</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2003/03_12_05_boyfriend/index.html" TARGET="main"><FONT COLOR="FF6600">My 
+    Boyfriend's Birthday</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2003/03_12_02_homo_homo_homo/index.html" TARGET="main"><FONT COLOR="FF6600">Homo 
+    Homo Homo</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2003/03_11_29_bryggen/index.html" TARGET="main"><FONT COLOR="FF6600">Nordatlantens 
+    Brygge</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2003/03_02_01_studio_54/index.html" TARGET="main"><FONT COLOR="FF6600">Studio 
+    54</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2002:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2002/froeken_verden/index.html" TARGET="main"><FONT COLOR="FF6600">Frøken 
+    Verden 2002</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2002/02_03_23_laundry_girls/index.html" TARGET="main"><FONT COLOR="FF6600">The 
+    Laundry Girls</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2002/02_02_08_miss_sixty/index.html" TARGET="main"><FONT COLOR="FF6600">Miss 
+    Sixty</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2001:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2001/01_12_05_rocky_horror/index.html" TARGET="main"><FONT COLOR="FF6600">Rocky 
+    Horror M. Show</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2001/2001_05_03_pinocchio_bar/index.html" TARGET="main"><FONT COLOR="FF6600">Pinocchio 
+    Bar</FONT></A></DIV>
+  <DIV CLASS="subNode">&nbsp;<B>2000:</B></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../recommends/2000/frk_verden/index.html" TARGET="main"><FONT COLOR="FF6600">Frøken 
+    Verden</FONT></A></DIV>
+</DIV>
+
+<DIV ID="mainNode_22" CLASS="mainNode"><A HREF="../01_performere/200_billeder_help.html" TARGET="main">PERFORMANCE GROUP</A></DIV>
+<DIV ID="subMenu_22" CLASS="subMenu"> 
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/17_alexis/index.html" TARGET="main">AleX.T.C.</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/11_bjarne_pigen/index.html" TARGET="main">Bjarne 
+    pigen</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/15_bob/index.html" TARGET="main">Bob</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/03_dennis-agerblad/index.html" TARGET="main">Dennis 
+    Agerblad</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/13_grr-it/index.html" TARGET="main">Grr-it</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/05_hairwerk/index.html" TARGET="main">Hairwerk</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/04_johnny_warehouse/index.html" TARGET="main">Johnny 
+    Warehouse</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/12_knud_vesterskov/index.html" TARGET="main">Knud 
+    Vesterskov</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/20_lene_leth/index.html" TARGET="main">Lene 
+    Leth Lebbe</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/10_liebling_siebling/index.html" TARGET="main">Liebling 
+    Siebling</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/14_madam/index.html" TARGET="main">mAdam</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/21_marilyn_not_monroe/index.html" TARGET="main">Marily 
+    'not' Monroe</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/02_miss_fish/index.html" TARGET="main">Miss Fish</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/23_nuclear_family/index.html" TARGET="main">Nuclear Family</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/18_ulle_dulle/index.html" TARGET="main">Ulle 
+    Dulle</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/06_puta/index.html" TARGET="main">Puta</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/01_ramona_macho/index.html" TARGET="main">Ramona 
+    Macho</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/09_stimulundia/index.html" TARGET="main">Stimulundia</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/07_car-o-lina/index.html" TARGET="main">S&oslash;de 
+    Car O'lina</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/08_the_thom/index.html" TARGET="main">The 
+    Thom</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/19_tina_trash/index.html" TARGET="main">Tina 
+    Trash</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/16_tove_hansen/index.html" TARGET="main">Tove 
+    Hansen</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../01_performere/guests/index.html" TARGET="main">Guest 
+    Performers</A></DIV>
+</DIV>
+
+<DIV ID="mainNode_25" CLASS="mainNode"><A HREF="../dj/index.html" TARGET="main">dunst DJ's</A></DIV>
+
+<DIV ID="mainNode_31" CLASS="mainNode"><A HREF="../about_us/index.html" TARGET="main">dunst HISTORY</A></DIV>
+
+<DIV ID="mainNode_35" CLASS="mainNode"><A HREF="../press/2005/index.html" TARGET="main">the PRESS</A></DIV>
+<DIV ID="subMenu_35" CLASS="subMenu"> 
+  <DIV CLASS="subNode">&nbsp;<A HREF="../press/2005/index.html" TARGET="main">2005</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../press/2004/index.html" TARGET="main">2004</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../press/2003/index.html" TARGET="main">2003</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../press/2002/index.html" TARGET="main">2002</A></DIV>
+  <DIV CLASS="subNode">&nbsp;<A HREF="../press/press_photos/press.html" TARGET="main">Press 
+    Photos</A></DIV>
+</DIV>
+
+<DIV ID="mainNode_40" CLASS="mainNode"><A HREF="../links/links.html" TARGET="main">LINKS</A></DIV>
+
+<DIV ID="mainNode_45" CLASS="mainNode"><A HREF="http://www.zip.dk/gaeste/bog.php3?id=12126" TARGET="main">dunst GUESTBOOK</A></DIV>
+
+<DIV ID="menuend"><IMG SRC="../../ny_04/blank.gif" WIDTH="1" HEIGHT="11"></DIV>
+
+&nbsp;<A href="http://www.ova.dk" target="_blank" style="COLOR: #999999; FONT-SIZE: 10px; FONT-WEIGHT: normal;">webdesign 
+© www.ova.dk</A> 
+</BODY>
+</HTML>

@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>dunst</title>
+<link rel="stylesheet" href="dunst.css">
+<SCRIPT LANGUAGE="JavaScript">
+<!--        
+isopen = false
+var popped
+msiemacsize = 0;
+
+function isaMac() 
+{ 
+if (navigator.appVersion.indexOf("PPC") != -1 || navigator.appVersion.indexOf("68K") != -1) return true; else return false; 
+}
+if (navigator.appName == "Microsoft Internet Explorer" && isaMac() && parseInt(navigator.appVersion) <= 4 && navigator.appVersion.indexOf('MSIE 5') == -1)  msiemacsize = 14;
+
+
+function pop(goPage,nom,windowWidth,windowHeight) 
+{
+if (parseInt(navigator.appVersion) >= 4) { wX = (screen.width/2)-(windowWidth/2+10); wY = (screen.height/2)-(windowHeight/2-47); 
+}
+else 
+{ 
+wX = 0; wY = 0; 
+}
+              
+popped=window.open(goPage,nom,'width='+windowWidth+',height='+(windowHeight+msiemacsize)+',status=no,menubar=no,scrollbars=no,resizable=no,screenX='+wX+',screenY='+wY+',left='+wX+',top='+wY);
+if (navigator.appName=="Netscape" || document.all) popped.focus();
+}
+// onload="pop('prizes/fest_01_frameset.html','popped',790,600)";
+-->		 
+</SCRIPT>
+</head>
+
+<body BGCOLOR="#FFFFCC">
+<table width="361" border="0" cellspacing="0" cellpadding="0" height="100" ALIGN="CENTER" BGCOLOR="#FFFFFF">
+  <tr> 
+    <td><IMG SRC="fester/fest_12/skoegereden_collor_04.gif" WIDTH="634" HEIGHT="283"></td>
+  </tr>
+</table>
+<BR>
+<BR>
+</body>
+</html>

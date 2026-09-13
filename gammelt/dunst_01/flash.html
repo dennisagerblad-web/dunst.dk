@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>flash</title>
+<link rel="stylesheet" href="dunst.css">
+<SCRIPT LANGUAGE="JavaScript">
+<!--        
+isopen = false
+var popped
+msiemacsize = 0;
+
+function isaMac() 
+{ 
+if (navigator.appVersion.indexOf("PPC") != -1 || navigator.appVersion.indexOf("68K") != -1) return true; else return false; 
+}
+if (navigator.appName == "Microsoft Internet Explorer" && isaMac() && parseInt(navigator.appVersion) <= 4 && navigator.appVersion.indexOf('MSIE 5') == -1)  msiemacsize = 14;
+
+
+function pop(goPage,nom,windowWidth,windowHeight) 
+{
+if (parseInt(navigator.appVersion) >= 4) { wX = (screen.width/2)-(windowWidth/2+10); wY = (screen.height/2)-(windowHeight/2-47); 
+}
+else 
+{ 
+wX = 0; wY = 0; 
+}
+              
+popped=window.open(goPage,nom,'width='+windowWidth+',height='+(windowHeight+msiemacsize)+',status=no,menubar=no,scrollbars=no,resizable=no,screenX='+wX+',screenY='+wY+',left='+wX+',top='+wY);
+if (navigator.appName=="Netscape" || document.all) popped.focus();
+}
+
+// onload="pop('pop.html','popped',400,250)";
+
+-->		 
+</SCRIPT>
+</head>
+
+<body bgcolor="#FFFFFF" onload="pop('pop.html','popped',674,310)";>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
+  <tr align="center" valign="middle"> 
+    <td><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=4,0,2,0" width="788" height="406">
+        <param name=movie value="dunst.swf">
+        <param name=quality value=high>
+        <embed src="dunst.swf" quality=high pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="788" height="406">
+        </embed> 
+      </object><BR>
+      <a href="http://www.ova.dk" target="_blank" style="COLOR: #CCCCCC; FONT-SIZE: 10px; FONT-WEIGHT: normal;"><BR>
+      webdesign © 2001 www.ova.dk</a></td>
+  </tr>
+</table>
+<!-- Start på ZIP Stat kode -->
+<script language="JavaScript" type="text/javascript">
+<!--
+far="Andre"; jav="Ved ikke"; skh="Andre"; jav=navigator.javaEnabled(); 
+skh=screen.width + "x" + screen.height; ref=""+escape(top.document.referrer); nav=navigator.appName;
+if (nav != "Netscape"){far=screen.colorDepth;} else {far=screen.pixelDepth;}
+if (navigator.appName == "Netscape" && (navigator.appVersion.charAt(0) == "2" || navigator.appVersion.charAt(0) == "3")) {skriv=false;} else {skriv=true;}
+if (skriv==true) { puri="brugernavn=dunst&amp;ssto="+skh+"&amp;referer="+ref+"&amp;colors="+far+"&amp;java="+jav+"&amp;js=true&amp;billed=trans"; 
+document.write("<img height=\"1\" width=\"1\" border=\"0\" src=\"http://www.zip.dk/cgi-bin/zipstat/zipstat.cgi?"+puri+"\" alt=\"\">"); }
+//-->
+</script> <noscript>
+<img height="1" width="1" border="0" src="http://www.zip.dk/cgi-bin/zipstat/zipstat.cgi?brugernavn=dunst&amp;js=false&amp;billed=trans" alt=""></noscript>
+<!-- Slut på ZIP Stat kode -->
+</body>
+</html>

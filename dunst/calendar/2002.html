@@ -1,0 +1,1502 @@
+<!--------Website created and produced by--------->
+<!---------------http://www.ova.dk---------------->
+<HTML>
+<HEAD>
+<TITLE>dunst calendar</TITLE>
+<SCRIPT language="JavaScript" type="text/JavaScript" src="float.js"></SCRIPT>
+<SCRIPT language="JavaScript">
+	var objPage = Page();
+function Page() {
+	return(this);
+}
+	onload=init;
+	OChaser= new ClassChaser("CC","OChaser",100,170)
+
+function resz() {
+	if (document.layers)
+	history.go(0);
+}
+
+function init() {
+	OChaser.init();
+}
+
+</SCRIPT>
+<STYLE>
+#CC {
+	position:absolute;
+	top:100px;
+	right:10px;
+	width:50;
+	z-index: 3;
+}
+</STYLE>
+<LINK rel="stylesheet" href="../0/dunst_right.css">
+<SCRIPT language="JavaScript" type="text/JavaScript">
+<!--
+function MM_reloadPage(init) {  //reloads the window if Nav4 resized
+  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
+    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
+  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
+}
+MM_reloadPage(true);
+//-->
+</SCRIPT>
+</HEAD>
+
+<BODY onresize="resz();" onscroll="OChaser.startChase();" onload="init();">
+<DIV ID="yellowCorner" STYLE="position:absolute; left:0px; top:0px; width:100%; height:100%; z-index:1"> 
+  <TABLE WIDTH="100%" HEIGHT="100" BORDER="0" ALIGN="RIGHT" CELLPADDING="0" CELLSPACING="0" BACKGROUND="../0/images/fade_op.jpg">
+    <TR>
+      <TD VALIGN="TOP"><TABLE WIDTH="150" HEIGHT="100" BORDER="0" ALIGN="RIGHT" CELLPADDING="0" CELLSPACING="0">
+          <TR>
+            <TD><IMG SRC="../0/images/fade_corner_02.jpg" WIDTH="150" HEIGHT="100"></TD>
+          </TR>
+        </TABLE></TD>
+    </TR>
+  </TABLE>
+</DIV>
+
+<DIV ID="Calendar" STYLE="position:absolute; left:0px; top:0px; width:700px; height:200px; z-index:2">
+<TABLE WIDTH="470" BORDER="0" CELLPADDING="0" CELLSPACING="10">
+  <TR>
+    <TD><IMG SRC="../0/images/pix_trans.gif" WIDTH="200" HEIGHT="80"></TD>
+	</TR>
+	<TR>
+      <TD><TABLE BORDER="0" CELLPADDING="6" CELLSPACING="0">
+          <TR>
+            <TD COLSPAN="10" NOWRAP><FONT SIZE="5"><B>dunst Calendar 2002</B></FONT></TD>
+          </TR>
+          <TR>
+            <TD><A HREF="2001.html" TARGET="_self"><FONT SIZE="2">2001</FONT></A></TD>
+            <TD BGCOLOR="#FFFFCC" CLASS="ramme"><A HREF="2002.html" TARGET="_self"><FONT SIZE="2">2002</FONT></A></TD>
+            <TD><A HREF="2003.html" TARGET="_self"><FONT SIZE="2">2003</FONT></A></TD>
+            <TD><A HREF="2004.html" TARGET="_self"><FONT SIZE="2">2004</FONT></A></TD>
+            <TD><A HREF="2005.html" TARGET="_self"><FONT SIZE="2">2005</FONT></A></TD>
+            <TD><A HREF="2006.html" TARGET="_self"><FONT SIZE="2">2006</FONT></A></TD>
+            <TD><A HREF="2007.html" TARGET="_self"><FONT SIZE="2">2007</FONT></A></TD>
+            <TD><A HREF="2008.html" TARGET="_self"><FONT SIZE="2">2008</FONT></A></TD>
+            <TD>&nbsp;</TD>
+            <TD>&nbsp;</TD>
+          </TR>
+        </TABLE></TD>
+	</TR>
+    <TR>
+      <TD>
+      <TABLE WIDTH="100%" BORDER="1" ALIGN="CENTER" CELLPADDING="5" CELLSPACING="2" BORDERCOLOR="#FF00FF">
+        <TR VALIGN="TOP"> 
+          <TD COLSPAN="7" CLASS="head">Januar 2002</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD><B>Monday</B></TD>
+          <TD><B>Tuesday</B></TD>
+          <TD><B>Wednesday</B></TD>
+          <TD><B>Thursday</B></TD>
+          <TD><B>Friday</B></TD>
+          <TD><B>Saturday</B></TD>
+          <TD><B>Sunday</B></TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>&nbsp;</TD>
+          <TD>1.<B> </B></TD>
+          <TD>2.</TD>
+          <TD>3.</TD>
+          <TD>4.</TD>
+          <TD>5.</TD>
+          <TD BGCOLOR="#FFFFCC">6.<BR>
+            <B>Aktivist m&oslash;de</B> </TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>7.</TD>
+          <TD>8.<B> </B></TD>
+          <TD>9.</TD>
+          <TD>10. </TD>
+          <TD>11.</TD>
+          <TD>12.</TD>
+          <TD>13.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>14.</TD>
+          <TD>15.<B> </B></TD>
+          <TD>16.</TD>
+          <TD>17. </TD>
+          <TD>18.</TD>
+          <TD>19.</TD>
+          <TD BGCOLOR="#FFFFCC">20.<BR>
+            <B>Aktivist m&oslash;de</B> </TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>21.</TD>
+          <TD>22.<B> </B></TD>
+          <TD>23.</TD>
+          <TD>24. </TD>
+          <TD>25.</TD>
+          <TD>26.</TD>
+          <TD>27.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>28.</TD>
+          <TD>29.<B> </B></TD>
+          <TD>30.</TD>
+          <TD>31.</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+        </TR>
+      </TABLE> <BR>
+      <BR>
+      <TABLE WIDTH="100%" BORDER="1" ALIGN="CENTER" CELLPADDING="5" CELLSPACING="2" BORDERCOLOR="#FF00FF">
+        <TR VALIGN="TOP"> 
+          <TD COLSPAN="7" CLASS="head">Februar 2002</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD><B>Monday</B></TD>
+          <TD><B>Tuesday</B></TD>
+          <TD><B>Wednesday</B></TD>
+          <TD><B>Thursday</B></TD>
+          <TD><B>Friday</B></TD>
+          <TD><B>Saturday</B></TD>
+          <TD><B>Sunday</B></TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>1.</TD>
+          <TD>2.</TD>
+          <TD BGCOLOR="#FFFFCC">3.<BR>
+            <B>Aktivist m&oslash;de</B> </TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>4.</TD>
+          <TD>5.<B> </B> </TD>
+          <TD>6.</TD>
+          <TD>7.</TD>
+            <TD BGCOLOR="#FF6600">8.<BR>
+              <B><A HREF="../recommends/2002/02_02_08_miss_sixty/index.html" TARGET="_self"><FONT COLOR="#FFFFCC">miss 
+              sixty fashion show</FONT></A></B><BR>
+              pull the strings<BR>
+              <BR>
+              <B>Performance:</B><BR>
+              Hairwerk,<BR>
+              Ramona Macho,<BR>
+              Miss Fish,<BR>
+              O.T.B. </TD>
+          <TD>9.</TD>
+          <TD>10.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>11.</TD>
+          <TD>12.<B> </B> </TD>
+          <TD>13.</TD>
+          <TD>14.</TD>
+          <TD>15.</TD>
+          <TD>16.</TD>
+          <TD BGCOLOR="#FFFFCC">17.<BR>
+            <B>Aktivist m&oslash;de</B></TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>18.</TD>
+          <TD>19.<B> </B> </TD>
+          <TD>20.</TD>
+          <TD>21.</TD>
+          <TD>22.</TD>
+          <TD>23.</TD>
+          <TD>24.<B> </B> </TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>25.</TD>
+          <TD>26.<BR> </TD>
+          <TD>27.</TD>
+          <TD>28.</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+        </TR>
+      </TABLE>
+      <BR>
+      <BR>
+      <TABLE WIDTH="100%" BORDER="1" ALIGN="CENTER" CELLPADDING="5" CELLSPACING="2" BORDERCOLOR="#FF00FF">
+        <TR VALIGN="TOP"> 
+          <TD COLSPAN="7" CLASS="head">Marts 2002</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD><B>Monday</B></TD>
+          <TD><B>Tuesday</B></TD>
+          <TD><B>Wednesday</B></TD>
+          <TD><B>Thursday</B></TD>
+          <TD><B>Friday</B></TD>
+          <TD><B>Saturday</B></TD>
+          <TD><B>Sunday</B></TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>1.</TD>
+          <TD>2.</TD>
+          <TD BGCOLOR="#FFFFCC">3.<BR>
+            <B>Aktivist m&oslash;de</B> </TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>4.</TD>
+          <TD>5.<B> </B> </TD>
+          <TD>6.</TD>
+          <TD>7.</TD>
+          <TD>8.</TD>
+          <TD>9.</TD>
+          <TD>10.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>11.</TD>
+          <TD>12.<B> </B> </TD>
+          <TD BGCOLOR="#FFFFCC">13.<BR> <B>dunst fest m&oslash;de</B> <BR>
+            kl. 21:00 </TD>
+          <TD>14.</TD>
+          <TD>15.</TD>
+          <TD>16.</TD>
+          <TD BGCOLOR="#FFFFCC">17.<BR> <B>Aktivist m&oslash;de med brunch</B><BR>
+            kl. 12:00</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>18.</TD>
+          <TD>19.<B> </B> </TD>
+          <TD>20.</TD>
+          <TD>21.</TD>
+          <TD>22.</TD>
+            <TD BGCOLOR="#FF6600">23.<BR>
+              <A HREF="../recommends/2002/02_03_23_laundry_girls/index.html" TARGET="_self"><FONT COLOR="#FFFFCC">The 
+              Laundry Girls</FONT></A><BR>
+              VEGA, Copenhagen <BR>
+              <BR>
+              <B>Performance:</B><BR>
+              Ramona Macho,<BR>
+              Miss Fish,<BR>
+              O.T.B. </TD>
+          <TD>24.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>25.</TD>
+          <TD>26.<B> </B> </TD>
+          <TD>27.</TD>
+          <TD>28.</TD>
+          <TD>29.</TD>
+          <TD>30.<BR> </TD>
+          <TD BGCOLOR="#FFFFCC"> <P>31.<BR>
+              <B>Aktivist m&oslash;de</B> </P></TD>
+        </TR>
+      </TABLE>
+      <BR>
+      <BR>
+      <TABLE WIDTH="100%" BORDER="1" ALIGN="CENTER" CELLPADDING="5" CELLSPACING="2" BORDERCOLOR="#FF00FF">
+        <TR VALIGN="TOP"> 
+          <TD COLSPAN="7" CLASS="head">April 2002</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD><B>Monday</B></TD>
+          <TD><B>Tuesday</B></TD>
+          <TD><B>Wednesday</B></TD>
+          <TD><B>Thursday</B></TD>
+          <TD><B>Friday</B></TD>
+          <TD><B>Saturday</B></TD>
+          <TD><B>Sunday</B></TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>1.</TD>
+          <TD>2.<B> </B> </TD>
+          <TD>3.<BR> </TD>
+          <TD>4.</TD>
+          <TD>5.</TD>
+          <TD>6.</TD>
+          <TD>7.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD HEIGHT="49">8.</TD>
+          <TD>9.<B> </B> </TD>
+          <TD>10.</TD>
+          <TD>11.</TD>
+          <TD BORDERCOLOR="#FF00FF">12.</TD>
+          <TD BGCOLOR="#FFFFCC">13.<BR> <B>Oprydning</B> <BR>
+            kl. 12:00 </TD>
+          <TD BGCOLOR="#FFFFCC">14.<BR> <B>Aktivist m&oslash;de med brunch</B><BR>
+            For alle kl. 12:00 </TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>15.</TD>
+          <TD>16.<B> </B> </TD>
+          <TD>17.</TD>
+          <TD>18.</TD>
+          <TD>19.</TD>
+          <TD>20.</TD>
+          <TD>21.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>22.</TD>
+          <TD>23.<B> </B> </TD>
+          <TD>24.</TD>
+          <TD>25.</TD>
+          <TD>26.</TD>
+          <TD>27.</TD>
+          <TD BGCOLOR="#FFFFCC">28.<BR> <B>Aktivist m&oslash;de</B><BR>
+            kl. 14:00 </TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>29.</TD>
+          <TD>30.<B> </B> </TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+        </TR>
+      </TABLE>
+      <BR>
+      <BR>
+      <TABLE WIDTH="100%" BORDER="1" ALIGN="CENTER" CELLPADDING="5" CELLSPACING="2" BORDERCOLOR="#FF00FF">
+          <TR VALIGN="TOP"> 
+            <TD COLSPAN="7" CLASS="head">Maj 2002</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD><B>Monday</B></TD>
+            <TD><B>Tuesday</B></TD>
+            <TD><B>Wednesday</B></TD>
+            <TD><B>Thursday</B></TD>
+            <TD><B>Friday</B></TD>
+            <TD><B>Saturday</B></TD>
+            <TD><B>Sunday</B></TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>&nbsp;</TD>
+            <TD>&nbsp;</TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">1.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 16 - 20<BR>
+              /Jacob Nicu</FONT></TD>
+            <TD>2.<BR>
+              <B>PRESSE:</B><BR>
+              Panbladet:<A HREF="../press/2002/02_05_01_jacob/02_05_01_jacob.html" TARGET="_self"><BR>
+               Ny gr&aelig;srodsforening i K&oslash;benhavn</A></TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">3.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 16 - 20<BR>
+              /Jacob Nicu</FONT></TD>
+            <TD>4.<BR>
+              Vores hjemmeside udvides med en kalender idag. </TD>
+            <TD>5.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>6.<BR> <B>Mandags klip<BR>
+              </B>kl. 15 - 18 (Christian) kom og bliv klippet. </TD>
+            <TD>7.<BR> </TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">8.<BR>
+              <B>dunst BIO<BR>
+              </B>kl. 19:00<BR>
+              <B><BR>
+              <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#8-maj" TARGET="_self">The 
+              Birdcage</A></B><BR>
+              </FONT> </TD>
+            <TD>9.<BR> </TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">10.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 16 - 20<BR>
+              /Jacob Nicu</FONT></TD>
+            <TD>11.</TD>
+            <TD BGCOLOR="#FFFFCC">12.<BR> <B>Aktivist m&oslash;de</B> </TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>13.<BR> <B>Mandags klip<BR>
+              </B>kl. 15 - 18 (Christian) kom og bliv klippet. </TD>
+            <TD>14.<BR> </TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">15.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 16 - 20<BR>
+              /Jacob Nicu</FONT></TD>
+            <TD>16.<BR> </TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">17.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 16 - 20<BR>
+              /Jacob Nicu</FONT></TD>
+            <TD>18.</TD>
+            <TD>19.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>20.<BR> <B>Mandags klip<BR>
+              </B>kl. 15 - 18 (Christian) kom og bliv klippet. </TD>
+            <TD>21.<BR> </TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">22. <BR>
+              <B>dunst BIO<BR>
+              </B>kl. 19:00<BR>
+              <BR>
+              <B><A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#22-maj" TARGET="_self">Jubilee</A></B></FONT></TD>
+            <TD>23.<BR> </TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">24.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 16 - 20<BR>
+              /Jacob Nicu</FONT></TD>
+            <TD>25. <BR> <B>Uddelingsnat</B> af flyers til vor fest 'Gay Night 
+              Cabaret'.<BR>
+              Hvem vil med?</TD>
+            <TD BGCOLOR="#FFFFCC">26.<BR> <B>Aktivist m&oslash;de</B> </TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>27.<BR> <B>Mandags klip<BR>
+              </B>kl. 15 - 18 (Christian) kom og bliv klippet. </TD>
+            <TD>28.<BR> </TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">29.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 16 - 20<BR>
+              /Jacob Nicu</FONT></TD>
+            <TD>30.<BR> </TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">31.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 16 - 20<BR>
+              /Jacob Nicu</FONT></TD>
+            <TD>&nbsp;</TD>
+            <TD> <P><BR>
+                <BR>
+              </P></TD>
+          </TR>
+        </TABLE>
+      <BR>
+      <BR>
+      <TABLE WIDTH="100%" BORDER="1" ALIGN="CENTER" CELLPADDING="5" CELLSPACING="2" BORDERCOLOR="#FF00FF">
+          <TR VALIGN="TOP"> 
+            <TD COLSPAN="7" CLASS="head">Juni 2002</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD><B>Monday</B></TD>
+            <TD><B>Tuesday</B></TD>
+            <TD><B>Wednesday</B></TD>
+            <TD><B>Thursday</B></TD>
+            <TD><B>Friday</B></TD>
+            <TD><B>Saturday</B></TD>
+            <TD><B>Sunday</B></TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>&nbsp;</TD>
+            <TD>&nbsp;</TD>
+            <TD>&nbsp;</TD>
+            <TD>&nbsp;</TD>
+            <TD>&nbsp;</TD>
+            <TD>1.<BR>
+               Den store flyer uddelings aften</TD>
+            <TD BGCOLOR="#FFFFCC">2.<BR> <B>Aktivist m&oslash;de</B><BR>
+              kl. 20:00 <B> </B> </TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>3.<BR> <B>Mandags klip<BR>
+              </B>kl. 15 - 18 (Christian) kom og bliv klippet. <BR> </TD>
+            <TD>4.<B><BR>
+PRESSE:</B><BR>
+              Nat &amp; Dag:<A HREF="../press/2002/02_06_01_nat_og_dag/02_06_01_nat_og_dag.html" TARGET="_self"><BR>
+              dunst gaynight cabaret</A><B>                          </B></TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">5.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 16 - 20<BR>
+              /Jacob Nicu</FONT></TD>
+            <TD>6.<BR> </TD>
+            <TD>7.</TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">8.<BR>
+              <A HREF="../cafe/2002/gay_night_cabaret/index.html" TARGET="_self"><FONT COLOR="#FFFFCC">Gay 
+              Night Cabaret</FONT></A><BR>
+              <B>dunst party</B><BR>
+              Hald-D<BR>
+              Strandstr&aelig;de<BR>
+              <BR>
+              <B>DJ's:</B><BR>
+              Minimal Martin,<BR>
+              Hairwerk. <BR>
+              <BR>
+              <B>VJ:</B><BR>
+              Gritt Uldahl,<BR>
+              Miss Fish,<BR>
+              <BR>
+              <B>Performance:</B><BR>
+              Johnny Warehouse,<BR>
+              Tammy Holestream,<BR>
+              Dennis Agerblad,<BR>
+              Ramona Macho,<BR>
+              Miss Fish,<BR>
+              Knud Vesterskov,<BR>
+              <BR>
+              <B>G&aelig;steperformere:</B><BR>
+              Ernalise Royer,<BR>
+              Tusnelda Tusindfryd,<BR>
+              Bragi,<BR>
+              Scarletta Jackson,<BR>
+              Miss O.T.B. </FONT></TD>
+            <TD>9.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>10.<BR> <B>Mandags klip<BR>
+              </B>kl. 15 - 18 (Christian) kom og bliv klippet. </TD>
+            <TD>11.<B> </B></TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">12.<BR>
+              <B>dunst BIO</B><BR>
+              kl. 19:00<B><BR>
+              <BR>
+              1. </B>Le ley del deseo<BR>
+              <B><BR>
+              2.</B> what have i done to deserve this<BR>
+              <B><BR>
+              3.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#12-juni" TARGET="_self">Hedwig 
+              and the angry inch</A></FONT></TD>
+            <TD>13.<BR> </TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">14.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 16 - 20<BR>
+              /Jacob Nicu</FONT></TD>
+            <TD>15.</TD>
+            <TD>16.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>17.</TD>
+            <TD>18.<BR> </TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">19.<BR>
+              <B>dunst BIO</B><BR>
+              kl. 20:00<BR>
+              <BR>
+              <B>1. </B><A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#19-juni" TARGET="_self">Dead 
+              dreams of monochrome men.</A><BR>
+              <B><BR>
+              2.</B> what have i done to deserve this.</FONT><BR> </TD>
+            <TD>20.<BR> </TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">21.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 16 - 20<BR>
+              /Jacob Nicu</FONT></TD>
+            <TD>22.</TD>
+            <TD>23.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD BGCOLOR="#FFFFCC">24.<BR> <B>Evaluering<BR>
+              </B>af sidste dunst fest<BR>
+              kl. 20:00</TD>
+            <TD>25.<BR> </TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">26.<BR>
+              <B>dunst BIO<BR>
+              </B>kl. 19:00<BR>
+              <BR>
+              <B>1.</B><A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#26-juni" TARGET="_self">PINK 
+              NARCISSUS/THE QUEER REVERIES OF JAMES BIDGOOD </A><BR>
+              <B><BR>
+              2.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#26-juni2" TARGET="_self">Enter 
+              Achilles (DV8)</A></FONT></TD>
+            <TD>27.<BR> </TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">28.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 16 - 20<BR>
+              /Jacob Nicu</FONT></TD>
+            <TD>29.</TD>
+            <TD> <P>30. </P></TD>
+          </TR>
+        </TABLE>
+      <BR>
+      <BR>
+      <TABLE WIDTH="100%" BORDER="1" ALIGN="CENTER" CELLPADDING="5" CELLSPACING="2" BORDERCOLOR="#FF00FF">
+        <TR VALIGN="TOP"> 
+          <TD COLSPAN="7" CLASS="head">Juli 2002</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD><B>Monday</B></TD>
+          <TD><B>Tuesday</B></TD>
+          <TD><B>Wednesday</B></TD>
+          <TD><B>Thursday</B></TD>
+          <TD><B>Friday</B></TD>
+          <TD><B>Saturday</B></TD>
+          <TD><B>Sunday</B></TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>1.</TD>
+          <TD>2.</TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">3.<BR>
+              <B>dunst BIO<BR>
+              </B>kl. 19:00<BR>
+              <BR>
+              <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#3-juli" TARGET="_self">Surprice 
+              film</A></FONT></TD>
+          <TD>4.</TD>
+          <TD>5.</TD>
+          <TD>6.</TD>
+          <TD>7.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>8.</TD>
+          <TD>9.</TD>
+          <TD>10.</TD>
+          <TD>11.</TD>
+          <TD BORDERCOLOR="#FF00FF">12.</TD>
+          <TD>13.</TD>
+          <TD>14.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>15.</TD>
+          <TD>16.<B> </B></TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">17.<BR>
+              <B>dunst BIO<BR>
+              </B>kl. 19:00<BR>
+              <BR>
+              <B>1.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#17-juli" TARGET="_self">Flesh 
+              - Andy Warhol</A><BR>
+              <BR>
+              <B>2.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#17-juli2" TARGET="_self">Tetsuo 
+              II: Body Hammer</A></FONT></TD>
+          <TD>18.</TD>
+          <TD>19.</TD>
+          <TD>20.</TD>
+          <TD>21.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>22.</TD>
+          <TD>23.<B> </B></TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">24.<BR>
+              <B>dunst BIO<BR>
+              </B>kl. 19:00<BR>
+              <BR>
+              <B>1.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#24-juli" TARGET="_self">Tetsuo: 
+              The Iron Man.</A><BR>
+              <B><BR>
+              2.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#24-juli2" TARGET="_self">Pet 
+              Shop Boys &quot;Discovery&quot; - Live In Rio (1994)</A></FONT><BR>
+            </TD>
+          <TD>25.</TD>
+          <TD BGCOLOR="#FF00FF">26.<BR> <A HREF="../02_parties/fest_04_sommerfest/index.html" TARGET="_self"><FONT COLOR="#FFFFCC">Sommerfest</FONT></A><BR> 
+            <B>dunst party</B><BR>
+            Barbeque and happyness.<BR> <BR> <B>DJ's:</B><BR>
+            Miss Fish,<BR>
+            Minimal Martin<A HREF="../fester/fest_04/fest_04.html" TARGET="_self"><BR>
+            </A></TD>
+          <TD>27.</TD>
+          <TD>28.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>29.</TD>
+          <TD>30.</TD>
+          <TD>31.</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+        </TR>
+      </TABLE> <BR>
+      <BR>
+      <TABLE WIDTH="100%" BORDER="1" ALIGN="CENTER" CELLPADDING="5" CELLSPACING="2" BORDERCOLOR="#FF00FF">
+        <TR VALIGN="TOP"> 
+          <TD COLSPAN="7" CLASS="head">August 2002</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD><B>Monday</B></TD>
+          <TD><B>Tuesday</B></TD>
+          <TD><B>Wednesday</B></TD>
+          <TD><B>Thursday</B></TD>
+          <TD><B>Friday</B></TD>
+          <TD><B>Saturday</B></TD>
+          <TD><B>Sunday</B></TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+            <TD>1.<BR>
+              <B>PRESSE:</B><BR>
+              Panbladet:<A HREF="../press/2002/02_08_01_gay_night/02_08_01_gay_night.html" TARGET="_self"><BR>
+dunster med drenge                                      </A></TD>
+          <TD>2.</TD>
+          <TD>3.</TD>
+          <TD>4.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>5.</TD>
+          <TD>6.</TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">7.<BR>
+              <B>dunst BIO <BR>
+              </B><A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#aug" TARGET="_self">holder 
+              sommerferie</A></FONT></TD>
+          <TD>8.</TD>
+          <TD>9.</TD>
+          <TD BGCOLOR="#FF6600">10.<BR>
+              <B><A HREF="../recommends/2002/froeken_verden/index.html" TARGET="_self"><FONT COLOR="#FFFFCC">Fr&oslash;ken 
+              Verden 2002</FONT></A></B><BR>
+            Den Gr&aring; Hal, Christiania.<BR> <BR>
+            <B>Performere:</B><BR>
+            bla.a 4 dunstere:<BR> <B>nr.1:</B> <BR>
+            Fr&oslash;ken Tammy Holestream,<BR> <B>nr. 2</B> <BR>
+            Fr&oslash;ken Hr. Dennis Agerblad,<BR> <B>nr. 7</B> <BR>
+            Fr&oslash;ken Puta,<BR> <B>nr. 9</B> <BR>
+            Fr&oslash;ken Tove Hansen.</TD>
+          <TD>11.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>12.</TD>
+          <TD>13.<B> </B> </TD>
+          <TD>14.</TD>
+          <TD>15.</TD>
+            <TD>16.<BR>
+              <B>PRESSE:</B><BR>
+ TV-2 Nyhederne:<BR>
+              <A HREF="../press/2002/02_08_16_tv2/video_tv2_foto.html" TARGET="_self"> Om dunst</A></TD>
+          <TD BGCOLOR="#2972A3"><FONT COLOR="#FFFFFF">17.<BR>
+            <B><A HREF="../03_events/2002/mermaid_pride/index.html" TARGET="_self"><FONT COLOR="#FFFFCC">Mermade 
+            Pride</FONT></A></B><BR>
+            <BR>
+            <B>Performere:</B><BR>
+            Ramona Macho,<BR>
+            Miss Fish,<BR>
+            Dennis Agerblad,<BR>
+            Johnny Warehouse,<BR>
+            Knud Vesterskov.<BR>
+            <BR>
+            <B>G&aelig;steperformere:</B><BR>
+            Anders,<BR>
+            Gabriel,<BR>
+            Anders Juhl</FONT><BR> </TD>
+          <TD>18.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>19.</TD>
+          <TD>20.</TD>
+            <TD>21.<BR>
+            </TD>
+          <TD>22.</TD>
+          <TD>23.</TD>
+          <TD>24.</TD>
+          <TD>25.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD BGCOLOR="#FFFFCC">26.<BR> <B>Fest m&oslash;de</B> <BR>
+            kl. 20:30 <BR>
+            Vil du hj&aelig;lpe med noget? kom forbi. </TD>
+          <TD>27.<B> </B> </TD>
+          <TD>28.</TD>
+          <TD>29.</TD>
+          <TD>30.</TD>
+          <TD>31.</TD>
+          <TD> <P>&nbsp;</P></TD>
+        </TR>
+      </TABLE>
+      <BR>
+      <BR>
+      <TABLE WIDTH="100%" BORDER="1" ALIGN="CENTER" CELLPADDING="5" CELLSPACING="2" BORDERCOLOR="#FF00FF">
+        <TR VALIGN="TOP"> 
+          <TD COLSPAN="7" CLASS="head">September 2002</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD><B>Monday</B></TD>
+          <TD><B>Tuesday</B></TD>
+          <TD><B>Wednesday</B></TD>
+          <TD><B>Thursday</B></TD>
+          <TD><B>Friday</B></TD>
+          <TD><B>Saturday</B></TD>
+          <TD><B>Sunday</B></TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD><BR> <BR> </TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+            <TD>1.<BR>
+              <B>PRESSE:</B>              <BR>
+              Cum &amp; C:<A HREF="../press/2002/02_09_01_cum_and_c/02_09_01_cum_and_c.html" TARGET="_self"><BR>
+Undergrund </A>                       </TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+            <TD>2.<BR>
+              <B>PRESSE:</B><BR>
+Panbladet:<BR>
+              <A HREF="../press/2002/02_09_01_frk_verden/02_09_01_frk_verden.html" TARGET="_self">Fr&oslash;ken Verden 2002</A><BR>
+og<BR>
+                            <A HREF="../press/2002/02_09_01_siden_sidst/02_09_01_siden_sidst.html" TARGET="_self">Siden Sidst</A><BR>
+                                                                     </TD>
+          <TD>3.</TD>
+          <TD>4.</TD>
+          <TD>5.</TD>
+          <TD BORDERCOLOR="#FF00FF">6.</TD>
+          <TD>7.</TD>
+          <TD BGCOLOR="#2972A3"><FONT COLOR="#FFFFFF">8.<BR>
+            <B><A HREF="../03_events/2002/designskolen/index.html" TARGET="_self"><FONT COLOR="#FFFFCC">Stemmet&aelig;llere</FONT></A></B><A HREF="../03_events/2002/designskolen/index.html"> 
+            </A>Danmarks Design Skole<BR>
+            kl. 14:00<BR>
+            <BR>
+            <B>Performere:</B><BR>
+            Ramona Macho,<BR>
+            Dennis Agerblad,<BR>
+            Miss Fish.</FONT></TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>9.</TD>
+          <TD>10.<B> </B> </TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">11.<BR>
+              <B>dunst BIO</B> <BR>
+              Kl. 20 - 22<BR>
+              <BR>
+              <B>1.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#11-sep" TARGET="_self">Looking 
+              for Langston</A><BR>
+              <B><BR>
+              2.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#11-sep2" TARGET="_self">The 
+              Celluloid Closet</A></FONT></TD>
+          <TD>12.</TD>
+          <TD>13.</TD>
+          <TD BGCOLOR="#FF00FF">14.<BR>
+              <A HREF="../02_parties/fest_05_electro/index.html" TARGET="_self"><FONT COLOR="#FFFFCC">ELEKTRO 
+              i dunst</FONT></A><BR> <B>dunst party</B> in Sommerstedgade 30 kld.<BR> 
+            <BR> <B>DJ's:</B><BR>
+            Minimal Martin,<BR>
+            Miss Fish,<BR>
+            Hairwerk.<BR> <BR> <B>Performance:</B><BR>
+            Dennis Agerblad,<BR>
+            Miss Fish,</TD>
+          <TD>15.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>16.</TD>
+          <TD BGCOLOR="#FFFFCC">17.<BR> <B>Aktivist m&oslash;de</B><BR>
+            kl. 20:00 <B> </B> </TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">18.<BR>
+              <B>dunst BIO</B> <BR>
+              Kl. 20 - 22<BR>
+              <BR>
+              <B>tema:</B> <BR>
+              Trash, pimps and hustlers <BR>
+              <BR>
+              <B>1. </B><A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#18-sep" TARGET="_self">Super 
+              8 1/2<BR>
+              How do you get to be a porn star?</A> <BR>
+              <B><BR>
+              2.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#18-sep2" TARGET="_self">Hustler 
+              White</A></FONT></TD>
+          <TD>19.</TD>
+          <TD>20.</TD>
+          <TD>21.</TD>
+          <TD>22.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>23.</TD>
+          <TD BGCOLOR="#FFFFCC">24.<BR> <B>Aktivist m&oslash;de</B><BR>
+            kl. 20:00 <B> </B> </TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">25.<BR>
+              <B>dunst BIO</B> <BR>
+              Kl. 20 - 22<BR>
+              <BR>
+              <B>tema:</B> <BR>
+              Real Men<BR>
+              <B><BR>
+              </B> <B>1.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#25-sep" TARGET="_self">Daddy 
+              and the Muscle Academy </A><BR>
+              <B><BR>
+              2.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#25-sep2" TARGET="_self">Animal 
+              Factory</A></FONT><BR> </TD>
+          <TD>26.</TD>
+          <TD>27.</TD>
+          <TD>28.</TD>
+          <TD>29.</TD>
+        </TR>
+        <TR VALIGN="TOP"> 
+          <TD>30.</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD>
+        </TR>
+      </TABLE>
+      <BR>
+      <BR>
+      <TABLE WIDTH="100%" BORDER="1" ALIGN="CENTER" CELLPADDING="5" CELLSPACING="2" BORDERCOLOR="#FF00FF">
+          <TR VALIGN="TOP"> 
+            <TD COLSPAN="7" CLASS="head">Oktober 2002</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD><B>Monday</B></TD>
+            <TD><B>Tuesday</B></TD>
+            <TD><B>Wednesday</B></TD>
+            <TD><B>Thursday</B></TD>
+            <TD><B>Friday</B></TD>
+            <TD><B>Saturday</B></TD>
+            <TD><B>Sunday</B></TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>&nbsp;</TD>
+            <TD BGCOLOR="#FFFFCC">1.<BR> <B>Aktivist m&oslash;de</B><BR>
+              kl. 20:00 <B> </B> </TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">2.<BR>
+              <B>dunst BIO</B> <BR>
+              Kl. 20 - 22<BR>
+              <BR>
+              <B>tema:</B> <BR>
+              Gay Art Film <BR>
+              <BR>
+              <B>1.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#2-okt" TARGET="_self">Sebastiane 
+              </A><BR>
+              <B><BR>
+              2.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#2-okt2" TARGET="_self">Poison 
+              </A></FONT></TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">3.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 20 - 22<BR>
+              /Loxi</FONT></TD>
+            <TD>4.<BR>
+              <B>PRESSE:</B><BR>
+              Panbladet:<BR>
+              <A HREF="../press/2002/02_10_01_prostitution/02_10_01_prostitution.html">Prostitution</A><BR>
+                            og<BR>
+<A HREF="../press/2002/02_10_01_electro/02_pan_electrical.html" TARGET="_self">dunst eller brunst</A></TD>
+            <TD>5.</TD>
+            <TD>6.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD ROWSPAN="2">7.<BR> </TD>
+            <TD ROWSPAN="2" BGCOLOR="#FFFFCC">8.<BR> <B>Aktivist m&oslash;de</B><BR>
+              kl. 20:00 <B> </B> </TD>
+            <TD ROWSPAN="2" BGCOLOR="#000000"><FONT COLOR="#FFFFFF">9.<BR>
+              <B>dunst BIO</B> <BR>
+              Kl. 20 - 22<BR>
+              <BR>
+              <B>tema:</B> <BR>
+              asian avantgarde<BR>
+              <BR>
+              <B>1.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#9-okt" TARGET="_self">Beautiful 
+              Mystery</A><BR>
+              <B><BR>
+              2.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#9-okt2" TARGET="_self">Kitami/Kurutta 
+              Butokai</A></FONT></TD>
+            <TD ROWSPAN="2" BGCOLOR="#754223"><FONT COLOR="#FFFFFF">10. <BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 20 - 22<BR>
+              /Loxi</FONT></TD>
+            <TD BGCOLOR="#FF6600">11.<BR> <B>Kulturnatten</B><BR>
+              Kafe Knud<BR> <BR> <B>Performance:</B><BR>
+              Dennis Agerblad<BR>
+              kl. 20:00</TD>
+            <TD ROWSPAN="2">12.</TD>
+            <TD ROWSPAN="2">13.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD BGCOLOR="#FF6600">11.<B> <BR>
+              Elektrikalrecords </B>opening reception <BR> <BR> <B>Performance:</B><BR>
+              Johnny Warehouse<BR>
+              kl. 23:00<B> </B></TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>14.<BR> </TD>
+            <TD BGCOLOR="#FFFFCC">15.<BR> <B>Aktivist m&oslash;de</B><BR>
+              kl. 20:00 <B> </B> </TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">16.<BR>
+              <B>dunst BIO</B> <BR>
+              Kl. 20 - 22<BR>
+              <BR>
+              <B>tema:</B> <BR>
+              dancing men &amp; gay rock chicks <BR>
+              <BR>
+              <B>1.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#16-okt" TARGET="_self">Dead 
+              dreams of monochrome men</A><BR>
+              <B><BR>
+              2.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#16-okt2" TARGET="_self">Hedwig 
+              and the Angry Inch</A></FONT></TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">17. <BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 20 - 22<BR>
+              /Loxi</FONT></TD>
+            <TD>18.</TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">19.<BR>
+              <B><A HREF="../film/from_scratch/index.html" TARGET="_self">Gay 
+              and Lesbian Film Festival</A></B><BR>
+              Dokumentar<B> </B>film 'From Scratz' om Knud Vesterskov.<BR>
+              + Fest.<BR>
+              <BR>
+              <B>Performance</B>:<BR>
+              Dennis Agerblad,<BR>
+              Johnny Warehouse,<BR>
+              Puta,</FONT></TD>
+            <TD>20.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>21.</TD>
+            <TD BGCOLOR="#FFFFCC">22.<BR> <B>Aktivist m&oslash;de</B><BR>
+              kl. 20:00 <B> </B> </TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">23.<BR>
+              <B>dunst BIO</B> <BR>
+              Kl. 20 - 22<BR>
+              <BR>
+              <B>Knud Vesterskov </B><A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#23-okt" TARGET="_self">special 
+              Film Aften</A> </FONT></TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">24.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 20 - 22<BR>
+              /Loxi</FONT></TD>
+            <TD>25.</TD>
+            <TD>26.</TD>
+            <TD>27.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>28.<BR> </TD>
+            <TD BGCOLOR="#FFFFCC">29.<BR> <B>Aktivist m&oslash;de</B><BR>
+              kl. 20:00 <B> </B> </TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">30.<BR>
+              <B>dunst BIO</B> <BR>
+              Kl. 20 - 22<BR>
+              <BR>
+              <B>tema: </B><BR>
+              queers and queens + Soft Cell special <BR>
+              <BR>
+              <B>1.</B> Soft Cell&sup1;s <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#30-okt" TARGET="_self">NON-STOP-EXOTIC 
+              VIDEO SHOW</A><BR>
+              <B><BR>
+              2.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#30-okt2" TARGET="_self">Paris 
+              Is Burning</A></FONT></TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">31.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 20 - 22<BR>
+              /Loxi</FONT></TD>
+            <TD><BR> </TD>
+            <TD>&nbsp;</TD>
+            <TD> <P>&nbsp;</P></TD>
+          </TR>
+        </TABLE>
+      <BR>
+      <BR>
+      <TABLE WIDTH="100%" BORDER="1" ALIGN="CENTER" CELLPADDING="5" CELLSPACING="2" BORDERCOLOR="#FF00FF">
+          <TR VALIGN="TOP"> 
+            <TD COLSPAN="7" CLASS="head">November 2002</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD><B>Monday</B></TD>
+            <TD><B>Tuesday</B></TD>
+            <TD><B>Wednesday</B></TD>
+            <TD><B>Thursday</B></TD>
+            <TD><B>Friday</B></TD>
+            <TD><B>Saturday</B></TD>
+            <TD><B>Sunday</B></TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>&nbsp;</TD>
+            <TD>&nbsp;</TD>
+            <TD>&nbsp;</TD>
+            <TD>&nbsp;</TD>
+            <TD>1.<BR>
+              <B>PRESSE:</B><BR>
+              Panbladet:<A HREF="../press/2002/02_11_01_filmhuset/02_11_01_filmhuset.html"><BR>
+Kong Knud holte hof</A></TD>
+            <TD>2.<BR>
+              </TD>
+            <TD>3.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>4.</TD>
+            <TD BGCOLOR="#FFFFCC">5.<BR> <B>Aktivist m&oslash;de</B><BR>
+              kl. 20:00 <B> </B> </TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">6.<BR>
+              <B>dunst BIO</B> <BR>
+              Kl. 20 - 22<BR>
+              <BR>
+              <B>tema: </B>transvestites and dragqueens <BR>
+              <BR>
+              <B>1.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#6-nov" TARGET="_self">Glen 
+              or Glenda</A><BR>
+              <B><BR>
+              2. </B><A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#6-nov2" TARGET="_self">Vegas 
+              in Space</A> </FONT></TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">7.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 20 - 22<BR>
+              /Loxi</FONT></TD>
+            <TD>8.</TD>
+            <TD>9.<BR>
+              Vi uddeler flyers for LeFreak festen. Hvem vil med?</TD>
+            <TD>10.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>11.</TD>
+            <TD BGCOLOR="#FFFFCC">12.<BR> <B>Aktivist m&oslash;de</B><BR>
+              kl. 20:00 <B> </B> </TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">13.<BR>
+              <B>dunst BIO</B> <BR>
+              Kl. 20 - 22<BR>
+              <BR>
+              <B>tema:</B> crime and passion<BR>
+              <BR>
+              <B>1.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#13-nov" TARGET="_self">Un 
+              Chant d'Amour</A><BR>
+              <B><BR>
+              2.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#13-nov2" TARGET="_self">The 
+              Crying Game</A></FONT></TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">14.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 20 - 22<BR>
+              /Loxi</FONT></TD>
+            <TD>15.<BR>
+              <B>PRESSE:</B><BR>
+              Copenhagen Post:<A HREF="../press/2002/02_11_15_cph_post/02_11_15_cph_post.html" TARGET="_self"><BR>
+Om LeFreak festen            </A></TD>
+            <TD BGCOLOR="#FF00FF">16.<BR> <A HREF="../02_parties/fest_06_lefreak/index.html" TARGET="_self"><FONT COLOR="#FFFFCC">Le 
+              Freak</FONT></A><BR> <B>dunst party</B><BR>
+              Ungdomshuset<BR> <BR> <B>DJ's:</B><BR>
+              Minimal Martin<BR>
+              Jean Von Barden<BR> <BR> <B>Performere:</B><BR>
+              Johnny Warehouse,<BR>
+              Ramona Macho,<BR>
+              Dennis Agerblad,<BR>
+              Miss Fish,<BR>
+              Puta,<BR>
+              Di-Laila,<BR>
+              Tammy Holestream,<BR>
+              Zanne, <BR> <BR> <B>G&aelig;steperformere:</B> <BR>
+              Tove Hansen,<BR>
+              Guxi Blasfemica,<BR>
+              Miss O.T.B. <BR> <BR> <B>Tombola:</B><BR>
+              Camilla,<BR>
+              Rosa, <BR> </TD>
+            <TD>17.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>18.</TD>
+            <TD BGCOLOR="#FFFFCC">19.<BR> <B>Aktivist m&oslash;de</B><BR>
+              kl. 20:00 <B> </B> </TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">20.<BR>
+              <B>dunst BIO</B> <BR>
+              Kl. 20 - 22 <BR>
+              <BR>
+              <B>tema: </B><BR>
+              London life style <BR>
+              <BR>
+              <B>1.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#20-nov" TARGET="_self">Enter 
+              Achilles</A><BR>
+              <B><BR>
+              2.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#20-nov2" TARGET="_self">Jubilee</A></FONT></TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">21.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 20 - 22<BR>
+              /Loxi</FONT></TD>
+            <TD>22.</TD>
+            <TD>23.<BR> <B>dunst julefrukost</B></TD>
+            <TD>24.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>25.</TD>
+            <TD BGCOLOR="#FFFFCC">26.<BR> <B>Aktivist m&oslash;de</B><BR>
+              kl. 20:00 <B> </B> </TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">27.<BR>
+              <B>dunst BIO</B> <BR>
+              Kl. 20 - 22 <BR>
+              <BR>
+              <B>tema:</B> den tyske aften <BR>
+              <BR>
+              <B>1</B>. <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#27-nov" TARGET="_self">Taxi 
+              zum Klo </A><BR>
+              <B><BR>
+              2.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#27-nov2" TARGET="_self">Kondom 
+              des Grauens </A></FONT></TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">28.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 20 - 22<BR>
+              /Loxi</FONT></TD>
+            <TD>29.</TD>
+            <TD>30.<BR> </TD>
+            <TD> <P>&nbsp;</P></TD>
+          </TR>
+        </TABLE>
+      <BR>
+      <BR>
+      <TABLE WIDTH="100%" BORDER="1" ALIGN="CENTER" CELLPADDING="5" CELLSPACING="2" BORDERCOLOR="#FF00FF">
+          <TR VALIGN="TOP"> 
+            <TD COLSPAN="7" CLASS="head">December 2002</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD><B>Monday</B></TD>
+            <TD><B>Tuesday</B></TD>
+            <TD><B>Wednesday</B></TD>
+            <TD><B>Thursday</B></TD>
+            <TD><B>Friday</B></TD>
+            <TD><B>Saturday</B></TD>
+            <TD><B>Sunday</B></TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>&nbsp;</TD>
+            <TD>&nbsp;</TD>
+            <TD><BR> <BR> </TD>
+            <TD>&nbsp;</TD>
+            <TD>&nbsp;</TD>
+            <TD>&nbsp;</TD>
+            <TD BGCOLOR="#FF6600">1.<BR> <B>World AIDS Day</B><BR> <BR>
+              Dennis Agerblad optr&aelig;der p&aring; Kafe Knud.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD BGCOLOR="#FFFFCC">2.<BR> <B>Aktivist m&oslash;de</B><BR>
+              kl. 20:00 <BR> <BR> <B>Emne:</B> B&oslash;ssehuset inviterer dunst 
+              ud. (dunst den nye generation) Vil vi det?</TD>
+            <TD>3.<BR>
+              <B>PRESSE:</B><BR>
+Panbladet:<BR>
+              <A HREF="../press/2002/02_12_01_pan/02_12_01_aaret_der_gik.html" TARGET="_self">&Aring;ret der gik</A><BR>
+og<BR>
+              <A HREF="../press/2002/02_12_01_pan_lefreak/02_12_01_pan_lefreak.html" TARGET="_self">dunst i Ungeren</A></TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">4.<BR>
+              <B>dunst BIO</B> <BR>
+              Kl. 20 - 22<BR>
+              <BR>
+              <B>tema:</B> <BR>
+              John Waters special<BR>
+              <BR>
+              <B>1.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#4-dec" TARGET="_self">Multiple 
+              Maniac</A><BR>
+              <B><BR>
+              2.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#4-dec2" TARGET="_self">Polyester<B> 
+              </B></A></FONT></TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">5.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 20 - 22<BR>
+              /Loxi</FONT></TD>
+            <TD BORDERCOLOR="#FF00FF">6.</TD>
+            <TD>7.</TD>
+            <TD>8.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD BGCOLOR="#FFFFCC">9.<BR> <B>Aktivist m&oslash;de</B><BR>
+              kl. 20:00 </TD>
+            <TD BGCOLOR="#FFFFCC">10.<BR> <B>Aktivist m&oslash;de</B><BR>
+              kl. 20:00 <B> </B> </TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">11.<BR>
+              <B>dunst BIO</B> <BR>
+              Kl. 20 - 22<BR>
+              <BR>
+              <B>tema:</B> <BR>
+              gay artists <BR>
+              <BR>
+              <B>1.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#11-dec" TARGET="_self">Francis 
+              Bacon dokumenta</A><BR>
+              <B><BR>
+              2.</B><A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#11-dec2" TARGET="_self"><B>Silence 
+              = Death</B> <BR>
+              Med Keith Harring</A></FONT></TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">12.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 20 - 22<BR>
+              /Loxi</FONT></TD>
+            <TD>13.</TD>
+            <TD BGCOLOR="#2972A3"><FONT COLOR="#FFFFFF">14.<BR>
+              <A HREF="../03_events/2002/fuck_around/fuck_around.html" TARGET="_self"><FONT COLOR="#FFFFCC">Fuck 
+              Around</FONT></A><BR>
+              hard on? <BR>
+              go on!<BR>
+              H.C. &Oslash;rstedsparken<BR>
+              (Anderz og Mads) </FONT></TD>
+            <TD>15.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>16.<BR> </TD>
+            <TD BGCOLOR="#FFFFCC">17.<BR> <B> Aktivist m&oslash;de</B><BR>
+              kl. 20:00 <B> </B> <B> </B><B><BR>
+              </B><B> </B> </TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">18.<BR>
+              <B> dunst BIO</B> <BR>
+              Kl. 20 - 22<BR>
+              <BR>
+              <B>tema:</B> <BR>
+              Queer lifestyle<BR>
+              <BR>
+              <B>1.</B> <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#18-dec" TARGET="_self">Basquiat 
+              </A><BR>
+              <B><BR>
+              2.</B> queer life dokumentar </FONT></TD>
+            <TD BGCOLOR="#754223"><FONT COLOR="#FFFFFF">19.<BR>
+              <A HREF="../cafe/2002/internet_cafe/index.html"><FONT COLOR="#FFFFCC">Gratis 
+              Internet Caf&eacute;</FONT></A><BR>
+              kl. 20 - 22<BR>
+              /Loxi</FONT></TD>
+            <TD BGCOLOR="#FF6600">20.<BR>
+              <B>Grr-it Pr&aelig;senterer et spektakel</B><BR> 
+              <BR> <B>Filmfremvisning</B>: af Gritt Uldal og Bent St&aring;lh&oslash;j.<BR> 
+              <BR> <B>Performance:</B><BR>
+              Dennis Agerblad,<BR>
+              Miss Fish,<BR>
+              April. <BR> <BR> <B>Opl&aelig;sning:<BR>
+              </B>af en Knud Vesterskov tekst.<FONT COLOR="#FFFFFF"><BR>
+              </FONT><BR> </TD>
+            <TD>21.</TD>
+            <TD>22.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>23.</TD>
+            <TD>24.<BR> <B> postXmas-get together<BR>
+              </B>kl. 24:00<BR> <BR>
+              Medbring drikkelige rester.</TD>
+            <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF">25.<BR>
+              <B>dunst BIO</B> <BR>
+              kl. 12:00 - resten af dagen<BR>
+              <BR>
+              <B>tema:</B> <BR>
+              <A HREF="../film/dunst_bio/2002/2002_dunst_bio.html#25-dec" TARGET="_self">Xmas 
+              special</A></FONT><BR> </TD>
+            <TD BGCOLOR="#FF6600">26.<BR> <B>Passion Club</B><BR>
+              Polysexual clubbing<BR>
+              Pan<BR> <BR> <B>Performance:</B><BR>
+              Hairwerk,<BR>
+              Miss Fish,<BR>
+              Puta,<BR>
+              Nancy African queen, </TD>
+            <TD BGCOLOR="#FFFFCC">27.<BR> <B>Aktivist m&oslash;de</B><BR>
+              i B&oslash;ssehuset<BR>
+              kl. 19:00 <B> </B></TD>
+            <TD>28.</TD>
+            <TD>29.</TD>
+          </TR>
+          <TR VALIGN="TOP"> 
+            <TD>30.</TD>
+            <TD BGCOLOR="#FF00FF">31.<BR> <A HREF="../02_parties/fest_07_nytaar/index.html" TARGET="_self"><FONT COLOR="#FFFFCC">Nyt&aring;rsknald</FONT></A><BR> 
+              <B>dunst party</B><BR>
+              i B&oslash;ssehuset<BR>
+              for alle som kan lide os <BR>
+              :-) <BR>
+              for kr. 50,-<B> <BR>
+              <BR>
+              DJ's:<BR>
+              </B>Minimal Martin,<BR>
+              Djuna Barnes.<B><BR>
+              <BR>
+              G&aelig;ste DJ's:<BR>
+              </B>Hinsidan <B><BR>
+              <BR>
+              Performance:<BR>
+              </B>Johnny Warehouse,<BR>
+              Miss Fish,<BR>
+              Dennis Agerblad. </TD>
+            <TD>&nbsp;</TD>
+            <TD>&nbsp;</TD>
+            <TD>&nbsp;</TD>
+            <TD>&nbsp;</TD>
+            <TD>&nbsp;</TD>
+          </TR>
+        </TABLE> 
+        <BR>
+        <BR>
+        <TABLE BORDER="0" CELLPADDING="6" CELLSPACING="0">
+          <TR>
+            <TD COLSPAN="10" NOWRAP><FONT SIZE="5"><B>dunst Calendar 2002</B></FONT></TD>
+          </TR>
+          <TR>
+            <TD><A HREF="2001.html" TARGET="_self"><FONT SIZE="2">2001</FONT></A></TD>
+            <TD BGCOLOR="#FFFFCC" CLASS="ramme"><A HREF="2002.html" TARGET="_self"><FONT SIZE="2">2002</FONT></A></TD>
+            <TD><A HREF="2003.html" TARGET="_self"><FONT SIZE="2">2003</FONT></A></TD>
+            <TD><A HREF="2004.html" TARGET="_self"><FONT SIZE="2">2004</FONT></A></TD>
+            <TD><A HREF="2005.html" TARGET="_self"><FONT SIZE="2">2005</FONT></A></TD>
+            <TD><A HREF="2006.html" TARGET="_self"><FONT SIZE="2">2006</FONT></A></TD>
+            <TD><A HREF="2007.html" TARGET="_self"><FONT SIZE="2">2007</FONT></A></TD>
+            <TD><A HREF="2008.html" TARGET="_self"><FONT SIZE="2">2008</FONT></A></TD>
+            <TD>&nbsp;</TD>
+            <TD>&nbsp;</TD>
+          </TR>
+        </TABLE></TD>
+  </TR>
+</TABLE>
+</DIV>
+
+<DIV NAME="CC" id="CC" width="50"> 
+  <TABLE WIDTH="50" BORDER="1" CELLPADDING="5" CELLSPACING="2" BORDERCOLOR="#FF00FF" BGCOLOR="#FFFFCC">
+    <TR> 
+      <TD ALIGN="CENTER" CLASS="head"><IMG SRC="the_meaning_of_the_colour.gif" WIDTH="52" HEIGHT="34"></TD>
+    </TR>
+    <TR> 
+      <TD BGCOLOR="#FF00FF"><A HREF="../02_parties/index.html" TARGET="_self"><FONT COLOR="#FFFFCC">dunst<BR>
+        parties</FONT></A></TD>
+    </TR>
+    <TR> 
+      <TD BGCOLOR="#2972A3"><A HREF="../03_events/index.html" TARGET="_self"><FONT COLOR="#FFFFCC">dunst 
+        events</FONT></A></TD>
+    </TR>
+    <TR> 
+      <TD BGCOLOR="#754223"><A HREF="../cafe/index.html" TARGET="_self"><FONT COLOR="#FFFFCC">dunst<BR>
+        caf&eacute;</FONT></A></TD>
+    </TR>
+    <TR> 
+      <TD BGCOLOR="#000000"><FONT COLOR="#FFFFFF"><A HREF="../film/index.html" TARGET="_self">dunst<BR>
+        film</A></FONT></TD>
+    </TR>
+    <TR> 
+      <TD BGCOLOR="#C04E4E"><A HREF="../abroad/index.html" TARGET="_self"><FONT COLOR="#FFFFFF">dunst<BR>
+        abroad</FONT></A></TD>
+    </TR>
+    <TR> 
+      <TD BGCOLOR="#CCCCCC"><A HREF="../musik/index.html" TARGET="_self"><FONT COLOR="#0000FF">dunst 
+        music</FONT></A></TD>
+    </TR>
+    <TR> 
+      <TD BGCOLOR="#FFFF00"><A HREF="../radio/index.html" TARGET="_self">dunst<BR>
+        radio </A></TD>
+    </TR>
+    <TR> 
+      <TD BGCOLOR="#FF6600"><A HREF="../recommends/index.html" TARGET="_self"><FONT COLOR="#FFFFCC">recom-<BR>
+        mends</FONT></A></TD>
+    </TR>
+    <TR> 
+      <TD BGCOLOR="#FFFFCC">activist<BR>
+        meetings</TD>
+    </TR>
+    <TR> 
+      <TD BGCOLOR="#FFFFFF">other<BR>
+        things</TD>
+    </TR>
+  </TABLE>
+</DIV>
+<FONT COLOR="#FFFFFF">
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>.<BR>
+
+
+</FONT> 
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-683517-1";
+urchinTracker();
+</script>
+</BODY>
+</HTML>

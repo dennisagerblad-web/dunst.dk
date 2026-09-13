@@ -1,0 +1,7 @@
+lav 
+nyhedsbrev.html
+nyhedsbrev.txt
+
+lav emne til mail i filen sendmail.php øverst
+
+gå ind i en browser og kald siden sendmail.php

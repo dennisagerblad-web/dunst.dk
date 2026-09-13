@@ -1,0 +1,91 @@
+body { 
+	BACKGROUND-COLOR: #FFFFCC;
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; 
+	COLOR: #000000; 
+	FONT-SIZE: 10px; 
+	FONT-WEIGHT: normal;
+} 
+
+body.burnst { 
+	BACKGROUND-COLOR: #FFFFFF;
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; 
+	COLOR: #FF0000; 
+	FONT-SIZE: 10px; 
+	FONT-WEIGHT: normal;
+} 
+
+.ramme {
+	border-style: solid;
+	border-color: #FF00FF;
+	border-width: 1px 1px 1px 1px;
+}
+
+h1 {
+	FONT-SIZE: 14px; 
+	FONT-WEIGHT: bold;
+}
+
+hr {
+	height: 1px;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	line-height: 1px;
+	color: #FF00FF;
+}
+
+td { 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #000000;  
+	FONT-SIZE: 10px; 
+	FONT-WEIGHT: normal;
+ }
+ 
+td.abroad { 
+	COLOR: #FFFFFF;  
+	BACKGROUND-COLOR: #C04E4E;
+ }
+ 
+td.cafe { 
+	COLOR: #FFFFFF;  
+	BACKGROUND-COLOR: #754223;
+ }
+ 
+td.event { 
+	COLOR: #FFFFFF;  
+	BACKGROUND-COLOR: #2972A3;
+ }
+ 
+td.film { 
+	COLOR: #FFFFFF;  
+	BACKGROUND-COLOR: #000000;
+ }
+ 
+td.musik { 
+	COLOR: #000000;  
+	BACKGROUND-COLOR: #EEEEEE;
+ }
+ 
+td.party { 
+	COLOR: #000000;  
+	BACKGROUND-COLOR: #FF00FF;
+ }
+ 
+td.radio { 
+	COLOR: #000000;  
+	BACKGROUND-COLOR: #FFFF00;
+ }
+ 
+td.rec { 
+	COLOR: #000000;  
+	BACKGROUND-COLOR: #FF720A;
+ }
+
+ .head {
+	COLOR: 000000;
+	FONT-WEIGHT: bold;
+	padding: 5px;
+	border-bottom: medium solid #FF00FF;
+	border-bottom-width: 1 px;
+	BACKGROUND-COLOR: #85E1FC;
+}

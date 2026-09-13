@@ -1,0 +1,92 @@
+<!--------Website created and produced by--------->
+<!-----------------------OVA---------------------->
+<!----------------Tel: +45 3312 2228-------------->
+<!---------------Mobil: +45 2012 2312------------->
+<!----------------E-mail: ova@ova.dk-------------->
+<!----------Web-address: http://www.ova.dk-------->
+<!---------------All rights reserved-------------->
+<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title> New Document </title>
+<LINK REL="stylesheet" HREF="../../../0/dunst_hvid.css">
+<meta name="Generator" content="EditPlus">
+</head>
+<script type="text/javascript">
+var player;
+
+function getPlayer() {
+	return document.getElementById("RAOCX");
+  if (document.prim_player_embed) {
+    return document.prim_player_embed;
+  } else {
+    return document.prim_player;
+  }
+}
+
+function Player() {
+    this.player     = getPlayer();
+    this.stop       = playerStop;
+    this.play       = playerPlay;
+    this.pause      = playerPause;
+}
+
+function playerStop() {
+  this.player.DoStop();
+}
+
+function playerPause() {
+  this.player.DoPause();
+}
+
+function playerPlay() {
+  this.player.DoPlay();
+}
+
+function pageLoad() {
+  player = new Player(); 
+}
+</script>
+<body onLoad="pageLoad()">
+<BR>
+<TABLE WIDTH="450"  BORDER="0" ALIGN="CENTER" CELLPADDING="4" CELLSPACING="0" CLASS="ramme">
+  <TR> 
+    <TD VALIGN="TOP"> 
+      <TABLE WIDTH="337" BORDER="0" ALIGN="CENTER" CELLPADDING="0" CELLSPACING="0">
+        <TR> 
+          <TD><B><IMG SRC="tv2-lorry_brunch_logoer.gif" WIDTH="450" HEIGHT="50"></B></TD>
+        </TR>
+        <TR> 
+          <TD ALIGN="RIGHT"><B>27. Maj 2005</B> </TD>
+        </TR>
+      </TABLE>
+      <HR>
+      Gense her programmet &quot;Brunch&quot; p&aring; TV2-Lorry hvor Puta, Dennis 
+      Agerblad &amp; Hairwerk synger en sang og fort&aelig;ller om dunst.<BR>
+      <BR>
+      <TABLE WIDTH="320" BORDER="0" CELLSPACING="0" CELLPADDING="4" HEIGHT="341" ALIGN="CENTER" CLASS="ramme">
+        <TR VALIGN="TOP"> 
+          <TD WIDTH="99%" CLASS="head">Windows Media Player</TD>
+        </TR>
+        <TR> 
+          <TD ALIGN="CENTER"  VALIGN="TOP"><OBJECT CLASSID="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6" ID="RAOCX" NAME="prim_player" WIDTH=320 HEIGHT=310>
+              <PARAM NAME=url VALUE=http://www.tv2regionerne.dk/video.asp?Id=242194>
+              <PARAM NAME="CONTROLS" VALUE="ImageWindow">
+              <PARAM NAME="AUTOSTART" VALUE="true">
+              <PARAM NAME="MAINTAINASPECT" VALUE="0">
+              <EMBED TYPE="application/x-mplayer2" WIDTH=320 HEIGHT=310 SRC=http://www.tv2regionerne.dk/video.asp?Id=242194 NAME=mPlayer PLUGINSPAGE=http://www.microsoft.com/mediaplayer ID=mPlayer BORDER=0> 
+              </EMBED></OBJECT></TD>
+        </TR>
+      </TABLE>
+      <BR>
+      Taget herfra:<BR>
+      <A HREF="http://tv2lorry.dk/moduler/nyheder/showregvideo.asp?dato=27-05-2005&cID=5&vId=242194" TARGET="_blank" onFocus="this.blur()">tv2lorry.dk/moduler/nyheder/showregvideo.asp?dato=27-05-2005&amp;cID=5&amp;vId=242194</A><BR>
+      <DIV ALIGN="RIGHT"><HR>
+        <A HREF="#" onClick="window.print();return false">Print denne side</A></DIV>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<BR>
+</body>
+</html>

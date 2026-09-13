@@ -1,0 +1,52 @@
+<!--------Website created and produced by--------->
+<!---------------http://www.ova.dk---------------->
+<HTML>
+<HEAD>
+<TITLE>menu</TITLE>
+<script language="JavaScript">
+<!--
+function tjekForm(){
+		if(document.forms["theForm"].email.value=="e-mail address"||(document.forms["theForm"].email.value=="")) {
+			alert("Write your e-mail address!");
+			return false;
+		}
+}
+
+function pwGo(){
+		var folder = "../login/kfgj/";
+		var pw = document.pwForm.pw.value;
+		parent.location = folder+pw+".html";
+		return false;
+}
+// -->
+</script>
+<LINK REL="stylesheet" HREF="dunst_hvid.css">
+</HEAD>
+
+<BODY LINK="#FFFFFF" ALINK="#FF00FF" VLINK="#FFFFFF">
+<FORM name="theForm" method="post" action="http://www.dunst.dk/cgi-bin/FormMail.pl" onsubmit="return tjekForm();">
+<input type="hidden" name="recipient" value="nyhedsbrev@dunst.dk">
+<input type="hidden" name="subject" value="dunst mailing-liste">
+<input type="hidden" name="redirect" value="http://dunst.dk/dunst/0/right_tak.html" TARGET="foto_menu">
+  <BR>
+  <TABLE WIDTH="130" HEIGHT="100" BORDER="0" ALIGN="CENTER" CELLPADDING="5" CELLSPACING="0" CLASS="ramme">
+    <TR> 
+      <TD COLSPAN="2" CLASS="head">dunst Newsletter:</TD>
+    </TR>
+    <TR> 
+      <TD WIDTH="10"> <INPUT NAME="Newsletter" TYPE="radio" VALUE="Remove me" CHECKED> 
+      </TD>
+      <TD WIDTH="120">Remove me</TD>
+    </TR>
+    <TR> 
+      <TD COLSPAN="2"> <INPUT NAME="email" TYPE="text" CLASS="input-medium" onFocus="this.value='';" VALUE="" SIZE="16"> 
+      </TD>
+    </TR>
+    <TR ALIGN="RIGHT"> 
+      <TD COLSPAN="2"> <INPUT CLASS="button" TYPE="submit" NAME="Submit" VALUE="Submit"> 
+      </TD>
+    </TR>
+  </TABLE>
+</FORM>
+</BODY>
+</HTML>

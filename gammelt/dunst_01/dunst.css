@@ -1,0 +1,89 @@
+body { 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; 
+	COLOR: #B6B6B0; 
+	FONT-SIZE: 12px; 
+	FONT-WEIGHT: normal;
+	scrollbar-face-color: #FFFFFF;
+	scrollbar-shadow-color: #808080; 
+	scrollbar-highlight-color: #CCCCCC;
+	scrollbar-3dlight-color:  #D4D0C8; 
+	scrollbar-darkshadow-color: #FF00FF;
+	scrollbar-track-color: #FFFFCC; 
+	scrollbar-arrow-color: #FF00FF; 
+} 
+
+.ramme {
+	border-style: solid;
+	border-color: #FF00FF;
+	border-width: 1px 1px 1px 1px;
+}
+
+hr {
+	height: 1px;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	line-height: 1px;
+	color: #FF00FF;
+}
+
+td { 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #000000;  
+	FONT-SIZE: 10px; 
+	FONT-WEIGHT: normal;
+ }
+ 
+ .head {
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: 000000;
+	FONT-SIZE: 10px;
+	FONT-WEIGHT: bold;
+	TEXT-DECORATION: none;
+	border-bottom: medium solid #FF00FF;
+	border-bottom-width: 1 px;
+} 
+
+ .bold12  {  
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; 
+	COLOR: #000000;
+	FONT-SIZE: 12px; 
+	FONT-WEIGHT: bold; 
+	TEXT-DECORATION: none;
+ }
+ 
+.mini10 {  
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; 
+	COLOR: #C8C8C2; 
+	FONT-SIZE: 10px; 
+	FONT-WEIGHT: normal;
+}
+
+A {
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #FF00FF; 
+	FONT-SIZE: 10px;
+	FONT-WEIGHT: bold;
+	TEXT-DECORATION: underline;
+	CURSOR: hand;
+} 
+
+.mini {
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #CCCCCC; 
+	FONT-SIZE: 10px;
+	FONT-WEIGHT: bold;
+	TEXT-DECORATION: underline;
+	CURSOR: hand;
+} 
+
+A:visited { 
+	COLOR: #FF00FF; 
+} 
+A:active { 
+	COLOR: #FF00FF; 
+} 
+A:hover { 
+    COLOR: #FF00FF; 
+	TEXT-DECORATION: none; 
+}

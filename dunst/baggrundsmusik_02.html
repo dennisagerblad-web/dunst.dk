@@ -1,0 +1,38 @@
+<!--------Website created and produced by--------->
+<!---------------http://www.ova.dk---------------->
+<!--------------All rights reserved--------------->
+<HTML>
+<HEAD>
+<TITLE>dunst</TITLE>
+<link rel="stylesheet" href="0/dunst_hvid.css">
+<script>
+<--
+/*
+Random background music player script credit: Website Abstraction (www.wsabstract.com).
+ Your free JavaScripts archieve, with over 200+ free JavaScripts.
+ This script may be freely used as long as credit remains intact.
+*/
+var sound1="02_parties/fest_16_coma/01_coma.mp3"
+var sound2="02_parties/fest_16_coma/02_coma.mp3"
+var sound3="02_parties/fest_16_coma/03_coma.mp3"
+var sound4="02_parties/fest_16_coma/04_coma.mp3"
+var sound5="02_parties/fest_16_coma/05_coma.mp3"
+var x=Math.round(Math.random()*4)
+if (x==0) x=sound1
+else if (x==1) x=sound2
+else if (x==2) x=sound3
+else if (x==3) x=sound4
+else x=sound5
+if (navigator.appName=="Microsoft Internet Explorer")
+document.write('<bgsound src='+'"'+x+'"'+' loop="infinite">')
+else 
+document.write('<embed src='+'"'+x+'"'+'hidden="true" border="0" width="20" height="20" autostart="true" loop="true">')
+//-->
+</script>
+</HEAD>
+
+<BODY>
+<BGSOUND SRC="skoegereden.mp3" LOOP=0> 
+test 
+</BODY>
+</HTML>
