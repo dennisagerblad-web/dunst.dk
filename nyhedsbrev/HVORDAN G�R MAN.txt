@@ -2,6 +2,6 @@ lav
 nyhedsbrev.html
 nyhedsbrev.txt
 
-lav emne til mail i filen sendmail.php øverst
+lav emne til mail i filen sendmail.php Ã¸verst
 
-gå ind i en browser og kald siden sendmail.php
+gÃ¥ ind i en browser og kald siden sendmail.php
