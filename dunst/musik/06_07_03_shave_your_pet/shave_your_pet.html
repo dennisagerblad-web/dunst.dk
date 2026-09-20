@@ -5,9 +5,35 @@
 <HEAD>
 <TITLE>dunst</TITLE>
 <LINK REL="stylesheet" HREF="../dunst_musik.css">
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/JavaScript" SRC="../../calendar/float.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript">
+var objPage = Page();
+function Page() {
+  return(this);
+}
+onload=init;
+OChaser = new ClassChaser("CC", "OChaser", 100, 170);
+
+function resz() {
+  if (document.layers) history.go(0);
+}
+
+function init() {
+  OChaser.init();
+}
+</SCRIPT>
+<STYLE>
+#CC {
+  position: absolute;
+  top: 100px;
+  right: 10px;
+  width: 50px;
+  z-index: 4;
+}
+</STYLE>
 </HEAD>
 
-<BODY>
+<BODY onResize="resz();" ONSCROLL="OChaser.startChase();" onLoad="init();">
 <BR>
 <BR>
 <BR>
@@ -51,6 +77,37 @@
   
   
 </TABLE>
+<DIV NAME="CC" ID="CC" WIDTH="50">
+  <TABLE WIDTH="50" BORDER="1" CELLPADDING="5" CELLSPACING="2" BORDERCOLOR="#FF00FF" BGCOLOR="#FFFFCC">
+    <TR>
+      <TD ALIGN="CENTER" CLASS="head"><IMG SRC="../../calendar/the_meaning_of_the_colour.gif" WIDTH="52" HEIGHT="34"></TD>
+    </TR>
+    <TR>
+      <TD BGCOLOR="#FF00FF"><A HREF="../../02_parties/index.html" TARGET="_parent"><FONT COLOR="#FFFFCC">dunst<BR>parties</FONT></A></TD>
+    </TR>
+    <TR>
+      <TD BGCOLOR="#2972A3"><A HREF="../../03_events/index.html" TARGET="_parent"><FONT COLOR="#FFFFCC">dunst events</FONT></A></TD>
+    </TR>
+    <TR>
+      <TD BGCOLOR="#754223"><A HREF="../../cafe/index.html" TARGET="_parent"><FONT COLOR="#FFFFCC">dunst<BR>caf&eacute;</FONT></A></TD>
+    </TR>
+    <TR>
+      <TD BGCOLOR="#000000"><A HREF="../../film/index.html" TARGET="_parent"><FONT COLOR="#FFFFFF">dunst<BR>film</FONT></A></TD>
+    </TR>
+    <TR>
+      <TD BGCOLOR="#C04E4E"><A HREF="../../abroad/index.html" TARGET="_parent"><FONT COLOR="#FFFFFF">dunst<BR>abroad</FONT></A></TD>
+    </TR>
+    <TR>
+      <TD BGCOLOR="#CCCCCC"><A HREF="../index.html" TARGET="_parent"><FONT COLOR="#0000FF">dunst music</FONT></A></TD>
+    </TR>
+    <TR>
+      <TD BGCOLOR="#FFFF00"><A HREF="../../radio/index.html" TARGET="_parent">dunst<BR>radio</A></TD>
+    </TR>
+    <TR>
+      <TD BGCOLOR="#FF6600"><A HREF="../../recommends/index.html" TARGET="_parent"><FONT COLOR="#FFFFCC">recom-<BR>mends</FONT></A></TD>
+    </TR>
+  </TABLE>
+</DIV>
 <BR>
 <BR>
 </BODY>
