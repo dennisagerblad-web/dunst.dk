@@ -1,6 +1,87 @@
 <html>
 <head>
 <LINK REL="stylesheet" HREF="../dunst_film.css">
+<STYLE TYPE="text/css">
+html, body {
+  min-height: 100%;
+}
+
+body {
+  background-repeat: repeat-x !important;
+  background-size: 450px 600px;
+}
+
+#sceneTop {
+  width: 100vw !important;
+  background-repeat: repeat-x !important;
+}
+
+#Indhold > table {
+  width: 100% !important;
+}
+
+#Indhold .KANT {
+  width: calc(100% - 24px) !important;
+  max-width: 470px;
+  box-sizing: border-box;
+}
+
+#Indhold .KANT img {
+  max-width: 202px;
+  height: auto;
+}
+
+@media (max-width: 620px) {
+  #sceneRightTop,
+  #sceneLeftTop,
+  #sceneRight,
+  #sceneLeft,
+  #sceneRightKant,
+  #sceneLeftKant {
+    display: none;
+  }
+
+  body {
+    box-sizing: border-box;
+    border: 3px solid #f5f5df;
+    border-radius: 30px;
+    overflow-x: hidden;
+  }
+
+  #Indhold {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100vh;
+    padding: 28px 10px;
+    box-sizing: border-box;
+  }
+
+  #Indhold > table {
+    height: auto !important;
+  }
+}
+
+@media (max-width: 390px) {
+  #Indhold .KANT,
+  #Indhold .KANT tbody,
+  #Indhold .KANT tr,
+  #Indhold .KANT td {
+    display: block;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  #Indhold .KANT td[rowspan] {
+    text-align: center;
+  }
+
+  #Indhold .KANT img {
+    width: auto;
+    max-width: min(202px, 70vw);
+  }
+}
+</STYLE>
 </head>
 
 <body STYLE="margin:0px; background-image:url(../film_bg_03.jpg); background-position:top left; background-repeat:repeat-x; background-attachment:fixed; background-color:#000000; min-width:100%;">
