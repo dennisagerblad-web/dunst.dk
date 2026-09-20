@@ -12,42 +12,7 @@
 <LINK REL="stylesheet" HREF="../../../0/dunst_hvid.css">
 <meta name="Generator" content="EditPlus">
 </head>
-<script type="text/javascript">
-var player;
-
-function getPlayer() {
-	return document.getElementById("RAOCX");
-  if (document.prim_player_embed) {
-    return document.prim_player_embed;
-  } else {
-    return document.prim_player;
-  }
-}
-
-function Player() {
-    this.player     = getPlayer();
-    this.stop       = playerStop;
-    this.play       = playerPlay;
-    this.pause      = playerPause;
-}
-
-function playerStop() {
-  this.player.DoStop();
-}
-
-function playerPause() {
-  this.player.DoPause();
-}
-
-function playerPlay() {
-  this.player.DoPlay();
-}
-
-function pageLoad() {
-  player = new Player(); 
-}
-</script>
-<body onLoad="pageLoad()">
+<body>
 <BR>
 <TABLE WIDTH="450"  BORDER="0" ALIGN="CENTER" CELLPADDING="4" CELLSPACING="0" CLASS="ramme">
   <TR> 
@@ -64,18 +29,12 @@ function pageLoad() {
       Gense her programmet &quot;Brunch&quot; p&aring; TV2-Lorry hvor Puta, Dennis 
       Agerblad &amp; Hairwerk synger en sang og fort&aelig;ller om dunst.<BR>
       <BR>
-      <TABLE WIDTH="320" BORDER="0" CELLSPACING="0" CELLPADDING="4" HEIGHT="341" ALIGN="CENTER" CLASS="ramme">
+      <TABLE WIDTH="500" BORDER="0" CELLSPACING="0" CELLPADDING="4" ALIGN="CENTER" CLASS="ramme">
         <TR VALIGN="TOP"> 
-          <TD WIDTH="99%" CLASS="head">Windows Media Player</TD>
+          <TD WIDTH="99%" CLASS="head">YouTube</TD>
         </TR>
         <TR> 
-          <TD ALIGN="CENTER"  VALIGN="TOP"><OBJECT CLASSID="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6" ID="RAOCX" NAME="prim_player" WIDTH=320 HEIGHT=310>
-              <PARAM NAME=url VALUE=http://www.tv2regionerne.dk/video.asp?Id=242194>
-              <PARAM NAME="CONTROLS" VALUE="ImageWindow">
-              <PARAM NAME="AUTOSTART" VALUE="true">
-              <PARAM NAME="MAINTAINASPECT" VALUE="0">
-              <EMBED TYPE="application/x-mplayer2" WIDTH=320 HEIGHT=310 SRC=http://www.tv2regionerne.dk/video.asp?Id=242194 NAME=mPlayer PLUGINSPAGE=http://www.microsoft.com/mediaplayer ID=mPlayer BORDER=0> 
-              </EMBED></OBJECT></TD>
+          <TD ALIGN="CENTER" VALIGN="TOP"><IFRAME WIDTH="500" HEIGHT="281" SRC="https://www.youtube.com/embed/NNK3iHLIqYY" TITLE="TV2-Lorry Brunch" FRAMEBORDER="0" ALLOW="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ALLOWFULLSCREEN></IFRAME></TD>
         </TR>
       </TABLE>
       <BR>
