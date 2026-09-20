@@ -1,5 +1,5 @@
 <!--
-  var snowsrc="http://www.dunst.dk/dunst/0/images/pik.gif"
+  var snowsrc="images/pik.gif"
   // Configure below to change number of snow to render
   var no = 1;
 
@@ -35,13 +35,13 @@
     sty[i] = 0.7 + Math.random();     // set step variables
     if (ns4up) {                      // set layers
       if (i == 0) {
-        document.write("<layer name=\"dot"+ i +"\" left=\"15\" top=\"15\" visibility=\"show\"><a href=\"http://www.dunst.dk/dunst/0/pis.html\"><img src='"+snowsrc+"' border=\"0\"><\/a><\/layer>");
+        document.write("<layer name=\"dot"+ i +"\" left=\"15\" top=\"15\" visibility=\"show\"><a href=\"pis.html\"><img src='"+snowsrc+"' border=\"0\"><\/a><\/layer>");
       } else {
         document.write("<layer name=\"dot"+ i +"\" left=\"15\" top=\"15\" visibility=\"show\"><img src='"+snowsrc+"' border=\"0\"><\/layer>");
       }
     } else if (ie4up||ns6up) {
       if (i == 0) {
-        document.write("<div id=\"dot"+ i +"\" style=\"POSITION: absolute; Z-INDEX: "+ i +"; VISIBILITY: visible; TOP: 15px; LEFT: 15px;\"><a href=\"http://www.dunst.dk/dunst/0/pis.html\"><img src='"+snowsrc+"' border=\"0\"><\/a><\/div>");
+        document.write("<div id=\"dot"+ i +"\" style=\"POSITION: absolute; Z-INDEX: "+ i +"; VISIBILITY: visible; TOP: 15px; LEFT: 15px;\"><a href=\"pis.html\"><img src='"+snowsrc+"' border=\"0\"><\/a><\/div>");
       } else {
         document.write("<div id=\"dot"+ i +"\" style=\"POSITION: absolute; Z-INDEX: "+ i +"; VISIBILITY: visible; TOP: 15px; LEFT: 15px;\"><img src='"+snowsrc+"' border=\"0\"><\/div>");
       }
