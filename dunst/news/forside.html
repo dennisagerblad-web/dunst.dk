@@ -24,6 +24,10 @@
       background: #fff;
     }
     .post h1 {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
       margin: 0;
       padding: 7px 10px;
       border-bottom: 1px solid #ff00ff;
@@ -32,6 +36,7 @@
       font-size: 14px;
       line-height: 1.4;
     }
+    .post h1 time { flex: none; white-space: nowrap; }
     .post-body { padding: 16px; }
     .video {
       width: 100%;
@@ -56,7 +61,7 @@
   <main>
     <section aria-label="Indslag">
       <article class="post">
-        <h1>Copenhagen Performance Art Troupe – Dunst</h1>
+        <h1><span>Copenhagen Performance Art Troupe – Dunst</span><time datetime="2013-03-12">12. mar. 2013</time></h1>
         <div class="post-body">
           <iframe class="video" src="https://www.youtube-nocookie.com/embed/ESgo8ApK9IY" title="Copenhagen Performance Art Troupe – Dunst på YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           <div class="post-copy">
