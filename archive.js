@@ -631,7 +631,16 @@ async function showDjFront() {
     if (!profile) return null;
     profile.classList.add("dj-profile");
     const head = profile.querySelector(".head[background]");
-    if (head) head.style.backgroundImage = `url("${head.getAttribute("background")}")`;
+    if (head) {
+      const name = document.createElement("h2");
+      name.textContent = head.textContent.replace(/\s+/g, " ").trim();
+      const image = document.createElement("img");
+      image.src = head.getAttribute("background");
+      image.alt = "";
+      head.removeAttribute("background");
+      head.classList.add("dj-profile-heading");
+      head.replaceChildren(image, name);
+    }
     return profile;
   }));
   for (const page of pages) {

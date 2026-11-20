@@ -760,7 +760,7 @@ window.DUNST_PREVIEW_DATA = {
     },
     {
       "label": "the PRESS",
-      "url": "https://dunst.dk/dunst/press/2007/index.html",
+      "url": "https://dunst.dk/dunst/press/2013/index.html",
       "color": null,
       "bullet": false,
       "children": [

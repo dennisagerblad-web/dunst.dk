@@ -74,19 +74,32 @@ function menuAnchor(item, className) {
 
 const menuRoot = document.getElementById("full-menu");
 const menuSidebar = document.getElementById("site-menu");
+const isPlainClick = (event) => event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
 let savedMenuScroll;
 try { savedMenuScroll = JSON.parse(sessionStorage.getItem("dunst-menu-scroll") || "null"); } catch {}
 const restoreMenuScroll = () => {
-  if (savedMenuScroll?.target === location.href) menuSidebar.scrollTop = savedMenuScroll.top;
+  if (savedMenuScroll?.target !== location.href) return;
+  const link = [...menuRoot.querySelectorAll("a.menu-link, a.menu-child")].find((item) => item.href === savedMenuScroll.target);
+  if (mobileMenuQuery.matches && link && Number.isFinite(savedMenuScroll.offset)) {
+    const offset = link.getBoundingClientRect().top - menuSidebar.getBoundingClientRect().top;
+    menuSidebar.scrollTop += offset - savedMenuScroll.offset;
+  } else {
+    menuSidebar.scrollTop = savedMenuScroll.top;
+  }
 };
 menuRoot.addEventListener("click", (event) => {
-  const link = event.target.closest("a.menu-child");
-  if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-  const group = link.closest(".menu-group").querySelector(".menu-link").textContent;
-  sessionStorage.setItem("dunst-menu-scroll", JSON.stringify({target: link.href, top: menuSidebar.scrollTop, group}));
-  sessionStorage.setItem("dunst-menu-group", group);
-  sessionStorage.setItem("dunst-menu-open", "true");
-  sessionStorage.removeItem("dunst-animate-menu-to");
+  const link = event.target.closest("a.menu-child, a.menu-link");
+  if (!link || !isPlainClick(event)) return;
+  const child = link.classList.contains("menu-child");
+  if (!child && (!mobileMenuQuery.matches || link.getAttribute("aria-current") === "page")) return;
+  const offset = link.getBoundingClientRect().top - menuSidebar.getBoundingClientRect().top;
+  sessionStorage.setItem("dunst-menu-scroll", JSON.stringify({target: link.href, top: menuSidebar.scrollTop, offset}));
+  if (child) {
+    const group = link.closest(".menu-group").querySelector(".menu-link").textContent;
+    sessionStorage.setItem("dunst-menu-group", group);
+    sessionStorage.setItem("dunst-menu-open", "true");
+    sessionStorage.removeItem("dunst-animate-menu-to");
+  }
 }, true);
 menuRoot.classList.add("menu-initializing");
 const menuStates = [];
@@ -190,15 +203,19 @@ for (const [index, section] of orderedMenu.entries()) {
     if (hasCurrentPage) selectedMenuState = state;
     button.addEventListener("click", () => toggleMenuGroup(state));
     sectionLink.addEventListener("click", (event) => {
+      if (!isPlainClick(event)) return;
       if (sectionLink.getAttribute("aria-current") === "page") {
         event.preventDefault();
         toggleMenuGroup(state);
         return;
       }
-      const previous = menuStates.find((item) => item.isOpen);
       if (mobileMenuQuery.matches) {
         sessionStorage.setItem("dunst-open-menu-after-category", sectionLink.href);
+        sessionStorage.removeItem("dunst-animate-menu-to");
+        rememberGroup(state, true);
+        return;
       }
+      const previous = menuStates.find((item) => item.isOpen);
       if (previous !== state) sessionStorage.setItem("dunst-animate-menu-to", sectionLink.href);
       else sessionStorage.removeItem("dunst-animate-menu-to");
       rememberGroup(state, true);
@@ -212,6 +229,7 @@ for (const [index, section] of orderedMenu.entries()) {
   } else {
     group.append(row);
     sectionLink.addEventListener("click", (event) => {
+      if (!isPlainClick(event) || mobileMenuQuery.matches) return;
       const previous = menuStates.find((item) => item.isOpen);
       if (!previous) return;
       event.preventDefault();
@@ -312,22 +330,21 @@ const backdrop = document.getElementById("menu-backdrop");
 const toggle = document.getElementById("menu-toggle");
 const close = document.getElementById("menu-close");
 
-function setDrawerOpen(open) {
+function setDrawerOpen(open, moveFocus = false) {
   document.body.classList.toggle("menu-open", open);
   backdrop.hidden = !open;
   toggle.setAttribute("aria-expanded", String(open));
   const hiddenOnMobile = !open && mobileMenuQuery.matches;
   drawer.setAttribute("aria-hidden", String(hiddenOnMobile));
   drawer.inert = hiddenOnMobile;
-  if (open) close.focus({preventScroll: true});
-  else toggle.focus();
+  if (moveFocus) (open ? close : toggle).focus({preventScroll: true});
 }
 
-toggle.addEventListener("click", () => setDrawerOpen(true));
-close.addEventListener("click", () => setDrawerOpen(false));
+toggle.addEventListener("click", (event) => setDrawerOpen(true, event.detail === 0));
+close.addEventListener("click", (event) => setDrawerOpen(false, event.detail === 0));
 backdrop.addEventListener("click", () => setDrawerOpen(false));
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && document.body.classList.contains("menu-open")) setDrawerOpen(false);
+  if (event.key === "Escape" && document.body.classList.contains("menu-open")) setDrawerOpen(false, true);
 });
 mobileMenuQuery.addEventListener("change", (event) => {
   if (!event.matches) {
@@ -348,6 +365,8 @@ if (mobileMenuQuery.matches) {
   const pendingCategory = sessionStorage.getItem("dunst-open-menu-after-category");
   if (pendingCategory === location.href) {
     sessionStorage.removeItem("dunst-open-menu-after-category");
+    drawer.classList.add("menu-restoring");
     setDrawerOpen(true);
+    requestAnimationFrame(() => requestAnimationFrame(() => drawer.classList.remove("menu-restoring")));
   }
 }
