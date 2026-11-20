@@ -1448,19 +1448,6 @@ window.DUNST_ARCHIVE_DATA = {
     ],
     "gallery": [
       {
-        "image": "/dunst/02_parties/fest_21_shave_your_pet/gkt_flyer_sort.jpg",
-        "url": "https://dunst.dk/dunst/02_parties/fest_21_shave_your_pet/shave_your_pet_flyer.html",
-        "alt": "",
-        "detail_lines": [
-          "dunst party - Shave Your Pet",
-          "8. Juli 2006",
-          "Download this poster as PDF",
-          "Mix drinks med Tina Trasch, sving kosten med Dennis Agerblad eller brug musklerne med Lene Leth Lebbe... Med andre ord: Tag en barvagt eller en garderobevagt, hjælp med at bære gear ind og ud eller giv en hånd med til oprydningen - så kommer du gratis med til sommerens ultimative brag af en dunstfest, SHAVE YOUR PET lørdag d. 8. juli i hal 55 i den brune kødby på Halmtorvet. Vagterne bliver fordelt efter først-til-mølle-princippet. infodunst.dk www.glamourtokill.de http://www.myspace.com/glamourtokill www.noblesseoblige.co.uk www.myspace.com/noblesseoblige",
-          "dunst party - Shave Your Pet",
-          "8. Juli 2006"
-        ]
-      },
-      {
         "image": "/dunst/02_parties/fest_21_shave_your_pet/images/IMG_0114.jpg",
         "url": "https://dunst.dk/dunst/02_parties/fest_21_shave_your_pet/pages/IMG_0114.html",
         "alt": "",

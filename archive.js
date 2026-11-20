@@ -1113,17 +1113,17 @@ function enhancePartyTopArt() {
     const tables = [...archiveContent.querySelectorAll(":scope > table.ramme")];
     const firstCell = tables[0]?.rows[1]?.cells[0];
     const firstImage = firstCell?.querySelector("img");
-    const secondImage = tables[1]?.querySelector("img");
-    if (!firstImage || !secondImage) return;
+    const blackAndWhitePoster = archiveContent.querySelector(':scope > table.ramme img[src$="/gkt_flyer_sort.jpg"]');
+    if (!firstImage) return;
     const download = firstCell.querySelector('a[href*="GTK-poster_a4.pdf"]');
     const pair = document.createElement("div");
     pair.className = "party-top-art-pair shave-flyers";
     const first = document.createElement("div");
     first.append(firstImage);
     if (download) first.append(download);
-    pair.append(first, secondImage);
+    pair.append(first);
     firstCell.replaceChildren(pair);
-    tables[1].remove();
+    blackAndWhitePoster?.closest("table.ramme")?.remove();
     for (const breakNode of archiveContent.querySelectorAll(":scope > br")) breakNode.remove();
   }
 }
