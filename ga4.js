@@ -181,7 +181,7 @@
         right: 8px;
         width: 40px;
         height: 40px;
-        color: #bc00c4;
+        color: var(--cookie-violet);
         pointer-events: none;
       }
       .body { display: flow-root; padding: 6px 10px; font-size: 14px; }
