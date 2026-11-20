@@ -793,7 +793,7 @@ async function showPressYear(year) {
   links.setAttribute("aria-label", `Presseindslag fra ${year}`);
   const heading = document.createElement("h2");
   heading.textContent = `Press ${year}`;
-  links.append(heading);
+  heading.className = "press-year-title";
   const articlePaths = [];
 
   if (year === "2013") {
@@ -880,7 +880,10 @@ async function showPressYear(year) {
   index.append(summary, links);
   const layout = document.createElement("div");
   layout.className = "press-year-layout";
-  layout.append(index, article);
+  const navigation = document.createElement("section");
+  navigation.className = "press-year-navigation";
+  navigation.append(heading, index);
+  layout.append(navigation, article);
   archiveContent.replaceChildren(layout);
   const narrow = matchMedia("(max-width: 900px), (max-width: 1024px) and (max-height: 500px)");
   index.open = !narrow.matches;
@@ -2910,17 +2913,6 @@ function showTv2News() {
   archiveContent.replaceChildren(panel);
 }
 
-const recommendsMonthNames = ["januar", "februar", "marts", "april", "maj", "juni", "juli", "august", "september", "oktober", "november", "december"];
-function recommendsEventMonth(item) {
-  // This event is labelled 25 April on the page and in the owner's review.
-  if (item.path.includes("/07_03_25_seminar/")) return 4;
-  const datedFolder = item.path.match(/\/(?:\d{2}|\d{4})_(\d{2})_\d{2}_/);
-  if (datedFolder) return Number(datedFolder[1]);
-  const copy = (window.DUNST_RECOMMENDS.routes[item.path]?.main_lines || []).join(" ").toLocaleLowerCase("da");
-  const month = recommendsMonthNames.findIndex(name => new RegExp(`\\b${name}\\b`, "i").test(copy));
-  return month < 0 ? null : month + 1;
-}
-
 function showRecommendsFront() {
   const panel = document.createElement("section");
   panel.className = "front-panel recommends-intro";
@@ -2931,9 +2923,7 @@ function showRecommendsFront() {
   intro.textContent = "Dette er ikke dunst, men medlemmers egne arrangementer.";
   panel.append(title, intro);
   const years = document.createElement("div");
-  const items = window.DUNST_RECOMMENDS.items.slice(4)
-    .map(item => ({...item, month: recommendsEventMonth(item)}))
-    .sort((a, b) => Number(b.year) - Number(a.year) || (b.month || 0) - (a.month || 0));
+  const { listedItems: items, monthNames: recommendsMonthNames } = window.DUNST_RECOMMENDS;
   let currentYear;
   let currentMonth;
   let section;

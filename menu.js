@@ -14,10 +14,17 @@ const menuOrder = [
 ];
 const recommendsChildren = [];
 let recommendsYear;
-for (const item of window.DUNST_RECOMMENDS.items.slice(4)) {
+let recommendsMonth;
+const { listedItems, monthNames } = window.DUNST_RECOMMENDS;
+for (const item of listedItems) {
   if (item.year !== recommendsYear) {
     recommendsChildren.push({label: `${item.year}:`});
     recommendsYear = item.year;
+    recommendsMonth = undefined;
+  }
+  if (item.month !== recommendsMonth) {
+    recommendsMonth = item.month;
+    if (item.month) recommendsChildren.push({label: `${monthNames[item.month - 1]}:`, month: true});
   }
   recommendsChildren.push({label: item.label, url: `https://dunst.dk${item.path}`});
 }
@@ -105,9 +112,20 @@ menuRoot.classList.add("menu-initializing");
 const menuStates = [];
 let selectedMenuState = null;
 let menuAction = 0;
-const currentArchivePath = new URLSearchParams(location.search).get("path") ||
+const currentArchivePath = new URLSearchParams(location.search).get("path") || document.body.dataset.archivePath ||
   (document.body.hasAttribute("data-performance-home") ? performanceHomePath : null);
 const isPerformanceHome = document.body.hasAttribute("data-performance-home");
+
+document.addEventListener("toggle", (event) => {
+  const details = event.target;
+  if (!(details instanceof HTMLDetailsElement)) return;
+  const label = details.querySelector(":scope > summary")?.firstChild;
+  if (label?.nodeType !== Node.TEXT_NODE) return;
+  label.textContent = label.textContent.replace(
+    /^(\s*[Ll]æs )(?:mere|mindre)\b/,
+    `$1${details.open ? "mindre" : "mere"}`,
+  );
+}, true);
 
 function rememberGroup(state, open) {
   sessionStorage.setItem("dunst-menu-group", state.label);
@@ -155,6 +173,7 @@ for (const [index, section] of orderedMenu.entries()) {
   const group = document.createElement("div");
   group.className = "menu-group";
   if (section.newsletter) group.classList.add("newsletter-group");
+  if (section.label === "dunst RECOMENDS") group.classList.add("recommends-menu-group");
   const row = document.createElement("div");
   row.className = "menu-row";
   const sectionLink = menuAnchor(section, "menu-link");
@@ -173,7 +192,7 @@ for (const [index, section] of orderedMenu.entries()) {
         inner.append(link);
       } else {
         const heading = document.createElement("span");
-        heading.className = "menu-year";
+        heading.className = child.month ? "menu-year menu-month" : "menu-year";
         heading.textContent = child.label;
         inner.append(heading);
       }
@@ -192,7 +211,7 @@ for (const [index, section] of orderedMenu.entries()) {
     group.append(row, children);
     const sectionPath = new URL(section.url).pathname;
     const state = {
-      button, children, label: section.label, isOpen: false, duration: 400,
+      button, children, sectionLink, label: section.label, isOpen: false, duration: 400,
       pathPrefix: section.label === "the PRESS" ? "/dunst/press/" : sectionPath.slice(0, sectionPath.lastIndexOf("/") + 1),
       childPrefixes: section.children.filter((item) => item.url).map((item) => {
         const path = new URL(item.url).pathname;
@@ -210,7 +229,6 @@ for (const [index, section] of orderedMenu.entries()) {
         return;
       }
       if (mobileMenuQuery.matches) {
-        sessionStorage.setItem("dunst-open-menu-after-category", sectionLink.href);
         sessionStorage.removeItem("dunst-animate-menu-to");
         rememberGroup(state, true);
         return;
@@ -258,6 +276,7 @@ if (!selectedMenuState && currentArchivePath) {
     || menuStates.find((state) => currentArchivePath.startsWith(state.pathPrefix))
     || null;
 }
+if (selectedMenuState?.label === "the PRESS") selectedMenuState.sectionLink.classList.add("is-current-section");
 const animateMenuOnArrival = sessionStorage.getItem("dunst-animate-menu-to") === location.href;
 sessionStorage.removeItem("dunst-animate-menu-to");
 if (!isPerformanceHome && selectedMenuState && !animateMenuOnArrival && !(sessionStorage.getItem("dunst-menu-group") === selectedMenuState.label && sessionStorage.getItem("dunst-menu-open") === "false")) {
@@ -329,6 +348,33 @@ const drawer = document.getElementById("site-menu");
 const backdrop = document.getElementById("menu-backdrop");
 const toggle = document.getElementById("menu-toggle");
 const close = document.getElementById("menu-close");
+const reducedDrawerMotion = matchMedia("(prefers-reduced-motion: reduce)");
+let drawerNavigating = false;
+
+menuRoot.addEventListener("click", (event) => {
+  if (event.defaultPrevented || !isPlainClick(event) || !mobileMenuQuery.matches ||
+      !document.body.classList.contains("menu-open")) return;
+  const link = event.target.closest("a[href]");
+  if (!link || link.target || link.hasAttribute("download")) return;
+  if (reducedDrawerMotion.matches) {
+    setDrawerOpen(false);
+    return;
+  }
+  event.preventDefault();
+  if (drawerNavigating) return;
+  drawerNavigating = true;
+  const go = () => {
+    clearTimeout(fallback);
+    drawer.removeEventListener("transitionend", onSlideEnd);
+    location.assign(link.href);
+  };
+  const onSlideEnd = (transition) => {
+    if (transition.target === drawer && transition.propertyName === "transform") go();
+  };
+  const fallback = setTimeout(go, 260);
+  drawer.addEventListener("transitionend", onSlideEnd);
+  setDrawerOpen(false);
+});
 
 function setDrawerOpen(open, moveFocus = false) {
   document.body.classList.toggle("menu-open", open);
@@ -362,11 +408,9 @@ mobileMenuQuery.addEventListener("change", (event) => {
 if (mobileMenuQuery.matches) {
   drawer.setAttribute("aria-hidden", "true");
   drawer.inert = true;
-  const pendingCategory = sessionStorage.getItem("dunst-open-menu-after-category");
-  if (pendingCategory === location.href) {
-    sessionStorage.removeItem("dunst-open-menu-after-category");
-    drawer.classList.add("menu-restoring");
-    setDrawerOpen(true);
-    requestAnimationFrame(() => requestAnimationFrame(() => drawer.classList.remove("menu-restoring")));
-  }
 }
+
+// A mobile link closes the menu before leaving. Restore interactivity after Back.
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) drawerNavigating = false;
+});

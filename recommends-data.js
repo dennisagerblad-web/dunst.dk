@@ -10961,3 +10961,19 @@ window.DUNST_RECOMMENDS = {
     }
   }
 };
+
+const recommendsMonthNames = ["januar", "februar", "marts", "april", "maj", "juni", "juli", "august", "september", "oktober", "november", "december"];
+function recommendsEventMonth(item) {
+  // This event is labelled 25 April on the page and in the owner's review.
+  if (item.path.includes("/07_03_25_seminar/")) return 4;
+  const datedFolder = item.path.match(/\/(?:\d{2}|\d{4})_(\d{2})_\d{2}_/);
+  if (datedFolder) return Number(datedFolder[1]);
+  const copy = (window.DUNST_RECOMMENDS.routes[item.path]?.main_lines || []).join(" ").toLocaleLowerCase("da");
+  const month = recommendsMonthNames.findIndex(name => new RegExp(`\\b${name}\\b`, "i").test(copy));
+  return month < 0 ? null : month + 1;
+}
+
+window.DUNST_RECOMMENDS.monthNames = recommendsMonthNames;
+window.DUNST_RECOMMENDS.listedItems = window.DUNST_RECOMMENDS.items.slice(4)
+    .map(item => ({...item, month: recommendsEventMonth(item)}))
+    .sort((a, b) => Number(b.year) - Number(a.year) || (b.month || 0) - (a.month || 0));

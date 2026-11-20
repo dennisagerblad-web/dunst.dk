@@ -208,6 +208,8 @@
         border-bottom: 0;
         vertical-align: .14em;
       }
+      .read-less, details[open] .read-more { display: none; }
+      details[open] .read-less { display: inline; }
       details[open] > summary::after { transform: rotate(180deg); }
       .details-copy { clear: both; padding-top: 5px; }
       p { margin: 0 0 2px; }
@@ -231,7 +233,7 @@
       <div class="body">
         <div class="choices"><button type="button" data-choice="granted" aria-label="Ja, tillad statistikcookies">Ja</button><button type="button" data-choice="denied" aria-label="Nej, afvis statistikcookies">Nej</button></div>
         <details>
-          <summary>Læs mere</summary>
+          <summary><span class="read-more">Læs mere</span><span class="read-less">Læs mindre</span></summary>
           <div class="details-copy">
             <p>Vi vil gerne se hvordan folk klikker sig rundt på siden.</p>
             <a href="https://policies.google.com/technologies/partner-sites?hl=da" target="_blank" rel="noopener noreferrer">Sådan behandler Google oplysninger</a>
