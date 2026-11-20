@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Pispis | dunst</title>
+  <link rel="stylesheet" href="style.css?v=20261120-dunst-launch">
+</head>
+<body class="pispis-preview">
+  <a class="pispis-close" href="index.html">Luk Pispis</a>
+  <div class="pispis-top" aria-hidden="true"><img src="/pispis/assets/fade_corner_121.jpg" width="150" height="121" alt=""></div>
+  <div class="pispis-layout">
+    <main id="pispis-content" class="pispis-content"></main>
+    <aside id="pispis-index" class="pispis-index" aria-label="Find indlæg" hidden></aside>
+  </div>
+  <script>
+    const allowed = sessionStorage.getItem("dunst-pispis-entry") === "allow";
+    sessionStorage.removeItem("dunst-pispis-entry");
+    const content = document.getElementById("pispis-content");
+    const index = document.getElementById("pispis-index");
+
+    function buildIndex(archive) {
+      const messages = [...archive.querySelectorAll(".msg")];
+      const details = document.createElement("details");
+      const summary = document.createElement("summary");
+      summary.textContent = "Find indlæg";
+      details.append(summary);
+
+      const controls = document.createElement("div");
+      controls.className = "pispis-index-controls";
+      const search = document.createElement("input");
+      search.type = "search";
+      search.placeholder = "Søg nr., navn eller tekst";
+      search.setAttribute("aria-label", "Søg efter nummer, forfatter eller tekst i Pispis-indlæg");
+      controls.append(search);
+
+      const count = document.createElement("p");
+      count.className = "pispis-index-count";
+      controls.append(count);
+      details.append(controls);
+
+      const list = document.createElement("ol");
+      list.className = "pispis-index-list";
+      const fragment = document.createDocumentFragment();
+      const entries = messages.map((message, number) => {
+        const postNumber = number + 1;
+        const writer = message.querySelector(".msgWriter");
+        const rawAuthor = writer?.querySelector("i")?.textContent.trim() || "Ukendt";
+        const author = rawAuthor.charAt(0).toLocaleUpperCase("da") + rawAuthor.slice(1);
+        const date = (writer?.textContent || "").match(/\bd\.\s*(.*)/i)?.[1]?.trim() || "";
+        const numberLabel = document.createElement("strong");
+        numberLabel.className = "pispis-number";
+        numberLabel.textContent = `Nr. ${postNumber}`;
+        writer?.prepend(numberLabel, document.createTextNode(" · "));
+        const fullText = (message.querySelector(".msgText")?.textContent || "")
+          .replace(/\s+/g, " ").trim();
+        const excerpt = fullText.slice(0, 90);
+        message.id = `pispis-indlaeg-${postNumber}`;
+        const item = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = `#${message.id}`;
+        const heading = document.createElement("strong");
+        heading.textContent = `Nr. ${postNumber} · Skrevet af ${author}`;
+        const description = document.createElement("span");
+        description.textContent = [date, excerpt].filter(Boolean).join(" · ");
+        link.append(heading, description);
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          list.querySelector('[aria-current="location"]')?.removeAttribute("aria-current");
+          link.setAttribute("aria-current", "location");
+          if (matchMedia("(max-width: 760px)").matches) details.open = false;
+          history.replaceState(null, "", `#${message.id}`);
+          requestAnimationFrame(() => message.scrollIntoView({ behavior: "smooth", block: "start" }));
+        });
+        item.append(link);
+        fragment.append(item);
+        return { item, number: postNumber, text: `${rawAuthor} ${date} ${fullText}`.toLocaleLowerCase("da") };
+      });
+      list.append(fragment);
+      details.append(list);
+      index.replaceChildren(details);
+      index.hidden = false;
+
+      function filterEntries() {
+        const query = search.value.trim().toLocaleLowerCase("da");
+        const numberQuery = query.match(/^(?:nr\.?\s*)?(\d+)$/);
+        let visible = 0;
+        for (const entry of entries) {
+          entry.item.hidden = numberQuery
+            ? entry.number !== Number(numberQuery[1])
+            : Boolean(query && !entry.text.includes(query));
+          if (!entry.item.hidden) visible++;
+        }
+        count.textContent = `${visible} af ${entries.length} indlæg`;
+      }
+      search.addEventListener("input", filterEntries);
+      filterEntries();
+      const narrow = matchMedia("(max-width: 760px)");
+      const setOpen = () => { details.open = !narrow.matches; };
+      setOpen();
+      narrow.addEventListener("change", setOpen);
+    }
+
+    if (allowed) {
+      fetch("/pispis/archive-no-at.html")
+        .then((response) => {
+          if (!response.ok) throw new Error("Archive unavailable");
+          return response.text();
+        })
+        .then((markup) => {
+          const source = new DOMParser().parseFromString(markup, "text/html");
+          const archive = source.getElementById("archive");
+          if (!archive) throw new Error("Archive missing");
+          archive.classList.remove("locked");
+          content.replaceChildren(archive);
+          buildIndex(archive);
+        })
+        .catch(() => { content.textContent = "Pispis kunne ikke indlæses."; });
+    } else {
+      content.textContent = "Du har ikke adgang til denne side. Prøv at logge ind igen";
+    }
+  </script>
+</body>
+</html>

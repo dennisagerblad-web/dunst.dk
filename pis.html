@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pis mig i num-sen | dunst</title>
+  <link rel="stylesheet" href="style.css?v=20261120-dunst-launch">
+</head>
+<body>
+  <main class="pis-page"><a class="pis-link" href="index.html" id="pis-back">Pis<br>mig<br>i<br>num<br>-sen</a></main>
+  <script>
+    document.getElementById("pis-back").addEventListener("click", (event) => {
+      const previous = document.referrer ? new URL(document.referrer) : null;
+      if (previous?.origin === location.origin && previous.pathname !== location.pathname) {
+        event.preventDefault();
+        history.back();
+      }
+    });
+  </script>
+</body>
+</html>
