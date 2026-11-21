@@ -3550,21 +3550,33 @@ async function showMain() {
     }
   }
   if (document.body.classList.contains("calendar-archive")) {
-    for (const heading of archiveContent.querySelectorAll("b,strong")) {
-      if (/^dunst Calendar 20\d\d$/.test(heading.textContent.trim())) heading.classList.add("copy-heading");
+    for (const node of [...archiveContent.childNodes]) {
+      if (node.nodeType === Node.TEXT_NODE && /^calendar$/i.test(node.textContent.trim())) node.remove();
     }
     const legend = archiveContent.querySelector("#CC");
     const calendar = archiveContent.querySelector("#Calendar, #Calender");
-    if (calendar?.id === "Calender") calendar.id = "Calendar";
-    for (const table of calendar?.querySelectorAll(":scope > table > tbody > tr > td > table") || []) {
-      if (table.querySelector(":scope > tbody > tr > td.head[colspan='7']")) table.classList.add("calendar-month");
-    }
-    if (legend && calendar) {
-      legend.setAttribute("role", "complementary");
-      legend.setAttribute("aria-label", "The meaning of the colours");
-      const legendImage = legend.querySelector("img");
-      if (legendImage) legendImage.alt = "The meaning of the colours";
-      calendar.before(legend);
+    if (calendar) {
+      calendar.id = "Calendar";
+      for (const heading of calendar.querySelectorAll("b,strong")) {
+        const label = heading.textContent.trim();
+        const row = heading.closest("tr");
+        if (!/^dunst Calendar 20\d\d$/.test(label) || row?.textContent.trim() !== label) continue;
+        archiveTitle.textContent = label;
+        archiveTitle.hidden = false;
+        row.remove();
+      }
+      const spacerRow = calendar.querySelector(":scope > table > tbody > tr:first-child");
+      if (spacerRow?.querySelector('img[src$="/pix_trans.gif"]') && !spacerRow.textContent.trim()) spacerRow.remove();
+      for (const table of calendar.querySelectorAll(":scope > table > tbody > tr > td > table")) {
+        if (table.querySelector(":scope > tbody > tr > td.head[colspan='7']")) table.classList.add("calendar-month");
+      }
+      if (legend) {
+        legend.setAttribute("role", "complementary");
+        legend.setAttribute("aria-label", "The meaning of the colours");
+        const legendImage = legend.querySelector("img");
+        if (legendImage) legendImage.alt = "The meaning of the colours";
+        calendar.before(legend);
+      }
     }
   }
   if (location.hash) {

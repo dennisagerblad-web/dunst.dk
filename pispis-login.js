@@ -38,6 +38,7 @@ function createPispisLogin(openArchive) {
   form.append(fieldWrap, submit, instructions, status);
 
   let errorFlash;
+  let submitFlash;
   function showError() {
     field.setAttribute("aria-invalid", "true");
     status.textContent = "Forkert adgangskode. Prøv igen.";
@@ -63,6 +64,11 @@ function createPispisLogin(openArchive) {
     event.preventDefault();
     if (field.value !== word) {
       showError();
+      submitFlash?.cancel();
+      submitFlash = form.animate(
+        [{ backgroundColor: "#ff3838" }, { backgroundColor: "#fff" }],
+        { duration: 1100, easing: "ease-out" },
+      );
       field.focus();
       return;
     }

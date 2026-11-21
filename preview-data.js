@@ -3,7 +3,7 @@ window.DUNST_PREVIEW_DATA = {
   "menu": [
     {
       "label": "dunst CALENDAR",
-      "url": "https://dunst.dk/dunst/calendar/2008.html#her",
+      "url": "https://dunst.dk/dunst/calendar/2008.html",
       "color": null,
       "bullet": false,
       "children": [
