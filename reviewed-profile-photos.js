@@ -336,18 +336,6 @@ const dunstReviewedProfilePhotos = {
       "alt": "Johnny Warehouse poserer på et trægulv i lilla kostume med fjer og stribede strømper"
     }
   ],
-  "/dunst/dj/nikolaj.html": [
-    {
-      "image": "/dunst/recommends/2005/05_05_19_pause_01/nikolaj_close.jpg",
-      "width": 400,
-      "height": 400,
-      "event": "/dunst/recommends/2005/05_05_19_pause_01/index.html",
-      "eventName": "Pause Show #1",
-      "year": 2005,
-      "alt": "Nikolaj Tange Lange med sorte briller og farverig ansigtsmaling foran et rødt tæppe",
-      "date": "19. maj 2005"
-    }
-  ],
   "/dunst/01_performere/09_stimulundia/index.html": [
     {
       "image": "/dunst/abroad/2004/04_07_02_homophobia_berlin/homophobia_stimu_02.jpg",
@@ -476,6 +464,7 @@ function appendDunstReviewedDjPhotos(profile, profilePath) {
   const photos = dunstReviewedProfilePhotos[profilePath];
   if (!photos?.length) return;
   const gallery = profile.tBodies[0].insertRow().insertCell();
+  gallery.colSpan = profile.rows[0].cells[0].colSpan;
   const years = [...new Set(photos.map((photo) => photo.year))].sort((a, b) => b - a);
   for (const year of years) {
     const section = document.createElement("section");

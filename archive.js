@@ -1,4 +1,5 @@
 const archiveParams = new URLSearchParams(location.search);
+const archiveVersionQuery = new URL(document.currentScript.src).search;
 const archivePath = archiveParams.get("path") ||
   (document.body.hasAttribute("data-performance-home") ? "/dunst/01_performere/200_billeder_help.html" : null);
 const skidtFilmPath = "/dunst/film/skidt_kommer_til/index.html";
@@ -754,10 +755,13 @@ async function showDjFront() {
     const link = table.querySelector('a[href*="_frameset.html"]');
     const path = link && new URL(link.href, location.href).searchParams.get("path")?.replace(/_frameset\.html$/, ".html");
     if (!path) return null;
-    const page = await readLegacyPage(archiveAsset(path));
+    const source = archiveAsset(path);
+    source.search = archiveVersionQuery;
+    const page = await readLegacyPage(source);
     const profile = rewriteContent(page.doc.body, page.url).querySelector("table.ramme");
     if (!profile) return null;
     profile.classList.add("dj-profile");
+    profile.rows[1]?.querySelector("img")?.classList.add("dj-profile-portrait");
     profile.id = `dj-${path.split("/").at(-1).replace(/\.html$/, "").replaceAll("_", "-")}`;
     const head = profile.querySelector(".head[background]");
     if (head) {
@@ -1060,7 +1064,7 @@ async function showPressYear(year) {
 function sizeArchiveTables() {
   if (!document.body.classList.contains("archive-detail")) return;
   const top = archiveContent.querySelector(":scope > table.ramme");
-  for (const table of archiveContent.querySelectorAll("table.ramme")) {
+  for (const table of archiveContent.querySelectorAll("table.ramme:not(.dj-profile)")) {
     for (const cell of table.querySelectorAll("td:not(.head)")) {
       if (cell.closest("table.ramme") !== table || !cell.querySelector("img,iframe,object,embed,video,audio")) continue;
       const textNodes = document.createTreeWalker(cell, NodeFilter.SHOW_TEXT);
