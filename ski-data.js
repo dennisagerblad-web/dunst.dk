@@ -2,7 +2,7 @@
 window.DUNST_SKI_DATA = {
   "09": [
     {
-      "title": "Torsdag 9. Januar 17 Timers Tog til Ore i Nord Sverige.",
+      "title": "Torsdag 9. januar – 17 timers togtur til Åre i Nordsverige",
       "photos": [
         {
           "image": "/dunst/abroad/2003/ski_ferie/09/ski_tog_01.jpg",
@@ -26,12 +26,12 @@ window.DUNST_SKI_DATA = {
         },
         {
           "image": "/dunst/abroad/2003/ski_ferie/09/ski_tog_06.jpg",
-          "caption": "Puta & Ramona Macho får sig en ryge pause på perrongen. Da man ikke må ryge i svenske tog. Vi røg dog hemmeligt på cahytten men så kom konduktøren løbende. Han havde en travel nat med alt det vi ikke måtte."
+          "caption": "Puta & Ramona Macho får sig en rygepause på perronen, da man ikke må ryge i svenske tog. Vi røg dog i smug i kahytten, men så kom konduktøren løbende. Han havde en travl nat med alt det, vi ikke måtte."
         }
       ]
     },
     {
-      "title": "På hotel værelset",
+      "title": "På hotelværelset",
       "photos": [
         {
           "image": "/dunst/abroad/2003/ski_ferie/09/ski_hotel_03.jpg",
@@ -58,7 +58,7 @@ window.DUNST_SKI_DATA = {
   ],
   "10": [
     {
-      "title": "Fredag 10. Januar På ski",
+      "title": "Fredag 10. januar – på ski",
       "photos": [
         {
           "image": "/dunst/abroad/2003/ski_ferie/10/ski_01.jpg",
@@ -86,28 +86,28 @@ window.DUNST_SKI_DATA = {
         },
         {
           "image": "/dunst/abroad/2003/ski_ferie/10/ski_07.jpg",
-          "caption": "Ramona macho."
+          "caption": "Ramona Macho."
         },
         {
           "image": "/dunst/abroad/2003/ski_ferie/10/ski_08.jpg",
-          "caption": "Varm cacao er godt når man er kold. Her sidder vi i en hytte."
+          "caption": "Varm kakao er godt, når man er kold. Her sidder vi i en hytte."
         }
       ]
     },
     {
-      "title": "På Hotellets Casino",
+      "title": "På hotellets kasino",
       "photos": [
         {
           "image": "/dunst/abroad/2003/ski_ferie/10/ski_casino_03.jpg",
-          "caption": "Puta ved spille-bordet."
+          "caption": "Puta ved spillebordet."
         },
         {
           "image": "/dunst/abroad/2003/ski_ferie/10/ski_casino_05.jpg",
-          "caption": "Dennis Agerblad ved spille-bordet."
+          "caption": "Dennis Agerblad ved spillebordet."
         },
         {
           "image": "/dunst/abroad/2003/ski_ferie/10/ski_casino_06.jpg",
-          "caption": "Dennis Agerblad & Ramona Macho ved spille-bordet."
+          "caption": "Dennis Agerblad & Ramona Macho ved spillebordet."
         },
         {
           "image": "/dunst/abroad/2003/ski_ferie/10/ski_casino_01.jpg",
@@ -154,7 +154,7 @@ window.DUNST_SKI_DATA = {
   ],
   "11": [
     {
-      "title": "Lørdag 11. Januar På Sne Scooter",
+      "title": "Lørdag 11. januar – på snescooter",
       "photos": [
         {
           "image": "/dunst/abroad/2003/ski_ferie/11/ski_scooter_01.jpg",
@@ -186,12 +186,12 @@ window.DUNST_SKI_DATA = {
         },
         {
           "image": "/dunst/abroad/2003/ski_ferie/11/ski_scooter_08.jpg",
-          "caption": "Ramona Macho, Puta & Dennis Agerblad efter turren. gennemblødte."
+          "caption": "Ramona Macho, Puta & Dennis Agerblad efter turen. Gennemblødte."
         }
       ]
     },
     {
-      "title": "Til Fest",
+      "title": "Til fest",
       "photos": [
         {
           "image": "/dunst/abroad/2003/ski_ferie/11/ski_fest_01.jpg",
@@ -222,7 +222,7 @@ window.DUNST_SKI_DATA = {
   ],
   "12": [
     {
-      "title": "Søndag 12. Januar I Hotellets Pool",
+      "title": "Søndag 12. januar – i hotellets pool",
       "photos": [
         {
           "image": "/dunst/abroad/2003/ski_ferie/12/ski_swim_01.jpg",
@@ -267,11 +267,11 @@ window.DUNST_SKI_DATA = {
       ]
     },
     {
-      "title": "Puta Fødselsdag",
+      "title": "Putas fødselsdag",
       "photos": [
         {
           "image": "/dunst/abroad/2003/ski_ferie/12/ski_puta_01.jpg",
-          "caption": "Puta fylder et år idag. Puta opstod på samme skiferie året før. Her puster han lyset ud. Dennis Agerblad & Ramona Macho har givet ham en kage. Senere vækkede vi hele blokken med stor fest med mange andre homoer. Vagten smed os ud og så fant vi et andet sted at fortsætte. I Sverige kalder de det 'hys om hys fest'."
+          "caption": "Puta fylder et år i dag. Puta opstod på samme skiferie året før. Her puster han lyset ud. Dennis Agerblad & Ramona Macho har givet ham en kage. Senere vækkede vi hele blokken med stor fest med mange andre homoer. Vagten smed os ud, og så fandt vi et andet sted at fortsætte. I Sverige kalder de det 'hys om hys fest'."
         }
       ]
     }

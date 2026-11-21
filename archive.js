@@ -416,6 +416,42 @@ function fitFilmImagePanel() {
   const row = image.closest("tr");
   image.closest("td").classList.add("film-picture-cell");
   row.nextElementSibling?.cells[0]?.classList.add("film-picture-caption");
+  if (!document.body.classList.contains("ramonas-rejse-page")) return;
+
+  const titleRow = table.rows[0];
+  const titleCell = titleRow.cells[0];
+  const title = document.createElement("h1");
+  title.className = "bar";
+  title.append(titleCell.textContent.trim());
+  const dates = document.createElement("span");
+  dates.className = "ramona-screening-dates";
+  dates.textContent = "4., 16. og 29. juni 2004";
+  title.append(dates);
+  titleCell.colSpan = 2;
+  titleCell.removeAttribute("nowrap");
+  titleCell.classList.add("ramona-film-heading");
+  titleCell.replaceChildren(title);
+  titleRow.cells[1]?.remove();
+
+  const copy = row.nextElementSibling?.cells[0];
+  if (!copy) return;
+  const text = document.createTreeWalker(copy, NodeFilter.SHOW_TEXT);
+  while (text.nextNode()) {
+    const node = text.currentNode;
+    node.textContent = node.textContent
+      .replace(/\bSNEAKBAR\./g, "SneakBar")
+      .replace(/\bSneakbar,/g, "SneakBar,")
+      .replace("Denne gang vises 3 film.", "Denne gang vises tre film.")
+      .replace("Ramonas Rejse.", "Ramonas rejse")
+      .replace("Sprog: Dansk", "Sprog: dansk")
+      .replace("Dut.dut.dut..klik.", "Dut, dut, dut … klik.")
+      .replace(/på Als,\s+for\b/g, "på Als for")
+      .replace("den 04. juni kl. 19:00 og kl. 12:00. - den", "Den 4. juni kl. 19.00 og kl. 12.00")
+      .replace("den 16. juni kl. 18 og", "Den 16. juni kl. 18.00")
+      .replace("den 29. juni kl. 20.30", "Den 29. juni kl. 20.30")
+      .replace("i salen 'Benjamin'.", "i salen Benjamin.")
+      .replace("Gratis Billetter reserveres på tel.", "Gratis billetter reserveres på tlf.");
+  }
 }
 
 function upgradeFrontImages() {
@@ -640,21 +676,26 @@ function unfoldPerformers() {
 function startPerformersScroll() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   let position = window.scrollY;
+  let previousScroll = position;
   let direction = 1;
   let lastFrame = 0;
-  let pauseUntil = 0;
+  let lastManualScroll = -Infinity;
+  let touching = false;
   const pixelsPerSecond = 24;
-  const pause = () => { pauseUntil = performance.now() + 12000; };
-  window.addEventListener("wheel", pause, { passive: true });
-  window.addEventListener("touchstart", pause, { passive: true });
-  window.addEventListener("pointerdown", pause, { passive: true });
-  window.addEventListener("keydown", pause);
+  const updateTouch = (event) => { touching = event.touches.length > 0; };
+  for (const type of ["touchstart", "touchend", "touchcancel"]) {
+    window.addEventListener(type, updateTouch, { passive: true });
+  }
+  window.addEventListener("wheel", () => { lastManualScroll = performance.now(); }, { passive: true });
 
   function move(time) {
     const elapsed = lastFrame ? Math.min((time - lastFrame) / 1000, 0.1) : 0;
     lastFrame = time;
-    if (document.hidden || document.body.classList.contains("menu-open") || time < pauseUntil) {
-      position = window.scrollY;
+    const currentScroll = window.scrollY;
+    if (currentScroll !== previousScroll) lastManualScroll = time;
+    if (touching || time - lastManualScroll < 160 || document.hidden ||
+        document.body.classList.contains("menu-open") || document.querySelector(".performers-photo-dialog[open]")) {
+      position = currentScroll;
     } else {
       const bottom = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
       position += direction * pixelsPerSecond * elapsed;
@@ -667,6 +708,7 @@ function startPerformersScroll() {
       }
       window.scrollTo(0, position);
     }
+    previousScroll = window.scrollY;
     window.requestAnimationFrame(move);
   }
   window.requestAnimationFrame(move);
@@ -860,12 +902,9 @@ async function showPressYear(year) {
   const index = document.createElement("details");
   index.className = "press-year-index";
   const summary = document.createElement("summary");
-  summary.textContent = `Se indslag fra ${year}`;
+  summary.textContent = `Vælg presseopslag fra ${year}`;
   const links = document.createElement("nav");
-  links.setAttribute("aria-label", `Presseindslag fra ${year}`);
-  const heading = document.createElement("h2");
-  heading.textContent = `Press ${year}`;
-  heading.className = "press-year-title";
+  links.setAttribute("aria-label", `Presseopslag fra ${year}`);
   const articlePaths = [];
 
   if (year === "2013") {
@@ -954,7 +993,7 @@ async function showPressYear(year) {
   layout.className = "press-year-layout";
   const navigation = document.createElement("section");
   navigation.className = "press-year-navigation";
-  navigation.append(heading, index);
+  navigation.append(index);
   layout.append(navigation, article);
   archiveContent.replaceChildren(layout);
   const narrow = matchMedia("(max-width: 900px), (max-width: 1024px) and (max-height: 500px)");
@@ -1869,24 +1908,34 @@ async function showPlayingTourist() {
   }
   const videos = document.createElement("div");
   videos.className = "playing-videos";
-  const firstVideo = document.createElement("a");
-  firstVideo.className = "playing-video-link";
-  firstVideo.href = "https://www.youtube.com/watch?v=niszWtJ7B6M";
-  firstVideo.target = "_blank";
-  firstVideo.rel = "noopener noreferrer";
-  firstVideo.setAttribute("aria-label", "Dennis Agerblad & Miss Fish in Copenhagen city – se videoen på YouTube");
-  const thumbnail = document.createElement("img");
-  thumbnail.src = "https://i.ytimg.com/vi/niszWtJ7B6M/hqdefault.jpg";
-  thumbnail.alt = "Dennis Agerblad & Miss Fish in Copenhagen city";
-  thumbnail.loading = "lazy";
-  firstVideo.append(thumbnail);
-  const secondVideo = document.createElement("iframe");
-  secondVideo.src = "https://www.youtube-nocookie.com/embed/jABs9lrKQ6A";
-  secondVideo.title = "Dennis Agerblad & Miss Fish in the forrest";
-  secondVideo.loading = "lazy";
-  secondVideo.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-  secondVideo.allowFullscreen = true;
-  videos.append(firstVideo, secondVideo);
+  for (const [id, title, inline] of [
+    ["niszWtJ7B6M", "Dennis Agerblad & Miss Fish in Copenhagen", false],
+    ["jABs9lrKQ6A", "Dennis Agerblad & Miss Fish in the forest", true],
+  ]) {
+    const play = document.createElement("a");
+    play.className = "playing-video-link";
+    play.href = `https://www.youtube.com/watch?v=${id}`;
+    play.target = "_blank";
+    play.rel = "noopener noreferrer";
+    play.setAttribute("aria-label", `Afspil ${title}`);
+    const thumbnail = document.createElement("img");
+    thumbnail.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+    thumbnail.alt = "";
+    thumbnail.loading = "lazy";
+    play.append(thumbnail);
+    if (inline) play.addEventListener("click", (event) => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      const player = document.createElement("iframe");
+      player.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&playsinline=1`;
+      player.title = title;
+      player.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      player.allowFullscreen = true;
+      play.replaceWith(player);
+      player.focus({ preventScroll: true });
+    });
+    videos.append(play);
+  }
   archiveContent.replaceChildren(heading, videos, slideshow, gallery, options);
 }
 
@@ -2879,7 +2928,7 @@ async function showSkiOverview() {
   panel.className = "ski-overview-panel";
   const heading = document.createElement("h1");
   heading.className = "front-heading";
-  heading.textContent = source.rows[0].textContent.replace(/\s+/g, " ").trim();
+  heading.textContent = "Skiferie i Nordsverige";
   const grid = document.createElement("div");
   grid.className = "ski-overview-grid";
   for (const [index, cell] of [...source.rows[1].cells].entries()) {
@@ -2903,7 +2952,10 @@ async function showSkiOverview() {
     const description = document.createElement("p");
     const descriptionLink = document.createElement("a");
     descriptionLink.href = dayUrl;
-    descriptionLink.textContent = cell.textContent.replace(originalDate, "").replace(/\s+/g, " ").trim();
+    descriptionLink.textContent = cell.textContent.replace(originalDate, "").replace(/\s+/g, " ").trim()
+      .replace("Og så på Casino.", "Og så på kasino.")
+      .replace("Sne-Scooter og om aftenen til Fest", "snescooter og om aftenen til fest")
+      .replace("Svømmehallen og Putas Fødselsdag", "svømmehallen og Putas fødselsdag");
     description.append(descriptionLink);
     card.append(description);
     grid.append(card);
@@ -2917,11 +2969,12 @@ function showSkiDay(day) {
   document.title = `Skiferie i Nordsverige – ${dayLabel} | dunst`;
   const sections = window.DUNST_SKI_DATA?.[day];
   if (!sections) throw new Error("Skiferiegalleriet mangler");
-  archiveTitle.replaceChildren(document.createTextNode("Skiferie i Nordsverige"));
+  const title = document.createElement("span");
+  title.textContent = "Skiferie i Nordsverige";
   const date = document.createElement("time");
   date.dateTime = `2003-01-${day}`;
   date.textContent = dayLabel;
-  archiveTitle.append(date);
+  archiveTitle.replaceChildren(title, date);
   archiveTitle.hidden = false;
   const header = document.createElement("header");
   header.className = "panel ski-day-header";
@@ -3000,7 +3053,7 @@ function showTv2News() {
     "“Hvorfor holder I pride?”",
     "“Det ved jeg ikke. Fish, hvorfor holder vi pride?”",
     "“Det gør vi, fordi der ikke er plads til sådan nogen som os.”",
-    "nå ja.",
+    "“nå ja.”",
   ]) {
     const paragraph = document.createElement("p");
     paragraph.textContent = line;
@@ -3651,9 +3704,14 @@ async function showMain() {
       if (legend) {
         legend.setAttribute("role", "complementary");
         legend.setAttribute("aria-label", "The meaning of the colours");
-        const legendImage = legend.querySelector("img");
-        if (legendImage) legendImage.alt = "The meaning of the colours";
-        calendar.before(legend);
+        const legendTitle = legend.querySelector(".head");
+        if (legendTitle) legendTitle.textContent = "The meaning of the colors";
+        for (const cell of legend.querySelectorAll("td:not(.head)")) {
+          for (const lineBreak of cell.querySelectorAll("br")) lineBreak.replaceWith(" ");
+          const link = cell.querySelector("a");
+          if (link && /^recom-\s*mends$/i.test(link.textContent.trim())) link.textContent = "recommends";
+        }
+        calendar.before(legend, archiveTitle);
       }
     }
   }
