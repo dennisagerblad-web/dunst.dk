@@ -479,65 +479,67 @@ function unfoldFrontTable() {
 
 function unfoldPerformers() {
   if (categoryFront !== "performers-front") return;
-  const booking = archiveContent.querySelector("table.ramme");
+  const bookingList = archiveContent.querySelector("table.ramme ul");
   const photoLinks = [...archiveContent.querySelectorAll("a")].filter((a) => a.querySelector("img"));
-  if (!booking || !photoLinks.length) return;
-  const bookingBox = document.createElement("div");
+  if (!bookingList || !photoLinks.length) return;
+
+  const bookingBox = document.createElement("section");
   bookingBox.className = "performers-booking";
-  bookingBox.append(booking.cloneNode(true));
-  const bookingHeading = bookingBox.querySelector("table.ramme .head");
-  if (bookingHeading) bookingHeading.textContent = "dunst was active from 2001 to 2007.";
-  const bookingCopy = bookingBox.querySelector("table.ramme tr:nth-child(2) td");
-  if (bookingCopy) {
-    const groupPhoto = document.createElement("img");
-    groupPhoto.className = "performers-group-photo";
-    groupPhoto.src = new URL("assets/hasse-dunst-group-1200.jpg", location.href).href;
-    groupPhoto.width = 1200;
-    groupPhoto.height = 876;
-    groupPhoto.alt = "Gruppeportræt af dunst-performere i farverige kostumer foran en lys væg";
-    const photoButton = document.createElement("button");
-    photoButton.type = "button";
-    photoButton.className = "performers-photo-open";
-    photoButton.setAttribute("aria-label", "Vis gruppebilledet i fuld størrelse");
-    photoButton.append(groupPhoto);
-    const photoFigure = document.createElement("figure");
-    photoFigure.className = "performers-photo-figure";
-    const photoCredit = document.createElement("figcaption");
-    photoCredit.className = "performers-photo-credit";
-    photoCredit.textContent = "Photo: Hasse Nielsen";
-    photoFigure.append(photoButton, photoCredit);
-    const photoDialog = document.createElement("dialog");
-    photoDialog.className = "performers-photo-dialog";
-    photoDialog.setAttribute("aria-label", "Gruppebillede af dunst");
-    const fullPhoto = document.createElement("img");
-    fullPhoto.alt = groupPhoto.alt;
-    fullPhoto.width = 4008;
-    fullPhoto.height = 2928;
-    const closePhoto = document.createElement("button");
-    closePhoto.type = "button";
-    closePhoto.className = "performers-photo-close";
-    closePhoto.setAttribute("aria-label", "Luk billedet");
-    closePhoto.textContent = "×";
-    photoDialog.append(closePhoto, fullPhoto);
-    document.body.append(photoDialog);
-    photoButton.addEventListener("click", () => {
-      fullPhoto.src = new URL("assets/hasse-dunst-group-full.jpg", location.href).href;
-      photoDialog.showModal();
-    });
-    closePhoto.addEventListener("click", () => photoDialog.close());
-    photoDialog.addEventListener("click", (event) => {
-      if (event.target === photoDialog) photoDialog.close();
-    });
-    const bookingFont = bookingCopy.querySelector("font");
-    const bookingList = bookingFont?.querySelector("ul");
-    if (bookingFont?.firstChild?.nodeType === Node.TEXT_NODE && bookingList) {
-      bookingFont.replaceChildren(bookingFont.firstChild, bookingList);
+  const bookingHeading = document.createElement("h1");
+  bookingHeading.className = "front-heading";
+  bookingHeading.textContent = "Active from 2001 to 2007";
+
+  const groupPhoto = document.createElement("img");
+  groupPhoto.className = "performers-group-photo";
+  groupPhoto.src = new URL("assets/hasse-dunst-group-1200.jpg", location.href).href;
+  groupPhoto.width = 1200;
+  groupPhoto.height = 876;
+  groupPhoto.alt = "Gruppeportræt af dunst-performere i farverige kostumer foran en lys væg";
+  const photoButton = document.createElement("button");
+  photoButton.type = "button";
+  photoButton.className = "performers-photo-open";
+  photoButton.setAttribute("aria-label", "Vis gruppebilledet i fuld størrelse");
+  photoButton.append(groupPhoto);
+  const photoFigure = document.createElement("figure");
+  photoFigure.className = "performers-photo-figure";
+  const photoCredit = document.createElement("figcaption");
+  photoCredit.className = "performers-photo-credit";
+  photoCredit.textContent = "Photo: Hasse Nielsen";
+  photoFigure.append(photoButton, photoCredit);
+  const photoDialog = document.createElement("dialog");
+  photoDialog.className = "performers-photo-dialog";
+  photoDialog.setAttribute("aria-label", "Gruppebillede af dunst");
+  const fullPhoto = document.createElement("img");
+  fullPhoto.alt = groupPhoto.alt;
+  fullPhoto.width = 4008;
+  fullPhoto.height = 2928;
+  const closePhoto = document.createElement("button");
+  closePhoto.type = "button";
+  closePhoto.className = "performers-photo-close";
+  closePhoto.setAttribute("aria-label", "Luk billedet");
+  closePhoto.textContent = "×";
+  photoDialog.append(closePhoto, fullPhoto);
+  document.body.append(photoDialog);
+  photoButton.addEventListener("click", () => {
+    fullPhoto.src = new URL("assets/hasse-dunst-group-full.jpg", location.href).href;
+    photoDialog.showModal();
+  });
+  closePhoto.addEventListener("click", () => photoDialog.close());
+  photoDialog.addEventListener("click", (event) => {
+    if (event.target === photoDialog) photoDialog.close();
+  });
+
+  for (const item of bookingList.children) {
+    if (item.textContent.trim() === "Individual and group concerts with own songs") {
+      item.textContent = "Concerts with own songs";
     }
-    const copyPanel = document.createElement("div");
-    copyPanel.className = "performers-booking-copy";
-    copyPanel.append(...bookingCopy.childNodes);
-    bookingCopy.replaceChildren(photoFigure, copyPanel);
   }
+  bookingList.setAttribute("role", "list");
+  const copyPanel = document.createElement("div");
+  copyPanel.className = "performers-booking-copy";
+  copyPanel.append(bookingList);
+  bookingBox.append(bookingHeading, photoFigure, copyPanel);
+
   const gallery = document.createElement("div");
   gallery.className = "performers-grid";
   const performerNames = new Map(window.DUNST_PREVIEW_DATA.menu.flatMap((section) => section.children || [])
