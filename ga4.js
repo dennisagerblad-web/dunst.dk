@@ -199,7 +199,7 @@
         grid-template-columns: auto 46px auto;
         gap: 5px;
         align-items: center;
-        margin-inline-end: 12px;
+        margin-inline-end: 26px;
       }
       .choices input {
         position: absolute;
@@ -212,9 +212,11 @@
         display: flex;
         align-items: center;
         position: relative;
-        min-height: 28px;
+        min-height: 44px;
         color: var(--cookie-violet);
         font-weight: 700;
+        text-decoration: underline;
+        text-underline-offset: 2px;
         cursor: pointer;
       }
       .choices label::after {
@@ -255,7 +257,7 @@
         outline-offset: 2px;
       }
       summary, section a { color: var(--cookie-violet); text-decoration: underline; }
-      summary { display: inline-block; max-width: 100%; padding-block: 4px; list-style: none; cursor: pointer; }
+      summary { display: inline-flex; align-items: center; min-height: 44px; max-width: 100%; padding-block: 4px; list-style: none; cursor: pointer; }
       summary::-webkit-details-marker { display: none; }
       details > summary::after {
         content: "";
@@ -298,7 +300,7 @@
         <details>
           <summary><span class="read-more">Læs mere</span><span class="read-less">Læs mindre</span></summary>
           <div class="details-copy">
-            <p>Vi vil gerne se hvordan folk klikker sig rundt på siden.</p>
+            <p>Vi vil gerne se, hvordan folk klikker sig rundt på siden.</p>
             <a href="https://policies.google.com/technologies/partner-sites?hl=da" target="_blank" rel="noopener noreferrer">Sådan behandler Google oplysninger</a>
           </div>
         </details>

@@ -6,20 +6,7 @@ const hairwerkPhotoCredit = (source) => {
     ?.find((line) => /^(?:photo|foto)\s*:/i.test(line)) || "";
 };
 const hairwerkPressPhotos = dunstPressPhotoCards("/dunst/01_performere/05_hairwerk/index.html");
-if (hairwerkPressPhotos) {
-  const photo = hairwerkPressPhotos.querySelector(".performer-press-images img");
-  if (photo) {
-    photo.src = "/dunst/01_performere/05_hairwerk/hasse_hairwerk_02.jpg";
-    const credit = hairwerkPhotoCredit(photo.src);
-    if (credit) {
-      const caption = document.createElement("p");
-      caption.className = "performer-photo-caption";
-      caption.textContent = credit;
-      photo.closest(".performer-press-images")?.after(caption);
-    }
-  }
-  hairwerkGallery.append(hairwerkPressPhotos);
-}
+if (hairwerkPressPhotos) hairwerkGallery.append(hairwerkPressPhotos);
 let currentYear;
 let currentGrid;
 
@@ -111,3 +98,4 @@ for (const [index, item] of window.DUNST_PREVIEW_DATA.hairwerk.entries()) {
   fitCard();
   currentGrid.append(card);
 }
+dunstNormalizePressCards(hairwerkGallery);

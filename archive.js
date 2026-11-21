@@ -424,7 +424,7 @@ function fitFilmImagePanel() {
   title.className = "bar";
   title.append(titleCell.textContent.trim());
   const dates = document.createElement("span");
-  dates.className = "ramona-screening-dates";
+  dates.className = "headline-date";
   dates.textContent = "4., 16. og 29. juni 2004";
   title.append(dates);
   titleCell.colSpan = 2;
@@ -1006,6 +1006,8 @@ async function showPressYear(year) {
     const source = await readLegacyPage(archiveAsset(path));
     if (token !== selectionToken) return;
     article.replaceChildren(rewriteContent(source.doc.body, source.url));
+    updateRomeoArticle(article, path);
+    markArchiveDates(article);
     if (path === "/dunst/press/2005/05_05_27_tv2-lorry_brunch/index.html") addTv2BrunchVideo(article);
     fitPressArticle(article);
     for (const link of links.querySelectorAll("a[href]")) {
@@ -1095,21 +1097,53 @@ function fitPartyTopTable() {
   fit();
 }
 
-function markArchiveDates() {
-  const month = "(?:januar|februar|marts|martz|march|april|maj|may|juni|june|juli|july|august|augst|september|oktober|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|oct|okt|nov|dec)";
-  const days = "(?:\\d{1,2}\\.?(?:\\s*(?:[+&,/–-]|\\s)\\s*\\d{1,2}\\.?)*)?";
-  const writtenDate = new RegExp(`^${days}\\s*${month}\\.?\\s*(?:[-–]\\s*)?(?:(?:19|20)\\d{2})?$`, "i");
+function markArchiveDates(container = archiveContent) {
+  if (document.body.matches(".calendar-archive, .recommends-archive")) return;
+  const month = "(?:januar[y]?|februar[y]?|marts|martz|march|april|maj|may|juni|june|juli|july|august|augst|september|oktober|october|november|nomember|novemer|december|jan|feb|mar|apr|jun|jul|aug|sep|oct|okt|nov|dec)";
+  const days = "(?:\\d{1,2}\\.?(?:\\s*(?:[+&,/–-]|og|and|\\s)\\s*\\d{1,2}\\.?)*)?";
+  const part = `${days}\\s*[/–-]?\\s*${month}\\.?`;
+  const year = "(?:19|20)\\d{2}";
+  const writtenDate = new RegExp(`^(?:${part}(?:\\s*[-–]\\s*${part})?|${month}\\s+\\d{1,2}|sommer|spring)\\s*(?:[-–]\\s*)?(?:${year})?$`, "i");
+  const numericPart = "\\d{1,2}\\s*[./-]\\s*\\d{1,2}";
+  const numericDate = new RegExp(`^(?:${year}(?:\\s*[-–]\\s*${year})?|${numericPart}(?:\\s*[-–]\\s*${numericPart})?(?:\\s*[-–./]\\s*(?:${year}|\\d{2}))?)$`);
+  const datePrefix = /^(?:(?:første gang|released|københavn|copenhagen|mandag|tirsdag|onsdag|torsdag|fredag|lørdag|søndag|monday|tuesday|wednesday|thursday|friday|saturday|sunday|den|d\.)\s+)+/i;
   const datedTables = new Map();
-  for (const cell of archiveContent.querySelectorAll(".head")) {
-    const value = cell.textContent.replace(/\s+/g, " ").trim();
-    if (!/^(?:19|20)\d{2}$/.test(value) && !writtenDate.test(value) && !/^\d{1,2}[.\/-]\d{1,2}(?:\s*[-–]\s*(?:19|20)\d{2}|[.\/-](?:19|20)?\d{2})?$/.test(value)) continue;
+  for (const cell of container.querySelectorAll(".head")) {
+    const value = cell.textContent.replace(/\s+/g, " ").trim().replace(datePrefix, "").replace(/\s*-?\s*kl\..*$/i, "");
+    if (!writtenDate.test(value) && !numericDate.test(value)) continue;
     cell.classList.add("archive-date");
     for (const breakNode of cell.querySelectorAll("br")) breakNode.replaceWith(" ");
     const table = cell.closest("table");
     if (table) datedTables.set(table, (datedTables.get(table) || 0) + 1);
   }
+  for (const row of container.querySelectorAll(".ramme tr:has(> .head)")) {
+    const [first, second] = row.cells;
+    if (!first?.matches(".head:not(.archive-date)") || first.querySelector("img,.bar,.legacy-headline")) continue;
+    if (row.cells.length === 1) {
+      first.classList.add("legacy-headline");
+      continue;
+    }
+    if (row.cells.length !== 2 || !second.matches(".head.archive-date") || second.querySelector("img")) continue;
+
+    const header = document.createElement("div");
+    header.className = "bar headline";
+    const title = document.createElement("span");
+    title.className = "headline-title";
+    title.append(...first.childNodes);
+    title.querySelectorAll("hr").forEach(rule => rule.remove());
+    const date = document.createElement("span");
+    date.className = "headline-date";
+    date.textContent = second.textContent.replace(/\s+/g, " ").trim();
+    header.append(title, date);
+    first.colSpan += second.colSpan;
+    first.removeAttribute("nowrap");
+    first.classList.add("archive-headline-cell");
+    first.replaceChildren(header);
+    second.remove();
+    row.classList.add("archive-headline-row");
+  }
   for (const [table, count] of datedTables) {
-    if (count < 3 || table.closest(".calendar-archive")) continue;
+    if (count < 3 || !table.querySelector(".archive-date")) continue;
     const scroller = document.createElement("div");
     scroller.className = "date-table-scroll";
     table.style.setProperty("--date-table-width", `${count * 135}px`);
@@ -2669,9 +2703,17 @@ async function showPerformerProfile() {
     if (cards?.children[3]) cards.prepend(cards.children[3]);
   }
   if (archivePath === "/dunst/01_performere/14_madam/index.html") {
-    const article = archiveRoute(null, "/dunst/press/2004/04_04_01_romeo_om_dunst/04_04_01_romeo_om_dunst.html");
-    for (const card of [...(profileYearGrid("2005")?.children || [])]) {
-      for (const link of card.querySelectorAll("a:has(img)")) link.href = article;
+    const romeoLink = archiveRoute(null, dunstPressPhotoSources.romeo.article);
+    const portraits = [...profile.querySelectorAll('img[src*="hasse_madam_"], img[src*="hasse_thom_madam_"]')];
+    for (const image of portraits) {
+      const isSolo = image.src.includes("hasse_madam_");
+      if (isSolo) {
+        image.src = "/dunst/01_performere/14_madam/hasse_madam_02.jpg";
+        image.alt = "Nærportræt af mAdam med sort paryk, store briller og mørke tænder";
+      }
+      const article = image.closest("a[href]") || document.createElement("a");
+      if (!article.contains(image)) { image.before(article); article.append(image); }
+      article.href = romeoLink;
     }
     promoteProfileCard("2005", 1);
   }
@@ -2788,23 +2830,22 @@ async function showPerformerProfile() {
       const hasseCard = yearGrid?.querySelector(".dennis-hasse-card");
       const danskCard = pressPhotos.querySelector(".performer-press-card");
       if (yearGrid && danskCard) yearGrid.insertBefore(danskCard, hasseCard?.nextSibling || yearGrid.firstChild);
-    } else if (archivePath === "/dunst/01_performere/14_madam/index.html") {
-      // The two former Flash image pages now link directly to this article.
+    } else if (archivePath === "/dunst/01_performere/04_johnny_warehouse/index.html") {
+      const card = pressPhotos.querySelector('[data-press-source="romeo"]');
+      if (card) profileYearGrid("2004")?.prepend(card);
     } else if (archivePath === "/dunst/01_performere/06_puta/index.html") {
       const danskCard = pressPhotos.querySelector(".performer-press-card");
       if (danskCard) profileYearGrid("2004")?.prepend(danskCard);
     } else if (archivePath === "/dunst/01_performere/01_ramona_macho/index.html") {
       const yearGrid = profileYearGrid("2004");
       yearGrid?.children[1]?.remove();
-      const danskCard = [...pressPhotos.querySelectorAll(".performer-press-card")]
-        .find((card) => card.textContent.includes("Dansk Magazine"));
+      const danskCard = pressPhotos.querySelector('[data-press-source="dansk"]');
       if (danskCard) yearGrid?.prepend(danskCard);
       profile.querySelector(".performer-profile-title")?.after(pressPhotos);
     } else if (archivePath === "/dunst/01_performere/09_stimulundia/index.html") {
       const yearGrid = profileYearGrid("2004");
       const flashCards = [yearGrid?.children[3], yearGrid?.children[4]].filter(Boolean);
-      const romeoCard = [...pressPhotos.querySelectorAll(".performer-press-card")]
-        .find((card) => card.textContent.includes("Nr. 19 - April 2004"));
+      const romeoCard = pressPhotos.querySelector('[data-press-source="romeo"]');
       const images = romeoCard?.querySelector(".performer-press-images");
       romeoCard?.classList.add("stimulundia-press-card");
       const article = archiveRoute(null, "/dunst/press/2004/04_04_01_romeo_om_dunst/04_04_01_romeo_om_dunst.html");
@@ -2819,13 +2860,11 @@ async function showPerformerProfile() {
           card.remove();
         }
       }
-      const danskCard = [...pressPhotos.querySelectorAll(".performer-press-card")]
-        .find((card) => card.textContent.includes("Dansk Magazine"));
+      const danskCard = pressPhotos.querySelector('[data-press-source="dansk"]');
       if (danskCard) yearGrid?.prepend(danskCard);
       profile.querySelector(".performer-profile-title")?.after(pressPhotos);
     } else if (archivePath === "/dunst/01_performere/08_the_thom/index.html") {
-      const danskCard = [...pressPhotos.querySelectorAll(".performer-press-card")]
-        .find((card) => card.textContent.includes("Dansk Magazine"));
+      const danskCard = pressPhotos.querySelector('[data-press-source="dansk"]');
       if (danskCard) profileYearGrid("2004")?.prepend(danskCard);
     } else {
       const title = profile.querySelector(".performer-profile-title");
@@ -2835,6 +2874,8 @@ async function showPerformerProfile() {
   }
   if (archivePath === "/dunst/01_performere/03_dennis-agerblad/index.html") promoteProfileCard("2004", 1);
   if (archivePath === "/dunst/01_performere/04_johnny_warehouse/index.html") promoteProfileCard("2003", 4);
+  dunstNormalizePressCards(profile);
+  markArchiveDates(profile);
   archiveContent.replaceChildren(profile);
   archiveGallery.hidden = true;
 }
@@ -3379,6 +3420,24 @@ async function showMain() {
     : archiveRecord?.main ? new URL(archiveRecord.main, location.href) : archiveAsset(archivePath);
   const { doc, url } = await readLegacyPage(source);
   archiveContent.replaceChildren(rewriteContent(doc.body, url));
+  updateRomeoArticle(archiveContent, archivePath);
+  if (archivePath.startsWith("/dunst/abroad/2006/06_06_10_zurich/")) {
+    const heading = archiveContent.querySelector("table.ramme .head");
+    if (heading) heading.textContent = "Zürich, Switzerland – Nakkeost";
+  }
+  if (["/dunst/abroad/2005/05_05_05_frankrig/", "/dunst/abroad/2005/05_10_07_be_queer_02/"].some(path => archivePath.startsWith(path))) {
+    const table = archiveContent.querySelector(":scope > table.ramme");
+    if (table?.querySelector("img")) {
+      table.classList.add("abroad-compact-intro");
+      const images = [...table.querySelectorAll("img")];
+      const fit = () => {
+        const width = Math.max(...images.map(image => image.naturalWidth || Number(image.getAttribute("width")) || 0));
+        if (width) table.style.setProperty("--abroad-intro-width", `${width + 2}px`);
+      };
+      for (const image of images) image.addEventListener("load", fit, { once: true });
+      fit();
+    }
+  }
   for (const drawing of archiveContent.querySelectorAll('img[src*="/dunst/0/images/tegning_01.gif"]')) {
     const container = drawing.closest("#Tegning");
     if (container) container.remove();
@@ -3991,6 +4050,8 @@ function showGallery(preserveMain = false) {
   grid.className = "grid";
   let pressGroupItems;
   for (const [index, item] of items.entries()) {
+    if ((archivePath === "/dunst/abroad/2006/06_05_27_berlin_plastique/index.html" && item.image.endsWith("/video_fish.jpg")) ||
+        (archivePath === "/dunst/abroad/2006/06_04_28_amsterdam/index.html" && item.image.endsWith("/video_01_00.jpg"))) continue;
     const pressArticle = !archivePath.startsWith("/dunst/press/") &&
       item.url && new URL(item.url, location.href).pathname.startsWith("/dunst/press/");
     if (pressArticle && document.body.classList.contains("habibis-party-page")) continue;
