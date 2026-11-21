@@ -99,3 +99,4 @@ for (const [index, item] of window.DUNST_PREVIEW_DATA.hairwerk.entries()) {
   currentGrid.append(card);
 }
 dunstNormalizePressCards(hairwerkGallery);
+dunstRemoveGenericProfileHeadings(hairwerkGallery);

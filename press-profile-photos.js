@@ -105,6 +105,16 @@ const dunstPressPhotoCaptions = {
   },
 };
 
+function dunstRemoveGenericProfileHeadings(root) {
+  for (const heading of root.querySelectorAll("table.profile-card .head, .legacy-box-heading")) {
+    const title = heading.textContent.trim().replace(/\s+/g, " ");
+    if (!/^(?:dunst party|event|recommend|abroad)[:.]?$/i.test(title)) continue;
+    const row = heading.closest("tr");
+    if (row?.cells.length === 1) row.remove();
+    else heading.remove();
+  }
+}
+
 function dunstNormalizePressCards(root, profilePath) {
   const logos = {
     romeo: [dunstPressPhotoSources.romeo.logo, "Romeo + Juliet"],
@@ -112,7 +122,7 @@ function dunstNormalizePressCards(root, profilePath) {
     studio54: ["/dunst/press/logoer/out_and_about_logo.jpg", "Out & About"],
     brunch: ["/dunst/press/logoer/tv2-lorry_logo_00.gif", "TV 2 Lorry"],
     blokken: ["/dunst/press/2005/05_11_08_blokken/blokken_logo.gif", "Blokken på DR1"],
-    mohawk: ["/dunst/press/2006/06_04_01_mohawk_beaver_nr_12/Mohawk_Beaver_front_00.jpg", "Mohawk Beaver"],
+    mohawk: ["/dunst/press/2006/06_04_01_mohawk_beaver_nr_12/Mohawk_Beaver_front.jpg", "Mohawk Beaver"],
     filmhuset: ["/dunst/press/logoer/panbladet_logo.gif", "Panbladet"],
   };
   for (const card of root.querySelectorAll("table.profile-card, .legacy-box")) {
@@ -125,8 +135,10 @@ function dunstNormalizePressCards(root, profilePath) {
     const source = Object.keys(logos).find(key => path.includes(key));
     let publication = logo?.alt;
     if (source) {
-      if (!logo) logo = document.createElement("img");
-      [logo.src, publication] = logos[source];
+      const [logoPath, name] = logos[source];
+      logo ||= card.querySelector(`img[src$="${logoPath}"]`) || document.createElement("img");
+      logo.src = logoPath;
+      publication = name;
     } else if (logo) {
       const filename = new URL(logo.src).pathname.split("/").at(-1);
       const titles = [ [/panbladet/i, "Panbladet"], [/out_and_about/i, "Out & About"], [/citadel/i, "Citadel"],
@@ -140,6 +152,9 @@ function dunstNormalizePressCards(root, profilePath) {
 
     const pressCard = document.createElement("section");
     pressCard.className = "performer-press-card performer-press-from-archive";
+    if (card.classList.contains("performer-press-portrait-stack")) {
+      pressCard.classList.add("performer-press-portrait-stack");
+    }
     pressCard.append(dunstPressLogo(logo));
     const photos = document.createElement("div");
     photos.className = "performer-press-images";

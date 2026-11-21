@@ -2402,7 +2402,7 @@ async function showHrFruCandidates() {
   return true;
 }
 
-function performerEventCard({imagePath, width, height, alt, eventPath, eventName, category = "dunst Party", description = ""}) {
+function performerEventCard({imagePath, width, height, alt, eventPath, eventName, category = "", description = ""}) {
   const card = document.createElement("table");
   card.className = "ramme profile-card";
   card.style.setProperty("--profile-image-width", `${width + 2}px`);
@@ -2751,7 +2751,7 @@ async function showPerformerProfile() {
     ensureProfileYearGrid("2006").prepend(performerEventCard({
       imagePath: new URL(photo.image, location.href).href,
       width: photo.width, height: photo.height, alt: photo.alt,
-      eventPath: recommendsPhotos.path, eventName: "CSD Berlin", category: "Recommend",
+      eventPath: recommendsPhotos.path, eventName: "CSD Berlin",
     }));
   }
   if (archivePath === "/dunst/01_performere/18_ulle_dulle/index.html") {
@@ -2819,7 +2819,14 @@ async function showPerformerProfile() {
   };
   if (archivePath === "/dunst/01_performere/12_knud_vesterskov/index.html") promoteProfileCard("2004", 1);
   if (archivePath === nuclearProfilePath) promoteProfileCard("2005", 2);
-  if (archivePath === "/dunst/01_performere/06_puta/index.html") promoteProfileCard("2004", 6);
+  if (archivePath === "/dunst/01_performere/06_puta/index.html") {
+    promoteProfileCard("2004", 6);
+    const featuredPhoto = profile.querySelector('.performer-feature img[src$="/homophobia_puta_01.jpg"]');
+    const caption = featuredPhoto?.closest("td").querySelector(".performer-card-copy");
+    const eventLink = caption?.querySelector("a[href]");
+    if (eventLink) caption.replaceChildren(eventLink);
+    profile.querySelector('a[href*="puta-pelle.com"]')?.closest("table.profile-card")?.remove();
+  }
   if (archivePath === "/dunst/01_performere/08_the_thom/index.html") promoteProfileCard("2005", 2);
   if (archivePath === "/dunst/01_performere/16_tove_hansen/index.html") promoteProfileCard("2005", 2);
   if (archivePath === "/dunst/01_performere/19_tina_trash/index.html") {
@@ -2870,7 +2877,7 @@ async function showPerformerProfile() {
       const logo = cell.querySelector('img[src*="romeo_juliet_logo"]')?.closest("a")?.cloneNode(true);
       cell.replaceChildren(images, caption);
       if (logo) cell.append(logo);
-      hasseCard.classList.add("dennis-hasse-card");
+      hasseCard.classList.add("dennis-hasse-card", "performer-press-portrait-stack");
       yearGrid.prepend(hasseCard);
     }
   }
@@ -2942,12 +2949,9 @@ async function showPerformerProfile() {
     }
   }
   if (archivePath === "/dunst/01_performere/07_car-o-lina/index.html") {
-    const year = [...profile.querySelectorAll(".hairwerk-year")]
-      .find((part) => part.querySelector(".year-box")?.textContent.startsWith("2006"));
-    const cards = year?.querySelector(".grid");
-    const film = [...(cards?.children || [])]
-      .find((card) => card.querySelector(".head")?.textContent.trim() === "Film");
-    if (film) cards.append(film);
+    const cards = profileYearGrid("2006");
+    cards?.querySelector('a[href*="06_08_02_aarhus_festival"]')?.closest("table.profile-card")?.remove();
+    cards?.querySelector('img[src*="/06_11_15_oejet_i_natten/"]')?.closest("table.profile-card")?.remove();
   }
   if (archivePath === "/dunst/01_performere/16_tove_hansen/index.html") {
     profile.querySelector('a[href*="tovehansendrag.dk"]')?.closest("table.profile-card")?.remove();
@@ -2977,7 +2981,7 @@ async function showPerformerProfile() {
       const flashCards = [yearGrid?.children[3], yearGrid?.children[4]].filter(Boolean);
       const romeoCard = pressPhotos.querySelector('[data-press-source="romeo"]');
       const images = romeoCard?.querySelector(".performer-press-images");
-      romeoCard?.classList.add("stimulundia-press-card");
+      romeoCard?.classList.add("performer-press-portrait-stack");
       const article = archiveRoute(null, "/dunst/press/2004/04_04_01_romeo_om_dunst/04_04_01_romeo_om_dunst.html");
       if (images && flashCards.length === 2) {
         images.replaceChildren();
@@ -3005,6 +3009,7 @@ async function showPerformerProfile() {
   if (archivePath === "/dunst/01_performere/03_dennis-agerblad/index.html") promoteProfileCard("2004", 1);
   if (archivePath === "/dunst/01_performere/04_johnny_warehouse/index.html") promoteProfileCard("2003", 4);
   dunstNormalizePressCards(profile, archivePath);
+  dunstRemoveGenericProfileHeadings(profile);
   markArchiveDates(profile);
   appendDunstReviewedPerformerPhotos(profile, archivePath);
   archiveContent.replaceChildren(profile);
@@ -4434,7 +4439,7 @@ if (archivePath === "/dunst/01_performere/23_nuclear_family/video_01.html") {
   location.replace(archiveRoute(null, hrFruRoot + "kandidater/lene_frameset.html"));
 } else if (photoToGallery.has(archivePath)) {
   location.replace(archiveRoute("billeder", photoToGallery.get(archivePath)));
-} else if (/^\/dunst\/01_performere\/05_hairwerk\/hairwerk_\d+\.html$/.test(archivePath)) {
+} else if (/^\/dunst\/01_performere\/05_hairwerk\/(?:index|hairwerk_\d+)\.html$/.test(archivePath)) {
   location.replace(new URL("hairwerk.html", location.href));
 } else if (!archivePath || !["/dunst/", "/nyhedsbrev/"].some((prefix) => archivePath.startsWith(prefix)) && archivePath !== "/mobil/help.html" || archivePath.includes("..")) {
   archiveContent.textContent = "Siden blev ikke fundet.";

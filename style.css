@@ -640,7 +640,11 @@ details[open] > summary::after { transform: rotate(180deg); }
 .performer-press-images a { display: block; max-width: 100%; }
 .performer-press-images figure { margin: 0; max-width: 100%; }
 .performer-press-card .performer-press-images figcaption { padding: 0 var(--box-inset) var(--caption-bottom); }
-.stimulundia-press-card .performer-press-images { gap: 4px; padding: 2px; }
+.performer-press-portrait-stack .performer-press-images {
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
 .performer-press-source { display: block; padding: 0 8px 8px; font-weight: 400; }
 .performer-profile-title { margin: 0 0 var(--box-gap); text-align: center; font-size: var(--page-title-size); font-weight: 700; }
 .performer-profile-content .hairwerk-year { margin: 0 0 var(--box-gap); }
