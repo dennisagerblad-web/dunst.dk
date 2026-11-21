@@ -142,6 +142,33 @@ const dunstReviewedProfilePhotos = {
       "eventName": "Miss Sixty Fashion Show",
       "year": 2002,
       "alt": "Scene fra modeshowet med et pink fjerkostume i forgrunden og Ramona Macho i baggrunden"
+    },
+    {
+      "image": "/dunst/abroad/2004/04_12_31_homophobia_newyear/IMG_4505.jpg",
+      "width": 375,
+      "height": 500,
+      "event": "/dunst/abroad/2004/04_12_31_homophobia_newyear/index.html",
+      "eventName": "Homophobia - Newyear",
+      "year": 2004,
+      "alt": "Ramona Macho i grøn kjole, blond krøllet paryk og turkis øjenmakeup"
+    },
+    {
+      "image": "/dunst/recommends/2004/04_09_18_ramona_intime/cafe_intime_03.jpg",
+      "width": 450,
+      "height": 338,
+      "event": "/dunst/recommends/2004/04_09_18_ramona_intime/index.html",
+      "eventName": "Ramona Macho goes retro",
+      "year": 2004,
+      "alt": "Ramona Macho smiler i blond krøllet paryk og en flerfarvet perlehalskæde"
+    },
+    {
+      "image": "/dunst/03_events/2003/eurogames/dennis_ramona_01.jpg",
+      "width": 450,
+      "height": 338,
+      "event": "/dunst/03_events/2003/eurogames/index.html",
+      "eventName": "Eurogames",
+      "year": 2003,
+      "alt": "Nærportræt af Dennis Agerblad og Ramona Macho ved Eurogames"
     }
   ],
   "/dunst/01_performere/03_dennis-agerblad/index.html": [
@@ -162,6 +189,33 @@ const dunstReviewedProfilePhotos = {
       "eventName": "Thursday Itch",
       "year": 2003,
       "alt": "Dennis Agerblad med rød klovnenæse og mørk øjenmakeup"
+    },
+    {
+      "image": "/assets/2006-csd/IMG_0238.jpg",
+      "width": 500,
+      "height": 375,
+      "event": "/dunst/recommends/2006/06_07_22_csd_berlin/index.html",
+      "eventName": "Official CSD Party",
+      "year": 2006,
+      "alt": "Dennis Agerblad med en stor rød gummiring over hovedet og rødt stribet tørklæde"
+    },
+    {
+      "image": "/dunst/recommends/2004/04_09_02_kupe_aarhus/images/IMG_2595_02.jpg",
+      "width": 450,
+      "height": 324,
+      "event": "/dunst/recommends/2004/04_09_02_kupe_aarhus/index.html",
+      "eventName": "The Act på KUPÉ",
+      "year": 2004,
+      "alt": "Nærbillede af Dennis Agerblad med blå paryk, grønlig ansigtsmaling og orange øjenmakeup"
+    },
+    {
+      "image": "/dunst/cafe/2003/arty_farty/2003_02_22_arty_farty_02.jpg",
+      "width": 360,
+      "height": 278,
+      "event": "/dunst/cafe/2003/arty_farty/index.html",
+      "eventName": "dunst & Arty Farty",
+      "year": 2003,
+      "alt": "Nærbillede af Dennis Agerblad med vådt, sort hår foran øjnene og mørkerød læbestift"
     }
   ],
   "/dunst/01_performere/10_liebling_siebling/index.html": [
@@ -173,6 +227,33 @@ const dunstReviewedProfilePhotos = {
       "eventName": "Sabaah meets dunst",
       "year": 2007,
       "alt": "Liebling Siebling med en sølvfarvet maske og frynser foran ansigtet"
+    },
+    {
+      "image": "/dunst/02_parties/fest_20_private_parts/images/IMG_6586.jpg",
+      "width": 450,
+      "height": 337,
+      "event": "/dunst/02_parties/fest_20_private_parts/index.html",
+      "eventName": "Private Parts",
+      "year": 2005,
+      "alt": "Liebling Siebling smiler i lang sort paryk foran et spejl"
+    },
+    {
+      "image": "/dunst/abroad/2004/04_07_02_homophobia_berlin/homophobia_liebling_02.jpg",
+      "width": 338,
+      "height": 450,
+      "event": "/dunst/abroad/2004/04_07_02_homophobia_berlin/index.html",
+      "eventName": "Homophobia",
+      "year": 2004,
+      "alt": "Liebling Siebling sidder i blå kjole med et glas i hånden"
+    },
+    {
+      "image": "/dunst/abroad/2004/04_06_04_queeruption/queer_liebling_01.jpg",
+      "width": 394,
+      "height": 450,
+      "event": "/dunst/abroad/2004/04_06_04_queeruption/index.html",
+      "eventName": "Queeruption #6",
+      "year": 2004,
+      "alt": "Liebling Siebling sidder på scenegulvet i lilla og synger i en mikrofon"
     }
   ],
   "/dunst/01_performere/19_tina_trash/index.html": [
@@ -244,6 +325,15 @@ const dunstReviewedProfilePhotos = {
       "eventName": "Supamolli",
       "year": 2004,
       "alt": "Johnny Warehouse med rød-hvid ansigtsmaling og en trøje med nummer 21"
+    },
+    {
+      "image": "/dunst/recommends/2004/04_09_02_kupe_aarhus/images/IMG_2351.jpg",
+      "width": 450,
+      "height": 337,
+      "event": "/dunst/recommends/2004/04_09_02_kupe_aarhus/index.html",
+      "eventName": "The Act på KUPÉ",
+      "year": 2004,
+      "alt": "Johnny Warehouse poserer på et trægulv i lilla kostume med fjer og stribede strømper"
     }
   ],
   "/dunst/dj/nikolaj.html": [
@@ -257,6 +347,70 @@ const dunstReviewedProfilePhotos = {
       "alt": "Nikolaj Tange Lange med sorte briller og farverig ansigtsmaling foran et rødt tæppe",
       "date": "19. maj 2005"
     }
+  ],
+  "/dunst/01_performere/09_stimulundia/index.html": [
+    {
+      "image": "/dunst/abroad/2004/04_07_02_homophobia_berlin/homophobia_stimu_02.jpg",
+      "width": 450,
+      "height": 338,
+      "event": "/dunst/abroad/2004/04_07_02_homophobia_berlin/index.html",
+      "eventName": "Homophobia",
+      "year": 2004,
+      "alt": "Stimulundia i kort blond paryk med mørk øjenmakeup og perlekæde"
+    }
+  ],
+  "/dunst/01_performere/08_the_thom/index.html": [
+    {
+      "image": "/dunst/recommends/2003/03_12_02_homo_homo_homo/homo_fish_thom_01.jpg",
+      "width": 450,
+      "height": 340,
+      "event": "/dunst/recommends/2003/03_12_02_homo_homo_homo/index.html",
+      "eventName": "Homo Homo Homo",
+      "year": 2003,
+      "alt": "The Thom synger i en blå jakke ved siden af Miss Fish på scenen"
+    }
+  ],
+  "/dunst/01_performere/15_bob/index.html": [
+    {
+      "image": "/dunst/film/04_02_03_zullu/zulu_bob_01.jpg",
+      "width": 369,
+      "height": 450,
+      "event": "/dunst/film/04_02_03_zullu/index.html",
+      "eventName": "Zulu Bingo",
+      "year": 2004,
+      "alt": "Dragking Bob gør V-tegn ved siden af dragking Ted"
+    }
+  ]
+};
+
+const dunstRemovedProfilePhotos = {
+  "/dunst/01_performere/09_stimulundia/index.html": [
+    "/dunst/abroad/2004/04_07_02_homophobia_berlin/homophobia_stimu_01.jpg",
+    "/dunst/abroad/2004/04_07_02_homophobia_berlin/homophobia_stimu_snax_01.jpg"
+  ],
+  "/dunst/01_performere/03_dennis-agerblad/index.html": [
+    "/assets/2006-csd/IMG_0236.jpg",
+    "/dunst/recommends/2004/04_09_02_kupe_aarhus/images/IMG_2585.jpg",
+    "/dunst/cafe/2003/arty_farty/2003_02_22_arty_farty_17.jpg"
+  ],
+  "/dunst/01_performere/01_ramona_macho/index.html": [
+    "/dunst/abroad/2004/04_12_31_homophobia_newyear/IMG_4550.jpg",
+    "/dunst/recommends/2004/04_09_18_ramona_intime/cafe_intime_04.jpg",
+    "/dunst/03_events/2003/eurogames/gruppe_03.jpg"
+  ],
+  "/dunst/01_performere/10_liebling_siebling/index.html": [
+    "/dunst/02_parties/fest_20_private_parts/images/IMG_6587.jpg",
+    "/dunst/abroad/2004/04_07_02_homophobia_berlin/homophobia_liebling_01.jpg",
+    "/dunst/abroad/2004/04_06_04_queeruption/queer_liebling_02.jpg"
+  ],
+  "/dunst/01_performere/15_bob/index.html": [
+    "/dunst/01_performere/15_bob/bob_03.jpg",
+    "/dunst/02_parties/fest_16_coma/coma_30.jpg"
+  ],
+  "/dunst/01_performere/07_car-o-lina/index.html": [
+    "/dunst/recommends/2004/04_10_23_fnat_02/fnat2_00.jpg",
+    "/dunst/01_performere/07_car-o-lina/black_01.jpg",
+    "/dunst/01_performere/07_car-o-lina/black_02.jpg"
   ]
 };
 
@@ -285,6 +439,20 @@ function dunstReviewedPhotoCard(photo) {
 }
 
 function appendDunstReviewedPerformerPhotos(root, profilePath) {
+  const removed = new Set(dunstRemovedProfilePhotos[profilePath]);
+  if (removed.size) {
+    for (const image of root.querySelectorAll("img[src]")) {
+      if (!removed.has(decodeURIComponent(new URL(image.src).pathname)) || !root.contains(image)) continue;
+      const card = image.closest("table.profile-card");
+      if (card?.querySelectorAll("img").length === 1) {
+        card.remove();
+        continue;
+      }
+      const link = image.closest("a");
+      if (link?.querySelectorAll("img").length === 1 && !link.textContent.trim()) link.remove();
+      else image.remove();
+    }
+  }
   for (const photo of dunstReviewedProfilePhotos[profilePath] || []) {
     const sections = [...root.querySelectorAll(":scope > .hairwerk-year")];
     const yearOf = (section) => Number(section.querySelector(":scope > .year-box")?.textContent.replace(/:\s*$/, ""));

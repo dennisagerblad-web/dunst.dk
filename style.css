@@ -679,9 +679,11 @@ details[open] > summary::after { transform: rotate(180deg); }
 .archive-detail .archive-gallery .gallery-single .media-card { flex: 0 1 auto; width: min(100%, var(--gallery-card-width, 480px)); }
 .archive-detail .archive-gallery .gallery-single .media-card img { padding: 0; }
 .skidt-film-page .archive-content > table.ramme { width: 100% !important; }
-.skidt-film-page .archive-content > table.ramme tr:first-child .head:last-child { white-space: nowrap; text-align: right; }
+.skidt-film-page .archive-content > table.ramme tr:first-child .head:last-child { text-align: right; }
 .skidt-copy-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; padding: 8px; text-align: left; }
 .skidt-copy { min-width: 0; }
+.skidt-video-card { --caption-card-width: 560px; width: min(100%, 560px); border: 1px solid var(--purple); }
+.skidt-video-card > a { display: block; padding: 4px var(--box-inset) var(--caption-bottom); text-align: center; }
 .dunst-bio-page .archive-content > table.ramme { width: min(100%, 800px) !important; }
 .dunst-bio-page .archive-content > table.ramme td:not(.head) { padding: var(--box-inset); }
 .dunst-bio-page .archive-content img[align="left"] { margin: 4px 14px 10px 0; }
@@ -1059,7 +1061,7 @@ body.calendar-archive::before {
   line-height: 1.4;
   white-space: nowrap;
 }
-.menu-child { color: var(--purple); }
+.menu-child { color: var(--purple); white-space: normal; overflow-wrap: anywhere; }
 .menu-year { color: #43b4ff; font-weight: 700; }
 .menu-month, .recommends-menu-group .menu-child { padding-inline-start: 20px; }
 .menu-attribution, .menu-statistics { --menu-meta-color: #999; }

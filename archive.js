@@ -1,6 +1,14 @@
 const archiveParams = new URLSearchParams(location.search);
 const archivePath = archiveParams.get("path") ||
   (document.body.hasAttribute("data-performance-home") ? "/dunst/01_performere/200_billeder_help.html" : null);
+const skidtFilmPath = "/dunst/film/skidt_kommer_til/index.html";
+const shavePartyPath = "/dunst/02_parties/fest_21_shave_your_pet/index.html";
+const partyHeading = new Map([
+  [shavePartyPath, "Shave Your Pet"],
+  ["/dunst/02_parties/fest_22_rode_rave_rovhul_pyramide/index.html", "Rode Rage Røvhuls Pyramide Fest"],
+  ["/dunst/02_parties/fest_11_helligaanden/index.html", "Helligåndsfesten"],
+  ["/dunst/02_parties/fest_10_primate_nite/index.html", "Primate Nite"],
+]).get(archivePath);
 const hrFruRoot = "/dunst/02_parties/fest_18_hr_fru/";
 if (archivePath?.startsWith(hrFruRoot + "kandidater/")) document.body.classList.add("hr-fru-candidates-page");
 const archiveView = archiveParams.get("view");
@@ -71,7 +79,7 @@ if (archivePath === "/dunst/film/kanal_dunst/index.html") document.body.classLis
 if (archivePath === "/dunst/film/05_09_28_videomarathon/index.html") document.body.classList.add("videomarathon-page");
 if (archivePath?.startsWith("/dunst/film/ramonas_rejse/")) document.body.classList.add("ramonas-rejse-page");
 if (archivePath === "/dunst/film/04_02_03_zullu/index.html") document.body.classList.add("zulu-bingo-page");
-if (archivePath === "/dunst/film/skidt_kommer_til/index.html") document.body.classList.add("skidt-film-page");
+if (archivePath === skidtFilmPath) document.body.classList.add("skidt-film-page");
 if (archivePath?.startsWith("/dunst/film/dunst_bio/")) document.body.classList.add("dunst-bio-page");
 if (archivePath?.startsWith("/dunst/film/cglff_2004/")) document.body.classList.add("film-festival-2004");
 if (["/dunst/film/cglff_2004/index.html", "/dunst/film/from_scratch/index.html"].includes(archivePath)) document.body.classList.add("film-festival-page");
@@ -80,7 +88,7 @@ if (archivePath === "/dunst/press/2005/05_05_27_tv2-lorry_brunch/index.html") do
 if (archivePath === "/dunst/02_parties/fest_23_sabaah/index.html") document.body.classList.add("sabaah-party-page");
 if (archivePath === "/dunst/02_parties/fest_24_stubnitz/index.html") document.body.classList.add("stubnitz-party-page");
 if (archivePath === "/dunst/02_parties/fest_11_helligaanden/index.html") document.body.classList.add("helligaanden-party-page");
-if (archivePath === "/dunst/02_parties/fest_21_shave_your_pet/index.html") document.body.classList.add("shave-party-page");
+if (archivePath === shavePartyPath) document.body.classList.add("shave-party-page");
 if (archivePath === "/dunst/02_parties/fest_19_habibis_exil/index.html") document.body.classList.add("habibis-party-page");
 if (archivePath === "/dunst/02_parties/fest_18_hr_fru/index.html") document.body.classList.add("hr-fru-party-page");
 if (archivePath === "/dunst/press/2005/05_02_01_lene_pan/lene_pan.html") document.body.classList.add("hr-fru-panbladet-page");
@@ -199,6 +207,7 @@ function addBackLink() {
 }
 
 function archiveItemTitle() {
+  if (partyHeading) return partyHeading;
   if (archivePath === "/nyhedsbrev/gamle_nyheder/index.html") return "dunst Newsletter - gamle nyhedsbreve";
   if (archivePath === "/nyhedsbrev/gamle_nyheder/right.html") return "Gamle nyhedsbreve";
   for (const section of window.DUNST_PREVIEW_DATA.menu) {
@@ -1248,8 +1257,6 @@ function enhancePartyTopArt() {
   }
   if (archivePath === "/dunst/02_parties/fest_11_helligaanden/index.html") {
     const table = archiveContent.querySelector("table.ramme");
-    const heading = table?.querySelector(".head");
-    if (heading) heading.textContent = "Helligåndsfesten";
     const cell = table?.rows[1]?.cells[0];
     const pictures = cell && [...cell.querySelectorAll("img")];
     if (pictures?.length === 2) {
@@ -1259,7 +1266,7 @@ function enhancePartyTopArt() {
       cell.replaceChildren(pair);
     }
   }
-  if (archivePath === "/dunst/02_parties/fest_21_shave_your_pet/index.html") {
+  if (archivePath === shavePartyPath) {
     const tables = [...archiveContent.querySelectorAll(":scope > table.ramme")];
     const firstCell = tables[0]?.rows[1]?.cells[0];
     const firstImage = firstCell?.querySelector("img");
@@ -1456,7 +1463,7 @@ function collapseLongPartyIntro() {
       [hrFruRoot + "index.html", "/dunst/02_parties/fest_06_lefreak/index.html"].includes(archivePath)) return;
   const table = archiveContent.querySelector(":scope > table.ramme");
   if (!table) return;
-  const label = `Læs mere om ${archiveItemTitle()}`;
+  const label = archivePath === shavePartyPath ? "Læs mere" : `Læs mere om ${archiveItemTitle()}`;
   const createDetails = () => {
     const details = document.createElement("details");
     details.className = "party-intro-details";
@@ -2753,6 +2760,11 @@ async function showPerformerProfile() {
     }
   }
   if (archivePath === "/dunst/01_performere/04_johnny_warehouse/index.html") {
+    const filmGrid = profileYearGrid("2006");
+    const film = filmGrid?.querySelector('img[src*="/06_11_15_oejet_i_natten/"]')?.closest("table.profile-card");
+    if (film?.querySelector(".head")?.textContent.trim() === "Film") film.remove();
+    if (filmGrid && !filmGrid.childElementCount) filmGrid.closest(".hairwerk-year").remove();
+    ensureProfileYearGrid("2003").append(skidtFilmVideoCard(true));
     const homepage = profile.querySelector('a[href*="johnnywarehouse.com"]');
     if (homepage) {
       const newLink = document.createElement("a");
@@ -3071,9 +3083,34 @@ function showSkidtFilm() {
     column.innerHTML = section;
     columns.append(column);
   }
-  cell.replaceChildren(columns);
+  const details = document.createElement("details");
+  details.className = "event-story-details skidt-film-details";
+  const summary = document.createElement("summary");
+  summary.textContent = "Læs om arrangementet";
+  details.append(summary, columns);
+  cell.replaceChildren(details);
   cell.colSpan = 2;
   row.cells[1]?.remove();
+}
+
+function skidtFilmVideoCard(linkToEvent = false) {
+  const card = document.createElement("article");
+  card.className = "media-card skidt-video-card";
+  const video = document.createElement("iframe");
+  video.className = "video";
+  video.src = "https://www.youtube-nocookie.com/embed/SrL0uPfyaIM";
+  video.title = "Video fra Når skidt kommer til ære";
+  video.loading = "lazy";
+  video.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  video.allowFullscreen = true;
+  card.append(video);
+  if (linkToEvent) {
+    const link = document.createElement("a");
+    link.href = archiveRoute(null, skidtFilmPath);
+    link.textContent = "Når skidt kommer til ære";
+    card.append(link);
+  }
+  return card;
 }
 
 function showTv2News() {
@@ -3423,6 +3460,10 @@ async function showMain() {
     : archiveRecord?.main ? new URL(archiveRecord.main, location.href) : archiveAsset(archivePath);
   const { doc, url } = await readLegacyPage(source);
   archiveContent.replaceChildren(rewriteContent(doc.body, url));
+  if (partyHeading) {
+    const heading = archiveContent.querySelector("table.ramme .head");
+    if (heading) heading.textContent = partyHeading;
+  }
   updateRomeoArticle(archiveContent, archivePath);
   if (archivePath.startsWith("/dunst/abroad/2006/06_06_10_zurich/")) {
     const heading = archiveContent.querySelector("table.ramme .head");
@@ -3594,7 +3635,7 @@ async function showMain() {
       flashCell.replaceChildren(image);
     }
   }
-  if (archivePath === "/dunst/film/skidt_kommer_til/index.html") showSkidtFilm();
+  if (archivePath === skidtFilmPath) showSkidtFilm();
   if (document.body.classList.contains("dunst-bio-page")) {
     if (archivePath === "/dunst/film/dunst_bio/2003/index.html") {
       const heading = archiveContent.querySelector("table.ramme .head");
@@ -4063,6 +4104,7 @@ function showGallery(preserveMain = false) {
     if (archivePath === "/dunst/musik/06_02_11_ungdomshuset/index.html" && item.image.endsWith("/flyer_01.jpg")) continue;
     if (archivePath === hrFruRoot + "index.html" && /\/hr_fru_dunst_0[23]\.html$/.test(item.url || "")) continue;
     if (mainImagePaths.has(new URL(item.image, location.href).pathname)) continue;
+    if (archivePath === skidtFilmPath && item.image.endsWith("/skidt_puta_02.jpg")) grid.append(skidtFilmVideoCard());
     const card = document.createElement("article");
     card.className = "media-card";
     if (pressArticle) card.classList.add("press-logo-card");
@@ -4286,7 +4328,7 @@ if (archivePath === "/dunst/musik/07_01_01_nuclear_fam/action_disco.html") {
   addBackLink();
   if (archiveView === "image") showArchiveImage();
   else if (archivePath === "/dunst/radio/player.html") showRadioPlayer();
-  else if (archiveView === "billeder" && archiveRecord) showGallery();
+  else if (archiveView === "billeder" && archiveRecord && !partyHeading && archivePath !== skidtFilmPath) showGallery();
   else showMain()
     .then(() => compactImageCaptionSpacing(document.querySelector(".page")))
     .catch((error) => { archiveContent.textContent = error.message; });

@@ -562,7 +562,7 @@ window.DUNST_PREVIEW_DATA = {
           "color": "#000000"
         },
         {
-          "label": "Når skidt kommer...",
+          "label": "Når skidt kommer til ære",
           "url": "https://dunst.dk/dunst/film/skidt_kommer_til/index.html",
           "color": "#000000"
         },
@@ -1198,7 +1198,7 @@ window.DUNST_PREVIEW_DATA = {
       ]
     },
     {
-      "label": "Helligånds Festen",
+      "label": "Helligåndsfesten",
       "url": "https://dunst.dk/dunst/02_parties/fest_11_helligaanden/index.html",
       "image": "/dunst/02_parties/fest_11_helligaanden/2003_06_08_flyer_pinse_e_00.gif",
       "year": 2003,
@@ -1593,8 +1593,9 @@ window.DUNST_PREVIEW_DATA = {
       "label": "Queeruption #6 in Amsterdam",
       "url": "https://dunst.dk/dunst/abroad/2004/04_06_04_queeruption/index.html",
       "images": [
-        "/dunst/abroad/2004/04_06_04_queeruption/queer_hairwerk_02.jpg"
+        "/dunst/abroad/2004/04_06_04_queeruption/queer_hairwerk_01.jpg"
       ],
+      "alt": "Hairwerk på scenegulvet i sort kostume med en mikrofon i hånden",
       "year": "2004",
       "source_text": "Abroad Photo from: Queeruption #6 in Amsterdam",
       "box_class": "",
