@@ -5,6 +5,7 @@
   --cream: #ffffcc;
   --link: var(--purple);
   --box-inset: 12px;
+  --caption-bottom: 4px;
   /* Vertical spacing between separate content boxes. Mobile overrides this below. */
   --box-gap: 16px;
   --page-title-size: clamp(24px, 2.1vw, 28px);
@@ -154,9 +155,10 @@ details[open] > summary::after { transform: rotate(180deg); }
 .event-copy { margin-bottom: var(--box-gap); overflow-wrap: anywhere; }
 .events-front .front-panel { width: min(100%, 800px); margin-inline: auto; }
 .events-archive.archive-detail .archive-content table.ramme { background: #fff; color: #000; }
-.events-archive.archive-detail .archive-content table.ramme > tbody > tr > td:not(.head) { padding: var(--box-inset) !important; background: #fff !important; color: #000; }
+.events-archive.archive-detail .archive-content table.ramme > tbody > tr > td:not(.head) { background: #fff !important; color: #000; }
+.events-archive.archive-detail .archive-content table.ramme > tbody > tr > td:not(.head, .image-caption-cell, .image-caption-tail) { padding: var(--box-inset) !important; }
 .events-archive .archive-gallery .media-card, .events-archive .archive-gallery .media-card .card-body { background: #fff; color: #000; }
-.events-archive .archive-gallery .media-card .card-body { padding: 0 var(--box-inset) var(--box-inset) !important; }
+.events-archive .archive-gallery .media-card .card-body { padding: 0 var(--box-inset) var(--caption-bottom) !important; }
 .events-archive .menu-child[aria-current="page"] { font-weight: 700; }
 .event-story-details summary { width: max-content; max-width: 100%; color: var(--purple); font-weight: 400; text-decoration: underline; cursor: pointer; }
 .events-archive.archive-detail .archive-content table.ramme.event-story-table { width: 100% !important; border: 0 !important; }
@@ -332,7 +334,7 @@ details[open] > summary::after { transform: rotate(180deg); }
 .film-archive .archive-content td:not(.head), .film-archive .archive-content .ramme { background: #000; color: #fff; }
 .film-archive .archive-content a, .film-archive .archive-gallery a { color: var(--purple); }
 .film-archive .archive-gallery .media-card, .film-archive .archive-gallery .card-body, .film-archive .event-copy { background: #000; color: #fff; }
-.playing-options { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: var(--box-gap); margin: 0 auto var(--box-gap); }
+.playing-options { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: var(--box-gap); margin: var(--box-gap) auto 0; }
 .playing-option { display: flex; flex-direction: column; align-items: center; width: 138px; color: #fff !important; text-align: center; }
 .playing-options .playing-option img { display: block; width: 120px; height: 90px; margin: 0; object-fit: contain; background: transparent; }
 .playing-option-modem { width: 82px; }
@@ -340,6 +342,7 @@ details[open] > summary::after { transform: rotate(180deg); }
 .playing-option span { margin-top: 5px; }
 .playing-quicktime { align-self: center; }
 .playing-quicktime img { display: block; width: 88px; height: 31px; }
+.playing-title { width: min(100%, 860px); margin: 0 auto var(--box-gap); border: 1px solid var(--purple); }
 .playing-videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); justify-content: center; gap: var(--box-gap); max-width: 860px; margin: 0 auto var(--box-gap); }
 .playing-videos iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
 .playing-video-link { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; background: #000; }
@@ -360,7 +363,7 @@ details[open] > summary::after { transform: rotate(180deg); }
 .kanal-intro > img { flex: none; width: 202px; max-width: 100%; height: auto; }
 .kanal-press { width: min(100%, 550px); margin: 32px auto 0; border-color: #87e3fc; background: #000; color: #fff; }
 .kanal-press .bar { border-bottom-color: #87e3fc; }
-.kanal-press summary { display: block; text-decoration: underline; text-underline-offset: 2px; }
+.kanal-press summary { display: block; font-size: 18px; text-decoration: underline; text-underline-offset: 2px; }
 .kanal-press:not([open]) summary { border-bottom: 0; }
 .kanal-press .panel-body { color: #fff; }
 .kanal-press .panel-body img { max-width: 100%; height: auto; }
@@ -413,9 +416,7 @@ details[open] > summary::after { transform: rotate(180deg); }
 .odeur-concert .archive-content .odeur-details { padding: 8px; text-align: left; }
 .odeur-concert .odeur-detail + .odeur-detail { margin-top: 16px; }
 .odeur-concert .odeur-detail img { width: min(100%, 330px); height: auto; margin: 0; }
-.tv2-featured-video { width: min(100%, 520px); margin: 0 auto 22px; }
-.tv2-featured-video .ramme { width: 100% !important; }
-.tv2-featured-video iframe { width: 100%; }
+.archive-content iframe.tv2-featured-video { width: min(100%, 520px); margin: 0 auto var(--box-gap); border: 0; }
 .tv2-brunch-page .archive-gallery .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--box-gap); }
 .tv2-brunch-page .archive-gallery .media-card { flex: 0 1 320px; width: min(100%, 320px); }
 .film-front .archive-content { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: var(--box-gap); }
@@ -654,7 +655,7 @@ details[open] > summary::after { transform: rotate(180deg); }
 .performer-profile .archive-content table.profile-card.johnny-article-card { flex: 0 1 800px; width: min(800px, 100%) !important; max-width: 800px; }
 .johnny-article-card td:not(.head) { background: #ffffcc !important; color: #000; font-weight: 400; }
 .johnny-article-card td:not(.head) a { color: var(--purple); }
-.guest-performers-overview .archive-gallery .media-card .card-body { padding: 0 var(--box-inset) var(--box-inset) !important; }
+.guest-performers-overview .archive-gallery .media-card .card-body { padding: 0 var(--box-inset) var(--caption-bottom) !important; }
 .guest-performers-overview .archive-gallery .media-card .card-body > p + p { margin-top: 4px; }
 .guest-performers-overview .archive-content table.ramme td:not(.head) { padding: var(--box-inset) !important; }
 .videomarathon-page .archive-content > .videomarathon-video { display: block; width: min(100%, 560px); aspect-ratio: 16 / 9; margin: 20px auto; border: 0; }
@@ -670,6 +671,14 @@ details[open] > summary::after { transform: rotate(180deg); }
 .dunst-bio-page .archive-content img[align="left"] { margin: 4px 14px 10px 0; }
 .dunst-bio-page .archive-content img[align="right"] { margin: 4px 0 10px 14px; }
 .film-festival-page .archive-content > table.ramme:first-of-type { width: min(100%, 800px) !important; }
+:is(.film-festival-2004, .ramonas-rejse-page) .archive-content > table.film-image-panel.ramme:first-of-type { width: min(100%, 452px) !important; table-layout: fixed; }
+.archive-content .film-image-panel td.film-picture-cell { padding: 0; }
+.archive-content .film-picture-cell img { width: 100%; margin: 0; }
+.archive-content .ramme td.film-picture-caption,
+.archive-gallery .film-related-card .card-body { padding-top: 8px !important; }
+.film-card-title { margin: 0; font-size: 20px; line-height: 1.3; font-weight: 700; }
+.archive-split-photo { width: min(100%, 360px); margin-inline: auto; }
+.archive-split-photo img { display: block; width: 100%; height: auto; margin: 0; }
 .tv2-news-panel { width: min(100%, 500px); margin: 0 auto; padding: 10px; border: 1px solid var(--purple); background: #fff; color: #000; }
 .tv2-news-head { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; margin-bottom: 12px; }
 .tv2-news-head img { width: min(100%, 360px); height: auto; margin: 0 auto !important; }
@@ -825,7 +834,7 @@ body.recommends-archive .page hr { border-top-color: var(--cream); }
 .abroad .archive-content td:not(.head):not(.hvid) a { color: var(--cream); }
 .abroad-front .archive-content a.front-card { color: var(--purple); }
 .abroad .archive-gallery .media-card, .abroad .archive-gallery .media-card .card-body { background: #c04e4e; color: #fff; }
-.abroad.archive-detail .archive-gallery .media-card .card-body { padding: 0 var(--box-inset) var(--box-inset) !important; }
+.abroad.archive-detail .archive-gallery .media-card .card-body { padding: 0 var(--box-inset) var(--caption-bottom) !important; }
 .abroad .archive-gallery a { color: var(--purple); }
 .abroad .archive-gallery .media-card:not(.press-logo-card) a { color: var(--cream); }
 .newsletter-archive .archive-content { max-width: 451px; margin-inline: auto; }
@@ -952,7 +961,16 @@ body.calendar-archive::before {
 .press-article-page .archive-content .press-article-table img[align="right" i] { float: right; margin: 4px 0 12px 16px; }
 .archive-content img.has-following-caption { margin-bottom: 0; }
 .archive-content .image-caption-copy { margin-top: 0; }
-.archive-content .ramme td.image-caption-cell:not(.head) { padding-top: 0 !important; }
+.archive-content .ramme td.image-caption-cell:not(.head, .film-picture-caption) { padding-top: 0 !important; }
+.page .archive-content .ramme td:is(.image-caption-cell, .image-caption-tail):not(.head),
+.page :is(.image-caption-cell, .image-caption-tail):not(.head),
+.page .media-card:has(img) .card-body,
+.page figure:has(img) figcaption,
+.page .performer-photo-caption,
+.page .owner-photo-caption { padding-bottom: var(--caption-bottom) !important; }
+.page :is(.image-caption-cell, .image-caption-tail, .media-card:has(img) .card-body, figcaption, .performer-photo-caption) p:last-child {
+  margin-bottom: 0;
+}
 .caption-review-entry { display: block; width: max-content; max-width: 100%; margin: 0 auto 14px; font-weight: 400; }
 .owner-photo-caption { font-weight: 400; white-space: pre-line; }
 .parties .archive-content figure.owner-caption-figure { width: auto; max-width: 100%; margin: 0; padding: 0; border: 0; }

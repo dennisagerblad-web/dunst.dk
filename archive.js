@@ -69,10 +69,11 @@ if (archivePath === "/dunst/01_performere/guests/index.html") document.body.clas
 if (archivePath === "/dunst/film/04_08_04_playing_tourist/index.html") document.body.classList.add("playing-tourist-page");
 if (archivePath === "/dunst/film/kanal_dunst/index.html") document.body.classList.add("kanal-dunst-page");
 if (archivePath === "/dunst/film/05_09_28_videomarathon/index.html") document.body.classList.add("videomarathon-page");
-if (archivePath === "/dunst/film/ramonas_rejse/index.html") document.body.classList.add("ramonas-rejse-page");
+if (archivePath?.startsWith("/dunst/film/ramonas_rejse/")) document.body.classList.add("ramonas-rejse-page");
 if (archivePath === "/dunst/film/04_02_03_zullu/index.html") document.body.classList.add("zulu-bingo-page");
 if (archivePath === "/dunst/film/skidt_kommer_til/index.html") document.body.classList.add("skidt-film-page");
 if (archivePath?.startsWith("/dunst/film/dunst_bio/")) document.body.classList.add("dunst-bio-page");
+if (archivePath?.startsWith("/dunst/film/cglff_2004/")) document.body.classList.add("film-festival-2004");
 if (["/dunst/film/cglff_2004/index.html", "/dunst/film/from_scratch/index.html"].includes(archivePath)) document.body.classList.add("film-festival-page");
 if (archivePath === "/dunst/press/2002/02_08_16_tv2/video_tv2_foto.html") document.body.classList.add("tv2-news-page");
 if (archivePath === "/dunst/press/2005/05_05_27_tv2-lorry_brunch/index.html") document.body.classList.add("tv2-brunch-page");
@@ -332,6 +333,7 @@ function compactImageCaptionSpacing(root) {
       if (isCopy) {
         spacing.forEach(node => node.remove());
         image.classList.add("has-following-caption");
+        image.closest("td")?.classList.add("image-caption-tail");
         if (next.nodeType === Node.ELEMENT_NODE) next.classList.add("image-caption-copy");
       }
       break;
@@ -348,6 +350,11 @@ function compactImageCaptionSpacing(root) {
       }
     }
   }
+  for (const caption of root.querySelectorAll([
+    ".image-caption-cell", ".image-caption-tail", ".image-caption-copy",
+    "figcaption", ".media-card:has(img) .card-body", ".performer-photo-caption", ".owner-photo-caption",
+  ].join(","))) trimImageCaptionEnd(caption);
+
 }
 
 function trimImageCaptionStart(container) {
@@ -359,6 +366,32 @@ function trimImageCaptionStart(container) {
     first.classList.add("image-caption-copy");
     trimImageCaptionStart(first);
   }
+}
+
+function trimImageCaptionEnd(container) {
+  while (container.lastChild) {
+    const node = container.lastChild;
+    if (node.nodeType === Node.COMMENT_NODE || node.nodeType === Node.TEXT_NODE && !node.textContent.trim()) {
+      node.remove();
+      continue;
+    }
+    if (node.nodeType !== Node.ELEMENT_NODE || node.matches("[id],[name]")) break;
+    if (node.matches("p,span,b,strong,font,i,em,u")) {
+      trimImageCaptionEnd(node);
+      if (node.hasChildNodes()) break;
+    } else if (node.nodeName !== "BR") break;
+    node.remove();
+  }
+}
+
+function fitFilmImagePanel() {
+  const table = archiveContent.querySelector(":scope > table.ramme");
+  const image = table?.querySelector('img[src$="/ramona_fjer.jpg"], img[src$="/ramonas_rejse_02.jpg"]');
+  if (!image) return;
+  table.classList.add("film-image-panel");
+  const row = image.closest("tr");
+  image.closest("td").classList.add("film-picture-cell");
+  row.nextElementSibling?.cells[0]?.classList.add("film-picture-caption");
 }
 
 function upgradeFrontImages() {
@@ -788,16 +821,14 @@ function fitPressArticle(container) {
 
 function addTv2BrunchVideo(container) {
   if (container.querySelector('iframe[src*="NNK3iHLIqYY"]')) return;
-  const video = document.createElement("div");
-  video.className = "tv2-featured-video";
   const frame = document.createElement("iframe");
+  frame.className = "tv2-featured-video";
   frame.src = "https://www.youtube-nocookie.com/embed/NNK3iHLIqYY";
   frame.title = "TV2-Lorry Brunch";
   frame.loading = "lazy";
   frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
   frame.allowFullscreen = true;
-  video.append(frame);
-  container.prepend(video);
+  container.prepend(frame);
 }
 
 async function showPressYear(year) {
@@ -1768,7 +1799,7 @@ async function showPlayingTourist() {
   const slideshow = document.createElement("section");
   slideshow.className = "playing-slideshow";
   const heading = document.createElement("h1");
-  heading.className = "bar";
+  heading.className = "bar playing-title";
   heading.append(document.createTextNode("Playing tourist"));
   const date = document.createElement("time");
   date.textContent = slideTable?.rows[0]?.cells[1]?.textContent.trim() || "";
@@ -1783,7 +1814,7 @@ async function showPlayingTourist() {
     caption.textContent = slideCaption;
     figure.append(caption);
   }
-  slideshow.append(heading, figure);
+  slideshow.append(figure);
   let slide = 1;
   window.setInterval(() => {
     if (document.hidden) return;
@@ -1832,7 +1863,7 @@ async function showPlayingTourist() {
   secondVideo.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
   secondVideo.allowFullscreen = true;
   videos.append(firstVideo, secondVideo);
-  archiveContent.replaceChildren(options, videos, slideshow, gallery);
+  archiveContent.replaceChildren(heading, videos, slideshow, gallery, options);
 }
 
 async function showKanalDunst() {
@@ -1863,7 +1894,7 @@ async function showKanalDunst() {
   press.className = "panel kanal-press";
   const heading = document.createElement("summary");
   heading.className = "bar";
-  heading.textContent = "læs Pressemeddelelsen";
+  heading.textContent = "Læs pressemeddelelsen";
   const body = document.createElement("div");
   body.className = "panel-body";
   if (pressCell) body.append(...pressCell.childNodes);
@@ -2941,10 +2972,11 @@ function showTv2News() {
   const story = document.createElement("div");
   story.className = "tv2-news-story";
   for (const line of [
-    "i forbindelse med Copenhagen pride fik dunst besøg nede i sin kælder i Sommerstedgade hvor vi hørte til dengang. Det blev til et interview med Dennis Agerblad og misfish",
-    "“hvorfor holder I pride?”",
-    "“det ved jeg ikke? Fish, hvorfor holder vi pride?”",
-    "“det gør vi fordi der ikke er plads til sådan nogen som os.”",
+    "I forbindelse med Copenhagen Pride fik dunst besøg nede i sin kælder i Sommerstedgade, hvor vi hørte til dengang. Det blev til et interview med Dennis Agerblad og Miss Fish.",
+    "“Hvorfor holder I pride?”",
+    "“Det ved jeg ikke. Fish, hvorfor holder vi pride?”",
+    "“Det gør vi, fordi der ikke er plads til sådan nogen som os.”",
+    "nå ja.",
   ]) {
     const paragraph = document.createElement("p");
     paragraph.textContent = line;
@@ -3477,25 +3509,18 @@ async function showMain() {
       details.replaceChildren(cell);
     }
   }
+  if (document.body.matches(".film-festival-2004, .ramonas-rejse-page")) fitFilmImagePanel();
   if (archivePath === "/dunst/film/music_videos/index.html") {
     const tv = archiveContent.querySelector('img[src*="tv_00.gif"]');
     if (tv) archiveContent.replaceChildren(tv);
   }
   if (archivePath === "/dunst/press/2005/05_05_27_tv2-lorry_brunch/index.html") {
-    const videoUrl = new URL("video_tv2-lorry_player.html", url);
-    const videoPage = await readLegacyPage(videoUrl);
-    const videoTable = videoPage.doc.querySelector("iframe[src*='youtube.com']")?.closest("table.ramme");
-    if (videoTable) {
-      const wrapper = document.createElement("div");
-      wrapper.append(videoTable.cloneNode(true));
-      const video = document.createElement("div");
-      video.className = "tv2-featured-video";
-      video.append(rewriteContent(wrapper, videoPage.url));
-      archiveContent.prepend(video);
-    }
+    addTv2BrunchVideo(archiveContent);
     for (const breakNode of archiveContent.querySelectorAll(":scope > br")) breakNode.remove();
   }
   if (archivePath === "/dunst/press/2005/05_05_27_tv2-lorry_brunch/video_tv2-lorry_player.html") {
+    archiveContent.querySelector('iframe[src*="NNK3iHLIqYY"]')?.closest("table.ramme")?.remove();
+    addTv2BrunchVideo(archiveContent);
     const broken = [...archiveContent.querySelectorAll("a")].find((link) => link.href.includes("tv2lorry.dk/moduler/nyheder/showregvideo.asp"));
     if (broken) {
       let previous = broken.previousSibling;
@@ -3626,7 +3651,6 @@ async function showMain() {
   if (document.body.classList.contains("press-article-page")) fitPressArticle(archiveContent);
   fitCaptionFigures();
   frameRecommendsImages();
-  compactImageCaptionSpacing(document.querySelector(".page"));
   spaceArchiveBoxes(archiveContent);
   if (archivePath.startsWith("/dunst/02_parties/")) await window.DunstPartyCaptions?.apply(archivePath);
   if (archivePath.startsWith("/dunst/recommends/")) await window.DunstRecommendsCaptions?.apply(archivePath);
@@ -3932,6 +3956,25 @@ function showGallery(preserveMain = false) {
       link.append(image);
       card.append(link);
     } else card.append(image);
+
+    // The original 2002 festival portrait was delivered as two stacked JPEGs.
+    if (item.image === "/dunst/film/from_scratch/2002_10_19_filmfestival_02a.jpg") {
+      const lower = document.createElement("img");
+      lower.src = item.image.replace(/02a\.jpg$/, "02b.jpg");
+      lower.alt = "";
+      lower.width = 360;
+      lower.height = 312;
+      lower.loading = image.loading;
+      image.alt = "Dennis Agerblad ved Copenhagen Gay & Lesbian Film Festival 2002";
+      image.width = 360;
+      image.height = 236;
+      const portrait = document.createElement("div");
+      portrait.className = "archive-split-photo";
+      image.replaceWith(portrait);
+      portrait.append(image, lower);
+    }
+    const filmCard = document.body.matches(".film-festival-2004, .ramonas-rejse-page");
+    if (filmCard) card.classList.add("film-related-card");
     let detailLines = (item.detail_lines || []).filter((line) => !mainLines.some((mainLine) => normalized(line) === normalized(mainLine)))
       .map((line) => line.replace(/\s*Print denne side\b/gi, "").trim()).filter(Boolean);
     if (document.body.classList.contains("recommends-archive")) detailLines = detailLines.filter(line =>
@@ -3962,8 +4005,9 @@ function showGallery(preserveMain = false) {
       const body = document.createElement("div");
       body.className = "card-body";
       for (const line of detailLines) {
-        const detail = document.createElement("p");
-        detail.className = "original-photo-text";
+        const isFilmTitle = filmCard && /^Ramonas rejse[.]?$/i.test(line);
+        const detail = document.createElement(isFilmTitle ? "h2" : "p");
+        detail.className = isFilmTitle ? "film-card-title" : "original-photo-text";
         detail.textContent = line;
         body.append(detail);
       }
@@ -4026,7 +4070,10 @@ function showGallery(preserveMain = false) {
       const image = card.querySelector("img");
       if (!image) continue;
       const fit = () => {
-        if (image.naturalWidth) card.style.setProperty("--gallery-card-width", `${Math.min(800, image.naturalWidth + 24)}px`);
+        if (image.naturalWidth) {
+          const inset = card.classList.contains("film-related-card") ? 2 : 24;
+          card.style.setProperty("--gallery-card-width", `${Math.min(800, image.naturalWidth + inset)}px`);
+        }
       };
       image.addEventListener("load", fit, { once: true });
       if (image.complete) fit();
@@ -4092,5 +4139,7 @@ if (archivePath === "/dunst/musik/07_01_01_nuclear_fam/action_disco.html") {
   if (archiveView === "image") showArchiveImage();
   else if (archivePath === "/dunst/radio/player.html") showRadioPlayer();
   else if (archiveView === "billeder" && archiveRecord) showGallery();
-  else showMain().catch((error) => { archiveContent.textContent = error.message; });
+  else showMain()
+    .then(() => compactImageCaptionSpacing(document.querySelector(".page")))
+    .catch((error) => { archiveContent.textContent = error.message; });
 }
