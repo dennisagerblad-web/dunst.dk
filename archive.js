@@ -6,6 +6,10 @@ const skidtFilmPath = "/dunst/film/skidt_kommer_til/index.html";
 const dennisProfilePath = "/dunst/01_performere/03_dennis-agerblad/index.html";
 const obsoleteDennisProfileMedia = /\/(?:video_dennis_thom_00|oejet_i_natten)\.jpg$/;
 const nuclearProfilePath = "/dunst/01_performere/23_nuclear_family/index.html";
+const obsoleteNuclearProfileMedia = /\/(?:nuclear_atitude_is_fine_00|video_02_00)\.jpg$/;
+const guestPerformersPath = "/dunst/01_performere/guests/index.html";
+const ginaProfilePath = "/dunst/01_performere/27_gina/index.html";
+const ginaProfileName = "Gina La Mirage";
 const musicFrontPath = "/dunst/musik/index.html";
 const habibisPartyPath = "/dunst/02_parties/fest_19_habibis_exil/index.html";
 const shavePartyPath = "/dunst/02_parties/fest_21_shave_your_pet/index.html";
@@ -96,7 +100,7 @@ if (filmMenu?.children.some((item) => {
 if (archivePath === "/dunst/film/music_videos/index.html") document.body.classList.add("music-videos-index");
 if (archivePath === "/dunst/03_events/2004/04_07_17_belgrade_pride/index.html") document.body.classList.add("belgrade-demo-page");
 if (archivePath === "/dunst/02_parties/fest_06_lefreak/index.html") document.body.classList.add("lefreak-page");
-if (archivePath === "/dunst/01_performere/guests/index.html") document.body.classList.add("guest-performers-overview");
+if (archivePath === guestPerformersPath) document.body.classList.add("guest-performers-overview");
 if (archivePath === "/dunst/film/04_08_04_playing_tourist/index.html") document.body.classList.add("playing-tourist-page");
 if (archivePath === "/dunst/film/kanal_dunst/index.html") document.body.classList.add("kanal-dunst-page");
 if (archivePath === "/dunst/film/05_09_28_videomarathon/index.html") document.body.classList.add("videomarathon-page");
@@ -180,6 +184,7 @@ function archiveImageRoute(path) {
 }
 
 function backFallback() {
+  if (archivePath === ginaProfilePath) return archiveRoute(null, guestPerformersPath);
   if (archivePath?.startsWith(hrFruCandidatesRoot) && /_frameset\.html$/.test(archivePath)) {
     return hrFruLineupRoute();
   }
@@ -212,7 +217,7 @@ function addBackLink() {
   if (categoryFront || /^\/dunst\/press\/(?:20\d\d)\/index\.html$/.test(archivePath) ||
       (isMenuDestination && !skiDay) ||
       document.body.matches(".newsletter-archive,.guestbook-archive,.links-archive") ||
-      /^\/dunst\/01_performere\/(?:\d+_[^/]+|guests(?:\/[^/]+)?)\/index\.html$/.test(archivePath)) return;
+      (archivePath !== ginaProfilePath && /^\/dunst\/01_performere\/(?:\d+_[^/]+|guests(?:\/[^/]+)?)\/index\.html$/.test(archivePath))) return;
   const link = document.createElement("a");
   link.className = "archive-back";
   link.href = backFallback();
@@ -229,6 +234,7 @@ function addBackLink() {
 }
 
 function archiveItemTitle() {
+  if (archivePath === ginaProfilePath) return ginaProfileName;
   if (partyHeading) return partyHeading;
   if (archivePath === "/nyhedsbrev/gamle_nyheder/index.html") return "dunst Newsletter - gamle nyhedsbreve";
   if (archivePath === "/nyhedsbrev/gamle_nyheder/right.html") return "Gamle nyhedsbreve";
@@ -496,8 +502,10 @@ function upgradeFrontImages() {
     if (full?.endsWith("/06_05_05_lars_von_trier/images/IMG_1157.jpg")) {
       image.alt = "Lars von Trier og Søde Car O’lina til 50-års fødselsdagen";
     }
-    image.removeAttribute("width");
-    image.removeAttribute("height");
+    if (categoryFront !== "performers-front") {
+      image.removeAttribute("width");
+      image.removeAttribute("height");
+    }
   }
 }
 
@@ -685,16 +693,18 @@ function unfoldPerformers() {
       gallery.append(item);
     }
   }
-  for (const [name, profilePath, photoPath] of [
-    ["Bob", "/dunst/01_performere/15_bob/index.html", "/dunst/02_parties/fest_16_coma/coma_29.jpg"],
-    ["Signe", "/dunst/01_performere/27_signe/index.html", "/dunst/02_parties/fest_16_coma/coma_57.jpg"],
-    ["Zanne Bizze", "/dunst/01_performere/14_zanne/index.html", "/dunst/01_performere/guests/zanne/zanne_arty_farty_01.jpg"],
+  for (const [name, profilePath, photoPath, width, height] of [
+    ["Bob", "/dunst/01_performere/15_bob/index.html", "/dunst/02_parties/fest_16_coma/coma_29.jpg", 450, 389],
+    ["Signe", "/dunst/01_performere/27_signe/index.html", "/dunst/02_parties/fest_16_coma/coma_57.jpg", 375, 500],
+    ["Zanne Bizze", "/dunst/01_performere/14_zanne/index.html", "/dunst/01_performere/guests/zanne/zanne_arty_farty_01.jpg", 359, 500],
   ]) {
     const item = document.createElement("a");
     item.href = archiveRoute(null, profilePath);
     item.setAttribute("aria-label", `Åbn profilen for ${name}`);
     const photo = document.createElement("img");
     photo.src = archiveAsset(photoPath).href;
+    photo.width = width;
+    photo.height = height;
     photo.alt = "";
     photo.loading = "lazy";
     item.append(photo);
@@ -706,6 +716,10 @@ function unfoldPerformers() {
 
 function startPerformersScroll() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!location.hash && performance.getEntriesByType("navigation")[0]?.type !== "back_forward") {
+    const scrollRange = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    window.scrollTo(0, Math.round(scrollRange * (0.1 + Math.random() * 0.8)));
+  }
   let position = window.scrollY;
   let previousScroll = position;
   let direction = 1;
@@ -2443,6 +2457,14 @@ function showAddedPerformerProfile() {
   const title = document.createElement("h1");
   title.className = "performer-profile-title";
   title.textContent = isSigne ? "Signe" : isMaria ? "Maria Maud" : "Zanne Bizze";
+  if (archivePath === ginaProfilePath) {
+    title.textContent = ginaProfileName;
+    profile.append(title);
+    appendDunstReviewedPerformerPhotos(profile, archivePath);
+    archiveContent.replaceChildren(profile);
+    archiveGallery.hidden = true;
+    return;
+  }
   const section = document.createElement("section");
   section.className = "hairwerk-year";
   const year = document.createElement("h2");
@@ -2532,7 +2554,7 @@ function showAddedPerformerProfile() {
 }
 
 async function showPerformerProfile() {
-  if (["/dunst/01_performere/14_zanne/index.html", "/dunst/01_performere/27_signe/index.html", "/dunst/01_performere/28_maria_maud/index.html"].includes(archivePath)) {
+  if ([ginaProfilePath, "/dunst/01_performere/14_zanne/index.html", "/dunst/01_performere/27_signe/index.html", "/dunst/01_performere/28_maria_maud/index.html"].includes(archivePath)) {
     showAddedPerformerProfile();
     return;
   }
@@ -2957,6 +2979,9 @@ async function showPerformerProfile() {
     }
   }
   if (archivePath === nuclearProfilePath) {
+    for (const image of profile.querySelectorAll("img")) {
+      if (obsoleteNuclearProfileMedia.test(new URL(image.src).pathname)) image.closest(".profile-card")?.remove();
+    }
     profileYearGrid("2007")?.replaceChildren(performerReleaseCollection(Object.values(nuclearSingles), musicFrontPath));
     const intro = profile.querySelector(".profile-card td");
     if (intro) {
@@ -4240,6 +4265,9 @@ function showGallery(preserveMain = false) {
   let pressGroupItems;
   for (const [index, item] of items.entries()) {
     if (archivePath === dennisProfilePath && obsoleteDennisProfileMedia.test(item.image)) continue;
+    if (archivePath === nuclearProfilePath && obsoleteNuclearProfileMedia.test(item.image)) continue;
+    const isGinaGuestCard = archivePath === guestPerformersPath && item.url &&
+      new URL(item.url, location.href).pathname === ginaProfilePath;
     if ((archivePath === "/dunst/abroad/2006/06_05_27_berlin_plastique/index.html" && item.image.endsWith("/video_fish.jpg")) ||
         (archivePath === "/dunst/abroad/2006/06_04_28_amsterdam/index.html" && item.image.endsWith("/video_01_00.jpg"))) continue;
     const pressArticle = !archivePath.startsWith("/dunst/press/") &&
@@ -4364,6 +4392,13 @@ function showGallery(preserveMain = false) {
         details.append(summary, body);
         card.append(details);
       } else card.append(body);
+    }
+    if (isGinaGuestCard) {
+      const link = document.createElement("a");
+      link.href = archiveRoute(null, ginaProfilePath);
+      link.setAttribute("aria-label", ginaProfileName);
+      link.append(...card.childNodes);
+      card.append(link);
     }
     if (!shaveVideo && !kunstVideo && document.body.classList.contains("archive-detail") && !document.body.classList.contains("hr-fru-candidates-page")) {
       const fitToImage = () => {

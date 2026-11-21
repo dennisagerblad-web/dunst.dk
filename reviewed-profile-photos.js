@@ -1,5 +1,79 @@
 // Existing event photos selected for the performer and DJ profiles.
 const dunstReviewedProfilePhotos = {
+  "/dunst/01_performere/27_gina/index.html": [
+    {
+      "image": "/dunst/02_parties/fest_22_rode_rave_rovhul_pyramide/images/IMG_0817.jpg",
+      "event": "/dunst/02_parties/fest_22_rode_rave_rovhul_pyramide/index.html",
+      "year": 2006,
+      "eventName": "Rode Rage Røvhuls Pyramide Fest",
+      "width": 450,
+      "height": 337,
+      "alt": "Gina La Mirage i pink mønstret kjole og kort mørkt hår"
+    },
+    {
+      "image": "/dunst/02_parties/fest_21_shave_your_pet/images/IMG_0061.jpg",
+      "event": "/dunst/02_parties/fest_21_shave_your_pet/index.html",
+      "year": 2006,
+      "eventName": "Shave Your Pet",
+      "width": 450,
+      "height": 337,
+      "alt": "Gina La Mirage i blond paryk rækker tunge i køkkenet"
+    },
+    {
+      "image": "/dunst/abroad/2006/06_04_28_amsterdam/images/IMG_9057.jpg",
+      "event": "/dunst/abroad/2006/06_04_28_amsterdam/index.html",
+      "year": 2006,
+      "eventName": "Roze Wester Festival",
+      "width": 450,
+      "height": 338,
+      "alt": "Nærbillede af Gina La Mirage i blond paryk og sort jakke"
+    },
+    {
+      "image": "/dunst/03_events/2006/06_04_12_boy_george/images/IMG_8863.jpg",
+      "event": "/dunst/03_events/2006/06_04_12_boy_george/index.html",
+      "year": 2006,
+      "eventName": "Boy George på Vega",
+      "width": 450,
+      "height": 338,
+      "alt": "Gina La Mirage i rød kjole sidder mellem to andre gæster på Vega"
+    },
+    {
+      "image": "/dunst/03_events/2006/06_03_23_natfilmfestival/images/IMG_8665.jpg",
+      "event": "/dunst/03_events/2006/06_03_23_natfilmfestival/index.html",
+      "year": 2006,
+      "eventName": "Nat Film Festival",
+      "width": 450,
+      "height": 337,
+      "alt": "Gina La Mirage i blond paryk, sort jakke og rødt tørklæde"
+    },
+    {
+      "image": "/dunst/abroad/2005/05_09_03_milch_nakkeost/images/IMG_6712.jpg",
+      "event": "/dunst/abroad/2005/05_09_03_milch_nakkeost/index.html",
+      "year": 2005,
+      "eventName": "Zürich, Switzerland – Nakkeost",
+      "width": 450,
+      "height": 337,
+      "alt": "Gina La Mirage i vinrød top foran et metalstativ"
+    },
+    {
+      "image": "/dunst/02_parties/fest_18_hr_fru/kandidater/kandidat_gina_01.jpg",
+      "event": "/dunst/02_parties/fest_18_hr_fru/index.html",
+      "year": 2004,
+      "eventName": "HR&Fru dunst",
+      "width": 376,
+      "height": 500,
+      "alt": "Gina La Mirage poserer i sort lakdragt og blond paryk"
+    },
+    {
+      "image": "/dunst/02_parties/fest_16_coma/coma_55.jpg",
+      "event": "/dunst/02_parties/fest_16_coma/index.html",
+      "year": 2004,
+      "eventName": "dunst går i COMA",
+      "width": 450,
+      "height": 338,
+      "alt": "Gina La Mirage og Unni side om side til dunst går i COMA"
+    }
+  ],
   "/dunst/dj/oli_viagra.html": [
     {
       "image": "/dunst/02_parties/fest_21_shave_your_pet/images/IMG_0166.jpg",

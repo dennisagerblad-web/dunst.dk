@@ -24062,6 +24062,14 @@ window.DUNST_ARCHIVE_DATA = {
     ],
     "gallery": [
       {
+        "image": "/dunst/02_parties/fest_18_hr_fru/kandidater/kandidat_gina_01.jpg",
+        "url": "https://dunst.dk/dunst/01_performere/27_gina/index.html",
+        "alt": "Gina La Mirage poserer i sort lakdragt og blond paryk",
+        "detail_lines": [
+          "Gina La Mirage"
+        ]
+      },
+      {
         "image": "/dunst/02_parties/fest_13_cross_dress/cross_ernalise_01.jpg",
         "url": "https://dunst.dk/dunst/01_performere/guests/ernalise/index.html",
         "alt": "",
