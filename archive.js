@@ -122,6 +122,7 @@ if (archivePath === "/dunst/film/music_videos/index.html") document.body.classLi
 if (archivePath === "/dunst/03_events/2004/04_07_17_belgrade_pride/index.html") document.body.classList.add("belgrade-demo-page");
 if (archivePath === "/dunst/02_parties/fest_06_lefreak/index.html") document.body.classList.add("lefreak-page");
 if (archivePath === guestPerformersPath) document.body.classList.add("guest-performers-overview");
+if (archivePath === zenRapKatPath) document.body.classList.add("zenrapkat-profile");
 if (archivePath === "/dunst/film/04_08_04_playing_tourist/index.html") document.body.classList.add("playing-tourist-page");
 if (archivePath === "/dunst/film/kanal_dunst/index.html") document.body.classList.add("kanal-dunst-page");
 if (archivePath === "/dunst/film/05_09_28_videomarathon/index.html") document.body.classList.add("videomarathon-page");

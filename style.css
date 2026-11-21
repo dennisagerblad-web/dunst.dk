@@ -690,6 +690,7 @@ details[open] > summary::after { transform: rotate(180deg); }
 }
 .performer-memorial p { margin: 0; padding-block: 4px; }
 .performer-memorial span { display: block; }
+.zenrapkat-profile .performer-memorial span { display: inline; }
 .archive-content .performer-memorial img {
   display: block;
   flex: none;
@@ -705,6 +706,7 @@ details[open] > summary::after { transform: rotate(180deg); }
 .performer-profile-content .hairwerk-year .grid { gap: var(--box-gap); margin-top: var(--box-gap); }
 .performer-profile .archive-content table.profile-card,
 .performer-profile .archive-content table.profile-card.ramme { flex: 0 1 auto; width: var(--profile-image-width, max-content) !important; max-width: 100%; margin: 0 !important; }
+.zenrapkat-profile .archive-content > table.profile-card.ramme { margin-inline: auto !important; text-align: center; }
 .performer-profile .archive-content table.profile-card { border: 1px solid var(--purple) !important; background: transparent !important; }
 .performer-profile .archive-content table.profile-card > tbody > tr > td:not(.head) { padding: var(--box-inset) !important; background: transparent !important; }
 .performer-profile .archive-content table.profile-card > tbody > tr > td:has(img):not(.head) { padding: 0 !important; }
