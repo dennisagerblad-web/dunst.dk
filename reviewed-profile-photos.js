@@ -316,6 +316,18 @@ const dunstReviewedProfilePhotos = {
       "alt": "Bjarne pigen i lys, krøllet paryk foran en væg med kort"
     }
   ],
+  "/dunst/01_performere/13_grr-it/index.html": [
+    {
+      "image": "/dunst/recommends/2003/03_12_02_homo_homo_homo/homo_gritt_01.jpg",
+      "width": 338,
+      "height": 450,
+      "event": "/dunst/recommends/2003/03_12_02_homo_homo_homo/index.html",
+      "eventName": "Homo Homo Homo",
+      "year": 2003,
+      "alt": "Gritt Uldahl sidder ved baren i lys kjole, sort slips og sorte strømper",
+      "date": "2. december 2003"
+    }
+  ],
   "/dunst/01_performere/04_johnny_warehouse/index.html": [
     {
       "image": "/dunst/abroad/2004/04_03_27_supamolli/supamolli_johnny_01.jpg",

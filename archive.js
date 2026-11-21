@@ -3,6 +3,8 @@ const archiveVersionQuery = new URL(document.currentScript.src).search;
 const archivePath = archiveParams.get("path") ||
   (document.body.hasAttribute("data-performance-home") ? "/dunst/01_performere/200_billeder_help.html" : null);
 const skidtFilmPath = "/dunst/film/skidt_kommer_til/index.html";
+const dennisProfilePath = "/dunst/01_performere/03_dennis-agerblad/index.html";
+const obsoleteDennisProfileMedia = /\/(?:video_dennis_thom_00|oejet_i_natten)\.jpg$/;
 const nuclearProfilePath = "/dunst/01_performere/23_nuclear_family/index.html";
 const musicFrontPath = "/dunst/musik/index.html";
 const habibisPartyPath = "/dunst/02_parties/fest_19_habibis_exil/index.html";
@@ -2848,7 +2850,18 @@ async function showPerformerProfile() {
     }
     promoteProfileCard("2005", 1);
   }
-  if (archivePath === "/dunst/01_performere/03_dennis-agerblad/index.html") {
+  if (archivePath === dennisProfilePath) {
+    profile.querySelector('img[src$="/oejet_i_natten.jpg"]')?.closest("table.profile-card")?.remove();
+    const thumbnail = profile.querySelector('img[src$="/video_dennis_thom_00.jpg"]');
+    const preview = thumbnail?.closest("a") || thumbnail;
+    if (preview) {
+      const container = preview.parentElement;
+      preview.remove();
+      for (const node of [...container.childNodes]) {
+        if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() === "YouTube") node.remove();
+      }
+      trimImageCaptionStart(container);
+    }
     const homepage = profile.querySelector('a[href*="dennisagerblad.dk/dennis_frameset.html"]');
     if (homepage) {
       homepage.href = "https://dennisagerblad.dk/";
@@ -4213,6 +4226,7 @@ function showGallery(preserveMain = false) {
   grid.className = "grid";
   let pressGroupItems;
   for (const [index, item] of items.entries()) {
+    if (archivePath === dennisProfilePath && obsoleteDennisProfileMedia.test(item.image)) continue;
     if ((archivePath === "/dunst/abroad/2006/06_05_27_berlin_plastique/index.html" && item.image.endsWith("/video_fish.jpg")) ||
         (archivePath === "/dunst/abroad/2006/06_04_28_amsterdam/index.html" && item.image.endsWith("/video_01_00.jpg"))) continue;
     const pressArticle = !archivePath.startsWith("/dunst/press/") &&

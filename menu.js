@@ -62,7 +62,7 @@ function galleryDestination(url) {
   return route.href;
 }
 
-function menuAnchor(item, className) {
+function menuAnchor(item, className, activePath = currentArchivePath) {
   const anchor = document.createElement("a");
   anchor.className = className;
   anchor.href = menuDestination(item.url);
@@ -70,8 +70,8 @@ function menuAnchor(item, className) {
   if (item.color) anchor.style.color = item.color;
   if (item.newsletter) anchor.classList.add("newsletter-link");
   const currentMainPage = location.pathname.replace("-billeder.html", ".html");
-  const selected = currentArchivePath
-    ? new URL(item.url).pathname === currentArchivePath
+  const selected = activePath
+    ? new URL(item.url).pathname === activePath
     : anchor.pathname === currentMainPage;
   if (selected) anchor.setAttribute("aria-current", "page");
   return anchor;
@@ -184,9 +184,11 @@ for (const [index, section] of orderedMenu.entries()) {
     const inner = document.createElement("div");
     inner.className = "menu-children-inner";
     let hasCurrentPage = sectionLink.getAttribute("aria-current") === "page";
+    const firstNewsletter = section.newsletter && hasCurrentPage && section.children.find((item) => item.url);
+    const activeChildPath = firstNewsletter ? new URL(firstNewsletter.url).pathname : currentArchivePath;
     for (const child of section.children) {
       if (child.url) {
-        const link = menuAnchor(child, "menu-child");
+        const link = menuAnchor(child, "menu-child", activeChildPath);
         if (link.getAttribute("aria-current") === "page") hasCurrentPage = true;
         inner.append(link);
       } else {

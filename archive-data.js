@@ -24089,15 +24089,6 @@ window.DUNST_ARCHIVE_DATA = {
         ]
       },
       {
-        "image": "/dunst/01_performere/guests/zanne/zanne_arty_farty_01.jpg",
-        "url": "https://dunst.dk/dunst/01_performere/guests/zanne/index.html",
-        "alt": "",
-        "detail_lines": [
-          "Zanne",
-          "Guest performer."
-        ]
-      },
-      {
         "image": "/dunst/01_performere/guests/april/april_01.jpg",
         "url": "https://dunst.dk/dunst/01_performere/guests/april/index.html",
         "alt": "",
