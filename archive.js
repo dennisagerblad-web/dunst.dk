@@ -510,7 +510,7 @@ function unfoldFrontTable() {
   } else {
     const paragraph = document.createElement("p");
     paragraph.textContent = introduction.textContent.replace(/\s+/g, " ").trim();
-    intro.append(categoryFront === "abroad-front" ? eventStoryDisclosure(paragraph) : paragraph);
+    intro.append(paragraph);
   }
   const cards = document.createElement("div");
   cards.className = "front-cards";
