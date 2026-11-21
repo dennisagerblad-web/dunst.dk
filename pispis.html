@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="referrer" content="no-referrer">
   <title>pispis | dunst</title>
-  <link rel="stylesheet" href="style.css?v=20261121-pispis-login">
+  <link rel="stylesheet" href="style.css?v=20261121-open-archive">
 </head>
 <body class="pispis-preview">
   <header class="pispis-toolbar">
@@ -15,7 +15,6 @@
   </header>
   <div class="pispis-top" aria-hidden="true"><img src="/pispis/assets/fade_corner_121.jpg" width="150" height="121" alt=""></div>
   <main id="pispis-content" class="pispis-content"></main>
-  <script src="pispis-login.js?v=20261121-pispis-login"></script>
   <script>
     const content = document.getElementById("pispis-content");
     const index = document.getElementById("pispis-index");
@@ -104,35 +103,19 @@
       document.getElementById(location.hash.slice(1))?.scrollIntoView({ block: "start", behavior: "instant" });
     }
 
-    function loadArchive() {
-      fetch("/pispis/archive-no-at.html")
-        .then((response) => {
-          if (!response.ok) throw new Error("Archive unavailable");
-          return response.text();
-        })
-        .then((markup) => {
-          const source = new DOMParser().parseFromString(markup, "text/html");
-          const archive = source.getElementById("archive");
-          if (!archive) throw new Error("Archive missing");
-          archive.classList.remove("locked");
-          content.replaceChildren(archive);
-          buildIndex(archive);
-        })
-        .catch(() => { content.textContent = "pispis kunne ikke indlæses."; });
-    }
-
-    if (hasPispisLogin()) loadArchive();
-    else {
-      const login = document.createElement("section");
-      login.className = "home-utility-box menu-activist pispis-login";
-      const heading = document.createElement("h2");
-      heading.textContent = "pispis";
-      login.append(heading, createPispisLogin(() => {
-        login.remove();
-        loadArchive();
-      }));
-      content.append(login);
-    }
+    fetch("/pispis/archive-no-at.html?v=20261121-open-archive")
+      .then((response) => {
+        if (!response.ok) throw new Error("Archive unavailable");
+        return response.text();
+      })
+      .then((markup) => {
+        const source = new DOMParser().parseFromString(markup, "text/html");
+        const archive = source.getElementById("archive");
+        if (!archive) throw new Error("Archive missing");
+        content.replaceChildren(archive);
+        buildIndex(archive);
+      })
+      .catch(() => { content.textContent = "pispis kunne ikke indlæses."; });
   </script>
 </body>
 </html>

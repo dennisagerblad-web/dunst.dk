@@ -466,6 +466,13 @@ function unfoldFrontTable() {
       }
     }
   }
+  if (categoryFront === "events-front") {
+    const eventMenu = window.DUNST_PREVIEW_DATA.menu.find(item => item.label === "dunst EVENTS");
+    const order = new Map(eventMenu.children.filter(item => item.url)
+      .map((item, index) => [new URL(item.url).pathname, index]));
+    const rank = card => order.get(new URL(card.href).searchParams.get("path")) ?? order.size;
+    cards.append(...[...cards.children].sort((a, b) => rank(a) - rank(b)));
+  }
   panel.append(title, intro);
   archiveContent.replaceChildren(panel, cards);
 }

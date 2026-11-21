@@ -148,7 +148,7 @@
       :host {
         all: initial;
         --cookie-blue: #85e1fc;
-        --cookie-violet: #f0f;
+        --cookie-violet: var(--purple, #ff00ff);
         --cookie-yellow: #ff0;
         display: block;
         position: relative;
@@ -192,8 +192,8 @@
         min-width: 38px;
         min-height: 27px;
         padding: 2px 7px;
-        border: 1px solid #950097;
-        color: #950097;
+        border: 1px solid var(--cookie-violet);
+        color: var(--cookie-violet);
         background: var(--cookie-yellow);
         font-weight: 700;
       }

@@ -2,6 +2,8 @@
 <html lang="da">
 <head>
 <meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<script>location.replace("../pispis.html" + location.hash)</script>
 <title>dunst - Diskussionsforum</title>
 <style>
 BODY {
@@ -28,16 +30,13 @@ A:visited { text-decoration:underline; }
 .msg { box-sizing:border-box; width:100%; max-width:500px; margin:0 auto; padding-top:40px; }
 .msgText { box-sizing:border-box; font-size:11px; border:1px solid #FF00FF; background:#FFFFCC; width:100%; padding:4px; table-layout:fixed; overflow-wrap:anywhere; word-break:break-word; }
 DIV.msgWriter { box-sizing:border-box; margin:0; border-width:1px 1px 0px 1px; border-style:solid; border-color:#FF00FF; width:100%; }
-.locked { display:none; }
-.access-error { padding-top:18px; text-align:center; }
 </style>
 </head>
 <body>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" background="assets/fade_up_121.jpg">
   <tr><td><img src="assets/fade_corner_121.jpg" width="150" height="121" alt=""></td></tr>
 </table>
-<div id="access-error" class="access-error">Du har ikke adgang til denne side. Prøv at logge ind igen</div>
-<div id="archive" class="locked" align="center">
+<div id="archive" align="center">
   <div class="allmessages"><div class="msg"><div class="msgWriter">Skrevet af: <i>djuna</i> d. 18/04 - 2006 kl. 00:36<br></div>
 <table border="0" class="msgText"><tr><td>PEACHES kommer 25.april (jeg havde skrevet forker), altså en helt almindelig kedelig tirsdag aften og giver i forbindelse med promotion tur for det nye album, -  et dj-sæt på culture box. det starter ved ti-tiden og kommer til at koste 30-50 kroner....</td></tr></table>
 </div><div class="msg"><div class="msgWriter">Skrevet af: <i>Dennis</i> d. 17/04 - 2006 kl. 12:45<br></div>
@@ -16035,14 +16034,5 @@ http://www.dorfdisco.de/rev/2002/mignon_e.phtml  (artikel om hende)<br>
 Den anden hedder Namosh</td></tr></table>
 </div></div>
 </div>
-<script>
-const archive=document.getElementById('archive');
-const supplied=new URLSearchParams(location.search).get('pw');
-if(supplied==='pispis'){
-  document.getElementById('access-error').style.display='none';
-  archive.className='';
-  history.replaceState(null,'',location.pathname+location.hash);
-}
-</script>
 </body>
 </html>
