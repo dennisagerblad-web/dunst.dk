@@ -4,6 +4,7 @@ const archivePath = archiveParams.get("path") ||
 const hrFruRoot = "/dunst/02_parties/fest_18_hr_fru/";
 if (archivePath?.startsWith(hrFruRoot + "kandidater/")) document.body.classList.add("hr-fru-candidates-page");
 const archiveView = archiveParams.get("view");
+const skiDay = archivePath?.match(/^\/dunst\/abroad\/2003\/ski_ferie\/(09|10|11|12)\/index\.html$/)?.[1];
 Object.assign(window.DUNST_ARCHIVE_DATA, window.DUNST_RECOMMENDS.routes);
 const froekenDennisPhoto = "assets/froken-verden-dennis-malle-720.jpg";
 const froekenDennisAlt = "Dennis Agerblad optræder i færøsk nationaldragt, blond paryk og sorte støvler til Frøken Verden 2002";
@@ -156,9 +157,7 @@ function backFallback() {
   }
   if (archivePath === "/mobil/help.html") return archiveRoute(null, "/dunst/dj/dj_ny.html");
   if (archivePath === "/dunst/recommends/index.html") return new URL("index.html", location.href).href;
-  if (/^\/dunst\/abroad\/2003\/ski_ferie\/(09|10|11|12)\/index\.html$/.test(archivePath)) {
-    return archiveRoute(null, "/dunst/abroad/2003/ski_ferie/ski_oversigt.html");
-  }
+  if (skiDay) return archiveRoute(null, "/dunst/abroad/2003/ski_ferie/ski_oversigt.html");
   const fronts = [
     ["/dunst/recommends/", "/dunst/recommends/index.html"],
     ["/dunst/film/", "/dunst/film/index.html"],
@@ -180,7 +179,7 @@ function addBackLink() {
   const isMenuDestination = window.DUNST_PREVIEW_DATA.menu.some((section) =>
     [section, ...section.children].some((item) => item.url && new URL(item.url).pathname === archivePath));
   if (categoryFront || /^\/dunst\/press\/(?:20\d\d)\/index\.html$/.test(archivePath) ||
-      isMenuDestination ||
+      (isMenuDestination && !skiDay) ||
       document.body.matches(".newsletter-archive,.guestbook-archive,.links-archive") ||
       /^\/dunst\/01_performere\/(?:\d+_[^/]+|guests(?:\/[^/]+)?)\/index\.html$/.test(archivePath)) return;
   const link = document.createElement("a");
@@ -188,6 +187,7 @@ function addBackLink() {
   link.href = backFallback();
   link.textContent = "← Tilbage";
   link.addEventListener("click", (event) => {
+    if (skiDay) return;
     const referrer = document.referrer && new URL(document.referrer);
     if (referrer && referrer.origin === location.origin && referrer.pathname.startsWith(new URL("./", location.href).pathname) && history.length > 1) {
       event.preventDefault();
@@ -535,9 +535,14 @@ function unfoldPerformers() {
     }
   }
   bookingList.setAttribute("role", "list");
-  const copyPanel = document.createElement("div");
+  const copyPanel = document.createElement("details");
   copyPanel.className = "performers-booking-copy";
-  copyPanel.append(bookingList);
+  const summary = document.createElement("summary");
+  summary.textContent = "Læs mere";
+  copyPanel.append(summary, bookingList);
+  const setBookingOpen = () => { copyPanel.open = !mobileMenuQuery.matches; };
+  setBookingOpen();
+  mobileMenuQuery.addEventListener("change", setBookingOpen);
   bookingBox.append(bookingHeading, photoFigure, copyPanel);
 
   const gallery = document.createElement("div");
@@ -1865,10 +1870,13 @@ async function showKanalDunst() {
   press.append(heading, body);
   const photos = document.createElement("div");
   photos.className = "kanal-photo-grid";
-  for (let number = 1; number <= 20; number++) {
+  const photoOrder = [1, 3, 4, 5, 6, 7, 8, 9, 10, 2, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+  for (const number of photoOrder) {
     const image = document.createElement("img");
     image.src = `assets/kanal-dunst/kanal-dunst-${String(number).padStart(2, "0")}.jpg`;
-    image.alt = number === 1 ? "kANAL dunst-logo" : `Stillbillede ${number - 1} fra kANAL dunst`;
+    image.alt = number === 1 ? "kANAL dunst-logo"
+      : number === 2 ? "Doktor foran en sort og hvid spiral"
+      : `Stillbillede ${number - 1} fra kANAL dunst`;
     image.loading = "lazy";
     image.decoding = "async";
     photos.append(image);
@@ -1886,7 +1894,14 @@ async function showKanalDunst() {
     image.className = `kanal-${name}`;
     image.src = archiveAsset(`/dunst/film/kanal_dunst/images/${file}`).href;
     image.alt = "";
-    frame.append(image);
+    if (name === "top-left") {
+      const corner = document.createElement("picture");
+      const mobile = document.createElement("source");
+      mobile.media = mobileMenuQuery.media;
+      mobile.srcset = archiveAsset("/dunst/film/kanal_dunst/images/screen_left_top.gif").href;
+      corner.append(mobile, image);
+      frame.append(corner);
+    } else frame.append(image);
   }
   document.body.append(frame);
 }
@@ -2814,40 +2829,53 @@ async function showSkiOverview() {
   grid.className = "ski-overview-grid";
   for (const [index, cell] of [...source.rows[1].cells].entries()) {
     const day = ["09", "10", "11", "12"][index];
-    const dayText = cell.querySelector("a")?.textContent.replace(/\s+/g, " ").trim() || "";
-    const link = document.createElement("a");
-    link.className = "ski-day-link";
-    link.href = archiveRoute(null, `/dunst/abroad/2003/ski_ferie/${day}/index.html`);
+    const originalDate = cell.querySelector("a")?.textContent.replace(/\s+/g, " ").trim() || "";
     const title = document.createElement("h2");
-    title.textContent = dayText;
-    link.append(title);
+    title.textContent = `${Number(day)}. januar`;
+    const card = document.createElement("article");
+    card.className = "ski-day-card";
+    card.append(title);
+    const dayUrl = archiveRoute(null, `/dunst/abroad/2003/ski_ferie/${day}/index.html`);
     for (const original of cell.querySelectorAll("a img")) {
       const image = document.createElement("img");
       image.src = new URL(original.getAttribute("src").replace(/_00(?=\.(?:jpe?g|png|gif)$)/i, ""), url).href;
-      image.alt = dayText;
-      link.append(image);
+      image.alt = `Billeder fra ${title.textContent}`;
+      const photo = document.createElement("a");
+      photo.href = dayUrl;
+      photo.append(image);
+      card.append(photo);
     }
     const description = document.createElement("p");
-    description.textContent = cell.textContent.replace(dayText, "").replace(/\s+/g, " ").trim();
-    link.append(description);
-    grid.append(link);
+    const descriptionLink = document.createElement("a");
+    descriptionLink.href = dayUrl;
+    descriptionLink.textContent = cell.textContent.replace(originalDate, "").replace(/\s+/g, " ").trim();
+    description.append(descriptionLink);
+    card.append(description);
+    grid.append(card);
   }
   panel.append(heading, grid);
   archiveContent.replaceChildren(panel);
 }
 
 function showSkiDay(day) {
-  document.title = `Skiferie i Nordsverige – ${Number(day)} Januar 2003 | dunst`;
+  const dayLabel = `${Number(day)}. januar 2003`;
+  document.title = `Skiferie i Nordsverige – ${dayLabel} | dunst`;
   const sections = window.DUNST_SKI_DATA?.[day];
   if (!sections) throw new Error("Skiferiegalleriet mangler");
   archiveTitle.replaceChildren(document.createTextNode("Skiferie i Nordsverige"));
   const date = document.createElement("time");
-  date.textContent = `${Number(day)} Januar 2003`;
+  date.dateTime = `2003-01-${day}`;
+  date.textContent = dayLabel;
   archiveTitle.append(date);
   archiveTitle.hidden = false;
+  const header = document.createElement("header");
+  header.className = "panel ski-day-header";
+  archiveTitle.before(header);
+  header.append(archiveTitle);
+
   const content = document.createElement("div");
   content.className = "ski-day-sections";
-  for (const section of sections) {
+  for (const [index, section] of sections.entries()) {
     const group = document.createElement("section");
     group.className = "ski-day-section";
     const heading = document.createElement("h2");
@@ -2868,7 +2896,8 @@ function showSkiDay(day) {
       }
       grid.append(figure);
     }
-    group.append(heading, grid);
+    (index === 0 ? header : group).append(heading);
+    group.append(grid);
     content.append(group);
   }
   archiveContent.replaceChildren(content);
@@ -3232,7 +3261,6 @@ async function showMain() {
     await showPerformerProfile();
     return;
   }
-  const skiDay = archivePath?.match(/^\/dunst\/abroad\/2003\/ski_ferie\/(09|10|11|12)\/index\.html$/)?.[1];
   if (skiDay) { showSkiDay(skiDay); fitCaptionFigures(); return; }
   if (archivePath === "/dunst/abroad/2003/ski_ferie/ski_oversigt.html") { await showSkiOverview(); return; }
   const source = archivePath === "/dunst/abroad/2003/03_11_15_shadow_people/index.html"
@@ -3562,6 +3590,7 @@ async function showMain() {
         const row = heading.closest("tr");
         if (!/^dunst Calendar 20\d\d$/.test(label) || row?.textContent.trim() !== label) continue;
         archiveTitle.textContent = label;
+        archiveTitle.classList.replace("bar", "plain-page-title");
         archiveTitle.hidden = false;
         row.remove();
       }

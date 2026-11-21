@@ -38,8 +38,11 @@ body.radio-archive { background-image: url("/dunst/radio/radio_bg_01.jpg"); }
 body.recommends-archive { background-image: url("/dunst/recommends/recommends_bg_02.jpg"); }
 body.film-archive { color: #fff; background-color: #000; background-image: url("/dunst/film/film_bg_03.jpg"); }
 body.performers-front { background-color: #000; background-image: none; }
-body.performers-front::before { display: none; }
-body:is(.hairwerk, .music-archive, .radio-archive, .parties, .events-archive, .abroad, .cafe-archive, .film-archive, .recommends-archive)::before { display: none; }
+body:is(.performers-front, .film-archive)::before { display: none; }
+body:is(.parties, .events-archive, .abroad, .cafe-archive, .music-archive, .radio-archive, .recommends-archive)::before {
+  -webkit-mask-image: linear-gradient(to left, #000 12%, transparent 100%);
+  mask-image: linear-gradient(to left, #000 12%, transparent 100%);
+}
 body:is(.hairwerk, .music-archive, .radio-archive, .parties, .events-archive, .abroad, .cafe-archive, .film-archive, .recommends-archive) .main-area { padding-right: 24px; }
 body:is(.events-archive,.cafe-archive,.music-archive,.radio-archive,.recommends-archive,.film-archive,.abroad,.parties) { background-repeat: repeat-x; background-attachment: fixed; }
 a { color: var(--link); }
@@ -390,13 +393,17 @@ details[open] > summary::after { transform: rotate(180deg); }
 .shadow-people-gallery > a { display: block; width: max-content; max-width: 100%; margin: 20px auto 0; }
 .ski-overview-panel { border: 1px solid var(--purple); background: #c04e4e; }
 .ski-overview-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--box-gap); padding: var(--box-inset); }
-.ski-day-link { display: block; min-width: 0; padding: 6px; border: 1px solid var(--purple); background: #c04e4e; color: #ffffcc; text-decoration: none; }
-.abroad .archive-content a.ski-day-link { color: var(--cream); }
-.ski-day-link h2 { margin: 0 0 8px; color: #ffffcc; font-size: 17px; text-decoration: underline; }
-.ski-day-link img { display: block; width: auto; max-width: 100%; height: auto; margin: 0 auto 8px; }
-.ski-day-link p { margin: 6px 0 0; color: #fff; }
+.ski-day-card { min-width: 0; padding: 6px; border: 1px solid #000; background: #c04e4e; }
+.ski-day-card h2 { margin: 0 0 8px; color: var(--cream); font-size: 17px; }
+.ski-day-card > a { display: block; width: fit-content; max-width: 100%; margin-inline: auto; }
+.ski-day-card img { display: block; width: auto; max-width: 100%; height: auto; margin: 0 auto 8px; }
+.ski-day-card p { margin: 6px 0 0; }
+.abroad .archive-content .ski-day-card p a { display: block; color: var(--cream); text-decoration: underline; }
+.ski-day-header { margin-bottom: var(--box-gap); }
 .ski-day-section + .ski-day-section { margin-top: var(--box-gap); }
-.ski-day-section h2 { margin: 0 0 15px; padding: 6px 10px; border: 1px solid var(--purple); background: var(--cream); color: #000; font-size: 18px; line-height: 1.4; }
+:is(.ski-day-header, .ski-day-section) h2 { padding: 6px 10px; background: var(--cream); color: #000; font-size: 18px; line-height: 1.4; }
+.ski-day-header h2 { margin: 0; }
+.ski-day-section h2 { margin: 0 0 15px; border: 1px solid var(--purple); }
 .ski-day-photos { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: var(--box-gap); }
 .ski-day-photos figure { width: max-content; max-width: 100%; margin: 0; padding: 5px; border: 1px solid var(--purple); background: #c04e4e; color: #fff; }
 .ski-day-photos img { display: block; width: auto; max-width: 100%; height: auto; }
@@ -437,6 +444,7 @@ details[open] > summary::after { transform: rotate(180deg); }
 }
 .performers-booking .front-heading { padding: 6px 10px; font-size: 16px; }
 .performers-booking-copy { padding: 8px 10px; background: rgb(0 0 0 / 80%); }
+.performers-booking-copy summary { display: none; color: #fff; text-decoration: underline; text-underline-offset: 2px; }
 .performers-photo-figure { position: relative; margin: 0; }
 .performers-group-photo { display: block; width: 100% !important; max-width: 100% !important; height: auto; margin: 0 auto !important; }
 .performers-photo-open { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
@@ -449,7 +457,6 @@ details[open] > summary::after { transform: rotate(180deg); }
 .performers-photo-close:focus-visible, .performers-photo-open:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 .performers-booking ul { margin: 0; padding-inline-start: 18px; columns: 2; column-gap: 18px; }
 .performers-booking li { break-inside: avoid; }
-@media (max-width: 560px) { .performers-booking ul { columns: 1; } }
 .performers-grid { columns: 5 170px; column-gap: 0; width: 100%; }
 .performers-grid a { display: block; break-inside: avoid; width: 100%; }
 .performers-grid img { display: block; width: 100% !important; max-width: none; height: auto; margin: 0; }
@@ -1148,6 +1155,8 @@ body.pispis-preview::before { display: none; }
   .cross-dress-page .cross-dress-centered font[size="7"] { font-size: 42px !important; }
   .cross-dress-page .cross-dress-centered font[size="6"] { font-size: 28px !important; }
   .performers-booking { position: fixed; top: calc(50dvh + 36px); left: 50%; width: min(calc(100vw - 44px), 380px); max-height: calc(100dvh - 96px); font-size: 14px; overflow: auto; transform: translate(-50%, -50%); }
+  .performers-booking-copy summary { display: block; width: fit-content; }
+  .performers-booking-copy[open] ul { margin-top: 8px; }
   .performers-booking ul { padding-inline-start: 0; list-style: none; }
   .performers-grid { column-count: 2; column-width: auto; }
   .dj-intro > .ramme { flex-basis: 100%; width: min(100%, 260px) !important; }
@@ -1157,7 +1166,7 @@ body.pispis-preview::before { display: none; }
   .skidt-film-page .archive-content > table.ramme tr:first-child .head { display: block; box-sizing: border-box; width: 100% !important; }
   .skidt-film-page .archive-content > table.ramme tr:first-child .head:first-child { border-bottom: 0; }
   body { font-size: 18px; line-height: 1.55; }
-  body::before { width: 24px; background: linear-gradient(to left, #ffffcc, transparent); }
+  body::before { width: 24px; background-size: 24px 100px, 24px 75px; }
   body.menu-open { overflow: hidden; }
   .layout { display: block; }
   .sidebar { display: none; }
@@ -1178,7 +1187,9 @@ body.pispis-preview::before { display: none; }
   .main-area { padding: 28px 24px 48px 12px; }
   .kanal-dunst-page .main-area { padding-top: 105px; padding-bottom: 190px; }
   .kanal-intro { flex-direction: column; align-items: center; }
-  .kanal-tv-frame { top: 72px; left: 0; }
+  .kanal-dunst-page { --kanal-mobile-bar-height: 72px; }
+  .kanal-dunst-page .mobile-header { min-height: var(--kanal-mobile-bar-height); background: #fff; }
+  .kanal-tv-frame { top: var(--kanal-mobile-bar-height); left: 0; }
   .kanal-tv-frame .kanal-top-left, .kanal-tv-frame .kanal-bottom-left { width: min(213px, 42vw); }
   .kanal-tv-frame .kanal-top-right, .kanal-tv-frame .kanal-bottom-right { width: min(287px, 55vw); }
   .radio-links .ramme img { max-width: calc(100vw - 46px); }

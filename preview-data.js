@@ -428,7 +428,7 @@ window.DUNST_PREVIEW_DATA = {
         },
         {
           "label": "Skiferie i Sverige",
-          "url": "https://dunst.dk/dunst/abroad/2003/ski_ferie/10/index.html",
+          "url": "https://dunst.dk/dunst/abroad/2003/ski_ferie/ski_oversigt.html",
           "color": "#E71A1A"
         }
       ]

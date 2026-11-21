@@ -2,8 +2,6 @@ const menuPreviewRoutes = new Map([
   ["/dunst/02_parties/index.html", "parties.html"],
   ["/dunst/01_performere/05_hairwerk/index.html", "hairwerk.html"],
 ]);
-const skiOriginalMenuPath = "/dunst/abroad/2003/ski_ferie/10/index.html";
-const skiOverviewPath = "/dunst/abroad/2003/ski_ferie/ski_oversigt.html";
 const previewBuild = "20261120-dunst-launch";
 const mobileMenuQuery = matchMedia("(max-width: 720px), (max-width: 1024px) and (max-height: 500px)");
 const performanceHomePath = "/dunst/01_performere/200_billeder_help.html";
@@ -47,7 +45,7 @@ function menuDestination(url) {
     return route.href;
   }
   const route = new URL("archive.html", location.href);
-  route.searchParams.set("path", original.pathname === skiOriginalMenuPath ? skiOverviewPath : original.pathname);
+  route.searchParams.set("path", original.pathname);
   for (const [key, value] of original.searchParams) route.searchParams.set(key, value);
   route.searchParams.set("v", previewBuild);
   route.hash = original.hash;
@@ -73,7 +71,7 @@ function menuAnchor(item, className) {
   if (item.newsletter) anchor.classList.add("newsletter-link");
   const currentMainPage = location.pathname.replace("-billeder.html", ".html");
   const selected = currentArchivePath
-    ? new URL(item.url).pathname === currentArchivePath || (new URL(item.url).pathname === skiOriginalMenuPath && currentArchivePath === skiOverviewPath)
+    ? new URL(item.url).pathname === currentArchivePath
     : anchor.pathname === currentMainPage;
   if (selected) anchor.setAttribute("aria-current", "page");
   return anchor;
