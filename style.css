@@ -20,15 +20,16 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; background-color: var(--cream); }
-html:has(body:is(.performers-front, .film-archive)) { background-color: #000; }
+html { scroll-behavior: smooth; background-color: var(--canvas-color, var(--cream)); }
+html:has(body:is(.performers-front, .film-archive)) { --canvas-color: #000; }
 html:has(body.performers-front) { scroll-behavior: auto; }
 body {
   --page-background-image: url("/dunst/0/images/fade_op.jpg");
+  --page-surface-color: #fff;
   isolation: isolate;
   margin: 0;
   color: #000;
-  background-color: #fff;
+  background-color: var(--page-surface-color);
   font: var(--body-font-size)/var(--body-line-height) Verdana, Arial, Helvetica, sans-serif;
 }
 /* A viewport layer also keeps page artwork fixed on mobile Safari. */
@@ -57,8 +58,8 @@ body.cafe-archive { --page-background-image: url("/dunst/cafe/cafe_bg_02.jpg"); 
 body.music-archive { --page-background-image: url("/dunst/musik/musik_bg_03.jpg"); }
 body.radio-archive { --page-background-image: url("/dunst/radio/radio_bg_01.jpg"); }
 body.recommends-archive { --page-background-image: url("/dunst/recommends/recommends_bg_02.jpg"); }
-body.film-archive { --page-background-image: url("/dunst/film/film_bg_03.jpg"); color: #fff; background-color: #000; }
-body.performers-front { --page-background-image: none; background-color: #000; }
+body.film-archive { --page-background-image: url("/dunst/film/film_bg_03.jpg"); --page-surface-color: #000; color: #fff; }
+body.performers-front { --page-background-image: none; --page-surface-color: #000; }
 body:is(.performers-front, .film-archive)::before { display: none; }
 body:is(.parties, .events-archive, .abroad, .cafe-archive, .music-archive, .radio-archive, .recommends-archive)::before {
   -webkit-mask-image: linear-gradient(to left, #000 12%, transparent 100%);
@@ -1242,7 +1243,7 @@ body.calendar-archive::before {
 .dunst-dims img { display: block; width: 10px; height: 17px; }
 .pis-page { min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 16px; }
 .pis-link { color: var(--purple); font: 700 36px/1.15 Verdana, Arial, Helvetica, sans-serif; text-align: center; }
-body.pispis-preview { background-color: #85e1fc; }
+body.pispis-preview { --page-surface-color: var(--blue); }
 body.pispis-preview::before {
   width: 100%;
   z-index: -1;
@@ -1461,8 +1462,20 @@ body.pispis-preview::before {
   :root {
     --landscape-edge-left: max(12px, env(safe-area-inset-left, 0px));
     --landscape-edge-right: max(12px, env(safe-area-inset-right, 0px));
+    --landscape-edge-color: var(--cream);
+    background-color: var(--landscape-edge-color);
   }
-  html:has(body:is(.performers-front, .film-archive)) { background-color: var(--cream); }
+  :root:has(body:is(.performers-front, .film-archive)) { --landscape-edge-color: #000; }
+  :root:has(body.kanal-dunst-page) { --landscape-edge-color: #fff; }
+  :root:has(body.pispis-preview) { --landscape-edge-color: var(--blue); }
+  /* iOS can use the document's solid color outside the viewport. */
+  body {
+    background-color: var(--landscape-edge-color);
+    background-image: linear-gradient(var(--page-surface-color), var(--page-surface-color));
+    background-repeat: no-repeat;
+    background-position: var(--landscape-edge-left) 0;
+    background-size: calc(100% - var(--landscape-edge-left) - var(--landscape-edge-right)) 100%;
+  }
   body > .layout, body.pispis-preview {
     padding-inline: var(--landscape-edge-left) var(--landscape-edge-right);
   }
@@ -1472,8 +1485,8 @@ body.pispis-preview::before {
     position: fixed;
     inset: 0;
     z-index: 21;
-    border-left: var(--landscape-edge-left) solid var(--cream);
-    border-right: var(--landscape-edge-right) solid var(--cream);
+    border-left: var(--landscape-edge-left) solid var(--landscape-edge-color);
+    border-right: var(--landscape-edge-right) solid var(--landscape-edge-color);
     pointer-events: none;
   }
 }
