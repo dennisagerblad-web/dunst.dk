@@ -85,7 +85,7 @@
     if (consent && !hadConsent) recordOpenFrames();
   }
   function show() {
-    lastFocus = preferenceButton;
+    lastFocus = document.activeElement;
     banner.querySelector('details').open = false;
     banner.hidden = false;
     banner.querySelector('button').focus();
@@ -136,7 +136,8 @@
     }
   }
   function init() {
-    if (!document.body || document.body.tagName === 'FRAMESET' || !analyticsAllowed) return;
+    preferenceButton = document.querySelector('.menu-statistics');
+    if (!preferenceButton || !analyticsAllowed) return;
     window.SiteStatistics = { showPreferences: show };
     const host = document.createElement('div');
     host.dataset.statisticsIgnore = '';
@@ -214,7 +215,6 @@
       .details-copy { clear: both; padding-top: 5px; }
       p { margin: 0 0 2px; }
       :is(button, summary, a):focus-visible { outline: 2px solid var(--cookie-blue); outline-offset: 2px; }
-      .settings { display: block; margin: 0 16px 0 auto; padding: 8px 0; min-height: 44px; border: 0; color: #333; background: #fff; font-size: 14px; text-decoration: underline; }
     </style><section role="region" aria-label="Valg af statistikcookies" hidden>
       <header>
         <h2>Tillad cookies?</h2>
@@ -240,8 +240,8 @@
           </div>
         </details>
       </div>
-    </section><button type="button" class="settings" hidden>Statistikvalg</button>`;
-    banner=root.querySelector('section');preferenceButton=root.querySelector('.settings');
+    </section>`;
+    banner=root.querySelector('section');
     root.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.choice)));
     preferenceButton.addEventListener('click',show);
     const choice=readConsent();

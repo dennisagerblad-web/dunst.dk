@@ -98,7 +98,8 @@ menuRoot.addEventListener("click", (event) => {
   const link = event.target.closest("a.menu-child, a.menu-link");
   if (!link || !isPlainClick(event)) return;
   const child = link.classList.contains("menu-child");
-  if (!child && (!mobileMenuQuery.matches || link.getAttribute("aria-current") === "page")) return;
+  if (!child && (!mobileMenuQuery.matches || link.getAttribute("aria-current") === "page" ||
+      link.parentElement.querySelector('.menu-expander[aria-expanded="true"]'))) return;
   const offset = link.getBoundingClientRect().top - menuSidebar.getBoundingClientRect().top;
   sessionStorage.setItem("dunst-menu-scroll", JSON.stringify({target: link.href, top: menuSidebar.scrollTop, offset}));
   if (child) {
@@ -223,7 +224,7 @@ for (const [index, section] of orderedMenu.entries()) {
     button.addEventListener("click", () => toggleMenuGroup(state));
     sectionLink.addEventListener("click", (event) => {
       if (!isPlainClick(event)) return;
-      if (sectionLink.getAttribute("aria-current") === "page") {
+      if (state.isOpen || sectionLink.getAttribute("aria-current") === "page") {
         event.preventDefault();
         toggleMenuGroup(state);
         return;
@@ -306,26 +307,29 @@ const activistBox = document.createElement("section");
 activistBox.className = "home-utility-box menu-activist";
 const activistHeading = document.createElement("h2");
 activistHeading.textContent = "dunst Activist";
-const activistForm = document.createElement("form");
-activistForm.className = "activist-form";
-activistForm.action = "pispis.html";
-activistForm.method = "get";
-const activistPassword = document.createElement("input");
-activistPassword.type = "password";
-activistPassword.setAttribute("aria-label", "Adgangskode til dunst Activist");
-activistPassword.autocomplete = "off";
-const activistSubmit = document.createElement("button");
-activistSubmit.type = "submit";
-activistSubmit.textContent = "Login";
-activistForm.append(activistPassword, activistSubmit);
-activistForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  sessionStorage.setItem("dunst-pispis-entry", activistPassword.value === "pispis" ? "allow" : "deny");
-  activistPassword.value = "";
-  location.assign("pispis.html");
+const activistEntry = document.createElement("div");
+activistEntry.className = "activist-entry";
+const activistField = document.createElement("input");
+activistField.type = "text";
+activistField.value = "pispis";
+activistField.readOnly = true;
+activistField.setAttribute("aria-label", "pispis");
+const activistLink = document.createElement("a");
+activistLink.href = "pispis.html";
+activistLink.textContent = "Login";
+activistEntry.append(activistField, activistLink);
+activistBox.append(activistHeading, activistEntry);
+
+const statisticsButton = document.createElement("button");
+statisticsButton.className = "menu-statistics";
+statisticsButton.type = "button";
+statisticsButton.textContent = "Statistikvalg";
+statisticsButton.dataset.statisticsIgnore = "";
+statisticsButton.hidden = true;
+statisticsButton.addEventListener("click", () => {
+  if (mobileMenuQuery.matches) setDrawerOpen(false, true);
 });
-activistBox.append(activistHeading, activistForm);
-menuRoot.append(activistBox, attribution);
+menuRoot.append(activistBox, attribution, statisticsButton);
 
 const simpleFront = orderedMenu.find((section) => !section.children.length &&
   new URL(section.url).pathname === currentArchivePath);

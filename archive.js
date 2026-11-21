@@ -369,6 +369,9 @@ function upgradeFrontImages() {
     const original = "/" + path.slice(archiveBase.pathname.length);
     const full = window.DUNST_FRONT_IMAGES?.[original];
     if (full) image.src = full;
+    if (full?.endsWith("/06_05_05_lars_von_trier/images/IMG_1157.jpg")) {
+      image.alt = "Lars von Trier og Søde Car O’lina til 50-års fødselsdagen";
+    }
     image.removeAttribute("width");
     image.removeAttribute("height");
   }
@@ -3574,8 +3577,27 @@ async function showMain() {
   fitCaptionFigures();
   frameRecommendsImages();
   compactImageCaptionSpacing(document.querySelector(".page"));
+  spaceArchiveBoxes(archiveContent);
   if (archivePath.startsWith("/dunst/02_parties/")) await window.DunstPartyCaptions?.apply(archivePath);
   if (archivePath.startsWith("/dunst/recommends/")) await window.DunstRecommendsCaptions?.apply(archivePath);
+}
+
+function spaceArchiveBoxes(container) {
+  const box = "table.ramme, .recommends-box, .legacy-box, .front-panel, .date-table-scroll";
+  for (const next of container.querySelectorAll(`:scope > :is(${box})`)) {
+    const breaks = [];
+    let previous = next.previousSibling;
+    while (previous && (previous.nodeName === "BR" ||
+        previous.nodeType === Node.COMMENT_NODE ||
+        previous.nodeType === Node.TEXT_NODE && !previous.textContent.trim())) {
+      if (previous.nodeName === "BR") breaks.push(previous);
+      previous = previous.previousSibling;
+    }
+    if (!previous?.matches?.(box)) continue;
+    breaks.forEach((node) => node.remove());
+    previous.classList.add("archive-box-before");
+    next.classList.add("archive-box-after");
+  }
 }
 
 function fitCaptionFigures() {

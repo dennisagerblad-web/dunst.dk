@@ -24,7 +24,7 @@ window.DUNST_FRONT_IMAGES = {
   "/dunst/radio/02/sune_mads_flyer_00.jpg": "/dunst/radio/02/sune_mads_flyer.jpg",
   "/dunst/radio/01/radio_dunst_00.jpg": "/dunst/radio/01/radio_dunst.jpg",
   "/dunst/press/logoer/dr_uland_p1_logo_00.gif": "/dunst/press/logoer/dr_uland_p1_logo.gif",
-  "/dunst/03_events/2006/06_05_05_lars_von_trier/thumbnails/lars_von_trier_00.jpg": "/dunst/03_events/2006/06_05_05_lars_von_trier/thumbnails/lars_von_trier_00.jpg",
+  "/dunst/03_events/2006/06_05_05_lars_von_trier/thumbnails/lars_von_trier_00.jpg": "/dunst/03_events/2006/06_05_05_lars_von_trier/images/IMG_1157.jpg",
   "/dunst/03_events/2003/pride_dk/dennis_agerblad_01_00.jpg": "/dunst/03_events/2003/pride_dk/dennis_agerblad_01.jpg",
   "/dunst/03_events/2001/mermaid_pride/banner_homospot_01_00.jpg": "/dunst/03_events/2001/mermaid_pride/banner_homospot_01.jpg",
   "/dunst/03_events/2002/mermaid_pride/mermaid_banner_02_00.jpg": "/dunst/03_events/2002/mermaid_pride/mermaid_banner_02.jpg",
