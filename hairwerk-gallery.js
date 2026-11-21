@@ -44,10 +44,11 @@ for (const [index, item] of window.DUNST_PREVIEW_DATA.hairwerk.entries()) {
 
   const images = document.createElement("div");
   images.className = "legacy-box-images";
+  if (item.stacked) images.classList.add("is-stacked");
   for (const [imageIndex, source] of item.images.entries()) {
     const image = document.createElement("img");
     image.src = source;
-    image.alt = csdPhoto?.alt || item.alt || `Hairwerk, billede ${index + 1}.${imageIndex + 1}`;
+    image.alt = csdPhoto?.alt || item.image_alts?.[imageIndex] || item.alt || `Hairwerk, billede ${index + 1}.${imageIndex + 1}`;
     image.loading = index < 3 ? "eager" : "lazy";
     images.append(image);
   }
@@ -90,9 +91,11 @@ for (const [index, item] of window.DUNST_PREVIEW_DATA.hairwerk.entries()) {
 
   if (body.childNodes.length) card.append(body);
   const fitCard = () => {
-    const pictures = [...images.querySelectorAll("img")];
-    const width = pictures.reduce((sum, picture) => sum + (picture.naturalWidth || 0), 0);
-    if (width) card.style.setProperty("--legacy-image-width", `${width + Math.max(0, pictures.length - 1) * 8 + 2}px`);
+    const widths = [...images.children].map((picture) => picture.naturalWidth);
+    const widest = Math.max(0, ...widths);
+    if (!widest) return;
+    const width = item.stacked ? widest : widths.reduce((sum, size) => sum + size, 0) + (widths.length - 1) * 8;
+    card.style.setProperty("--legacy-image-width", `${width + 2}px`);
   };
   for (const picture of images.querySelectorAll("img")) picture.addEventListener("load", fitCard, { once: true });
   fitCard();

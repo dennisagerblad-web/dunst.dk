@@ -1399,10 +1399,17 @@ window.DUNST_PREVIEW_DATA = {
       "url": "https://dunst.dk/dunst/abroad/2005/05_10_07_be_queer_02/index.html",
       "images": [
         "/dunst/abroad/2005/05_10_07_be_queer_02/images/IMG_7451.jpg",
-        "/dunst/abroad/2005/05_10_07_be_queer_02/images/IMG_7512.jpg"
+        "/dunst/abroad/2005/05_10_07_be_queer_02/images/IMG_7512.jpg",
+        "/dunst/abroad/2005/05_10_07_be_queer_02/images/IMG_7434.jpg"
       ],
+      "image_alts": [
+        "Hairwerk med neongul paryk, sort øjenmakeup og striber over ansigtet",
+        "Hairwerk i nettrøje ved siden af Liebling Siebling bag et gelænder",
+        "Hairwerk i grøn vest med lyserød øjenmakeup og kort lyst hår"
+      ],
+      "stacked": true,
       "year": "2005",
-      "source_text": "Abroad Day 2. Day 1. Photo from: Be Queer #2 Dunkerque, Frankrig",
+      "source_text": "Be Queer #2 Dunkerque, Frankrig",
       "box_class": "abroad",
       "box_bgcolor": null,
       "box_heading": ""
