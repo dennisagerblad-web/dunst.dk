@@ -6,9 +6,9 @@ const previewBuild = "20261120-dunst-launch";
 const mobileMenuQuery = matchMedia("(max-width: 720px), (max-width: 1024px) and (max-height: 500px)");
 const performanceHomePath = "/dunst/01_performere/200_billeder_help.html";
 const menuOrder = [
-  "PERFORMANCE GROUP", "dunst MUSIC", "dunst RADIO", "dunst PARTIES", "dunst EVENTS",
-  "dunst ABROAD", "dunst CAFÉ", "dunst FILMS", "dunst CALENDAR", "dunst DJ's",
-  "dunst HISTORY", "the PRESS", "dunst GUESTBOOK", "dunst NEWSLETTER", "dunst RECOMENDS", "LINKS",
+  "PERFORMANCE GROUP", "dunst DJ's", "dunst MUSIC", "dunst RADIO", "dunst PARTIES", "dunst EVENTS",
+  "dunst ABROAD", "dunst CAFÉ", "dunst FILMS", "dunst RECOMENDS", "dunst CALENDAR",
+  "dunst HISTORY", "the PRESS", "dunst GUESTBOOK", "dunst NEWSLETTER", "LINKS",
 ];
 const recommendsChildren = [];
 let recommendsYear;
@@ -63,6 +63,7 @@ function galleryDestination(url) {
 }
 
 function menuLabel(label) {
+  if (label === "dunst FILMS") return "Film";
   return label.replace(/^dunst\s+(?:&\s+)?/i, "").toLocaleLowerCase("da")
     .replace(/^\p{L}/u, (letter) => letter.toLocaleUpperCase("da"));
 }
