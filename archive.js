@@ -1858,14 +1858,15 @@ async function showPlayingTourist() {
   const base = "/dunst/film/04_08_04_playing_tourist/";
   const slidePage = await readLegacyPage(archiveAsset(`${base}playing_doll_01.html`));
   const slideTable = slidePage.doc.querySelector("table.ramme");
-  const slideCaption = slideTable?.rows[2]?.textContent.replace(/\s+/g, " ").trim() || "";
+  const slideCaption = slideTable?.rows[2]?.textContent.replace(/\s+/g, " ").trim()
+    .replace("udstillings dukke i butik på Strædet, KBH.", "udstillingsdukke i en butik på Strædet i København.") || "";
   const slideshow = document.createElement("section");
   slideshow.className = "playing-slideshow";
   const heading = document.createElement("h1");
   heading.className = "bar playing-title";
   heading.append(document.createTextNode("Playing tourist"));
   const date = document.createElement("time");
-  date.textContent = slideTable?.rows[0]?.cells[1]?.textContent.trim() || "";
+  date.textContent = slideTable?.rows[0]?.cells[1]?.textContent.trim().replace("August", "august") || "";
   heading.append(date);
   const figure = document.createElement("figure");
   const animatedImage = document.createElement("img");
@@ -1901,6 +1902,7 @@ async function showPlayingTourist() {
     if (captionCell?.textContent.trim()) {
       const caption = document.createElement("figcaption");
       caption.append(...captionCell.childNodes);
+      if (caption.textContent.trim() === "Dennis Agerblad i Taxa.") caption.textContent = "Dennis Agerblad i taxa.";
       image.alt = caption.textContent.replace(/\s+/g, " ").trim();
       photo.append(caption);
     } else image.alt = "Playing tourist";
