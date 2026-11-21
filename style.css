@@ -476,6 +476,7 @@ details[open] > summary::after { transform: rotate(180deg); }
 .dj-intro > .ramme img { display: block; width: 116px; max-width: 100%; height: auto; margin: 0 auto 8px; }
 .dj-profile-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: var(--box-gap); margin-top: var(--box-gap); }
 .dj-profile-grid > .dj-profile { width: min(100%, 470px) !important; margin: 0; }
+.dj-profile { scroll-margin-top: 84px; }
 .dj-profile-divider { flex: 0 0 100%; width: 100%; height: 1px; margin: 0; border: 0; background: var(--purple); }
 .dj-profile td:not(.head) { padding: var(--box-inset); }
 .dj-front .archive-content :is(.dj-intro, .dj-profile-grid) td:not(.head) { background: #000; color: #ff0; }
@@ -647,6 +648,12 @@ details[open] > summary::after { transform: rotate(180deg); }
 .performer-profile .profile-card td { min-width: 0; overflow-wrap: anywhere; }
 .performer-profile .profile-card img { display: block; width: auto; max-width: 100%; height: auto; margin: 0 auto; }
 .performer-photo-caption { margin: 0; text-align: center; }
+.reviewed-profile-photo { margin: 0; background: transparent; }
+.reviewed-profile-photo .performer-photo-caption { padding: 4px var(--box-inset) var(--caption-bottom); }
+.reviewed-dj-photo-year + .reviewed-dj-photo-year { margin-top: var(--box-gap); }
+.reviewed-dj-photo-year h3 { margin: 0 0 6px; }
+.reviewed-dj-photo-year .reviewed-profile-photo { margin-inline: auto; }
+.reviewed-dj-photo-year .reviewed-profile-photo + .reviewed-profile-photo { margin-top: var(--box-gap); }
 .hairwerk .performer-photo-caption { padding: 0 8px 4px; }
 .performer-profile .profile-card a:has(> img) { display: block; width: fit-content; max-width: 100%; margin-inline: auto; }
 .performer-profile .profile-card td > p:first-child { margin-top: 0; }

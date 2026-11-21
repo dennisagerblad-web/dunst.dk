@@ -1532,8 +1532,9 @@ window.DUNST_PREVIEW_DATA = {
       "label": "The ACT på KUPÉ, Århus",
       "url": "https://dunst.dk/dunst/recommends/2004/04_09_02_kupe_aarhus/index.html",
       "images": [
-        "/dunst/recommends/2004/04_09_02_kupe_aarhus/images/IMG_2695.jpg"
+        "/dunst/recommends/2004/04_09_02_kupe_aarhus/images/IMG_2497.jpg"
       ],
+      "alt": "Hairwerk sidder på hug i et gult fjerkostume på KUPÉ i Aarhus",
       "year": "2004",
       "source_text": "Recommend photo from: The ACT på KUPÉ, Århus",
       "box_class": "rec",

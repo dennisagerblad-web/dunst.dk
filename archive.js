@@ -746,6 +746,7 @@ async function showDjFront() {
     const profile = rewriteContent(page.doc.body, page.url).querySelector("table.ramme");
     if (!profile) return null;
     profile.classList.add("dj-profile");
+    profile.id = `dj-${path.split("/").at(-1).replace(/\.html$/, "").replaceAll("_", "-")}`;
     const head = profile.querySelector(".head[background]");
     if (head) {
       const name = document.createElement("h2");
@@ -757,6 +758,7 @@ async function showDjFront() {
       head.classList.add("dj-profile-heading");
       head.replaceChildren(image, name);
     }
+    appendDunstReviewedDjPhotos(profile, path);
     return profile;
   }));
   for (const page of pages) {
@@ -2876,6 +2878,7 @@ async function showPerformerProfile() {
   if (archivePath === "/dunst/01_performere/04_johnny_warehouse/index.html") promoteProfileCard("2003", 4);
   dunstNormalizePressCards(profile);
   markArchiveDates(profile);
+  appendDunstReviewedPerformerPhotos(profile, archivePath);
   archiveContent.replaceChildren(profile);
   archiveGallery.hidden = true;
 }

@@ -47,7 +47,7 @@ for (const [index, item] of window.DUNST_PREVIEW_DATA.hairwerk.entries()) {
   for (const [imageIndex, source] of item.images.entries()) {
     const image = document.createElement("img");
     image.src = source;
-    image.alt = csdPhoto?.alt || `Hairwerk, billede ${index + 1}.${imageIndex + 1}`;
+    image.alt = csdPhoto?.alt || item.alt || `Hairwerk, billede ${index + 1}.${imageIndex + 1}`;
     image.loading = index < 3 ? "eager" : "lazy";
     images.append(image);
   }
