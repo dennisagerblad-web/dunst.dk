@@ -13,6 +13,7 @@
   const consentMaxAge = 400 * 24 * 60 * 60;
   const consentScope = preview ? '' : `; Domain=${site}; Secure`;
   let consent = false, started = false, banner, preferenceButton, lastFocus;
+  let choiceInputs;
   const cleanUrl = (raw, base = location.href) => {
     if (!raw) return '';
     try {
@@ -60,10 +61,14 @@
     tag.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
     document.head.append(tag);
   }
+  function showSavedChoice(choice) {
+    for (const input of choiceInputs) input.checked = input.value === choice;
+  }
   function choose(choice) {
     const hadConsent = consent;
     consent = choice === 'granted' && analyticsAllowed;
     document.cookie = `${consentCookie}=${choice}; Max-Age=${consentMaxAge}; Path=/; SameSite=Lax${consentScope}`;
+    showSavedChoice(choice);
     banner.hidden = true;
     preferenceButton.hidden = false;
     if (consent && !hadConsent) {
@@ -87,8 +92,9 @@
   function show() {
     lastFocus = document.activeElement;
     banner.querySelector('details').open = false;
+    showSavedChoice(readConsent());
     banner.hidden = false;
-    banner.querySelector('button').focus();
+    (choiceInputs.find(input => input.checked) ?? choiceInputs[0]).focus();
   }
   function attachInteractions(doc) {
     doc.addEventListener('click', event => {
@@ -186,16 +192,68 @@
         pointer-events: none;
       }
       .body { display: flow-root; padding: 6px 10px; font-size: 14px; }
-      .choices { float: inline-start; display: flex; gap: 6px; margin-inline-end: 10px; }
-      button { font: inherit; cursor: pointer; }
-      .choices button {
-        min-width: 38px;
-        min-height: 27px;
-        padding: 2px 7px;
-        border: 1px solid var(--cookie-violet);
-        color: var(--cookie-violet);
-        background: var(--cookie-yellow);
+      .choices {
+        position: relative;
+        float: inline-start;
+        display: grid;
+        grid-template-columns: auto 46px auto;
+        gap: 5px;
+        align-items: center;
+        margin-inline-end: 12px;
+      }
+      .choices input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: 0;
+        clip-path: inset(50%);
+      }
+      .choices label {
+        display: flex;
+        align-items: center;
+        position: relative;
+        min-height: 28px;
+        color: var(--cookie-yellow);
         font-weight: 700;
+        cursor: pointer;
+      }
+      .choices label::after {
+        content: "";
+        position: absolute;
+        inset-block: 0;
+        width: 28px;
+      }
+      .choice-no::after { inset-inline-start: 100%; }
+      .choice-yes::after { inset-inline-end: 100%; }
+      .switch-track {
+        display: flex;
+        align-items: center;
+        position: relative;
+        height: 24px;
+        border: 1px solid var(--cookie-violet);
+        border-radius: 14px;
+        pointer-events: none;
+      }
+      .switch-track::before {
+        content: "";
+        position: absolute;
+        left: 4px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        opacity: 0;
+      }
+      #cookie-no:checked ~ .switch-track::before { background: #999; opacity: 1; }
+      #cookie-yes:checked ~ .switch-track::before {
+        transform: translateX(22px);
+        background: var(--cookie-yellow);
+        box-shadow: 0 0 5px #ff06;
+        opacity: 1;
+      }
+      #cookie-no:focus-visible ~ .choice-no,
+      #cookie-yes:focus-visible ~ .choice-yes {
+        outline: 2px solid var(--cookie-blue);
+        outline-offset: 2px;
       }
       summary, section a { color: var(--cookie-violet); text-decoration: underline; }
       summary { display: inline-block; max-width: 100%; padding-block: 4px; list-style: none; cursor: pointer; }
@@ -231,7 +289,13 @@
         </svg>
       </header>
       <div class="body">
-        <div class="choices"><button type="button" data-choice="granted" aria-label="Ja, tillad statistikcookies">Ja</button><button type="button" data-choice="denied" aria-label="Nej, afvis statistikcookies">Nej</button></div>
+        <div class="choices" role="radiogroup" aria-label="Tillad statistikcookies">
+          <input id="cookie-no" type="radio" name="statistics-choice" value="denied">
+          <input id="cookie-yes" type="radio" name="statistics-choice" value="granted">
+          <label class="choice-no" for="cookie-no">Nej</label>
+          <span class="switch-track" aria-hidden="true"></span>
+          <label class="choice-yes" for="cookie-yes">Ja</label>
+        </div>
         <details>
           <summary><span class="read-more">Læs mere</span><span class="read-less">Læs mindre</span></summary>
           <div class="details-copy">
@@ -242,9 +306,17 @@
       </div>
     </section>`;
     banner=root.querySelector('section');
-    root.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.choice)));
+    choiceInputs = [...root.querySelectorAll('input[name="statistics-choice"]')];
+    for (const input of choiceInputs) {
+      const commitChoice = () => {
+        if (!banner.hidden && input.checked) choose(input.value);
+      };
+      input.addEventListener('click', commitChoice);
+      input.addEventListener('change', commitChoice);
+    }
     preferenceButton.addEventListener('click',show);
     const choice=readConsent();
+    showSavedChoice(choice);
     consent=choice==='granted';
     start();
     if (!choice) banner.hidden=false;else preferenceButton.hidden=false;

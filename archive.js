@@ -235,6 +235,7 @@ function rewriteContent(body, sourceUrl) {
     fragment.firstChild.nodeName === "BR"
   )) fragment.firstChild.remove();
   for (const element of [...fragment.querySelectorAll("script,style,link,meta,base")]) element.remove();
+  removeLegacyTextFragments(fragment, sourceUrl);
   for (const link of [...fragment.querySelectorAll("a[href]")]) {
     if (!/^javascript:\s*(?:(?:window|parent)\.)?history\.back\s*\(/i.test(link.getAttribute("href")) ||
         !/^(?:tilbage|back)$/i.test(link.textContent.trim())) continue;
@@ -296,6 +297,29 @@ function rewriteContent(body, sourceUrl) {
   }
   compactImageCaptionSpacing(fragment);
   return fragment;
+}
+
+function removeLegacyTextFragments(fragment, sourceUrl) {
+  // Old Recommends and HR & FRU pages contain a loose S outside their content tables.
+  for (const node of [...fragment.childNodes]) {
+    if (node.nodeType === Node.TEXT_NODE && /^s$/i.test(node.textContent.trim())) node.remove();
+  }
+
+  // The festival invitation was also copied into this newsletter with a loose x.
+  const path = new URL(sourceUrl, location.href).pathname;
+  if (![
+    "/dunst/03_events/2006/06_07_03_queer_festival/invitation.html",
+    "/nyhedsbrev/gamle_nyheder/2006_01_18_nyhedsbrev.html",
+  ].includes(path)) return;
+  for (const cell of fragment.querySelectorAll("td")) {
+    for (const node of [...cell.childNodes]) {
+      if (node.nodeType !== Node.TEXT_NODE || node.textContent.trim() !== "x" ||
+          node.previousSibling?.nodeName !== "BR" || node.nextSibling?.nodeName !== "BR") continue;
+      node.previousSibling.remove();
+      node.nextSibling.remove();
+      node.remove();
+    }
+  }
 }
 
 function compactImageCaptionSpacing(root) {
