@@ -62,11 +62,16 @@ function galleryDestination(url) {
   return route.href;
 }
 
+function menuLabel(label) {
+  return label.replace(/^dunst\s+(?:&\s+)?/i, "").toLocaleLowerCase("da")
+    .replace(/^\p{L}/u, (letter) => letter.toLocaleUpperCase("da"));
+}
+
 function menuAnchor(item, className, activePath = currentArchivePath) {
   const anchor = document.createElement("a");
   anchor.className = className;
   anchor.href = menuDestination(item.url);
-  anchor.textContent = item.label;
+  anchor.textContent = menuLabel(item.label);
   if (item.color) anchor.style.color = item.color;
   if (item.newsletter) anchor.classList.add("newsletter-link");
   const currentMainPage = location.pathname.replace("-billeder.html", ".html");
@@ -101,9 +106,9 @@ menuRoot.addEventListener("click", (event) => {
   const offset = link.getBoundingClientRect().top - menuSidebar.getBoundingClientRect().top;
   sessionStorage.setItem("dunst-menu-scroll", JSON.stringify({target: link.href, top: menuSidebar.scrollTop, offset}));
   if (child) {
-    const group = link.closest(".menu-group").querySelector(".menu-link").textContent;
-    sessionStorage.setItem("dunst-menu-group", group);
-    sessionStorage.setItem("dunst-menu-open", "true");
+    const group = link.closest(".menu-group").querySelector(".menu-link");
+    const state = menuStates.find(({ sectionLink }) => sectionLink === group);
+    if (state) rememberGroup(state, true);
     sessionStorage.removeItem("dunst-animate-menu-to");
   }
 }, true);
@@ -137,7 +142,7 @@ function setGroupOpen(state, open) {
   state.children.inert = !open;
   state.children.setAttribute("aria-hidden", String(!open));
   state.button.setAttribute("aria-expanded", String(open));
-  state.button.setAttribute("aria-label", `${open ? "Skjul" : "Vis"} underpunkter til ${state.label}`);
+  state.button.setAttribute("aria-label", `${open ? "Skjul" : "Vis"} underpunkter til ${state.sectionLink.textContent}`);
 }
 
 function slideTime(state) {
@@ -194,7 +199,7 @@ for (const [index, section] of orderedMenu.entries()) {
       } else {
         const heading = document.createElement("span");
         heading.className = child.month ? "menu-year menu-month" : "menu-year";
-        heading.textContent = child.label;
+        heading.textContent = menuLabel(child.label);
         inner.append(heading);
       }
     }
@@ -202,8 +207,7 @@ for (const [index, section] of orderedMenu.entries()) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "menu-expander";
-    button.textContent = "▾";
-    button.setAttribute("aria-label", `Vis underpunkter til ${section.label}`);
+    button.setAttribute("aria-label", `Vis underpunkter til ${sectionLink.textContent}`);
     button.setAttribute("aria-controls", children.id);
     button.setAttribute("aria-expanded", "false");
     children.inert = true;

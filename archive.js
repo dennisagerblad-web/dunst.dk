@@ -10,6 +10,20 @@ const obsoleteNuclearProfileMedia = /\/(?:nuclear_atitude_is_fine_00|video_02_00
 const guestPerformersPath = "/dunst/01_performere/guests/index.html";
 const ginaProfilePath = "/dunst/01_performere/27_gina/index.html";
 const ginaProfileName = "Gina La Mirage";
+const zenRapKatPath = "/dunst/01_performere/guests/trine_syberg/index.html";
+const tusneldaProfilePath = "/dunst/01_performere/guests/tusnelda_tusindfryd/index.html";
+const memorialProfiles = new Map([
+  ["/dunst/01_performere/21_marilyn_not_monroe/index.html", ["Marilyn 'not' Monroe", "Gerry Hail", "han"]],
+  ["/dunst/01_performere/09_stimulundia/index.html", ["Stimulundia", "Jens Lund", "han"]],
+  ["/dunst/01_performere/16_tove_hansen/index.html", ["Tove Hansen", "Ove Hansen", "han"]],
+  [ginaProfilePath, [ginaProfileName, "Nikolaj Christophersen", "han"]],
+  [zenRapKatPath, ["ZenRapKat", "Trine Syberg", "hun"]],
+  [tusneldaProfilePath, ["Tusnelda Tusindfryd", "Svend Bunch", "han"]],
+  ["/dunst/dj/djuna_barnes.html", ["Djuna Barnes", "Maria Gerhard", "hun"]],
+  ["/dunst/dj/stimulundia.html", ["Stimulundia", "Jens Lund", "han"]],
+]);
+const guestProfilePaths = new Set([ginaProfilePath, zenRapKatPath, tusneldaProfilePath]);
+const renameZenRapKat = (copy) => copy.replace(/\bTrine\s+Syberg\b/gi, "ZenRapKat");
 const musicFrontPath = "/dunst/musik/index.html";
 const habibisPartyPath = "/dunst/02_parties/fest_19_habibis_exil/index.html";
 const shavePartyPath = "/dunst/02_parties/fest_21_shave_your_pet/index.html";
@@ -62,6 +76,13 @@ for (const [path, photos] of [
     .concat(photos);
 }
 const archiveRecord = window.DUNST_ARCHIVE_DATA[archivePath];
+if (archiveRecord) {
+  archiveRecord.main_lines = archiveRecord.main_lines?.map(renameZenRapKat);
+  for (const photo of archiveRecord.gallery) {
+    if (photo.alt) photo.alt = renameZenRapKat(photo.alt);
+    if (photo.detail_lines) photo.detail_lines = photo.detail_lines.map(renameZenRapKat);
+  }
+}
 const marilynName = "Marilyn ´Not´Monroe";
 const correctMarilynName = (value) => value.replace(/Cunta Kinte/g, marilynName);
 const marilynCorrectionPage = [
@@ -184,7 +205,7 @@ function archiveImageRoute(path) {
 }
 
 function backFallback() {
-  if (archivePath === ginaProfilePath) return archiveRoute(null, guestPerformersPath);
+  if (guestProfilePaths.has(archivePath)) return archiveRoute(null, guestPerformersPath);
   if (archivePath?.startsWith(hrFruCandidatesRoot) && /_frameset\.html$/.test(archivePath)) {
     return hrFruLineupRoute();
   }
@@ -217,7 +238,7 @@ function addBackLink() {
   if (categoryFront || /^\/dunst\/press\/(?:20\d\d)\/index\.html$/.test(archivePath) ||
       (isMenuDestination && !skiDay) ||
       document.body.matches(".newsletter-archive,.guestbook-archive,.links-archive") ||
-      (archivePath !== ginaProfilePath && /^\/dunst\/01_performere\/(?:\d+_[^/]+|guests(?:\/[^/]+)?)\/index\.html$/.test(archivePath))) return;
+      (!guestProfilePaths.has(archivePath) && /^\/dunst\/01_performere\/(?:\d+_[^/]+|guests(?:\/[^/]+)?)\/index\.html$/.test(archivePath))) return;
   const link = document.createElement("a");
   link.className = "archive-back";
   link.href = backFallback();
@@ -234,7 +255,7 @@ function addBackLink() {
 }
 
 function archiveItemTitle() {
-  if (archivePath === ginaProfilePath) return ginaProfileName;
+  if (guestProfilePaths.has(archivePath)) return memorialProfiles.get(archivePath)[0];
   if (partyHeading) return partyHeading;
   if (archivePath === "/nyhedsbrev/gamle_nyheder/index.html") return "dunst Newsletter - gamle nyhedsbreve";
   if (archivePath === "/nyhedsbrev/gamle_nyheder/right.html") return "Gamle nyhedsbreve";
@@ -297,7 +318,7 @@ function rewriteContent(body, sourceUrl) {
   }
   const textNodes = document.createTreeWalker(fragment, NodeFilter.SHOW_TEXT);
   while (textNodes.nextNode()) {
-    let copy = textNodes.currentNode.textContent.replace(/\bPrint (?:denne side|this page)\b/gi, "");
+    let copy = renameZenRapKat(textNodes.currentNode.textContent).replace(/\bPrint (?:denne side|this page)\b/gi, "");
     if (marilynCorrectionPage) copy = correctMarilynName(copy);
     textNodes.currentNode.textContent = copy;
   }
@@ -794,7 +815,7 @@ async function showDjFront() {
     if (!profile) return null;
     profile.classList.add("dj-profile");
     profile.rows[1]?.querySelector("img")?.classList.add("dj-profile-portrait");
-    profile.id = `dj-${path.split("/").at(-1).replace(/\.html$/, "").replaceAll("_", "-")}`;
+    profile.id = djProfileId(path);
     const head = profile.querySelector(".head[background]");
     if (head) {
       const name = document.createElement("h2");
@@ -807,6 +828,15 @@ async function showDjFront() {
       head.replaceChildren(image, name);
     }
     appendDunstReviewedDjPhotos(profile, path);
+    const memorial = memorialProfiles.get(path);
+    if (memorial) {
+      const section = document.createElement("div");
+      section.className = "dj-memorial-profile";
+      section.id = profile.id;
+      profile.removeAttribute("id");
+      section.append(createPerformerMemorial(memorial), profile);
+      return section;
+    }
     return profile;
   }));
   for (const page of pages) {
@@ -1634,12 +1664,16 @@ async function addHrFruFeatures() {
     link.textContent = title;
     section.append(link);
   }
-  archiveContent.querySelector("table.ramme")?.after(createHrFruLineup(), features);
+  archiveContent.querySelector("table.ramme")?.after(createHrFruLineup());
 
   const menuUrl = archiveAsset(hrFruRoot + "kattegorier/kattegori_menu.html");
   const { doc } = await readLegacyPage(menuUrl);
   const category = document.createElement("section");
+  category.id = "hr-fru-kategorier";
   category.className = "hr-fru-categories";
+  const heading = document.createElement("h2");
+  heading.className = "hr-fru-section-title";
+  heading.textContent = "Vælg to emner og lav to shows.";
   const list = document.createElement("div");
   list.className = "hr-fru-category-list";
   const entries = await Promise.all([...doc.querySelectorAll('a:has(img)')].map(async (link) => {
@@ -1651,21 +1685,20 @@ async function addHrFruFeatures() {
     return image;
   }));
   list.append(...entries);
-  category.append(list);
-  archiveContent.append(category);
+  category.append(heading, list);
+  archiveContent.append(category, features);
 }
 
 function combineHrFruFlow() {
   if (archivePath !== hrFruRoot + "index.html") return;
-  const top = archiveContent.querySelector(":scope > table.ramme");
   const features = archiveContent.querySelector(":scope > .hr-fru-features");
-  const categories = archiveContent.querySelector(":scope > .hr-fru-categories");
   const galleryGrid = archiveGallery.querySelector(":scope > .grid");
-  if (!top || !features || !categories || !galleryGrid) return;
+  if (!features || !galleryGrid) return;
   const flow = document.createElement("div");
   flow.className = "hr-fru-flow";
   flow.append(galleryGrid);
-  features.after(categories, flow);
+  features.replaceWith(flow);
+  archiveGallery.append(features);
 }
 
 function combinePartyFlow() {
@@ -2362,10 +2395,16 @@ async function readCandidateFrames(url) {
 }
 
 function createHrFruLineup() {
-  const grid = document.createElement("section");
-  grid.id = "hr-fru-kandidater";
+  const section = document.createElement("section");
+  section.id = "hr-fru-kandidater";
+  section.className = "hr-fru-lineup";
+  section.setAttribute("aria-labelledby", "hr-fru-kandidater-title");
+  const heading = document.createElement("h2");
+  heading.id = "hr-fru-kandidater-title";
+  heading.className = "hr-fru-section-title";
+  heading.textContent = "De 10 konkurenter:";
+  const grid = document.createElement("div");
   grid.className = "hr-fru-candidate-grid";
-  grid.setAttribute("aria-label", "De 10 kandidater");
   for (const [slug, name, filename] of hrFruCandidates) {
     const link = document.createElement("a");
     link.className = "hr-fru-candidate-card";
@@ -2385,7 +2424,8 @@ function createHrFruLineup() {
     }
     grid.append(link);
   }
-  return grid;
+  section.append(heading, grid);
+  return section;
 }
 
 async function showHrFruCandidates() {
@@ -2447,6 +2487,28 @@ function performerEventCard({imagePath, width, height, alt, eventPath, eventName
   caption.append(link);
   cell.append(caption);
   return card;
+}
+
+function createPerformerMemorial([name, realName, pronoun]) {
+  const memorial = document.createElement("aside");
+  memorial.className = "performer-memorial";
+  const text = document.createElement("p");
+  const announcement = document.createElement("span");
+  announcement.textContent = `${name} (${realName}) er gået bort. `;
+  const thanks = document.createElement("span");
+  thanks.textContent = `Dunst takker for den tid ${pronoun} gav os.`;
+  text.append(announcement, thanks);
+  const candle = document.createElement("img");
+  candle.src = archiveAsset("/assets/dunst-mindelys.jpg").href;
+  candle.width = 120;
+  candle.height = 100;
+  candle.alt = "";
+  memorial.append(text, candle);
+  return memorial;
+}
+
+function djProfileId(path) {
+  return `dj-${path.split("/").at(-1).replace(/\.html$/, "").replaceAll("_", "-")}`;
 }
 
 function showAddedPerformerProfile() {
@@ -4266,8 +4328,8 @@ function showGallery(preserveMain = false) {
   for (const [index, item] of items.entries()) {
     if (archivePath === dennisProfilePath && obsoleteDennisProfileMedia.test(item.image)) continue;
     if (archivePath === nuclearProfilePath && obsoleteNuclearProfileMedia.test(item.image)) continue;
-    const isGinaGuestCard = archivePath === guestPerformersPath && item.url &&
-      new URL(item.url, location.href).pathname === ginaProfilePath;
+    const guestProfilePath = archivePath === guestPerformersPath && item.url &&
+      new URL(item.url, location.href).pathname;
     if ((archivePath === "/dunst/abroad/2006/06_05_27_berlin_plastique/index.html" && item.image.endsWith("/video_fish.jpg")) ||
         (archivePath === "/dunst/abroad/2006/06_04_28_amsterdam/index.html" && item.image.endsWith("/video_01_00.jpg"))) continue;
     const pressArticle = !archivePath.startsWith("/dunst/press/") &&
@@ -4393,10 +4455,10 @@ function showGallery(preserveMain = false) {
         card.append(details);
       } else card.append(body);
     }
-    if (isGinaGuestCard) {
+    if (guestProfilePaths.has(guestProfilePath)) {
       const link = document.createElement("a");
-      link.href = archiveRoute(null, ginaProfilePath);
-      link.setAttribute("aria-label", ginaProfileName);
+      link.href = archiveRoute(null, guestProfilePath);
+      link.setAttribute("aria-label", memorialProfiles.get(guestProfilePath)[0]);
       link.append(...card.childNodes);
       card.append(link);
     }
@@ -4477,7 +4539,12 @@ if (archivePath === "/dunst/01_performere/23_nuclear_family/video_01.html") {
 } else if (mergedRadioPages.has(archivePath)) {
   location.replace(archiveRoute(null, "/dunst/radio/index.html"));
 } else if (mergedDjPages.has(archivePath)) {
-  location.replace(archiveRoute(null, "/dunst/dj/dj_ny.html"));
+  const profilePath = archivePath.replace(/_frameset\.html$/, ".html");
+  const target = new URL(archiveRoute(null, "/dunst/dj/dj_ny.html"));
+  if (memorialProfiles.has(profilePath)) {
+    target.hash = djProfileId(profilePath);
+  }
+  location.replace(target.href);
 } else if (archivePath === "/dunst/news/forside_nyt.html") {
   location.replace(archiveRoute(null, "/dunst/01_performere/04_johnny_warehouse/index.html"));
 } else if ([
@@ -4518,6 +4585,10 @@ if (archivePath === "/dunst/01_performere/23_nuclear_family/video_01.html") {
   else if (archiveView === "billeder" && archiveRecord && !partyHeading &&
            archivePath !== skidtFilmPath && archivePath !== hrFruRoot + "index.html") showGallery();
   else showMain()
-    .then(() => compactImageCaptionSpacing(document.querySelector(".page")))
+    .then(() => {
+      const memorial = memorialProfiles.get(archivePath);
+      if (memorial) archiveContent.prepend(createPerformerMemorial(memorial));
+      compactImageCaptionSpacing(document.querySelector(".page"));
+    })
     .catch((error) => { archiveContent.textContent = error.message; });
 }
