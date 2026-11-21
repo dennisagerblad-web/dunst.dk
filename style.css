@@ -1019,8 +1019,10 @@ body.links-archive::after {
 .menu-activist { width: 160px; max-width: calc(100% - 16px); margin: 16px 8px 10px; }
 .menu-activist h2 { margin: 0; padding: 5px; background: var(--blue); border-bottom: 1px solid var(--purple); color: #000; font-size: 14px; line-height: 1.3; }
 .activist-entry { display: flex; gap: 6px; align-items: center; padding: 5px; }
-.activist-entry input { min-width: 0; width: 55px; height: 24px; border: 1px solid var(--blue); background: var(--cream); color: #777; }
-.activist-entry a { display: inline-flex; align-items: center; padding: 2px 6px; border: 1px solid var(--blue); background: #fff; color: #000; font: 700 13px Verdana, Arial, sans-serif; text-decoration: none; }
+.activist-entry input { min-width: 0; width: 55px; height: 24px; border: 1px solid var(--blue); background: var(--cream); color: #000; }
+.activist-entry input::placeholder { color: #888; opacity: 1; }
+.pispis-login { margin: 0 auto; }
+.activist-entry button { display: inline-flex; align-items: center; padding: 2px 6px; border: 1px solid var(--blue); background: #fff; color: #000; font: 700 13px Verdana, Arial, sans-serif; cursor: pointer; }
 .tunga-box { padding: 4px; background: #000; }
 .home-utility.tunga-box { width: 130px; }
 .tunga-box a { color: #ffffcc; font-weight: 400; }
@@ -1219,7 +1221,7 @@ body.pispis-preview::before { display: none; }
   .menu-activist { width: 210px; }
   .menu-activist h2 { font-size: 16px; }
   .activist-entry input { width: 90px; height: 42px; }
-  .activist-entry a { min-height: 42px; padding: 4px 10px; font-size: 16px; }
+  .activist-entry button { min-height: 42px; padding: 4px 10px; font-size: 16px; }
   .dunst-dims { width: 28px; }
   .archive-content .ramme tr:has(> .head) { display: flex; flex-wrap: wrap; }
   .press-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 8px; }
