@@ -598,7 +598,7 @@ window.DUNST_PREVIEW_DATA = {
       "bullet": false,
       "children": [
         {
-          "label": "AleX.T.C.",
+          "label": "Alexis",
           "url": "https://dunst.dk/dunst/01_performere/17_alexis/index.html",
           "color": null
         },

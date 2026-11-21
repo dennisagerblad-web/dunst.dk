@@ -98,7 +98,14 @@ function dunstPressArticlePath(anchor) {
   return /^\/dunst\/press\/20\d{2}\/.+\.html?$/.test(path) ? path : "";
 }
 
-function dunstNormalizePressCards(root) {
+const dunstPressPhotoCaptions = {
+  "/dunst/01_performere/08_the_thom/index.html": {
+    "hasse_thom_madam_01.jpg": "mAdam & The Thom",
+    "hasse_johnny_thom_02.jpg": "The Thom & Johnny Warehouse",
+  },
+};
+
+function dunstNormalizePressCards(root, profilePath) {
   const logos = {
     romeo: [dunstPressPhotoSources.romeo.logo, "Romeo + Juliet"],
     bt: ["/dunst/press/logoer/bt_logo_00.gif", "B.T."],
@@ -136,10 +143,20 @@ function dunstNormalizePressCards(root) {
     pressCard.append(dunstPressLogo(logo));
     const photos = document.createElement("div");
     photos.className = "performer-press-images";
-    photos.append(...card.querySelectorAll("img"));
+    const captions = source === "romeo" ? dunstPressPhotoCaptions[profilePath] : null;
+    for (const image of card.querySelectorAll("img")) {
+      const caption = captions?.[new URL(image.src).pathname.split("/").at(-1)];
+      if (!caption) { photos.append(image); continue; }
+      const figure = document.createElement("figure");
+      const copy = document.createElement("figcaption");
+      copy.className = "performer-photo-caption";
+      copy.textContent = caption;
+      image.alt = caption;
+      figure.append(image, copy);
+      photos.append(figure);
+    }
     if (photos.childElementCount) pressCard.append(photos);
-    const credits = [...card.querySelectorAll(".performer-photo-caption")];
-    pressCard.append(...credits);
+    if (!captions) pressCard.append(...card.querySelectorAll(".performer-photo-caption"));
 
     const foot = document.createElement("div");
     foot.className = "performer-press-links";

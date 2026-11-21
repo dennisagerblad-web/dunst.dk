@@ -99,7 +99,7 @@ const dunstReviewedProfilePhotos = {
       "event": "/dunst/recommends/2004/04_10_23_fnat_02/index.html",
       "eventName": "FNAT på KAT 2",
       "year": 2004,
-      "alt": "AleX.T.C. ved mixeren i rødligt lys"
+      "alt": "Alexis ved mixeren i rødligt lys"
     }
   ],
   "/dunst/dj/minimal_martin.html": [

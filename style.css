@@ -11,6 +11,9 @@
   --headline-size: clamp(24px, 2.1vw, 28px);
   --page-title-size: var(--headline-size);
   --headline-date-size: 14px;
+  --headline-line-height: 1.35;
+  --body-font-size: 16px;
+  --body-line-height: 1.6;
   --menu-link-size: 11px;
   --menu-inset: 4px;
 }
@@ -23,7 +26,7 @@ body {
   margin: 0;
   color: #000;
   background: #fff url("/dunst/0/images/fade_op.jpg") repeat-x top left;
-  font: 16px/1.6 Verdana, Arial, Helvetica, sans-serif;
+  font: var(--body-font-size)/var(--body-line-height) Verdana, Arial, Helvetica, sans-serif;
 }
 body::before {
   content: "";
@@ -108,7 +111,7 @@ details[open] > summary::after { transform: rotate(180deg); }
   background: var(--blue);
   color: #111;
   font-size: var(--page-title-size);
-  line-height: 1.4;
+  line-height: var(--headline-line-height);
   font-weight: 700;
 }
 .bar :is(time, .headline-date) { margin-left: auto; white-space: nowrap; font-size: var(--headline-date-size) !important; }
@@ -151,7 +154,7 @@ details[open] > summary::after { transform: rotate(180deg); }
 .press-mentions .press-text-card a { padding: 8px; color: var(--purple); font-weight: 400; }
 .media-card .card-body { padding: 12px var(--box-inset) 15px; }
 .archive-detail:not(.hr-fru-candidates-page) .media-card .card-body { padding-left: var(--box-inset); padding-right: var(--box-inset); }
-.media-card h3 { margin: 0 0 4px; font-size: 18px; line-height: 1.35; }
+.media-card h3:not(.headline) { margin: 0 0 4px; font-size: 18px; line-height: 1.35; }
 .media-card p { margin: 0; }
 .media-card .original-photo-text { margin-top: 6px; overflow-wrap: anywhere; font-size: 16px; line-height: 1.45; }
 .media-card > img + .card-body, .legacy-box-images + .card-body { padding-top: 0; }
@@ -270,7 +273,7 @@ details[open] > summary::after { transform: rotate(180deg); }
 .archive-content > :is(div, table, section, article) { margin-inline: auto; }
 .category-front .archive-content { width: 100%; margin-inline: auto; }
 .front-panel { width: 100%; border: 1px solid var(--purple); }
-.front-heading { margin: 0; padding: 8px var(--box-inset); border-bottom: 1px solid var(--purple); background: var(--blue); color: #000; font-size: var(--page-title-size); font-weight: 700; line-height: 1.35; }
+.front-heading { margin: 0; padding: 8px var(--box-inset); border-bottom: 1px solid var(--purple); background: var(--blue); color: #000; font-size: var(--page-title-size); font-weight: 700; line-height: var(--headline-line-height); }
 .front-intro { padding: var(--box-inset); color: #fff; }
 .front-intro p { margin: 0; }
 .front-intro hr { margin: 12px 0; border: 0; border-top: 1px solid var(--cream); }
@@ -630,6 +633,8 @@ details[open] > summary::after { transform: rotate(180deg); }
 .performer-press-images { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 8px; padding: 8px; }
 .performer-press-images img { display: block; width: auto; max-width: 100%; height: auto; margin: 0 !important; }
 .performer-press-images a { display: block; max-width: 100%; }
+.performer-press-images figure { margin: 0; max-width: 100%; }
+.performer-press-card .performer-press-images figcaption { padding: 0 var(--box-inset) var(--caption-bottom); }
 .stimulundia-press-card .performer-press-images { gap: 4px; padding: 2px; }
 .performer-press-source { display: block; padding: 0 8px 8px; font-weight: 400; }
 .performer-profile-title { margin: 0 0 var(--box-gap); text-align: center; font-size: var(--page-title-size); font-weight: 700; }
@@ -643,6 +648,14 @@ details[open] > summary::after { transform: rotate(180deg); }
 .performer-profile .archive-content table.profile-card > tbody > tr > td:has(img):not(.head) > .performer-card-copy,
 .performer-profile .archive-content table.profile-card > tbody > tr > td:has(img):not(.head) > .performer-photo-caption { box-sizing: border-box; width: 100%; padding: 0 var(--box-inset) 8px; }
 .performer-card-copy { text-align: center; }
+.performer-profile .profile-photo-stack > :is(img, a:has(> img)),
+.performer-profile .profile-photo-stack > a > img { display: block; width: 100%; margin: 0; }
+.performer-profile .profile-photo-stack > .performer-card-copy { padding-top: var(--caption-bottom) !important; }
+.release-collection { width: min(100%, 800px); background: transparent; }
+.release-collection-covers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.release-collection-covers img { width: 100%; aspect-ratio: 1; }
+.release-collection .card-body { text-align: center; }
+.release-collection-covers + .card-body { padding: var(--caption-bottom) var(--box-inset); }
 .performer-profile .archive-content table.profile-card td.head { background: var(--blue) !important; color: #000 !important; border-bottom: 1px solid var(--purple); }
 .performer-profile .archive-content .head a { color: var(--purple); }
 .performer-profile .profile-card td { min-width: 0; overflow-wrap: anywhere; }
@@ -712,7 +725,7 @@ details[open] > summary::after { transform: rotate(180deg); }
 .archive-content :is(td, th) { width: auto !important; vertical-align: top; overflow-wrap: anywhere; }
 .archive-content .ramme { border: 1px solid var(--purple); }
 .archive-content .head { padding: 5px var(--box-inset); background: var(--blue); border-bottom: 1px solid var(--purple); color: #000; font-weight: 700; }
-.archive-content :is(.headline, .legacy-headline) { font-size: var(--headline-size) !important; line-height: 1.35; }
+.archive-content :is(.headline, .legacy-headline) { font-size: var(--headline-size) !important; line-height: var(--headline-line-height); }
 .archive-content .archive-date { white-space: nowrap; overflow-wrap: normal; font-size: var(--headline-date-size) !important; text-align: right; }
 .archive-content .ramme tr.archive-headline-row { display: table-row; }
 .archive-content .ramme .head.archive-headline-cell { display: table-cell; padding: 0; border-bottom: 0; }
@@ -858,7 +871,11 @@ body.recommends-archive .page hr { border-top-color: var(--cream); }
 .abroad .archive-content td.hvid { background: #fff; color: #000; }
 .abroad.archive-detail .archive-content table.ramme > tbody > tr > td:not(.head) { padding: var(--box-inset) !important; }
 .abroad .archive-content a { color: var(--purple); }
-.abroad .archive-content td:not(.head):not(.hvid) a { color: var(--cream); }
+.abroad .archive-content td:not(.head):not(.hvid) :is(a, .event-story-details > summary) { color: var(--cream); }
+.abroad .event-story-details[open] > summary { margin-bottom: var(--box-inset); }
+.abroad .archive-content .event-story-table { width: 100% !important; border: 0; border-collapse: collapse; text-align: start; }
+.abroad.archive-detail .archive-content table.event-story-table td:not(.head) { padding: 0 var(--box-inset) 0 0 !important; }
+.abroad .event-story-table td:last-child { padding-right: 0 !important; }
 .abroad-front .archive-content a.front-card { color: var(--purple); }
 .abroad .archive-gallery .media-card, .abroad .archive-gallery .media-card .card-body { background: #c04e4e; color: #fff; }
 .abroad.archive-detail .archive-gallery .media-card .card-body { padding: 0 var(--box-inset) var(--caption-bottom) !important; }
@@ -1198,6 +1215,7 @@ body.pispis-preview::before { display: none; }
 
 @media (max-width: 720px), (max-width: 1024px) and (max-height: 500px) {
   :root { --box-gap: 24px; --menu-link-size: 18px; --menu-inset: 8px; }
+  .release-collection-covers { grid-template-columns: minmax(0, 1fr); }
   .cross-dress-page .archive-content > table.ramme, .cross-dress-page .archive-content > table.ramme > tbody, .cross-dress-page .archive-content > table.ramme > tbody > tr, .cross-dress-page .archive-content > table.ramme > tbody > tr > td { display: block; width: 100% !important; min-width: 0; }
   .cross-dress-page .archive-content > table.ramme > tbody > tr > .cross-dress-art-cell { width: 100% !important; min-width: 0; }
   .cross-dress-page .cross-dress-centered font[size="7"] { font-size: 42px !important; }
@@ -1243,7 +1261,7 @@ body.pispis-preview::before { display: none; }
   .guestbook-archive .archive-content .msgWriter { padding: 9px var(--box-inset); }
   .guestbook-archive .archive-content .besked td,
   .guestbook-archive .archive-content .kommentar { padding: 12px var(--box-inset); }
-  .media-card h3, .info-card h2 { font-size: 19px; }
+  .media-card h3:not(.headline), .info-card h2 { font-size: 19px; }
   .media-card .original-photo-text { font-size: 17px; }
   .media-card .category { font-size: 16px; }
   .source, .page-footer { font-size: 16px; }

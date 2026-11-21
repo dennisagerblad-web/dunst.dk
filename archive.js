@@ -2,6 +2,9 @@ const archiveParams = new URLSearchParams(location.search);
 const archivePath = archiveParams.get("path") ||
   (document.body.hasAttribute("data-performance-home") ? "/dunst/01_performere/200_billeder_help.html" : null);
 const skidtFilmPath = "/dunst/film/skidt_kommer_til/index.html";
+const nuclearProfilePath = "/dunst/01_performere/23_nuclear_family/index.html";
+const musicFrontPath = "/dunst/musik/index.html";
+const habibisPartyPath = "/dunst/02_parties/fest_19_habibis_exil/index.html";
 const shavePartyPath = "/dunst/02_parties/fest_21_shave_your_pet/index.html";
 const partyHeading = new Map([
   [shavePartyPath, "Shave Your Pet"],
@@ -506,7 +509,7 @@ function unfoldFrontTable() {
   } else {
     const paragraph = document.createElement("p");
     paragraph.textContent = introduction.textContent.replace(/\s+/g, " ").trim();
-    intro.append(paragraph);
+    intro.append(categoryFront === "abroad-front" ? eventStoryDisclosure(paragraph) : paragraph);
   }
   const cards = document.createElement("div");
   cards.className = "front-cards";
@@ -1368,24 +1371,63 @@ function enhanceGayNightCabaret() {
   cell.replaceChildren(pair);
 }
 
+function eventStoryDisclosure(content, label = "Læs om arrangementet") {
+  const details = document.createElement("details");
+  details.className = "event-story-details";
+  const summary = document.createElement("summary");
+  summary.textContent = label;
+  details.append(summary, content);
+  return details;
+}
+
+function collapseAbroadIntro() {
+  if (!document.body.matches(".abroad.archive-detail")) return;
+  const table = archiveContent.querySelector(":scope > table.ramme");
+  if (!table?.rows[0]?.querySelector(".head")) return;
+
+  const media = "img, picture, video, audio, iframe, object, embed";
+  const minimumStoryLength = 120;
+  const copyLength = (node) => node.textContent.replace(/\s+/g, " ").trim().length;
+  const rows = [...table.rows].slice(1);
+  const copyRows = rows.filter((row) => !row.querySelector(media) && copyLength(row));
+  const mixedCells = rows.flatMap((row) => [...row.cells])
+    .filter((cell) => cell.querySelector(media) && copyLength(cell) > minimumStoryLength);
+
+  if (copyRows.reduce((sum, row) => sum + copyLength(row), 0) > minimumStoryLength) {
+    const story = document.createElement("table");
+    story.className = "event-story-table";
+    const row = table.insertRow(copyRows[0].rowIndex);
+    const cell = row.insertCell();
+    cell.colSpan = [...table.rows[0].cells].reduce((sum, heading) => sum + heading.colSpan, 0);
+    story.createTBody().append(...copyRows);
+    cell.append(eventStoryDisclosure(story));
+  }
+
+  for (const cell of mixedCells) {
+    const copy = document.createElement("div");
+    for (const node of [...cell.childNodes]) {
+      if (node.matches?.(media) || node.querySelector?.(media)) continue;
+      copy.append(node);
+    }
+    trimImageCaptionStart(copy);
+    trimImageCaptionEnd(copy);
+    if (copy.textContent.trim()) cell.append(eventStoryDisclosure(copy));
+  }
+}
+
 function collapseDemonstration() {
   if (archivePath !== "/dunst/03_events/2004/04_07_17_belgrade_pride/index.html") return;
   const table = archiveContent.querySelector(":scope > table.ramme");
   if (!table || table.rows.length < 4) return;
-  const details = document.createElement("details");
-  details.className = "event-story-details";
-  const summary = document.createElement("summary");
-  summary.textContent = "læs om demonstrationen";
   const story = document.createElement("table");
   story.className = "ramme event-story-table";
   const body = document.createElement("tbody");
   body.append(...[...table.rows].slice(2));
   story.append(body);
-  details.append(summary, story);
   const row = table.insertRow();
   const cell = row.insertCell();
   cell.colSpan = 2;
-  cell.append(details);
+  cell.append(eventStoryDisclosure(story, "læs om demonstrationen"));
 }
 
 function adjustKunstIDunst() {
@@ -1720,10 +1762,58 @@ function adjustMusicFront() {
   if (secondHeading) secondHeading.textContent = "dunst cd 2 - Shave Your Pet";
 }
 
+const nuclearSingles = {
+  janeFonda: {
+    title: "Jane Fonda / Electroclash Is Dead",
+    width: 600,
+    height: 600,
+    cover: "/assets/nuclear-family-jane-fonda-600.jpg",
+    spotify: "https://open.spotify.com/album/49vnXWwP2iSJm7pfta75jK?si=vBD0oikzQaaBtLBGlsmviw",
+  },
+  doubleSingle: {
+    title: "Double Single",
+    width: 450,
+    height: 450,
+    cover: "/dunst/musik/07_01_01_nuclear_fam/action_disco.jpg",
+    spotify: "https://open.spotify.com/album/6FTwf3KSqPhPaxwBmGk2iM?si=b2_U1VwMQPSPBxSpy8rylw",
+  },
+  deformedBabies: {
+    title: "Deformed Babies",
+    width: 450,
+    height: 451,
+    cover: "/dunst/musik/07_01_01_nuclear_fam/deformed_babies_01.jpg",
+    spotify: "https://open.spotify.com/track/3p3adbLzPz81Yw0Jmohjeu?si=b1e422b79e6b4d40",
+  },
+};
+
+function performerReleaseCollection(releases, destination) {
+  const card = document.createElement("article");
+  card.className = "media-card release-collection";
+  const title = document.createElement("h3");
+  title.className = "bar headline";
+  title.textContent = "Musik";
+  const covers = document.createElement("div");
+  covers.className = "release-collection-covers";
+  for (const release of releases) {
+    const cover = document.createElement("img");
+    cover.src = release.cover;
+    cover.alt = `Cover til ${release.title}`;
+    cover.width = release.width;
+    cover.height = release.height;
+    cover.loading = "lazy";
+    covers.append(cover);
+  }
+  const copy = document.createElement("div");
+  copy.className = "card-body";
+  const link = document.createElement("a");
+  link.href = archiveRoute(null, destination);
+  link.textContent = "Se udgivelserne på dunst MUSIC";
+  copy.append(link);
+  card.append(title, covers, copy);
+  return card;
+}
+
 const musicStreaming = {
-  janeFonda: "https://open.spotify.com/album/49vnXWwP2iSJm7pfta75jK?si=vBD0oikzQaaBtLBGlsmviw",
-  doubleSingle: "https://open.spotify.com/album/6FTwf3KSqPhPaxwBmGk2iM?si=b2_U1VwMQPSPBxSpy8rylw",
-  deformedBabies: "https://open.spotify.com/track/3p3adbLzPz81Yw0Jmohjeu?si=b1e422b79e6b4d40",
   shaveYourPet: "https://open.spotify.com/album/01dKCA2BXGwbCgC3tD7VwF?si=CAZVyQWcTfu2_1MjgQqCyQ",
   munchOfUs: "https://open.spotify.com/album/7Fv1itDE3SLy3w1rxnKq40?si=sIhXKNU3QUSqy8_IPD61yw",
   odeur: "https://open.spotify.com/album/6lq1QPMY6hCQdihWcoFmZZ?si=DLwkKY5MTNOdH3qI_o0BNg",
@@ -1749,11 +1839,11 @@ async function updateMusicReleases() {
       const box = doubleSingle.cloneNode(true);
       box.id = "nuclear-jane-fonda";
       const headings = box.querySelectorAll(".head");
-      headings[0].textContent = "Nuclear Family - Jane Fonda / Electroclash Is Dead";
+      headings[0].textContent = `Nuclear Family - ${nuclearSingles.janeFonda.title}`;
       headings[1].textContent = "2007";
       const cell = box.querySelector("tr:last-child td");
       const cover = document.createElement("img");
-      cover.src = "assets/nuclear-family-jane-fonda-600.jpg";
+      cover.src = nuclearSingles.janeFonda.cover;
       cover.alt = "Cover til Nuclear Family-singlen Jane Fonda / Electroclash Is Dead";
       cover.width = 600;
       cover.height = 600;
@@ -1762,7 +1852,7 @@ async function updateMusicReleases() {
       const details = document.createElement("p");
       details.textContent = "Sangene er som altid en hæsblæsende blanding af skarpe satiriske tekster, electro beats og en ægte melodisk indie feeling.";
       cell.replaceChildren(cover, description, details);
-      appendMusicStreaming(cell, musicStreaming.janeFonda);
+      appendMusicStreaming(cell, nuclearSingles.janeFonda.spotify);
       doubleSingle.before(box);
     }
     for (const head of archiveContent.querySelectorAll(".head")) {
@@ -1773,12 +1863,13 @@ async function updateMusicReleases() {
       const source = image?.getAttribute("src") || "";
       if (source.includes("action_disco")) {
         box.id = "nuclear-double-single";
-        box.querySelector(".head").textContent = "Nuclear Family - Double Single";
+        box.querySelector(".head").textContent = `Nuclear Family - ${nuclearSingles.doubleSingle.title}`;
+        image.src = nuclearSingles.doubleSingle.cover;
         const cell = image.closest("td");
         const copy = document.createElement("p");
         copy.textContent = 'Nuclear Family’s double single "Action! Disco! / Smashing Cars" is available for streaming.';
         cell.replaceChildren(image, copy);
-        appendMusicStreaming(cell, musicStreaming.doubleSingle);
+        appendMusicStreaming(cell, nuclearSingles.doubleSingle.spotify);
         continue;
       }
       const detailPath = source.includes("FUCK-MY-HE-ART")
@@ -1788,7 +1879,10 @@ async function updateMusicReleases() {
       if (detailPath) {
         for (const link of box.querySelectorAll("a")) link.href = archiveRoute(null, detailPath);
       }
-      if (source.includes("deformed_babies")) appendMusicStreaming(box.querySelector("tr:last-child td"), musicStreaming.deformedBabies);
+      if (source.includes("deformed_babies")) {
+        image.src = nuclearSingles.deformedBabies.cover;
+        appendMusicStreaming(box.querySelector("tr:last-child td"), nuclearSingles.deformedBabies.spotify);
+      }
       if (source.includes("/06_07_03_shave_your_pet/")) appendMusicStreaming(box.querySelector("tr:last-child td"), musicStreaming.shaveYourPet);
       if (source.includes("/05_03_01_odeur/")) appendMusicStreaming(box.querySelector("tr:last-child td"), musicStreaming.odeur);
     }
@@ -1858,7 +1952,7 @@ async function updateMusicReleases() {
   }
   let streaming;
   if (/^\/dunst\/musik\/07_01_01_nuclear_fam\/(?:index|deformed_babies)\.html$/.test(archivePath)) {
-    streaming = musicStreaming.deformedBabies;
+    streaming = nuclearSingles.deformedBabies.spotify;
   } else if (/^\/dunst\/musik\/06_07_03_shave_your_pet\/(?:index|shave_your_pet)\.html$/.test(archivePath)) {
     streaming = musicStreaming.shaveYourPet;
   } else if (/^\/dunst\/musik\/04_02_07_munch_of_us\/(?:index|04_02_07_munch_01)\.html$/.test(archivePath)) {
@@ -2500,7 +2594,7 @@ async function showPerformerProfile() {
   for (const node of [...root.childNodes]) {
     if (node.nodeType === Node.TEXT_NODE) {
       if (node.textContent.trim()) {
-        if (archivePath === "/dunst/01_performere/23_nuclear_family/index.html" &&
+        if (archivePath === nuclearProfilePath &&
             node.textContent.trim() === ":" && profile.querySelector(".performer-profile-title")) continue;
         if (!grid) newSection();
         const paragraph = document.createElement("p");
@@ -2535,8 +2629,12 @@ async function showPerformerProfile() {
           (firstImage ? (heading.compareDocumentPosition(firstImage) & Node.DOCUMENT_POSITION_FOLLOWING) :
             firstCell.textContent.replace(/\s+/g, " ").trim() === headingText);
         if (heading && headingIsLabel) {
-          const next = heading.nextElementSibling;
-          if (next?.matches("hr,br")) next.remove();
+          while (heading.nextElementSibling?.matches("hr,br")) heading.nextElementSibling.remove();
+          if (/^dunst party$/i.test(headingText)) {
+            const event = [...node.querySelectorAll("a[href]")].find((link) =>
+              new URL(link.href).searchParams.get("path") === habibisPartyPath && link.textContent.trim());
+            if (event) heading.textContent = event.textContent.trim();
+          }
           const headerRow = node.insertRow(0);
           const headerCell = headerRow.insertCell();
           headerCell.className = "head";
@@ -2574,8 +2672,9 @@ async function showPerformerProfile() {
         }
         // Keep the original caption text, including bare text nodes, inside its own padded area.
         const cellImages = [...cell.querySelectorAll("img")];
-        if (cellImages.length === 1) {
-          const media = cellImages[0].closest("a") || cellImages[0];
+        if (cellImages.length) {
+          const lastImage = cellImages.at(-1);
+          const media = lastImage.closest("a") || lastImage;
           if (media.parentElement === cell && media.nextSibling) {
             const copy = document.createElement("div");
             copy.className = "performer-card-copy";
@@ -2585,7 +2684,19 @@ async function showPerformerProfile() {
                copy.firstChild.nodeType === Node.ELEMENT_NODE && copy.firstChild.matches("br"))) {
               copy.firstChild.remove();
             }
-            if (copy.textContent.trim()) cell.append(copy);
+            if (copy.textContent.trim()) {
+              for (const link of copy.querySelectorAll("a:not(:has(img))")) {
+                if (!link.textContent.trim()) link.remove();
+              }
+              trimImageCaptionStart(copy);
+              cell.append(copy);
+            }
+          }
+          const directMedia = [...cell.children].filter((child) => child.matches("img, a:has(> img)"));
+          if (cellImages.length > 1 && directMedia.length === cellImages.length &&
+              directMedia.every((item) => !item.textContent.trim()) &&
+              [...cell.childNodes].every((part) => part.nodeType !== Node.TEXT_NODE || !part.textContent.trim())) {
+            cell.classList.add("profile-photo-stack");
           }
         }
       }
@@ -2703,7 +2814,7 @@ async function showPerformerProfile() {
     feature.append(card);
   };
   if (archivePath === "/dunst/01_performere/12_knud_vesterskov/index.html") promoteProfileCard("2004", 1);
-  if (archivePath === "/dunst/01_performere/23_nuclear_family/index.html") promoteProfileCard("2005", 2);
+  if (archivePath === nuclearProfilePath) promoteProfileCard("2005", 2);
   if (archivePath === "/dunst/01_performere/06_puta/index.html") promoteProfileCard("2004", 6);
   if (archivePath === "/dunst/01_performere/08_the_thom/index.html") promoteProfileCard("2005", 2);
   if (archivePath === "/dunst/01_performere/16_tove_hansen/index.html") promoteProfileCard("2005", 2);
@@ -2810,7 +2921,8 @@ async function showPerformerProfile() {
       hotmen.rel = "noopener noreferrer";
     }
   }
-  if (archivePath === "/dunst/01_performere/23_nuclear_family/index.html") {
+  if (archivePath === nuclearProfilePath) {
+    profileYearGrid("2007")?.replaceChildren(performerReleaseCollection(Object.values(nuclearSingles), musicFrontPath));
     const intro = profile.querySelector(".profile-card td");
     if (intro) {
       for (const line of [...intro.querySelectorAll("br")]) {
@@ -2888,7 +3000,7 @@ async function showPerformerProfile() {
   }
   if (archivePath === "/dunst/01_performere/03_dennis-agerblad/index.html") promoteProfileCard("2004", 1);
   if (archivePath === "/dunst/01_performere/04_johnny_warehouse/index.html") promoteProfileCard("2003", 4);
-  dunstNormalizePressCards(profile);
+  dunstNormalizePressCards(profile, archivePath);
   markArchiveDates(profile);
   appendDunstReviewedPerformerPhotos(profile, archivePath);
   archiveContent.replaceChildren(profile);
@@ -3083,11 +3195,8 @@ function showSkidtFilm() {
     column.innerHTML = section;
     columns.append(column);
   }
-  const details = document.createElement("details");
-  details.className = "event-story-details skidt-film-details";
-  const summary = document.createElement("summary");
-  summary.textContent = "Læs om arrangementet";
-  details.append(summary, columns);
+  const details = eventStoryDisclosure(columns);
+  details.classList.add("skidt-film-details");
   cell.replaceChildren(details);
   cell.colSpan = 2;
   row.cells[1]?.remove();
@@ -3502,7 +3611,7 @@ async function showMain() {
       content.prepend(heading);
 
       const instagramLinks = [
-        ["AleX.T.C.", "https://www.instagram.com/alexisdragby/"],
+        ["Alexis", "https://www.instagram.com/alexisdragby/"],
         ["Andreas Tange Lange (Nuclear Family)", "https://www.instagram.com/theandreastange/"],
         ["Carsten Sparwath", "https://www.instagram.com/carstensparwath/"],
         ["Delores Düshess LaCour", "https://www.instagram.com/gevandt/"],
@@ -3834,6 +3943,7 @@ async function showMain() {
     combinePartyFlow();
     if (location.hash === "#klf") document.getElementById("klf")?.scrollIntoView();
   }
+  collapseAbroadIntro();
   addSupplementalPressMentions();
   if (document.body.classList.contains("press-article-page")) fitPressArticle(archiveContent);
   fitCaptionFigures();
@@ -4284,7 +4394,9 @@ const mergedRadioPages = new Set([
 const mergedDjPages = new Set(["djuna_barnes", "rosa_lux", "minimal_martin", "stimulundia", "alexis", "carsten", "hairwerk", "miss_fish", "nikolaj", "vibeke", "oli_viagra"]
   .flatMap((name) => [`/dunst/dj/${name}.html`, `/dunst/dj/${name}_frameset.html`]).concat(["/dunst/dj/index.html", "/dunst/dj/right.html"]));
 
-if (archivePath === "/dunst/musik/07_01_01_nuclear_fam/action_disco.html") {
+if (archivePath === "/dunst/01_performere/23_nuclear_family/video_01.html") {
+  location.replace(archiveRoute(null, nuclearProfilePath));
+} else if (archivePath === "/dunst/musik/07_01_01_nuclear_fam/action_disco.html") {
   location.replace(`${archiveRoute(null, "/dunst/musik/index.html")}#nuclear-double-single`);
 } else if (archivePath === "/nyhedsbrev/gamle_nyheder/right.html") {
   location.replace(archiveRoute(null, "/nyhedsbrev/gamle_nyheder/index.html"));
