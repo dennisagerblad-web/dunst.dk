@@ -1628,7 +1628,7 @@ window.DUNST_PREVIEW_DATA = {
         "/dunst/musik/04_02_07_munch_of_us/munch_of_us_02.jpg"
       ],
       "year": "2004",
-      "source_text": "Music Hairwerk on the Compilation CD \"munch of us\":",
+      "source_text": "Compilation CD \"munch of us\":",
       "box_class": "",
       "box_bgcolor": null,
       "box_heading": ""

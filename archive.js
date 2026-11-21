@@ -791,6 +791,7 @@ async function showDjFront() {
   const title = document.createElement("h1");
   title.className = "performer-profile-title";
   title.textContent = "dunst DJ's";
+  dunstRemoveProfileSourcePrefixes(profiles);
   archiveContent.replaceChildren(title, intro, profiles);
 }
 
@@ -2428,7 +2429,6 @@ function performerEventCard({imagePath, width, height, alt, eventPath, eventName
     descriptionLine.textContent = description;
     caption.append(descriptionLine);
   }
-  caption.append("Photo from: ");
   const link = document.createElement("a");
   link.href = archiveRoute(null, eventPath);
   link.textContent = eventName;
@@ -3025,6 +3025,7 @@ async function showPerformerProfile() {
   dunstRemoveGenericProfileHeadings(profile);
   markArchiveDates(profile);
   appendDunstReviewedPerformerPhotos(profile, archivePath);
+  dunstRemoveProfileSourcePrefixes(profile);
   archiveContent.replaceChildren(profile);
   archiveGallery.hidden = true;
 }
@@ -3720,6 +3721,7 @@ async function showMain() {
   }
   if (/^\/dunst\/01_performere\/guests\/[^/]+\/index\.html$/.test(archivePath)) {
     document.body.classList.add("performer-profile");
+    dunstRemoveProfileSourcePrefixes(archiveContent);
     for (const card of archiveContent.querySelectorAll("table.ramme")) {
       card.classList.add("profile-card");
       const images = [...card.querySelectorAll("img")];
@@ -4380,6 +4382,7 @@ function showGallery(preserveMain = false) {
       pressGroupItems.append(card);
     } else grid.append(card);
   }
+  if (archivePath.startsWith("/dunst/01_performere/")) dunstRemoveProfileSourcePrefixes(grid);
   archiveGallery.append(grid);
   if (partyGallery && photoCredits.size) {
     const credit = document.createElement("p");

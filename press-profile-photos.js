@@ -115,6 +115,33 @@ function dunstRemoveGenericProfileHeadings(root) {
   }
 }
 
+function dunstRemoveProfileSourcePrefixes(root) {
+  const prefix = /(?:\b(?:dunst\s+party|recommend|event|abroad|music|musik|caf[ée]|film)[\s:–-]+)?\b(?:photos?|videos?|fotos?|billeder?)\s+(?:f\s*rom|fra)\s*:\s*/gi;
+  const recommendation = /^\s*dunst\s+recommends?(?:\s+this\s+event)?\s*[:.]?\s*$/i;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const emptyLabels = [];
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    const parent = node.parentElement;
+    if (!parent.closest(".card-body, .performer-photo-caption, td:not(.head)") || parent.closest("a")) continue;
+    const copy = recommendation.test(node.data) ? "" : node.data.replace(prefix, "");
+    if (copy === node.data) continue;
+    node.data = copy;
+    if (!copy.trim()) emptyLabels.push(node);
+  }
+  for (const text of emptyLabels) {
+    if (!root.contains(text)) continue;
+    const parent = text.parentElement;
+    const label = parent.matches("b, strong, span, font, p") && !parent.textContent.trim() &&
+      !parent.querySelector(":not(br)") ? parent : text;
+    while (label.nextSibling?.nodeName === "BR" ||
+           label.nextSibling?.nodeType === Node.TEXT_NODE && !label.nextSibling.textContent.trim()) {
+      label.nextSibling.remove();
+    }
+    label.remove();
+  }
+}
+
 function dunstNormalizePressCards(root, profilePath) {
   const logos = {
     romeo: [dunstPressPhotoSources.romeo.logo, "Romeo + Juliet"],
