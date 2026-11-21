@@ -213,7 +213,7 @@
         align-items: center;
         position: relative;
         min-height: 28px;
-        color: var(--cookie-yellow);
+        color: var(--cookie-violet);
         font-weight: 700;
         cursor: pointer;
       }
@@ -237,9 +237,9 @@
       .switch-track::before {
         content: "";
         position: absolute;
-        left: 4px;
-        width: 14px;
-        height: 14px;
+        left: 1px;
+        width: 20px;
+        height: 20px;
         border-radius: 50%;
         opacity: 0;
       }
@@ -247,7 +247,6 @@
       #cookie-yes:checked ~ .switch-track::before {
         transform: translateX(22px);
         background: var(--cookie-yellow);
-        box-shadow: 0 0 5px #ff06;
         opacity: 1;
       }
       #cookie-no:focus-visible ~ .choice-no,
