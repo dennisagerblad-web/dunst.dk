@@ -817,8 +817,8 @@ details[open] > summary::after { transform: rotate(180deg); }
   .party-intro-details .party-intro-inner td { display: block; width: 100% !important; }
 }
 .shave-flyers > div { display: grid; justify-items: center; gap: 4px; }
-.hr-fru-party-page.party-gallery .archive-content > table.ramme { border-color: var(--purple); }
-.hr-fru-top-art { display: grid; justify-items: center; gap: 12px; }
+.hr-fru-party-page.party-gallery .archive-content > table.ramme:first-of-type { border-color: var(--purple); table-layout: fixed; }
+.hr-fru-top-art { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 12px; }
 .hr-fru-top-art > img { display: block; width: auto; max-width: 100%; height: auto; }
 .hr-fru-story { width: 100%; margin: 0; }
 .hr-fru-story summary { width: max-content; max-width: 100%; color: var(--cream); font-size: 16px; font-weight: 400; text-decoration: underline; cursor: pointer; }
@@ -833,8 +833,7 @@ details[open] > summary::after { transform: rotate(180deg); }
 .hr-fru-feature { display: grid; justify-items: center; align-content: start; gap: 7px; width: min(100%, 210px); padding: 0 8px 8px; border: 1px solid var(--purple); background: #ff00ff; text-align: center; }
 .hr-fru-feature h2 { width: calc(100% + 16px); margin: 0 -8px; padding: 5px 8px; background: var(--blue); color: #000; font-size: 16px; line-height: 1.4; }
 .hr-fru-feature img { display: block; width: auto; max-width: 100%; height: auto; }
-.hr-fru-feature a { color: var(--cream); }
-.party-gallery .archive-content :is(.hr-fru-feature, .hr-fru-candidate-card) a { color: var(--cream); }
+.party-gallery .archive-content .hr-fru-feature a { color: var(--cream); }
 .hr-fru-feature a:has(img) img { max-width: 180px; }
 .hr-fru-press-feature { box-sizing: border-box; width: min(100%, 380px); }
 .hr-fru-press-feature .hr-fru-homotropolis-link { display: grid; justify-items: center; gap: 4px; width: 100%; margin-top: 12px; }
@@ -859,9 +858,41 @@ details[open] > summary::after { transform: rotate(180deg); }
 .shadow-people-photos figcaption,
 .ski-day-photos figcaption { margin-top: 0; padding-top: 0; }
 .music-videos-index .archive-gallery .music-video-card-link .card-body { padding-top: 0; }
-.hr-fru-candidate-grid, .hr-fru-candidate-photos { display: flex; flex-wrap: wrap; justify-content: center; align-items: start; gap: var(--box-gap); margin-top: var(--box-gap); }
-.hr-fru-candidate-card { display: grid; justify-items: center; align-content: start; gap: 5px; width: max-content; max-width: min(100%, 470px); padding: 8px; border: 1px solid var(--purple); background: #ff00ff; color: var(--cream); text-align: center; }
-.hr-fru-candidate-card img { display: block; width: auto; max-width: 100%; height: auto; }
+.hr-fru-candidate-grid {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: var(--menu-inset);
+  margin: var(--box-gap) 0 0;
+  padding-bottom: 42px;
+  scroll-margin-top: 84px;
+  font-size: 12px;
+}
+.hr-fru-party-page .archive-content .hr-fru-candidate-card {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+  border: 1px solid var(--purple);
+  background: var(--purple);
+  color: var(--cream);
+  text-align: center;
+  line-height: 1.25;
+}
+.archive-content .hr-fru-candidate-card img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 30%; }
+.hr-fru-candidate-name { padding: 4px; overflow-wrap: anywhere; }
+.archive-content .hr-fru-winner-flap {
+  position: absolute;
+  top: calc(100% + 1px);
+  inset-inline: -1px;
+  padding: 3px 2px;
+  border: 1px solid var(--purple);
+  background: var(--cream);
+  color: #000;
+  font-size: 11px !important;
+  line-height: 1.1;
+  text-decoration: none;
+}
+.hr-fru-candidate-photos { display: flex; flex-wrap: wrap; justify-content: center; align-items: start; gap: var(--box-gap); margin-top: var(--box-gap); }
 .archive-detail .archive-content .hr-fru-candidate-photos table.ramme { flex: 0 1 auto; width: max-content !important; max-width: min(100%, 470px); margin: 0 !important; }
 .hr-fru-candidate-photos img { display: block; width: auto; max-width: 100%; height: auto; }
 .party-gallery .archive-content hr { height: 0; margin: 10px 0; border: 0; border-top: 1px solid #ffffcc; background: none; }
@@ -1251,6 +1282,7 @@ body.pispis-preview::before { display: none; }
   body::before { width: 75px; background-size: 75px 50px, 75px 37.5px; }
   body.menu-open { overflow: hidden; }
   .layout { display: block; padding-inline: env(safe-area-inset-left) env(safe-area-inset-right); }
+  .hr-fru-candidate-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: max(var(--box-gap), 32px) var(--box-gap); padding-bottom: 0; }
   .sidebar { display: none; }
   .mobile-header {
     position: sticky;
@@ -1290,7 +1322,7 @@ body.pispis-preview::before { display: none; }
     position: fixed;
     inset: 0 0 0 auto;
     z-index: 40;
-    width: min(66.666vw, 400px);
+    width: min(60vw, 360px);
     height: 100dvh;
     overflow-y: auto;
     overscroll-behavior: contain;

@@ -115,7 +115,20 @@ function dunstRemoveGenericProfileHeadings(root) {
   }
 }
 
-function dunstRemoveProfileSourcePrefixes(root) {
+function dunstCleanProfileCaptions(root) {
+  const sourceLinks = new WeakMap();
+  const hasSourceLink = (card) => {
+    if (!sourceLinks.has(card)) {
+      sourceLinks.set(card, [...card.querySelectorAll("a[href]")].some((link) => {
+        const url = new URL(link.href, location.href);
+        if (url.origin !== location.origin && !["dunst.dk", "www.dunst.dk"].includes(url.hostname)) return false;
+        const path = url.searchParams.get("path") || url.pathname;
+        return /^\/dunst\/(?:02_parties|03_events|abroad|cafe|film|kunst|musik|press|radio|recommends)\//.test(path);
+      }));
+    }
+    return sourceLinks.get(card);
+  };
+  const credit = /[ \t]*\b(?:photos?|fotos?|photographer|fotograf)(?:[ \t]*:[ \t]*|[ \t]+(?:by|af)[ \t]+)[^.!?\r\n]+[.]?/gi;
   const prefix = /(?:\b(?:dunst\s+party|recommend|event|abroad|music|musik|caf[ée]|film)[\s:–-]+)?\b(?:photos?|videos?|fotos?|billeder?)\s+(?:f\s*rom|fra)\s*:\s*/gi;
   const recommendation = /^\s*dunst\s+recommends?(?:\s+this\s+event)?\s*[:.]?\s*$/i;
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
@@ -124,7 +137,14 @@ function dunstRemoveProfileSourcePrefixes(root) {
     const node = walker.currentNode;
     const parent = node.parentElement;
     if (!parent.closest(".card-body, .performer-photo-caption, td:not(.head)") || parent.closest("a")) continue;
-    const copy = recommendation.test(node.data) ? "" : node.data.replace(prefix, "");
+    let copy = recommendation.test(node.data) ? "" : node.data.replace(prefix, "");
+    if (/\b(?:photo|foto)/i.test(copy)) {
+      const card = parent.closest(".profile-card, .performer-press-card, .media-card, .dj-profile td");
+      if (card && hasSourceLink(card)) {
+        const withoutCredit = copy.replace(credit, "");
+        if (withoutCredit !== copy) copy = withoutCredit.trim();
+      }
+    }
     if (copy === node.data) continue;
     node.data = copy;
     if (!copy.trim()) emptyLabels.push(node);

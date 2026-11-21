@@ -16,6 +16,23 @@ const partyHeading = new Map([
   ["/dunst/02_parties/fest_10_primate_nite/index.html", "Primate Nite"],
 ]).get(archivePath);
 const hrFruRoot = "/dunst/02_parties/fest_18_hr_fru/";
+const hrFruCandidatesRoot = hrFruRoot + "kandidater/";
+const hrFruWinner = "lene";
+const hrFruCandidates = [
+  ["gina", "Gina La Mirage", "kandidat_gina_01.jpg"],
+  ["tina", "Tina Trash", "CRW_0569.jpg"],
+  [hrFruWinner, "Lene Leth Lebbe", "IMG_4230.jpg"],
+  ["rune", "Rune", "kandidat_rune_01.jpg"],
+  ["tove_hansen", "Tove Hansen", "CRW_0460.jpg"],
+  ["schinchis_kaghen", "Skinkis Kaghen", "CRW_0471.jpg"],
+  ["sammy-jo", "SammyJo", "CRW_0495.jpg"],
+  ["cunta_kinte", "Marilyn 'not' Monroe", "CRW_0516.jpg"],
+  ["car-olina", "Søde Car O'lina", "CRW_0532.jpg"],
+  ["guxi", "Guxina Blasfemica", "CRW_0541.jpg"],
+];
+function hrFruLineupRoute() {
+  return archiveRoute(null, hrFruRoot + "index.html") + "#hr-fru-kandidater";
+}
 if (archivePath?.startsWith(hrFruRoot + "kandidater/")) document.body.classList.add("hr-fru-candidates-page");
 const archiveView = archiveParams.get("view");
 const skiDay = archivePath?.match(/^\/dunst\/abroad\/2003\/ski_ferie\/(09|10|11|12)\/index\.html$/)?.[1];
@@ -163,9 +180,8 @@ function archiveImageRoute(path) {
 }
 
 function backFallback() {
-  if (archivePath?.startsWith(hrFruRoot + "kandidater/") && /_frameset\.html$/.test(archivePath) &&
-      !archivePath.endsWith("/kandidat_frameset.html")) {
-    return archiveRoute(null, hrFruRoot + "kandidater/kandidat_frameset.html");
+  if (archivePath?.startsWith(hrFruCandidatesRoot) && /_frameset\.html$/.test(archivePath)) {
+    return hrFruLineupRoute();
   }
   if (archivePath?.startsWith(hrFruRoot + "kandidater/") || archivePath?.startsWith(hrFruRoot + "kattegorier/")) {
     return archiveRoute(null, hrFruRoot + "index.html");
@@ -791,7 +807,7 @@ async function showDjFront() {
   const title = document.createElement("h1");
   title.className = "performer-profile-title";
   title.textContent = "dunst DJ's";
-  dunstRemoveProfileSourcePrefixes(profiles);
+  dunstCleanProfileCaptions(profiles);
   archiveContent.replaceChildren(title, intro, profiles);
 }
 
@@ -1574,18 +1590,6 @@ async function addHrFruFeatures() {
     features.append(section);
     return section;
   };
-  const candidates = box("Vinder af HR&FRU dunst:");
-  const winner = document.createElement("img");
-  winner.src = archiveAsset(hrFruRoot + "kandidater/IMG_4230.jpg").href;
-  winner.alt = "Lene Leth Lebbe";
-  const winnerLink = document.createElement("a");
-  winnerLink.href = archiveRoute(null, hrFruRoot + "kandidater/lene_frameset.html");
-  winnerLink.append(winner);
-  const allCandidates = document.createElement("a");
-  allCandidates.href = archiveRoute(null, hrFruRoot + "kandidater/kandidat_frameset.html");
-  allCandidates.textContent = "Se alle Kandidaterne";
-  candidates.append(winnerLink, allCandidates);
-
   const press = box("Pressen skrev");
   press.classList.add("hr-fru-press-feature");
   const panblad = document.createElement("img");
@@ -1616,7 +1620,7 @@ async function addHrFruFeatures() {
     link.textContent = title;
     section.append(link);
   }
-  archiveContent.querySelector("table.ramme")?.after(features);
+  archiveContent.querySelector("table.ramme")?.after(createHrFruLineup(), features);
 
   const menuUrl = archiveAsset(hrFruRoot + "kattegorier/kattegori_menu.html");
   const { doc } = await readLegacyPage(menuUrl);
@@ -1647,7 +1651,7 @@ function combineHrFruFlow() {
   const flow = document.createElement("div");
   flow.className = "hr-fru-flow";
   flow.append(galleryGrid);
-  top.after(features, categories, flow);
+  features.after(categories, flow);
 }
 
 function combinePartyFlow() {
@@ -2343,41 +2347,35 @@ async function readCandidateFrames(url) {
   };
 }
 
-async function showHrFruCandidates() {
-  const root = hrFruRoot + "kandidater/";
-  if (archivePath === root + "kandidat_frameset.html") {
-    const menuUrl = archiveAsset(root + "kandidat_menu.html");
-    const menu = await readLegacyPage(menuUrl);
-    const title = document.createElement("h1");
-    title.className = "year-box";
-    title.textContent = "De 10 Kandidater:";
-    const grid = document.createElement("div");
-    grid.className = "hr-fru-candidate-grid";
-    const cards = await Promise.all([...menu.doc.querySelectorAll('a:has(img)')].map(async (link) => {
-      const framesUrl = new URL(link.getAttribute("href"), menuUrl);
-      const frames = await readCandidateFrames(framesUrl);
-      const [namePage, photoPage] = await Promise.all([readLegacyPage(frames.menuUrl), readLegacyPage(frames.photoUrl)]);
-      const nameCell = namePage.doc.querySelector("td");
-      for (const breakNode of nameCell?.querySelectorAll("br") || []) breakNode.replaceWith(" ");
-      const name = nameCell?.textContent.replace(/\s+/g, " ").trim() || "";
-      const sourceImage = photoPage.doc.querySelector("table.ramme img") || link.querySelector("img");
-      const image = document.createElement("img");
-      image.src = new URL(sourceImage.getAttribute("src"), sourceImage === link.querySelector("img") ? menuUrl : photoPage.url).href;
-      image.alt = name;
-      const caption = document.createElement("span");
-      caption.textContent = name;
-      const card = document.createElement("a");
-      card.href = archiveRoute(null, "/" + framesUrl.pathname.slice(archiveBase.pathname.length));
-      card.className = "hr-fru-candidate-card";
-      card.append(image, caption);
-      return card;
-    }));
-    grid.append(...cards);
-    archiveContent.replaceChildren(title, grid);
-    archiveGallery.hidden = true;
-    document.title = "De 10 Kandidater | dunst";
-    return true;
+function createHrFruLineup() {
+  const grid = document.createElement("section");
+  grid.id = "hr-fru-kandidater";
+  grid.className = "hr-fru-candidate-grid";
+  grid.setAttribute("aria-label", "De 10 kandidater");
+  for (const [slug, name, filename] of hrFruCandidates) {
+    const link = document.createElement("a");
+    link.className = "hr-fru-candidate-card";
+    link.href = archiveRoute(null, hrFruCandidatesRoot + slug + "_frameset.html");
+    const image = document.createElement("img");
+    image.src = archiveAsset(hrFruCandidatesRoot + filename).href;
+    image.alt = "";
+    const caption = document.createElement("span");
+    caption.className = "hr-fru-candidate-name";
+    caption.textContent = name;
+    link.append(image, caption);
+    if (slug === hrFruWinner) {
+      const flap = document.createElement("span");
+      flap.className = "hr-fru-winner-flap";
+      flap.textContent = "Vinder af HR&Fru dunst";
+      link.append(flap);
+    }
+    grid.append(link);
   }
+  return grid;
+}
+
+async function showHrFruCandidates() {
+  const root = hrFruCandidatesRoot;
   if (!archivePath.startsWith(root) || !/_frameset\.html$/.test(archivePath)) return false;
   const frames = await readCandidateFrames(archiveAsset(archivePath));
   const menu = await readLegacyPage(frames.menuUrl);
@@ -2470,6 +2468,18 @@ function showAddedPerformerProfile() {
       eventPath: "/dunst/02_parties/fest_16_coma/index.html",
       eventName: "dunst går i COMA",
     }));
+    for (const [filename, width, height, alt] of [
+      ["CRW_0471.jpg", 266, 400, "Signe som Skinkis Kaghen i hvid skjorte, slips og hat på scenen"],
+      ["CRW_0487.jpg", 266, 400, "Signe som Skinkis Kaghen i leopardkjole i rødt scenelys"],
+      ["CRW_0621.jpg", 400, 266, "Signe som Skinkis Kaghen med kraftig teatersminke, lyserød sløjfe og sort tape på brystet"],
+    ]) {
+      grid.append(performerEventCard({
+        imagePath: hrFruCandidatesRoot + filename,
+        width, height, alt,
+        eventPath: hrFruRoot + "index.html",
+        eventName: "HR&Fru dunst",
+      }));
+    }
   } else if (isMaria) {
     for (const [folder, file, height, eventName, alt, credit] of [
       ["fest_21_shave_your_pet", "IMG_0171.jpg", 337, "Shave Your Pet", "Maria Maud smiler i pink top og blond krøllet paryk ved siden af en maskeret gæst", "Dennis Agerblad"],
@@ -2516,6 +2526,7 @@ function showAddedPerformerProfile() {
   }
   section.append(year, grid);
   profile.append(title, section);
+  dunstCleanProfileCaptions(profile);
   archiveContent.replaceChildren(profile);
   archiveGallery.hidden = true;
 }
@@ -3025,7 +3036,7 @@ async function showPerformerProfile() {
   dunstRemoveGenericProfileHeadings(profile);
   markArchiveDates(profile);
   appendDunstReviewedPerformerPhotos(profile, archivePath);
-  dunstRemoveProfileSourcePrefixes(profile);
+  dunstCleanProfileCaptions(profile);
   archiveContent.replaceChildren(profile);
   archiveGallery.hidden = true;
 }
@@ -3721,7 +3732,7 @@ async function showMain() {
   }
   if (/^\/dunst\/01_performere\/guests\/[^/]+\/index\.html$/.test(archivePath)) {
     document.body.classList.add("performer-profile");
-    dunstRemoveProfileSourcePrefixes(archiveContent);
+    dunstCleanProfileCaptions(archiveContent);
     for (const card of archiveContent.querySelectorAll("table.ramme")) {
       card.classList.add("profile-card");
       const images = [...card.querySelectorAll("img")];
@@ -4382,7 +4393,7 @@ function showGallery(preserveMain = false) {
       pressGroupItems.append(card);
     } else grid.append(card);
   }
-  if (archivePath.startsWith("/dunst/01_performere/")) dunstRemoveProfileSourcePrefixes(grid);
+  if (archivePath.startsWith("/dunst/01_performere/")) dunstCleanProfileCaptions(grid);
   archiveGallery.append(grid);
   if (partyGallery && photoCredits.size) {
     const credit = document.createElement("p");
@@ -4452,7 +4463,10 @@ if (archivePath === "/dunst/01_performere/23_nuclear_family/video_01.html") {
   location.replace(archiveRoute(null, hrFruRoot + "index.html"));
 } else if (archivePath === "/dunst/02_parties/fest_16_coma/coma_club_04.html") {
   location.replace(`${archiveRoute(null, "/dunst/02_parties/fest_16_coma/index.html")}#klf`);
-} else if (archivePath === hrFruRoot + "kandidater/kandidat_frameset_lene.html") {
+} else if (archivePath === hrFruCandidatesRoot + "kandidat_frameset.html" ||
+           archivePath === hrFruCandidatesRoot + "kandidat_menu.html") {
+  location.replace(hrFruLineupRoute());
+} else if (archivePath === hrFruCandidatesRoot + "kandidat_frameset_lene.html") {
   location.replace(archiveRoute(null, hrFruRoot + "kandidater/lene_frameset.html"));
 } else if (photoToGallery.has(archivePath)) {
   location.replace(archiveRoute("billeder", photoToGallery.get(archivePath)));
@@ -4466,7 +4480,8 @@ if (archivePath === "/dunst/01_performere/23_nuclear_family/video_01.html") {
   addBackLink();
   if (archiveView === "image") showArchiveImage();
   else if (archivePath === "/dunst/radio/player.html") showRadioPlayer();
-  else if (archiveView === "billeder" && archiveRecord && !partyHeading && archivePath !== skidtFilmPath) showGallery();
+  else if (archiveView === "billeder" && archiveRecord && !partyHeading &&
+           archivePath !== skidtFilmPath && archivePath !== hrFruRoot + "index.html") showGallery();
   else showMain()
     .then(() => compactImageCaptionSpacing(document.querySelector(".page")))
     .catch((error) => { archiveContent.textContent = error.message; });

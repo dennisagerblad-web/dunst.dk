@@ -103,4 +103,4 @@ for (const [index, item] of window.DUNST_PREVIEW_DATA.hairwerk.entries()) {
 }
 dunstNormalizePressCards(hairwerkGallery);
 dunstRemoveGenericProfileHeadings(hairwerkGallery);
-dunstRemoveProfileSourcePrefixes(hairwerkGallery);
+dunstCleanProfileCaptions(hairwerkGallery);
