@@ -546,11 +546,11 @@ details[open] > summary::after { transform: rotate(180deg); }
   .press-year-navigation { min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; }
   .press-year-index summary { position: sticky; top: 0; z-index: 1; }
 }
-.press-year-index { border: 1px solid var(--purple); }
-.press-year-index summary { padding: 9px 28px 9px var(--box-inset); background: var(--blue); color: #000; font-size: 18px; font-weight: 700; }
+.press-year-index { border: 1px solid var(--purple); border-radius: 12px; }
+.press-year-index summary { padding: 9px 28px 9px var(--box-inset); border-radius: 11px; background: var(--blue); color: #000; font-size: 18px; font-weight: 700; }
 .press-year-index summary::after { position: absolute; right: 12px; top: calc(50% - .17em); }
-.press-year-index[open] summary { border-bottom: 1px solid var(--purple); }
-.press-year-index nav { padding: 8px; background: #ff0; text-align: left; }
+.press-year-index[open] summary { border-bottom: 1px solid var(--purple); border-radius: 11px 11px 0 0; }
+.press-year-index nav { padding: 8px; border-radius: 0 0 11px 11px; background: #ff0; text-align: left; }
 .press-year-title { margin: 0 0 8px; padding: 8px 12px; font-size: 26px; line-height: 1.3; }
 .press-year-months { display: grid; gap: 12px; }
 .press-year-month { border: 1px solid var(--purple); background: #fff; min-width: 0; }
@@ -997,7 +997,7 @@ body.recommends-archive .page hr { border-top-color: var(--cream); }
 .guestbook-archive .archive-content hr { width: 100%; margin: 8px 0; border: 0; border-top: 1px solid var(--purple); }
 .guestbook-archive .archive-content :is(input, textarea) { max-width: 100%; border: 1px solid var(--purple); background: var(--cream); }
 .links-archive #Indhold { width: 100%; }
-.links-archive .layout { position: relative; z-index: 1; }
+.links-archive .layout { position: relative; }
 .links-archive .links-page-title { width: min(100%, 600px); margin: 0 auto 16px; }
 .links-archive #Indhold > table.ramme { width: min(100%, 600px) !important; margin-bottom: 16px; background: transparent !important; }
 .links-archive #Indhold > table.ramme td:not(.head) { background: transparent !important; }
@@ -1470,18 +1470,42 @@ body.pispis-preview::before {
   :root:has(body:is(.performers-front, .film-archive)) { --landscape-edge-color: #000; }
   :root:has(body.kanal-dunst-page) { --landscape-edge-color: #fff; }
   :root:has(body.pispis-preview) { --landscape-edge-color: var(--blue); }
-  /* iOS can use the document's solid color outside the viewport. */
-  body {
-    background-color: var(--landscape-edge-color);
-    background-image: linear-gradient(var(--page-surface-color), var(--page-surface-color));
-    background-repeat: no-repeat;
-    background-position: var(--landscape-edge-left) 0;
-    background-size: calc(100% - var(--landscape-edge-left) - var(--landscape-edge-right)) 100%;
+  /* Keep the canvas solid and position artwork inside the safe edges. */
+  body { background-color: var(--landscape-edge-color); }
+  body > :is(.layout, .pis-page)::before {
+    inset-inline: var(--landscape-edge-left) var(--landscape-edge-right);
+    background-color: var(--page-surface-color);
+  }
+  body::before { right: var(--landscape-edge-right); }
+  body:is(.calendar-archive, .pispis-preview)::before {
+    inset-inline: var(--landscape-edge-left) var(--landscape-edge-right);
+    width: auto;
+  }
+  body.pispis-preview::before {
+    background: url("/pispis/assets/fade_up_121.jpg") repeat-x top left;
+  }
+  body.links-archive::after {
+    right: var(--landscape-edge-right);
+    width: min(325px, calc(100dvh * 325 / 493));
+  }
+  .kanal-tv-frame {
+    inset-inline: var(--landscape-edge-left) var(--landscape-edge-right);
+  }
+  .sidebar {
+    right: var(--landscape-edge-right);
+    padding-right: 0;
+    visibility: hidden;
+    transform: translateX(calc(105% + var(--landscape-edge-right)));
+    transition: transform 180ms ease, visibility 0s 180ms;
+  }
+  body.menu-open .sidebar {
+    visibility: visible;
+    transition-delay: 0s;
   }
   body > .layout, body.pispis-preview {
     padding-inline: var(--landscape-edge-left) var(--landscape-edge-right);
   }
-  body > .layout .main-area { padding-inline: 0; }
+  body:not(.performers-front) > .layout .main-area { padding-inline: var(--box-inset); }
   body > .layout::after, .pispis-top::after, body > .pis-page::after {
     content: "";
     position: fixed;
