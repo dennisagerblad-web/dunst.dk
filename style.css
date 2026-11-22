@@ -1492,14 +1492,19 @@ body.pispis-preview::before {
     inset-inline: var(--landscape-edge-left) var(--landscape-edge-right);
   }
   .sidebar {
-    right: var(--landscape-edge-right);
-    padding-right: 0;
+    width: calc(min(60vw, 360px) + var(--landscape-edge-right));
+    padding-right: var(--landscape-edge-right);
+    /* Paint the safe area as part of the drawer so the browser can match its outer edge. */
+    background:
+      url("/dunst/0/images/fade_right.jpg") right var(--landscape-edge-right) top repeat-y,
+      linear-gradient(#fff, #fff) left top / calc(100% - var(--landscape-edge-right)) 100% no-repeat
+      var(--cream);
     visibility: hidden;
-    transform: translateX(calc(105% + var(--landscape-edge-right)));
     transition: transform 180ms ease, visibility 0s 180ms;
   }
   body.menu-open .sidebar {
     visibility: visible;
+    transform: none;
     transition-delay: 0s;
   }
   body > .layout, body.pispis-preview {
